@@ -777,7 +777,6 @@ export function Gaming() {
                   </div>
                 </div>
 
-                {/* Combined stats */}
                 <div className="space-y-4 mb-6 text-gray-300">
                   {/* Genshin */}
                   <div className="rounded-xl border border-slate-700 bg-slate-900/40 p-4">

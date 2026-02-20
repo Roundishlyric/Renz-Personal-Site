@@ -5,9 +5,8 @@ import { Button } from './ui/button';
 export function CVDownload() {
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = '#'; // Replace with actual CV file path
+    link.href = '#';
     link.download = 'YourName_CV.pdf';
-    // link.click();
     alert('CV download would start here. Please upload your CV file to enable this feature.');
   };
 

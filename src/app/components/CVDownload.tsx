@@ -4,8 +4,6 @@ import { Button } from './ui/button';
 
 export function CVDownload() {
   const handleDownload = () => {
-    // In a real implementation, this would download an actual PDF file
-    // For now, it's a placeholder that would trigger a download
     const link = document.createElement('a');
     link.href = '#'; // Replace with actual CV file path
     link.download = 'YourName_CV.pdf';

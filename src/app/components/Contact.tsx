@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { useState } from 'react';
+import { Linkedin, Github, Facebook } from 'lucide-react';
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -42,106 +43,110 @@ export function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="py-20 bg-gradient-to-br from-red-50 via-orange-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Get In Touch</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-4"></div>
-          <p className="text-lg text-gray-600">
-            Have a project in mind? Let's work together!
-          </p>
+          <div className="w-20 h-1 bg-gradient-to-r from-red-600 to-orange-600 mx-auto mb-4"></div>
+          <p className="text-lg text-gray-600">Let's connect and discuss opportunities</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          <div>
-            <h3 className="text-2xl mb-6 text-gray-900">Contact Information</h3>
-            <p className="text-gray-600 mb-8">
-              Feel free to reach out to me through any of the following channels. 
-              I'm always open to discussing new projects, creative ideas, or opportunities.
-            </p>
-
-            <div className="space-y-6">
-              {contactInfo.map((info, index) => {
-                const Icon = info.icon;
-                return (
-                  <Card key={index} className="p-4 hover:shadow-xl transition-shadow border-2 border-transparent hover:border-blue-200">
-                    <div className="flex items-center gap-4">
-                      <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg shadow-md">
-                        <Icon className="text-white" size={24} />
-                      </div>
-                      <div>
-                        <p className="text-sm text-gray-500">{info.label}</p>
-                        {info.link ? (
-                          <a
-                            href={info.link}
-                            className="text-lg text-gray-900 hover:text-blue-600 transition-colors"
-                          >
-                            {info.value}
-                          </a>
-                        ) : (
-                          <p className="text-lg text-gray-900">{info.value}</p>
-                        )}
-                      </div>
+        <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-2xl mb-6 text-gray-900">Contact Information</h3>
+              <div className="space-y-4">
+                <Card className="p-4 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-red-200">
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 bg-gradient-to-br from-red-600 to-orange-600 rounded-lg">
+                      <Mail className="text-white" size={24} />
                     </div>
-                  </Card>
-                );
-              })}
+                    <div>
+                      <p className="text-sm text-gray-500">Email</p>
+                      <p className="text-gray-900 font-medium">your.email@example.com</p>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className="p-4 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-red-200">
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 bg-gradient-to-br from-red-600 to-orange-600 rounded-lg">
+                      <Phone className="text-white" size={24} />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Phone</p>
+                      <p className="text-gray-900 font-medium">+1 (555) 123-4567</p>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className="p-4 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-red-200">
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 bg-gradient-to-br from-red-600 to-orange-600 rounded-lg">
+                      <MapPin className="text-white" size={24} />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Location</p>
+                      <p className="text-gray-900 font-medium">City, Country</p>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-2xl mb-6 text-gray-900">Connect With Me</h3>
+              <div className="flex gap-4">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+                  onClick={() => window.open('https://linkedin.com', '_blank')}
+                >
+                  <Linkedin size={20} />
+                </Button>
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black"
+                  onClick={() => window.open('https://github.com', '_blank')}
+                >
+                  <Github size={20} />
+                </Button>
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+                  onClick={() => window.open('https://facebook.com', '_blank')}
+                >
+                  <Facebook size={20} />
+                </Button>
+              </div>
             </div>
           </div>
 
-          <div>
-            <Card className="p-6 border-2 border-transparent hover:border-blue-200 shadow-lg">
-              <h3 className="text-2xl mb-6 text-gray-900">Send Me a Message</h3>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="block text-sm mb-2 text-gray-700">
-                    Name
-                  </label>
-                  <Input
-                    id="name"
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Your name"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm mb-2 text-gray-700">
-                    Email
-                  </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm mb-2 text-gray-700">
-                    Message
-                  </label>
-                  <Textarea
-                    id="message"
-                    required
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Your message..."
-                    rows={6}
-                  />
-                </div>
-
-                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
-                  <Send size={18} className="mr-2" />
-                  Send Message
-                </Button>
-              </form>
-            </Card>
-          </div>
+          <Card className="p-8 border-2 border-red-200 shadow-xl">
+            <h3 className="text-2xl mb-6 text-gray-900">Send a Message</h3>
+            <form className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                <Input placeholder="Your Name" className="border-gray-300 focus:border-red-500 focus:ring-red-500" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                <Input type="email" placeholder="your.email@example.com" className="border-gray-300 focus:border-red-500 focus:ring-red-500" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                <Textarea placeholder="Your message here..." rows={5} className="border-gray-300 focus:border-red-500 focus:ring-red-500" />
+              </div>
+              <Button 
+                type="submit" 
+                className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white"
+                size="lg"
+              >
+                <Send size={20} className="mr-2" />
+                Send Message
+              </Button>
+            </form>
+          </Card>
         </div>
       </div>
     </section>

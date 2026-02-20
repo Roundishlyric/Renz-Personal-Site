@@ -1,3 +1,12 @@
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
+@keyframes gamingSlideInToZero {
+  to {
+    transform: translateX(0);
+  }
+}
+
+.gaming-slide-in {
+  animation: gamingSlideInToZero 300ms ease-out forwards;
+}

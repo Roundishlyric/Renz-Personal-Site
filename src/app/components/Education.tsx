@@ -1,4 +1,4 @@
-import { GraduationCap, Calendar, Award } from 'lucide-react';
+import { GraduationCap, Calendar, Award, Building2 } from 'lucide-react';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 
@@ -27,146 +27,95 @@ export function Education() {
     },
   ];
 
-  const certifications = [
-    {
-      name: 'AWS Certified Cloud Practitioner',
-      issuer: 'Amazon Web Services',
-      date: 'December 2024',
-    },
-    {
-      name: 'Responsive Web Design',
-      issuer: 'freeCodeCamp',
-      date: 'August 2024',
-    },
-    {
-      name: 'JavaScript Algorithms and Data Structures',
-      issuer: 'freeCodeCamp',
-      date: 'June 2024',
-    },
-  ];
-
   const activities = [
     {
-      title: 'Computer Science Club',
-      role: 'Vice President',
+      name: 'IEEE Computer Society',
+      role: 'Active Member',
       period: '2023 - Present',
-      description: 'Organize coding workshops and hackathons for 100+ students',
-    },
-    {
-      title: 'Hackathon Participant',
-      role: 'Team Member',
-      period: '2023 - Present',
-      description: 'Participated in 5+ hackathons, won 2nd place in University Hackathon 2024',
-    },
-    {
-      title: 'Peer Tutor',
-      role: 'Programming Tutor',
-      period: '2023 - 2024',
-      description: 'Tutored 20+ students in Introduction to Programming and Data Structures',
+      description: 'Participating in technical workshops, seminars, and collaborative projects focused on emerging technologies and software development practices.',
+      logo: '🖥️',
     },
   ];
 
   return (
-    <section id="education" className="py-20 bg-white">
+    <section id="education" className="py-20 bg-gradient-to-br from-red-50 via-orange-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Education</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+          <div className="w-20 h-1 bg-gradient-to-r from-red-600 to-orange-600 mx-auto mb-4"></div>
+          <p className="text-lg text-gray-600">My academic journey and achievements</p>
         </div>
 
-        {/* Main Education */}
-        <div className="mb-16">
+        <div className="space-y-12">
           {education.map((edu, index) => (
-            <Card key={index} className="p-8 hover:shadow-2xl transition-shadow border-2 border-transparent hover:border-blue-200">
-              <div className="flex items-start gap-4 mb-6">
-                <div className="p-4 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg">
-                  <GraduationCap className="text-white" size={32} />
+            <Card key={index} className="p-8 hover:shadow-2xl transition-shadow border-2 border-transparent hover:border-red-200">
+              <div className="flex items-start gap-6">
+                <div className="p-4 bg-gradient-to-br from-red-600 to-orange-600 rounded-xl">
+                  <GraduationCap size={40} className="text-white" />
                 </div>
                 <div className="flex-1">
-                  <div className="flex flex-wrap items-start justify-between gap-4 mb-2">
+                  <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h3 className="text-2xl mb-2 text-gray-900">{edu.degree}</h3>
-                      <p className="text-xl text-blue-600 mb-1">{edu.school}</p>
-                      <p className="text-gray-600">{edu.location}</p>
+                      <h3 className="text-2xl md:text-3xl mb-2 text-gray-900">{edu.degree}</h3>
+                      <p className="text-xl text-red-600 mb-2">{edu.school}</p>
                     </div>
-                    <div className="text-right">
-                      <Badge className="bg-blue-600 mb-2">{edu.status}</Badge>
-                      <div className="flex items-center gap-2 text-gray-500">
-                        <Calendar size={16} />
-                        <span>{edu.period}</span>
-                      </div>
-                      <p className="text-lg mt-2">GPA: {edu.gpa}</p>
+                    <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white">
+                      <Calendar size={16} className="mr-2" />
+                      {edu.period}
+                    </Badge>
+                  </div>
+                  
+                  {edu.gpa && (
+                    <div className="flex items-center gap-2 mb-4">
+                      <Award size={20} className="text-orange-600" />
+                      <span className="text-gray-700 font-medium">GPA: {edu.gpa}</span>
                     </div>
-                  </div>
+                  )}
 
-                  <div className="mb-6">
-                    <h4 className="text-lg mb-3 text-gray-900 flex items-center gap-2">
-                      <Award size={20} className="text-blue-600" />
-                      Achievements & Honors
-                    </h4>
-                    <ul className="space-y-2">
-                      {edu.achievements.map((achievement, i) => (
-                        <li key={i} className="flex items-start gap-2 text-gray-700">
-                          <span className="text-blue-600 mt-1">▸</span>
-                          <span>{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="text-lg mb-3 text-gray-900">Relevant Coursework</h4>
+                  <div className="mb-4">
+                    <h4 className="text-lg mb-2 text-gray-700 font-semibold">Relevant Coursework:</h4>
                     <div className="flex flex-wrap gap-2">
                       {edu.coursework.map((course, i) => (
-                        <span
-                          key={i}
-                          className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm"
-                        >
+                        <Badge key={i} variant="outline" className="border-red-300 text-gray-700">
                           {course}
-                        </span>
+                        </Badge>
                       ))}
                     </div>
                   </div>
+
+                  {edu.achievements && (
+                    <div>
+                      <h4 className="text-lg mb-2 text-gray-700 font-semibold">Achievements:</h4>
+                      <ul className="list-disc list-inside space-y-1 text-gray-600">
+                        {edu.achievements.map((achievement, i) => (
+                          <li key={i}>{achievement}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
             </Card>
           ))}
         </div>
 
-        {/* Certifications */}
-        <div className="mb-16">
-          <h3 className="text-3xl mb-8 text-center">Certifications</h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {certifications.map((cert, index) => (
-              <Card key={index} className="p-6 hover:shadow-xl transition-shadow border-2 border-transparent hover:border-green-200">
-                <div className="flex items-start gap-3">
-                  <div className="p-3 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg shadow-md">
-                    <Award className="text-white" size={24} />
+        {/* Organization */}
+        <div className="mt-16">
+          <h3 className="text-3xl mb-8 text-center">Organization</h3>
+          <div className="max-w-2xl mx-auto">
+            {activities.map((activity, index) => (
+              <Card key={index} className="p-8 hover:shadow-xl transition-shadow border-2 border-transparent hover:border-orange-200">
+                <div className="flex items-start gap-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center text-4xl">
+                    {activity.logo}
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-lg mb-2 text-gray-900">{cert.name}</h4>
-                    <p className="text-gray-600 mb-1">{cert.issuer}</p>
-                    <p className="text-sm text-gray-500">{cert.date}</p>
+                    <h4 className="text-2xl mb-2 text-gray-900">{activity.name}</h4>
+                    <p className="text-red-600 mb-2 font-medium text-lg">{activity.role}</p>
+                    <p className="text-sm text-gray-500 mb-4">{activity.period}</p>
+                    <p className="text-gray-700">{activity.description}</p>
                   </div>
                 </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Extracurricular Activities */}
-        <div>
-          <h3 className="text-3xl mb-8 text-center">Extracurricular Activities</h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {activities.map((activity, index) => (
-              <Card key={index} className="p-6 hover:shadow-xl transition-shadow border-2 border-transparent hover:border-purple-200 group">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <span className="text-2xl">🎯</span>
-                </div>
-                <h4 className="text-xl mb-2 text-gray-900">{activity.title}</h4>
-                <p className="text-blue-600 mb-2 font-medium">{activity.role}</p>
-                <p className="text-sm text-gray-500 mb-3">{activity.period}</p>
-                <p className="text-gray-700">{activity.description}</p>
               </Card>
             ))}
           </div>

@@ -1,95 +1,86 @@
-import { Gamepad2, Music, Book, Plane, Camera, Dumbbell, Coffee, Palette } from 'lucide-react';
 import { Card } from './ui/card';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function Hobbies() {
   const hobbies = [
     {
-      icon: Gamepad2,
       title: 'Competitive Gaming',
       description: 'Fighting game tournaments and esports competitions',
-      color: 'from-blue-500 to-cyan-500',
+      image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80',
     },
     {
-      icon: Book,
       title: 'Reading',
       description: 'Tech blogs, sci-fi novels, and programming books',
-      color: 'from-purple-500 to-pink-500',
+      image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80',
     },
     {
-      icon: Music,
       title: 'Music',
       description: 'Playing guitar and discovering new genres',
-      color: 'from-red-500 to-orange-500',
+      image: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&q=80',
     },
     {
-      icon: Camera,
       title: 'Photography',
       description: 'Capturing moments and exploring visual creativity',
-      color: 'from-green-500 to-teal-500',
+      image: 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800&q=80',
     },
     {
-      icon: Dumbbell,
       title: 'Fitness',
       description: 'Regular workouts and staying healthy',
-      color: 'from-orange-500 to-red-500',
+      image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80',
     },
     {
-      icon: Plane,
       title: 'Traveling',
       description: 'Exploring new places and cultures',
-      color: 'from-cyan-500 to-blue-500',
+      image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80',
     },
     {
-      icon: Coffee,
       title: 'Coffee Enthusiast',
       description: 'Trying different brewing methods and cafes',
-      color: 'from-amber-600 to-orange-600',
+      image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80',
     },
     {
-      icon: Palette,
       title: 'Digital Art',
       description: 'UI design and creative digital projects',
-      color: 'from-pink-500 to-purple-500',
+      image: 'https://images.unsplash.com/photo-1561998338-13ad7883b20f?w=800&q=80',
     },
   ];
 
   return (
-    <section id="hobbies" className="py-20 bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <section id="hobbies" className="py-20 bg-gradient-to-br from-red-50 via-orange-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Hobbies & Interests</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-4"></div>
+          <div className="w-20 h-1 bg-gradient-to-r from-red-600 to-orange-600 mx-auto mb-4"></div>
           <p className="text-lg text-gray-600">What I enjoy doing in my free time</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {hobbies.map((hobby, index) => {
-            const Icon = hobby.icon;
-            return (
-              <Card
-                key={index}
-                className="group hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-blue-200"
-              >
-                <div className={`h-2 bg-gradient-to-r ${hobby.color}`}></div>
-                <div className="p-6">
-                  <div className="flex flex-col items-center text-center">
-                    <div className={`p-4 bg-gradient-to-br ${hobby.color} rounded-full mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                      <Icon className="text-white" size={28} />
-                    </div>
-                    <h3 className="text-xl mb-3 text-gray-900">{hobby.title}</h3>
-                    <p className="text-gray-600">{hobby.description}</p>
-                  </div>
+          {hobbies.map((hobby, index) => (
+            <Card
+              key={index}
+              className="group hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-red-300"
+            >
+              <div className="relative h-48 overflow-hidden">
+                <ImageWithFallback
+                  src={hobby.image}
+                  alt={hobby.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <h3 className="text-xl mb-1 text-white font-semibold">{hobby.title}</h3>
+                  <p className="text-gray-200 text-sm">{hobby.description}</p>
                 </div>
-              </Card>
-            );
-          })}
+              </div>
+            </Card>
+          ))}
         </div>
 
         <div className="mt-16 text-center">
-          <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white max-w-4xl mx-auto">
+          <Card className="bg-gradient-to-r from-red-600 to-orange-600 text-white max-w-4xl mx-auto">
             <div className="p-8">
               <h3 className="text-2xl mb-4">Balance is Key</h3>
-              <p className="text-lg text-blue-100">
+              <p className="text-lg text-red-100">
                 I believe in maintaining a healthy work-life balance. These hobbies help me stay creative, 
                 motivated, and bring fresh perspectives to my academic and professional work.
               </p>

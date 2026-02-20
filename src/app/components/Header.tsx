@@ -28,7 +28,7 @@ export function Header() {
     { label: 'Education', id: 'education' },
     { label: 'Skills', id: 'skills' },
     { label: 'Hobbies', id: 'hobbies' },
-    { label: 'Projects', id: 'projects' },
+    { label: 'Gallery', id: 'gallery' },
     { label: 'Contact', id: 'contact' },
   ];
 
@@ -44,7 +44,7 @@ export function Header() {
             onClick={() => scrollToSection('hero')}
             className="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors"
           >
-            &lt;YourName /&gt;
+            &lt;Renz Rapanut /&gt;
           </button>
 
           {/* Desktop Navigation */}

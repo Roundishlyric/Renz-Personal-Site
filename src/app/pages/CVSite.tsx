@@ -4,9 +4,10 @@ import { About } from '../components/About';
 import { Education } from '../components/Education';
 import { Skills } from '../components/Skills';
 import { Hobbies } from '../components/Hobbies';
-import { AcademicProjects } from '../components/AcademicProjects';
+import { Gallery } from '../components/gallery';
 import { Contact } from '../components/Contact';
 import { Footer } from '../components/Footer';
+import { CVDownload } from '../components/CVDownload';
 
 export function CVSite() {
   return (
@@ -18,7 +19,8 @@ export function CVSite() {
         <Education />
         <Skills />
         <Hobbies />
-        <AcademicProjects />
+        <Gallery />
+        <CVDownload />
         <Contact />
       </main>
       <Footer />

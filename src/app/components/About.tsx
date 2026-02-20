@@ -1,5 +1,6 @@
 import { Code2, Palette, Rocket } from 'lucide-react';
 import { Card } from './ui/card';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function About() {
   const highlights = [
@@ -25,45 +26,47 @@ export function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">About Me</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+          <div className="w-20 h-1 bg-gradient-to-r from-red-600 to-orange-600 mx-auto"></div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <p className="text-lg text-gray-700 mb-6">
-              I'm a passionate Computer Science student with a strong foundation in software development
-              and a keen interest in web technologies. Currently working as a software development intern,
-              I'm gaining valuable real-world experience while pursuing my degree.
-            </p>
-            <p className="text-lg text-gray-700 mb-6">
-              My academic journey has equipped me with solid knowledge in data structures, algorithms,
-              database systems, and modern web frameworks. I enjoy tackling challenging problems and
-              turning ideas into functional applications.
-            </p>
-            <p className="text-lg text-gray-700">
-              I'm actively involved in campus tech communities, participate in hackathons, and continuously
-              work on personal projects to enhance my skills. Always eager to learn new technologies and
-              contribute to meaningful projects.
-            </p>
+            <Card className="overflow-hidden border-2 border-transparent hover:border-red-300 transition-all shadow-xl">
+              <ImageWithFallback
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
+                alt="Profile"
+                className="w-full h-96 object-cover"
+              />
+            </Card>
           </div>
-          
-          <div className="grid gap-6">
-            {highlights.map((highlight, index) => {
-              const Icon = highlight.icon;
-              return (
-                <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 bg-blue-100 rounded-lg">
-                      <Icon className="text-blue-600" size={24} />
-                    </div>
-                    <div>
-                      <h3 className="text-xl mb-2 text-gray-900">{highlight.title}</h3>
-                      <p className="text-gray-600">{highlight.description}</p>
-                    </div>
-                  </div>
-                </Card>
-              );
-            })}
+
+          <div className="space-y-6">
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Hello! I'm a passionate Computer Science student with a keen interest in software development 
+              and problem-solving. Currently pursuing my degree while gaining practical experience as a 
+              Software Development Intern.
+            </p>
+
+            <p className="text-lg text-gray-700 leading-relaxed">
+              I specialize in full-stack web development, with expertise in modern frameworks like React, 
+              Node.js, and databases. I'm always eager to learn new technologies and apply them to real-world projects.
+            </p>
+
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Beyond coding, I enjoy participating in hackathons, contributing to open-source projects, 
+              and staying updated with the latest trends in technology.
+            </p>
+
+            <div className="grid grid-cols-2 gap-4 pt-4">
+              <div className="p-4 bg-gradient-to-br from-red-50 to-orange-50 rounded-lg border-2 border-red-200">
+                <div className="text-3xl font-bold text-red-600 mb-2">3+</div>
+                <div className="text-gray-700">Years Coding</div>
+              </div>
+              <div className="p-4 bg-gradient-to-br from-orange-50 to-red-50 rounded-lg border-2 border-orange-200">
+                <div className="text-3xl font-bold text-orange-600 mb-2">15+</div>
+                <div className="text-gray-700">Projects Built</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

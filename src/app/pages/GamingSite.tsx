@@ -1,7 +1,6 @@
 import { Gaming } from '../components/Gaming';
 import { GamingHeader } from '../components/GamingHeader';
 import { GamingFooter } from '../components/GamingFooter';
-import { OtherGames } from "../components/OtherGames";
 
 
 export function GamingSite() {
@@ -10,7 +9,6 @@ export function GamingSite() {
       <GamingHeader />
       <main>
         <Gaming />
-        <OtherGames />
       </main>
       <GamingFooter />
     </div>

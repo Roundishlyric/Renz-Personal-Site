@@ -1,5 +1,6 @@
 import { ArrowDown, Github, Linkedin, Mail, Facebook } from 'lucide-react';
 import { Button } from './ui/button';
+import { Badge } from './ui/badge';
 
 export function Hero() {
   const scrollToSection = (id: string) => {
@@ -10,70 +11,59 @@ export function Hero() {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 pt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <section className="pt-32 pb-20 bg-gradient-to-br from-red-50 via-orange-50 to-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <div className="mb-8">
-            <div className="inline-block p-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full">
-              <div className="bg-white rounded-full p-1">
-                <div className="w-32 h-32 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center">
-                  <span className="text-4xl">👨‍💻</span>
-                </div>
-              </div>
+          <div className="mb-8 inline-block">
+            <div className="w-40 h-40 mx-auto bg-gradient-to-br from-red-600 to-orange-600 rounded-full flex items-center justify-center text-white text-6xl font-bold shadow-2xl">
+              YN
             </div>
           </div>
           
-          <h1 className="text-5xl md:text-7xl mb-6 text-gray-900">
-            Hi, I'm <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Your Name</span>
+          <h1 className="text-5xl md:text-7xl mb-4 bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
+            Your Name
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-600 mb-4">
+          <div className="w-24 h-1 bg-gradient-to-r from-red-600 to-orange-600 mx-auto mb-6"></div>
+          
+          <h2 className="text-2xl md:text-3xl text-gray-700 mb-8">
             Computer Science Student & Software Development Intern
-          </p>
+          </h2>
           
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-8">
-            Passionate about learning and building innovative solutions. 
-            Currently pursuing a degree in Computer Science while gaining hands-on experience in software development.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+            Passionate about building innovative solutions and exploring cutting-edge technologies. 
+            Currently pursuing a Bachelor's degree in Computer Science with hands-on experience in web development.
           </p>
-          
-          <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
-            <Button
-              onClick={() => scrollToSection('contact')}
-              className="bg-blue-600 hover:bg-blue-700"
+
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white text-lg px-6 py-2">
+              CS Student
+            </Badge>
+            <Badge className="bg-gradient-to-r from-orange-600 to-red-600 text-white text-lg px-6 py-2">
+              Software Intern
+            </Badge>
+            <Badge className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-lg px-6 py-2">
+              Full Stack Developer
+            </Badge>
+          </div>
+
+          <div className="flex justify-center gap-4">
+            <Button 
+              size="lg"
+              className="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white shadow-xl hover:shadow-2xl"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              <Mail className="mr-2" size={18} />
               Get In Touch
             </Button>
-            <Button
+            <Button 
+              size="lg"
               variant="outline"
-              onClick={() => window.open('#', '_blank')}
+              className="border-2 border-red-600 text-red-600 hover:bg-red-50"
+              onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              <Github className="mr-2" size={18} />
-              GitHub
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => window.open('#', '_blank')}
-            >
-              <Linkedin className="mr-2" size={18} />
-              LinkedIn
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => window.open('#', '_blank')}
-            >
-              <Facebook className="mr-2" size={18} />
-              Facebook
+              Learn More
             </Button>
           </div>
-          
-          <button
-            onClick={() => scrollToSection('about')}
-            className="animate-bounce inline-flex flex-col items-center text-gray-400 hover:text-gray-600 transition-colors"
-          >
-            <span className="text-sm mb-2">Scroll down</span>
-            <ArrowDown size={24} />
-          </button>
         </div>
       </div>
     </section>

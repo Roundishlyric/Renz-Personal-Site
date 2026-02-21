@@ -21,13 +21,13 @@ export function Hero() {
           </div>
           
           <h1 className="text-5xl md:text-7xl mb-4 bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
-            Your Name
+            Renz Danniel R. Rapanut
           </h1>
           
           <div className="w-24 h-1 bg-gradient-to-r from-red-600 to-orange-600 mx-auto mb-6"></div>
           
           <h2 className="text-2xl md:text-3xl text-gray-700 mb-8">
-            Computer Science Student & Software Development Intern
+            Computer Engineering Student & Software Development Intern
           </h2>
           
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
@@ -37,13 +37,10 @@ export function Hero() {
 
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <Badge className="bg-gradient-to-r from-red-600 to-orange-600 text-white text-lg px-6 py-2">
-              CS Student
-            </Badge>
-            <Badge className="bg-gradient-to-r from-orange-600 to-red-600 text-white text-lg px-6 py-2">
-              Software Intern
+              CpE Student
             </Badge>
             <Badge className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-lg px-6 py-2">
-              Full Stack Developer
+              Full Stack Intern
             </Badge>
           </div>
 

@@ -25,19 +25,19 @@ export function Contact() {
     {
       icon: Mail,
       label: 'Email',
-      value: 'your.email@example.com',
-      link: 'mailto:your.email@example.com',
+      value: 'renzdanniel63@gmail.com',
+      link: 'mailto:renzdanniel63@gmail.com',
     },
     {
       icon: Phone,
       label: 'Phone',
-      value: '+1 (555) 123-4567',
-      link: 'tel:+15551234567',
+      value: '+63 9478178886',
+      link: 'mob:+639478178886',
     },
     {
       icon: MapPin,
       label: 'Location',
-      value: 'San Francisco, CA',
+      value: 'Quezon City, Philippines',
       link: null,
     },
   ];
@@ -63,7 +63,7 @@ export function Contact() {
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Email</p>
-                      <p className="text-gray-900 font-medium">your.email@example.com</p>
+                      <p className="text-gray-900 font-medium">renzdanniel63@gmail.com</p>
                     </div>
                   </div>
                 </Card>
@@ -75,7 +75,7 @@ export function Contact() {
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Phone</p>
-                      <p className="text-gray-900 font-medium">+1 (555) 123-4567</p>
+                      <p className="text-gray-900 font-medium">(+63) 9478178886</p>
                     </div>
                   </div>
                 </Card>
@@ -87,7 +87,7 @@ export function Contact() {
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Location</p>
-                      <p className="text-gray-900 font-medium">City, Country</p>
+                      <p className="text-gray-900 font-medium">Quezon City, Philippines</p>
                     </div>
                   </div>
                 </Card>

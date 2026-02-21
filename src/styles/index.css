@@ -10,3 +10,7 @@
 .gaming-slide-in {
   animation: gamingSlideInToZero 300ms ease-out forwards;
 }
+
+html {
+  scroll-behavior: smooth;
+}

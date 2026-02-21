@@ -12,7 +12,7 @@ export function Footer() {
               <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-orange-600 rounded-lg flex items-center justify-center text-white font-bold">
                 YN
               </div>
-              <span className="text-xl font-bold">Your Name</span>
+              <span className="text-xl font-bold">Renz Danniel R. Rapanut</span>
             </div>
             <p className="text-gray-400">
               Computer Science Student & Software Development Intern passionate about creating innovative solutions.
@@ -46,7 +46,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
-          <p>&copy; 2026 Your Name. All rights reserved.</p>
+          <p>&copy; 2026 Renz Rapanut. All rights reserved.</p>
         </div>
       </div>
     </footer>

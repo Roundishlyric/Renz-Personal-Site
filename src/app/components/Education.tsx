@@ -5,24 +5,19 @@ import { Badge } from './ui/badge';
 export function Education() {
   const education = [
     {
-      degree: 'Bachelor of Science in Computer Science',
-      school: 'University Name',
-      location: 'City, State',
-      period: '2022 - 2026 (Expected)',
-      gpa: '3.8/4.0',
+      degree: 'Bachelor of Science in Computer Engineering',
+      school: 'Far Eastern University Institute of Technology',
+      location: 'Manila',
+      period: '2021 - 2026 (Expected)',
       status: 'In Progress',
       achievements: [
-        'Dean\'s List - Fall 2023, Spring 2024',
-        'Presidential Scholarship Recipient',
-        'Member of Computer Science Honor Society',
+        'Member of Computer Engineering Organization',
       ],
-      coursework: [
-        'Data Structures & Algorithms',
-        'Web Development',
-        'Database Systems',
-        'Software Engineering',
-        'Artificial Intelligence',
-        'Computer Networks',
+      coursework: ['Data Structures & Algorithms', 
+        'Object-Oriented Programming', 'Database Systems', 
+        'Software Engineering', 'Operating Systems', 
+        'Computer Networks','Hardware Engineering', 'Computer Architecture', 
+        'Digital Logic Design', 'Electronic Circuits',
       ],
     },
   ];
@@ -64,13 +59,6 @@ export function Education() {
                       {edu.period}
                     </Badge>
                   </div>
-                  
-                  {edu.gpa && (
-                    <div className="flex items-center gap-2 mb-4">
-                      <Award size={20} className="text-orange-600" />
-                      <span className="text-gray-700 font-medium">GPA: {edu.gpa}</span>
-                    </div>
-                  )}
 
                   <div className="mb-4">
                     <h4 className="text-lg mb-2 text-gray-700 font-semibold">Relevant Coursework:</h4>

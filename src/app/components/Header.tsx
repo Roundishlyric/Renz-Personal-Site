@@ -1,48 +1,57 @@
-import { useState, useEffect } from 'react';
-import { Menu, X, Gamepad2 } from 'lucide-react';
-import { Button } from './ui/button';
-import { Link } from 'react-router';
+import { useState, useEffect } from "react";
+import { Menu, X, Gamepad2 } from "lucide-react";
+import { Button } from "./ui/button";
+import { Link } from "react-router";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
       setIsMobileMenuOpen(false);
     }
   };
 
   const navItems = [
-    { label: 'About', id: 'about' },
-    { label: 'Education', id: 'education' },
-    { label: 'Skills', id: 'skills' },
-    { label: 'Hobbies', id: 'hobbies' },
-    { label: 'Gallery', id: 'gallery' },
-    { label: 'Contact', id: 'contact' },
+    { label: "About", id: "about" },
+    { label: "Education", id: "education" },
+    { label: "Skills", id: "skills" },
+    { label: "Hobbies", id: "hobbies" },
+    { label: "Gallery", id: "gallery" },
+    { label: "Contact", id: "contact" },
   ];
+
+  const headerBg = isScrolled
+    ? "bg-black/90 backdrop-blur-md shadow-lg shadow-black/40"
+    : "bg-transparent";
+
+  const brandText = isScrolled ? "text-white" : "text-gray-900";
+  const navText = isScrolled
+    ? "text-gray-200 hover:text-white"
+    : "text-gray-700 hover:text-red-700";
+
+  const mobileBorder = isScrolled ? "border-white/10" : "border-gray-200";
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/80 backdrop-blur-md shadow-md' : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerBg}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <button
-            onClick={() => scrollToSection('hero')}
-            className="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors"
+            onClick={() => scrollToSection("hero")}
+            className={`text-xl font-bold transition-colors ${brandText} ${
+              isScrolled ? "hover:text-red-400" : "hover:text-red-700"
+            }`}
           >
             &lt;Renz Rapanut /&gt;
           </button>
@@ -53,13 +62,21 @@ export function Header() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-gray-700 hover:text-blue-600 transition-colors"
+                className={`transition-colors ${navText}`}
               >
                 {item.label}
               </button>
             ))}
+
             <Link to="/gaming">
-              <Button variant="outline" className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                className={`flex items-center gap-2 transition-colors ${
+                  isScrolled
+                    ? "border-white/30 text-white hover:bg-white/10 hover:text-white"
+                    : "border-gray-300 text-gray-900 hover:bg-gray-100"
+                }`}
+              >
                 <Gamepad2 size={18} />
                 Gaming
               </Button>
@@ -68,8 +85,11 @@ export function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-gray-900"
+            className={`md:hidden transition-colors ${
+              isScrolled ? "text-white" : "text-gray-900"
+            }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -77,19 +97,27 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <nav className="md:hidden py-4 border-t border-gray-200">
+          <nav className={`md:hidden py-4 border-t ${mobileBorder}`}>
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left py-2 text-gray-700 hover:text-blue-600 transition-colors"
+                className={`block w-full text-left py-2 transition-colors ${
+                  isScrolled
+                    ? "text-gray-200 hover:text-red-700"
+                    : "text-gray-700 hover:text-red-700"
+                }`}
               >
                 {item.label}
               </button>
             ))}
+
             <Link
               to="/gaming"
-              className="flex items-center gap-2 py-2 text-gray-700 hover:text-blue-600 transition-colors"
+              className={`flex items-center gap-2 py-2 transition-colors ${
+                isScrolled ? "text-gray-200 hover:text-white" : "text-gray-700 hover:text-red-700"
+              }`}
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               <Gamepad2 size={18} />
               Gaming

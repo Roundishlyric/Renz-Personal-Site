@@ -159,65 +159,6 @@ export function Gaming() {
     },
   ];
 
-  const tournaments: {
-    name: string;
-    placement: string;
-    prize: string;
-    date: string;
-    participants: string;
-    badge: TournamentBadge;
-  }[] = [
-    {
-      name: "EVO 2025 - Street Fighter 6",
-      placement: "1st Place",
-      prize: "$5,000",
-      date: "August 2025",
-      participants: "2,500+",
-      badge: "gold",
-    },
-    {
-      name: "Combo Breaker 2025",
-      placement: "2nd Place",
-      prize: "$2,500",
-      date: "May 2025",
-      participants: "1,200+",
-      badge: "silver",
-    },
-    {
-      name: "CEO Fighting Game Championships",
-      placement: "3rd Place",
-      prize: "$1,000",
-      date: "June 2025",
-      participants: "800+",
-      badge: "bronze",
-    },
-    {
-      name: "Tekken World Tour Regional",
-      placement: "1st Place",
-      prize: "$3,000",
-      date: "March 2025",
-      participants: "500+",
-      badge: "gold",
-    },
-    {
-      name: "Local Fighting Game League",
-      placement: "1st Place",
-      prize: "$500",
-      date: "February 2025",
-      participants: "150+",
-      badge: "gold",
-    },
-    {
-      name: "Online Championship Series",
-      placement: "4th Place",
-      prize: "$750",
-      date: "January 2025",
-      participants: "1,000+",
-      badge: "participant",
-    },
-  ];
-
-
   const getBadgeColor = (badge: TournamentBadge) => {
     switch (badge) {
       case "gold":
@@ -293,7 +234,7 @@ export function Gaming() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Introduction */}
-        <div className="text-center mb-20">
+        <div id="overview" className="scroll-mt-24 text-center mb-20">
           <div className="mb-8">
             <div className="inline-block p-1 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full">
               <div className="bg-slate-900 rounded-full p-1">
@@ -316,7 +257,7 @@ export function Gaming() {
           <div className="w-20 h-1 bg-gradient-to-r from-teal-500 to-cyan-500 mx-auto mb-6" />
 
           <h2 className="text-2xl md:text-3xl text-teal-400 mb-6">
-            Professional Fighting Game Competitor
+            Fighting Game Competitor and Gaming Content Creator
           </h2>
 
           <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-4">
@@ -332,22 +273,19 @@ export function Gaming() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
-            <Badge className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-lg px-6 py-2">
-              🏆 5x Champion
-            </Badge>
             <Badge className="bg-gradient-to-r from-teal-500 to-cyan-500 text-white text-lg px-6 py-2">
               ⚔️ Fighting Game Specialist
             </Badge>
             <Badge className="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-lg px-6 py-2">
-              👥 Team Apex Fighters
+              👥 TArchangel Esports
             </Badge>
           </div>
         </div>
 
         {/* Team Section */}
-        <div className="mb-20">
+        <div id="team" className="scroll-mt-24 mb-20">
           <div className="text-center mb-10">
-            <h3 className="text-3xl mb-4">Representing Team Apex Fighters</h3>
+            <h3 className="text-3xl mb-4">Representing Archangel Esports</h3>
             <p className="text-gray-300 max-w-2xl mx-auto">
               Competing as one of the top fighting game teams in the region
             </p>
@@ -364,10 +302,10 @@ export function Gaming() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <h3 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                      Team Apex Fighters
+                      Archangel Esports
                     </h3>
                     <Badge className="bg-gradient-to-r from-teal-500 to-cyan-500 text-white text-lg px-6 py-2">
-                      Est. 2020 • Regional Champions
+                      Est. 2022 • Community Team
                     </Badge>
                   </div>
                 </div>
@@ -412,49 +350,9 @@ export function Gaming() {
           </div>
         </div>
 
-        {/* Tournament Placements */}
-        <div className="mb-20">
-          <div className="text-center mb-10">
-            <h3 className="text-3xl mb-4">Tournament Placements</h3>
-            <p className="text-gray-300">
-              Recent competitive achievements and prize winnings
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {tournaments.map((tournament, index) => (
-              <Card
-                key={index}
-                className="bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-slate-700 hover:border-teal-500 transition-all hover:shadow-xl hover:shadow-teal-500/20 overflow-hidden"
-              >
-                <div className={`h-2 ${getBadgeColor(tournament.badge)}`} />
-                <div className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <h4 className="text-xl mb-2 text-white">
-                        {tournament.name}
-                      </h4>
-                      <Badge className={`${getBadgeColor(tournament.badge)} mb-2`}>
-                        {tournament.placement}
-                      </Badge>
-                    </div>
-                    <div className="text-right ml-2">
-                      <div className="text-2xl text-teal-400 font-bold">
-                        {tournament.prize}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="space-y-2 text-gray-300 text-sm">
-                    <p>📅 {tournament.date}</p>
-                    <p>👥 {tournament.participants} Participants</p>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
 
         {/* MAIN GAMES SECTION */}
-        <div className="mb-20">
+        <div id="main-games" className="scroll-mt-24 mb-20">
           <div className="max-w-6xl mx-auto">
             {/* TABS */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
@@ -635,7 +533,7 @@ export function Gaming() {
         </div>
 
         {/* Other Games */}
-        <div className="mb-20">
+        <div id="other-games" className="scroll-mt-24 mb-20">
           <h3 className="text-3xl mb-4 text-center">Other Games</h3>
           <p className="text-center text-gray-300 mb-10">
             Additional competitive and casual titles I play
@@ -668,7 +566,7 @@ export function Gaming() {
         </div>
 
         {/* Steam Profile & Social Media */}
-        <div className="mb-20">
+        <div id="profiles" className="scroll-mt-24 mb-20">
           <h3 className="text-3xl mb-10 text-center">
             Gaming Profiles & Social Media
           </h3>
@@ -766,7 +664,7 @@ export function Gaming() {
                 <div className="flex items-center gap-4 mb-6">
                   <div className="p-4 bg-gradient-to-br from-cyan-500 to-blue-700 rounded-xl shadow-lg flex items-center justify-center">
                     <img
-                      src="/images/hoyolab.png"
+                      src="/images/hoyo.png"
                       alt="HoYoLAB"
                       className="w-8 h-8 object-contain"
                     />
@@ -782,7 +680,7 @@ export function Gaming() {
                   <div className="rounded-xl border border-slate-700 bg-slate-900/40 p-4">
                     <div className="flex items-center gap-3 mb-3">
                       <img
-                        src="/images/genshin.png"
+                        src="/images/gen.webp"
                         alt="Genshin Impact"
                         className="w-6 h-6 object-contain"
                       />
@@ -809,7 +707,7 @@ export function Gaming() {
                   <div className="rounded-xl border border-slate-700 bg-slate-900/40 p-4">
                     <div className="flex items-center gap-3 mb-3">
                       <img
-                        src="/images/starrail.png"
+                        src="/images/star.webp"
                         alt="Honkai: Star Rail"
                         className="w-6 h-6 object-contain"
                       />
@@ -836,7 +734,7 @@ export function Gaming() {
                   <div className="rounded-xl border border-slate-700 bg-slate-900/40 p-4">
                     <div className="flex items-center gap-3 mb-3">
                       <img
-                        src="/images/zzz.png"
+                        src="/images/zzz.webp"
                         alt="Zenless Zone Zero"
                         className="w-6 h-6 object-contain"
                       />
@@ -873,7 +771,7 @@ export function Gaming() {
 
           {/* Social Media Links */}
           <div className="max-w-4xl mx-auto">
-            <h4 className="text-2xl mb-6 text-center text-white">
+            <h4 className="text-2xl mb-6 mt-8 text-center text-white">
               Connect on Social Media
             </h4>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -907,47 +805,6 @@ export function Gaming() {
               </Button>
             </div>
           </div>
-        </div>
-
-        {/* Stats Summary */}
-        <div className="text-center">
-          <Card className="bg-gradient-to-br from-teal-900/50 to-slate-900/50 border-2 border-teal-700 backdrop-blur-sm max-w-5xl mx-auto">
-            <div className="p-8">
-              <h3 className="text-3xl mb-8 text-white">Career Overview</h3>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-                <div className="p-4 bg-slate-800/50 rounded-lg border border-teal-500/30">
-                  <div className="text-4xl mb-2 text-teal-400 font-bold">
-                    6,400+
-                  </div>
-                  <div className="text-gray-300">Total Hours</div>
-                </div>
-                <div className="p-4 bg-slate-800/50 rounded-lg border border-teal-500/30">
-                  <div className="text-4xl mb-2 text-teal-400 font-bold">
-                    25+
-                  </div>
-                  <div className="text-gray-300">Tournaments</div>
-                </div>
-                <div className="p-4 bg-slate-800/50 rounded-lg border border-teal-500/30">
-                  <div className="text-4xl mb-2 text-yellow-400 font-bold">
-                    5
-                  </div>
-                  <div className="text-gray-300">Championships</div>
-                </div>
-                <div className="p-4 bg-slate-800/50 rounded-lg border border-teal-500/30">
-                  <div className="text-4xl mb-2 text-teal-400 font-bold">
-                    $15K+
-                  </div>
-                  <div className="text-gray-300">Prize Money</div>
-                </div>
-                <div className="p-4 bg-slate-800/50 rounded-lg border border-teal-500/30">
-                  <div className="text-4xl mb-2 text-teal-400 font-bold">
-                    Top 5
-                  </div>
-                  <div className="text-gray-300">Regional Rank</div>
-                </div>
-              </div>
-            </div>
-          </Card>
         </div>
       </div>
     </section>

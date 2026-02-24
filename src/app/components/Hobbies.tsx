@@ -50,7 +50,7 @@ export function Hobbies() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Hobbies & Interests</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-red-600 to-orange-600 mx-auto mb-4"></div>
+          <div className="w-20 h-1 bg-gradient-to-r from-red-700 to-red-700 mx-auto mb-4"></div>
           <p className="text-lg text-gray-600">What I enjoy doing in my free time</p>
         </div>
 
@@ -77,7 +77,7 @@ export function Hobbies() {
         </div>
 
         <div className="mt-16 text-center">
-          <Card className="bg-gradient-to-r from-red-600 to-orange-600 text-white max-w-4xl mx-auto">
+          <Card className="bg-gradient-to-r from-red-700 to-red-700 text-white max-w-4xl mx-auto">
             <div className="p-8">
               <h3 className="text-2xl mb-4">Balance is Key</h3>
               <p className="text-lg text-red-100">

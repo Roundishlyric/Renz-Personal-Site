@@ -39,7 +39,7 @@ export function CVDownload() {
               <Button
                 size="lg"
                 onClick={handleDownload}
-                className="bg-red-600 text-black hover:bg-red-700 px-8 py-6 text-lg shadow-lg shadow-red-900/50"
+                className="bg-red-600 text-white hover:bg-red-700 px-8 py-6 text-lg shadow-lg shadow-red-900/50"
               >
                 <Download size={24} className="mr-3" />
                 Download CV (PDF)

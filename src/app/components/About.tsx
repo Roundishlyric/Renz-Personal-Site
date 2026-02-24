@@ -22,11 +22,11 @@ export function About() {
   ];
 
   return (
-    <section id="about" className="py-20 bg-white">
+    <section id="about" className="py-20 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">About Me</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-red-600 to-orange-600 mx-auto"></div>
+          <h2 className="text-4xl md:text-5xl mb-4 text-white">About Me</h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-red-700 to-red-700 mx-auto"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -41,18 +41,18 @@ export function About() {
           </div>
 
           <div className="space-y-6">
-            <p className="text-lg text-gray-700 leading-relaxed">
+            <p className="text-lg text-white leading-relaxed">
               Hello! I'm a passionate Computer Science student with a keen interest in software development 
               and problem-solving. Currently pursuing my degree while gaining practical experience as a 
               Software Development Intern.
             </p>
 
-            <p className="text-lg text-gray-700 leading-relaxed">
+            <p className="text-lg text-white leading-relaxed">
               I specialize in full-stack web development, with expertise in modern frameworks like React, 
               Node.js, and databases. I'm always eager to learn new technologies and apply them to real-world projects.
             </p>
 
-            <p className="text-lg text-gray-700 leading-relaxed">
+            <p className="text-lg text-white leading-relaxed">
               Beyond coding, I enjoy participating in hackathons, contributing to open-source projects, 
               and staying updated with the latest trends in technology.
             </p>

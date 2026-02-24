@@ -40,6 +40,17 @@ type SlideAnim = {
   dir: "next" | "prev";
 };
 
+const XIcon = ({ size = 34 }: { size?: number }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+  >
+    <path d="M18.244 2H21.5l-7.37 8.42L23 22h-6.828l-5.345-6.993L4.5 22H1.244l7.885-9.007L1 2h6.828l4.84 6.35L18.244 2Zm-2.395 18h2.1L7.95 4h-2.1l9.999 16Z"/>
+  </svg>
+);
 export function Gaming() {
   const games = useMemo<Game[]>(
     () => [
@@ -84,10 +95,9 @@ export function Gaming() {
         placements: [
           { event: "CTRL+ALT+ELITE tournament", place: "3rd Place" },
           { event: "MANILA MADNESS III", place: "49th Place" },
-          {
-            event: "RTX PC AI DAY TEKKEN 8 COMMUNITY TOURNAMENT",
-            place: "49th Place",
-          },
+          {event: "RTX PC AI DAY TEKKEN 8 COMMUNITY TOURNAMENT",place: "17th Place"},
+          {event: "TRYHARDS September 2024",place: "49th Place"},
+          {event: "Geekpop+ Ayala Circuit",place: "25th Place"},
         ],
       },
       {
@@ -99,7 +109,9 @@ export function Gaming() {
         main: "ELPHELT VALENTINE",
         subs: ["NAGORIYUKI", "LEO WHITEFANG"],
         rank: "Platinum",
-        placements: [{ event: "Online Lobby", place: "Top Player" }],
+        placements: [{ event: "Geekpop+ Ayala Circuit", place: "11th Place" },
+          { event: "Geekpop+ Fight Club February 2026", place: "5th  Place" }
+        ],
       },
       {
         key: "gbvsr",
@@ -110,7 +122,7 @@ export function Gaming() {
         main: "BEATRIX",
         subs: ["GALLEON", "ANILA"],
         rank: "S+",
-        placements: [{ event: "Add Event", place: "13th Place" }],
+        placements: [{ event: "Geek+Pop Fight Club Ranker Event 4", place: "13th Place" }],
       },
     ],
     []
@@ -310,7 +322,7 @@ export function Gaming() {
                   </div>
                 </div>
               </div>
-              <div className="p-8">
+              <div className="p-8 flex flex-col flex-1">
                 <div className="grid md:grid-cols-3 gap-6 mb-6">
                   <div className="flex items-center gap-4">
                     <div className="p-4 bg-teal-600/20 rounded-lg">
@@ -538,7 +550,7 @@ export function Gaming() {
           <p className="text-center text-gray-300 mb-10">
             Additional competitive and casual titles I play
           </p>
-          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6 items-stretch">
             {otherGames.map((game, index) => (
               <Card
                 key={index}
@@ -554,7 +566,7 @@ export function Gaming() {
                 </div>
                 <div className="p-4">
                   <h4 className="text-lg mb-2 text-white">{game.title}</h4>
-                  <div className="space-y-1 text-sm">
+                  <div className="space-y-1 text-sm mt-auto">
                     <p className="text-teal-400">🏅 {game.rank}</p>
                     <p className="text-gray-300">🎮 {game.role}</p>
                     <p className="text-cyan-400">⏱️ {game.hours}</p>
@@ -566,246 +578,242 @@ export function Gaming() {
         </div>
 
         {/* Steam Profile & Social Media */}
-        <div id="profiles" className="scroll-mt-24 mb-20">
-          <h3 className="text-3xl mb-10 text-center">
-            Gaming Profiles & Social Media
-          </h3>
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-8">
-            {/* Steam Profile */}
-            <Card className="bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-slate-700 hover:border-teal-500 transition-all">
-              <div className="p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-4 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl shadow-lg">
-                    <img
-                        src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/steam.svg"
-                        alt="Steam Logo"
-                        className="w-8 h-8 invert"
-                      />
-                  </div>
-                  <div>
-                    <h4 className="text-2xl text-white">Sen</h4>
-                    <p className="text-teal-400">ID: 1108528630</p>
-                  </div>
-                </div>
-                <div className="space-y-3 mb-6 text-gray-300">
-                  <p className="flex justify-between">
-                    <span>Games Owned:</span>
-                    <span className="text-white font-semibold">200+</span>
-                  </p>
-                  <p className="flex justify-between">
-                    <span>Total Hours:</span>
-                    <span className="text-white font-semibold">6,400+</span>
-                  </p>
-                  <p className="flex justify-between">
-                    <span>Level:</span>
-                    <span className="text-white font-semibold">85</span>
-                  </p>
-                  <p className="flex justify-between">
-                    <span>Achievements:</span>
-                    <span className="text-white font-semibold">850+</span>
-                  </p>
-                </div>
-                <Button
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900"
-                  onClick={() => window.open("#", "_blank")}
-                >
-                  <ExternalLink size={18} className="mr-2" />
-                  View Steam Profile
-                </Button>
-              </div>
-            </Card>
+          {/* Steam Profile & Social Media */}
+<div id="profiles" className="scroll-mt-24 mb-20">
+  <h3 className="text-3xl mb-10 text-center">Gaming Profiles & Social Media</h3>
 
-            {/* Twitch Streaming */}
-            <Card className="bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-slate-700 hover:border-teal-500 transition-all">
-              <div className="p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-4 bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl shadow-lg">
-                    <Twitch size={32} className="text-white" />
-                  </div>
-                  <div>
-                    <h4 className="text-2xl text-white">Twitch Channel</h4>
-                    <p className="text-teal-400">@YourTwitchHandle</p>
-                  </div>
-                </div>
-                <div className="space-y-3 mb-6 text-gray-300">
-                  <p className="flex justify-between">
-                    <span>Followers:</span>
-                    <span className="text-white font-semibold">2,500+</span>
-                  </p>
-                  <p className="flex justify-between">
-                    <span>Stream Schedule:</span>
-                    <span className="text-white font-semibold">Mon-Fri 7PM</span>
-                  </p>
-                  <p className="flex justify-between">
-                    <span>Content:</span>
-                    <span className="text-white font-semibold">
-                      Fighting Games
-                    </span>
-                  </p>
-                  <p className="flex justify-between">
-                    <span>Status:</span>
-                    <span className="text-teal-400 font-semibold">Affiliate</span>
-                  </p>
-                </div>
-                <Button
-                  className="w-full bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900"
-                  onClick={() => window.open("#", "_blank")}
-                >
-                  <Twitch size={18} className="mr-2" />
-                  Watch Live Stream
-                </Button>
-              </div>
-            </Card>
+  {/* 2-column grid (Steam + Twitch) */}
+  <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-8 items-stretch">
+    {/* Steam Profile */}
+    <Card className="h-full flex flex-col bg-slate-800 border-2 border-slate-700 hover:border-teal-500 transition-all">
+      <div className="p-8 flex flex-col flex-1">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="p-4 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl shadow-lg">
+            <img
+              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/steam.svg"
+              alt="Steam Logo"
+              className="w-8 h-8 invert"
+            />
+          </div>
+          <div>
+            <h4 className="text-2xl text-white">Sen</h4>
+            <p className="text-teal-400">ID: 1108528630</p>
+          </div>
+        </div>
+
+        <div className="space-y-3 mb-6 text-gray-300">
+          <p className="flex justify-between">
+            <span>Games Owned:</span>
+            <span className="text-white font-semibold">200+</span>
+          </p>
+          <p className="flex justify-between">
+            <span>Total Hours:</span>
+            <span className="text-white font-semibold">6,400+</span>
+          </p>
+          <p className="flex justify-between">
+            <span>Level:</span>
+            <span className="text-white font-semibold">85</span>
+          </p>
+          <p className="flex justify-between">
+            <span>Achievements:</span>
+            <span className="text-white font-semibold">850+</span>
+          </p>
+        </div>
+
+        <Button
+          className="w-full mt-auto bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900"
+          onClick={() => window.open("#", "_blank")}
+        >
+          <ExternalLink size={18} className="mr-2" />
+          View Steam Profile
+        </Button>
+      </div>
+    </Card>
+
+    {/* Twitch Streaming */}
+    <Card className="h-full flex flex-col bg-slate-800 border-2 border-slate-700 hover:border-teal-500 transition-all">
+      <div className="p-8 flex flex-col flex-1">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="p-4 bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl shadow-lg">
+            <Twitch size={32} className="text-white" />
+          </div>
+          <div>
+            <h4 className="text-2xl text-white">Twitch Channel</h4>
+            <p className="text-teal-400">@YourTwitchHandle</p>
+          </div>
+        </div>
+
+        <div className="space-y-3 mb-6 text-gray-300">
+          <p className="flex justify-between">
+            <span>Followers:</span>
+            <span className="text-white font-semibold">2,500+</span>
+          </p>
+          <p className="flex justify-between">
+            <span>Stream Schedule:</span>
+            <span className="text-white font-semibold">Mon-Fri 7PM</span>
+          </p>
+          <p className="flex justify-between">
+            <span>Content:</span>
+            <span className="text-white font-semibold">Fighting Games</span>
+          </p>
+          <p className="flex justify-between">
+            <span>Status:</span>
+            <span className="text-teal-400 font-semibold">Affiliate</span>
+          </p>
+        </div>
+
+        <Button
+          className="w-full mt-auto bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900"
+          onClick={() => window.open("#", "_blank")}
+        >
+          <Twitch size={18} className="mr-2" />
+          Watch Live Stream
+        </Button>
+      </div>
+    </Card>
+  </div>
+
+  {/* HoYoLAB (centered, same max width as grid) */}
+  <div className="max-w-5xl mx-auto">
+    <Card className="h-full flex flex-col bg-slate-800 border-2 border-slate-700 hover:border-cyan-400 transition-all">
+      <div className="p-8 flex flex-col flex-1">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="p-4 bg-gradient-to-br from-cyan-500 to-blue-700 rounded-xl shadow-lg flex items-center justify-center">
+            <img
+              src="/images/hoyo.png"
+              alt="HoYoLAB"
+              className="w-8 h-8 object-contain"
+            />
+          </div>
+          <div>
+            <h4 className="text-2xl text-white">HoYoLAB</h4>
+            <p className="text-cyan-300">11846094</p>
+          </div>
+        </div>
+
+        <div className="space-y-4 mb-6 text-gray-300">
+          {/* Genshin */}
+          <div className="rounded-xl border border-slate-700 bg-slate-900/40 p-4">
+            <div className="flex items-center gap-3 mb-3">
+              <img src="/images/gen.webp" alt="Genshin Impact" className="w-6 h-6 object-contain" />
+              <p className="text-white font-semibold">Genshin Impact</p>
+            </div>
+            <div className="space-y-2">
+              <p className="flex justify-between">
+                <span>UID:</span>
+                <span className="text-white font-semibold">801498652</span>
+              </p>
+              <p className="flex justify-between">
+                <span>Achievements:</span>
+                <span className="text-white font-semibold">950+</span>
+              </p>
+              <p className="flex justify-between">
+                <span>Spiral Abyss:</span>
+                <span className="text-cyan-300 font-semibold">36★</span>
+              </p>
+            </div>
           </div>
 
-                    {/* HoYoLAB Profile (Genshin + Star Rail + ZZZ) */}
-            <Card className="bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-slate-700 hover:border-cyan-400 transition-all">
-              <div className="p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-4 bg-gradient-to-br from-cyan-500 to-blue-700 rounded-xl shadow-lg flex items-center justify-center">
-                    <img
-                      src="/images/hoyo.png"
-                      alt="HoYoLAB"
-                      className="w-8 h-8 object-contain"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="text-2xl text-white">HoYoLAB</h4>
-                    <p className="text-cyan-300">@YourHoYoUsername</p>
-                  </div>
-                </div>
+          {/* Star Rail */}
+          <div className="rounded-xl border border-slate-700 bg-slate-900/40 p-4">
+            <div className="flex items-center gap-3 mb-3">
+              <img src="/images/star.webp" alt="Honkai: Star Rail" className="w-6 h-6 object-contain" />
+              <p className="text-white font-semibold">Honkai: Star Rail</p>
+            </div>
+            <div className="space-y-2">
+              <p className="flex justify-between">
+                <span>UID:</span>
+                <span className="text-white font-semibold">802923246</span>
+              </p>
+              <p className="flex justify-between">
+                <span>Memory of Chaos:</span>
+                <span className="text-cyan-300 font-semibold">Full Clear</span>
+              </p>
+              <p className="flex justify-between">
+                <span>Favorites:</span>
+                <span className="text-white font-semibold">Kafka / Jingliu</span>
+              </p>
+            </div>
+          </div>
 
-                <div className="space-y-4 mb-6 text-gray-300">
-                  {/* Genshin */}
-                  <div className="rounded-xl border border-slate-700 bg-slate-900/40 p-4">
-                    <div className="flex items-center gap-3 mb-3">
-                      <img
-                        src="/images/gen.webp"
-                        alt="Genshin Impact"
-                        className="w-6 h-6 object-contain"
-                      />
-                      <p className="text-white font-semibold">Genshin Impact</p>
-                    </div>
-
-                    <div className="space-y-2">
-                      <p className="flex justify-between">
-                        <span>Adventure Rank:</span>
-                        <span className="text-white font-semibold">AR 60</span>
-                      </p>
-                      <p className="flex justify-between">
-                        <span>Achievements:</span>
-                        <span className="text-white font-semibold">950+</span>
-                      </p>
-                      <p className="flex justify-between">
-                        <span>Spiral Abyss:</span>
-                        <span className="text-cyan-300 font-semibold">36★</span>
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Honkai: Star Rail */}
-                  <div className="rounded-xl border border-slate-700 bg-slate-900/40 p-4">
-                    <div className="flex items-center gap-3 mb-3">
-                      <img
-                        src="/images/star.webp"
-                        alt="Honkai: Star Rail"
-                        className="w-6 h-6 object-contain"
-                      />
-                      <p className="text-white font-semibold">Honkai: Star Rail</p>
-                    </div>
-
-                    <div className="space-y-2">
-                      <p className="flex justify-between">
-                        <span>Trailblaze Level:</span>
-                        <span className="text-white font-semibold">TL 70</span>
-                      </p>
-                      <p className="flex justify-between">
-                        <span>Memory of Chaos:</span>
-                        <span className="text-cyan-300 font-semibold">Full Clear</span>
-                      </p>
-                      <p className="flex justify-between">
-                        <span>Favorites:</span>
-                        <span className="text-white font-semibold">Kafka / Jingliu</span>
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Zenless Zone Zero */}
-                  <div className="rounded-xl border border-slate-700 bg-slate-900/40 p-4">
-                    <div className="flex items-center gap-3 mb-3">
-                      <img
-                        src="/images/zzz.webp"
-                        alt="Zenless Zone Zero"
-                        className="w-6 h-6 object-contain"
-                      />
-                      <p className="text-white font-semibold">Zenless Zone Zero</p>
-                    </div>
-
-                    <div className="space-y-2">
-                      <p className="flex justify-between">
-                        <span>Inter-Knot Level:</span>
-                        <span className="text-white font-semibold">IK 50</span>
-                      </p>
-                      <p className="flex justify-between">
-                        <span>Hollow Zero:</span>
-                        <span className="text-cyan-300 font-semibold">Cleared</span>
-                      </p>
-                      <p className="flex justify-between">
-                        <span>Main Squad:</span>
-                        <span className="text-white font-semibold">Ellen / Lycaon</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <Button
-                  className="w-full bg-gradient-to-r from-cyan-500 to-blue-700 hover:from-cyan-600 hover:to-blue-800"
-                  onClick={() => window.open("https://www.hoyolab.com/", "_blank")}
-                >
-                  <img src="/images/hoyolab.png" alt="" className="w-5 h-5 mr-2" />
-                  View HoYoLAB Profile
-                </Button>
-              </div>
-            </Card>
-          
-
-          {/* Social Media Links */}
-          <div className="max-w-4xl mx-auto">
-            <h4 className="text-2xl mb-6 mt-8 text-center text-white">
-              Connect on Social Media
-            </h4>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Button
-                className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 h-16"
-                onClick={() => window.open("https://www.youtube.com/@SenGouku")}
-              >
-                <Youtube size={24} className="mr-2" />
-                YouTube
-              </Button>
-              <Button
-                className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 h-16"
-                onClick={() => window.open("https://www.instagram.com/sen_gouku/")}
-              >
-                <Instagram size={24} className="mr-2" />
-                Instagram
-              </Button>
-              <Button
-                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 h-16"
-                onClick={() => window.open("https://www.facebook.com/SenGouku20")}
-              >
-                <Facebook size={24} className="mr-2" />
-                Facebook
-              </Button>
-              <Button
-                className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 h-16"
-                onClick={() => window.open("https://x.com/Sen_Gouku")}
-              >
-                <Twitter size={24} className="mr-2" />
-                Twitter
-              </Button>
+          {/* ZZZ */}
+          <div className="rounded-xl border border-slate-700 bg-slate-900/40 p-4">
+            <div className="flex items-center gap-3 mb-3">
+              <img src="/images/zzz.webp" alt="Zenless Zone Zero" className="w-6 h-6 object-contain" />
+              <p className="text-white font-semibold">Zenless Zone Zero</p>
+            </div>
+            <div className="space-y-2">
+              <p className="flex justify-between">
+                <span>UID:</span>
+                <span className="text-white font-semibold">1302497095</span>
+              </p>
+              <p className="flex justify-between">
+                <span>Hollow Zero:</span>
+                <span className="text-cyan-300 font-semibold">Cleared</span>
+              </p>
+              <p className="flex justify-between">
+                <span>Main Squad:</span>
+                <span className="text-white font-semibold">Ellen / Lycaon</span>
+              </p>
             </div>
           </div>
         </div>
+
+        <Button
+          className="w-full mt-auto bg-gradient-to-r from-cyan-500 to-blue-700 hover:from-cyan-600 hover:to-blue-800"
+          onClick={() => window.open("https://www.hoyolab.com/accountCenter/postList?id=11846094")}
+        >
+          <img src="/images/hoyolab.png" alt="" className="w-5 h-5 mr-2" />
+          View HoYoLAB Profile
+        </Button>
+      </div>
+    </Card>
+  </div>
+
+{/* Social Media Links */}
+<div className="max-w-5xl mx-auto">
+  <h4 className="text-3xl mb-8 mt-12 text-center text-white font-semibold">
+    Connect on Social Media
+  </h4>
+
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+
+    <Button
+      className="h-23 text-lg font-semibold flex flex-col items-center justify-center gap-2 bg-red-600 hover:bg-red-700"
+      onClick={() => window.open("https://www.youtube.com/@SenGouku")}
+    >
+      <Youtube size={34} />
+      YouTube
+    </Button>
+
+    <Button
+      className="h-23 text-lg font-semibold flex flex-col items-center justify-center gap-2 bg-pink-600 hover:bg-pink-700"
+      onClick={() => window.open("https://www.instagram.com/sen_gouku/")}
+    >
+      <Instagram size={34} />
+      Instagram
+    </Button>
+
+    <Button
+      className="h-23 text-lg font-semibold flex flex-col items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700"
+      onClick={() => window.open("https://www.facebook.com/SenGouku20")}
+    >
+      <Facebook size={34} />
+      Facebook
+    </Button>
+
+ <Button
+  className="h-23 text-lg font-semibold flex flex-col items-center justify-center gap-2 bg-black hover:bg-neutral-800 border border-white/20"
+  onClick={() => window.open("https://x.com/Sen_Gouku")}
+>
+  <XIcon size={34} />
+  X / Twitter
+</Button>
+
+  </div>
+</div>
+</div>
+
       </div>
     </section>
   );

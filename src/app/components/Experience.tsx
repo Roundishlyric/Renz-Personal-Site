@@ -1,109 +1,81 @@
-import { Briefcase, Calendar } from 'lucide-react';
-import { Card } from './ui/card';
+import { Briefcase, Calendar } from "lucide-react";
+import { Card } from "./ui/card";
 
 export function Experience() {
   const experiences = [
     {
-      role: 'Senior Full Stack Developer',
-      company: 'Tech Company Inc.',
-      period: '2022 - Present',
+      role: "Software Engineering Intern",
+      company: "Your Company Name",
+      period: "2025 - Present",
       description: [
-        'Led development of a microservices architecture serving 1M+ users',
-        'Improved application performance by 40% through optimization',
-        'Mentored junior developers and conducted code reviews',
-        'Implemented CI/CD pipelines reducing deployment time by 60%',
+        "Assisted in building and maintaining web features using React and TypeScript",
+        "Implemented UI components based on design specs and improved responsiveness",
+        "Integrated REST APIs and handled validation and error states",
+        "Fixed bugs and improved performance through code cleanup and optimization",
+        "Collaborated with team using Git, pull requests, and code reviews",
       ],
-      technologies: ['React', 'TypeScript', 'Node.js', 'AWS', 'Docker'],
-    },
-    {
-      role: 'Full Stack Developer',
-      company: 'StartUp Solutions',
-      period: '2020 - 2022',
-      description: [
-        'Built and maintained multiple client-facing web applications',
-        'Collaborated with designers to implement pixel-perfect UIs',
-        'Developed RESTful APIs and integrated third-party services',
-        'Participated in agile development processes and sprint planning',
-      ],
-      technologies: ['React', 'JavaScript', 'Express', 'MongoDB', 'GraphQL'],
-    },
-    {
-      role: 'Frontend Developer',
-      company: 'Digital Agency',
-      period: '2019 - 2020',
-      description: [
-        'Created responsive web applications for various clients',
-        'Worked with design team to translate mockups into code',
-        'Optimized websites for performance and SEO',
-        'Maintained and updated existing client projects',
-      ],
-      technologies: ['HTML/CSS', 'JavaScript', 'Vue.js', 'Sass', 'Webpack'],
+      technologies: ["React", "TypeScript", "JavaScript", "Node.js", "Git"],
     },
   ];
 
   return (
-    <section id="experience" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="experience" className="py-20 bg-black">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Title */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Experience</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+          <h2 className="text-4xl md:text-5xl mb-4 text-white">
+            Internship Experience
+          </h2>
+          <div className="w-24 h-1 bg-red-600 mx-auto"></div>
         </div>
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-blue-600 to-purple-600"></div>
+        {/* Card */}
+        <div className="max-w-3xl mx-auto">
+          {experiences.map((exp, index) => (
+            <Card
+              key={index}
+              className="p-8 bg-neutral-900 border border-red-600 hover:border-red-500 transition-colors"
+            >
+              <div className="flex items-start gap-4 mb-6">
+                <div className="p-3 bg-red-600 rounded-lg">
+                  <Briefcase className="text-white" size={22} />
+                </div>
 
-          <div className="space-y-12">
-            {experiences.map((exp, index) => (
-              <div
-                key={index}
-                className={`relative md:grid md:grid-cols-2 gap-8 items-center ${
-                  index % 2 === 0 ? 'md:text-right' : 'md:flex-row-reverse'
-                }`}
-              >
-                {/* Timeline dot */}
-                <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full border-4 border-white shadow-md"></div>
+                <div className="flex-1">
+                  <h3 className="text-2xl mb-1 text-white">{exp.role}</h3>
+                  <p className="text-lg text-red-500 mb-2">{exp.company}</p>
 
-                <div className={index % 2 === 0 ? '' : 'md:col-start-2'}>
-                  <Card className="p-6 hover:shadow-xl transition-shadow">
-                    <div className="flex items-start gap-3 mb-4">
-                      <div className="p-2 bg-blue-100 rounded-lg">
-                        <Briefcase className="text-blue-600" size={20} />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl mb-1 text-gray-900">{exp.role}</h3>
-                        <p className="text-lg text-blue-600 mb-2">{exp.company}</p>
-                        <div className="flex items-center gap-2 text-gray-500">
-                          <Calendar size={16} />
-                          <span>{exp.period}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <ul className="space-y-2 mb-4 text-gray-700">
-                      {exp.description.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="text-blue-600 mt-1">▸</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="flex flex-wrap gap-2">
-                      {exp.technologies.map((tech, i) => (
-                        <span
-                          key={i}
-                          className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </Card>
+                  <div className="flex items-center gap-2 text-gray-400">
+                    <Calendar size={16} />
+                    <span>{exp.period}</span>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
+
+              {/* Description */}
+              <ul className="space-y-3 mb-6 text-gray-300">
+                {exp.description.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="text-red-500 mt-1">▸</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Tech Stack */}
+              <div className="flex flex-wrap gap-3">
+                {exp.technologies.map((tech, i) => (
+                  <span
+                    key={i}
+                    className="px-3 py-1.5 bg-black border border-red-600 text-red-400 rounded-full text-sm"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </Card>
+          ))}
         </div>
       </div>
     </section>

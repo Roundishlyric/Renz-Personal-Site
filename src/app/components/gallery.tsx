@@ -55,7 +55,7 @@ export function Gallery() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Photo Gallery</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-4"></div>
+          <div className="w-20 h-1 bg-red-700 mx-auto mb-4"></div>
           <p className="text-lg text-gray-600">Moments and memories from my journey</p>
         </div>
 

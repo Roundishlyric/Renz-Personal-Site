@@ -8,6 +8,7 @@ import { Gallery } from '../components/gallery';
 import { Contact } from '../components/Contact';
 import { Footer } from '../components/Footer';
 import { CVDownload } from '../components/CVDownload';
+import { Experience } from '../components/Experience';
 
 export function CVSite() {
   return (
@@ -18,6 +19,7 @@ export function CVSite() {
         <About />
         <Education />
         <Skills />
+        <Experience />
         <Hobbies />
         <Gallery />
         <CVDownload />

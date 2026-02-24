@@ -47,7 +47,7 @@ export function Contact() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Get In Touch</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-red-600 to-orange-600 mx-auto mb-4"></div>
+          <div className="w-20 h-1 bg-gradient-to-r from-red-700 to-red-700 mx-auto mb-4"></div>
           <p className="text-lg text-gray-600">Let's connect and discuss opportunities</p>
         </div>
 
@@ -58,7 +58,7 @@ export function Contact() {
               <div className="space-y-4">
                 <Card className="p-4 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-red-200">
                   <div className="flex items-center gap-4">
-                    <div className="p-3 bg-gradient-to-br from-red-600 to-orange-600 rounded-lg">
+                    <div className="p-3 bg-gradient-to-br from-red-700 to-red-700 rounded-lg">
                       <Mail className="text-white" size={24} />
                     </div>
                     <div>
@@ -70,7 +70,7 @@ export function Contact() {
 
                 <Card className="p-4 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-red-200">
                   <div className="flex items-center gap-4">
-                    <div className="p-3 bg-gradient-to-br from-red-600 to-orange-600 rounded-lg">
+                    <div className="p-3 bg-gradient-to-br from-red-700 to-red-700 rounded-lg">
                       <Phone className="text-white" size={24} />
                     </div>
                     <div>
@@ -82,7 +82,7 @@ export function Contact() {
 
                 <Card className="p-4 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-red-200">
                   <div className="flex items-center gap-4">
-                    <div className="p-3 bg-gradient-to-br from-red-600 to-orange-600 rounded-lg">
+                    <div className="p-3 bg-gradient-to-br from-red-700 to-red-700 rounded-lg">
                       <MapPin className="text-white" size={24} />
                     </div>
                     <div>
@@ -100,21 +100,21 @@ export function Contact() {
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
-                  onClick={() => window.open('https://linkedin.com', '_blank')}
+                  onClick={() => window.open('www.linkedin.com/in/renz-danniel-rapanut-692902210')}
                 >
                   <Linkedin size={20} />
                 </Button>
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black"
-                  onClick={() => window.open('https://github.com', '_blank')}
+                  onClick={() => window.open('https://github.com/Roundishlyric')}
                 >
                   <Github size={20} />
                 </Button>
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
-                  onClick={() => window.open('https://facebook.com', '_blank')}
+                  onClick={() => window.open('https://www.facebook.com/Roundishlyric/')}
                 >
                   <Facebook size={20} />
                 </Button>
@@ -139,7 +139,7 @@ export function Contact() {
               </div>
               <Button 
                 type="submit" 
-                className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white"
+                className="w-full bg-gradient-to-r from-red-700 to-red-700 hover:from-red-700 hover:to-red-700 text-white"
                 size="lg"
               >
                 <Send size={20} className="mr-2" />

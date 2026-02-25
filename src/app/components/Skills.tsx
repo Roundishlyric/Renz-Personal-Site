@@ -6,7 +6,7 @@ export function Skills() {
     {
       category: 'Frontend',
       skills: [
-        { name: 'React / Next.js', level: 95 },
+        { name: 'React.js', level: 95 },
         { name: 'TypeScript', level: 90 },
         { name: 'Tailwind CSS', level: 85 },
         { name: 'Vue.js', level: 75 },
@@ -16,7 +16,7 @@ export function Skills() {
       category: 'Backend',
       skills: [
         { name: 'Node.js / Express', level: 90 },
-        { name: 'Python / Django', level: 80 },
+        { name: 'Python', level: 80 },
         { name: 'PostgreSQL', level: 85 },
         { name: 'MongoDB', level: 80 },
       ],
@@ -24,16 +24,15 @@ export function Skills() {
     {
       category: 'Tools & Others',
       skills: [
-        { name: 'Git / GitHub', level: 95 },
-        { name: 'Docker', level: 80 },
-        { name: 'AWS / Cloud Services', level: 75 },
-        { name: 'CI/CD', level: 85 },
+        { name: 'Git / GitHub', level: 90 },
+        { name: 'Docker', level: 70 },
+        { name: 'Figma / Photshop', level: 80},
       ],
     },
   ];
 
   return (
-    <section id="skills" className="py-20 bg-white">
+    <section id="skills" className="py-10 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Technical Skills</h2>
@@ -42,7 +41,7 @@ export function Skills() {
 
         <div className="grid md:grid-cols-3 gap-8">
           {skillCategories.map((category, index) => (
-            <Card key={index} className="p-6 hover:shadow-xl transition-shadow border-2 border-transparent hover:border-blue-200">
+            <Card key={index} className="p-6 hover:shadow-xl transition-shadow border-2 border-transparent hover:border-red-700">
               <div className="flex items-center gap-3 mb-6 pb-3 border-b-2 border-red-100">
                 <div className="p-2 bg-red-100 rounded-lg">
                   <div className="w-6 h-6 bg-gradient-to-br from-red-600 to-red-600 rounded"></div>

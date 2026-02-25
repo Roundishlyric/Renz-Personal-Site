@@ -78,9 +78,9 @@ export function Education() {
   return (
     <section
       id="education"
-      className="py-20 bg-gradient-to-br from-red-50 via-orange-50 to-white"
+      className="py-10 bg-gradient-to-br from-red-50 via-orange-50 to-white"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         {/* HEADER */}
         <div className="text-center">
           <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Education</h2>
@@ -95,7 +95,7 @@ export function Education() {
           {education.map((edu, index) => (
             <Card
               key={index}
-              className="p-8 hover:shadow-2xl transition-shadow border-2 border-transparent hover:border-red-200"
+              className="p-8 hover:shadow-2xl transition-shadow border-2 border-transparent hover:border-red-700"
             >
               <div className="flex items-start gap-6">
               <div className="w-20 h-20 rounded-xl 
@@ -158,58 +158,6 @@ export function Education() {
           ))}
         </div>
 
-        {/* CERTIFICATIONS */}
-        <div className="mt-24">
-          <h3 className="text-4xl mb-14 text-center text-black font-bold tracking-tight">
-            Badges and Certifications
-            <div className="mt-4 mx-auto h-1 w-24 rounded bg-red-600" />
-          </h3>
-
-          <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-            {certifications.map((cert, index) => (
-              <Card
-                key={index}
-                className="p-6 rounded-2xl bg-black backdrop-blur-md 
-                border border-red-600/70
-                hover:shadow-[0_0_30px_rgba(255,0,0,0.18)]
-                hover:-translate-y-1 transition-all duration-300"
-              >
-                <div className="flex items-start gap-4">
-
-                  {/* LOGO */}
-                  <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-white border border-zinc-700">
-                    <img
-                      src={
-                        cert.issuer.toLowerCase().includes("certiport")
-                          ? "/images/cert.png"
-                          : "/images/cis.png"
-                      }
-                      alt={cert.issuer}
-                      className="w-11 h-11 object-contain"
-                    />
-                  </div>
-
-                  {/* TEXT */}
-                  <div className="flex-1 space-y-1">
-                    <h4 className="text-lg text-white font-semibold leading-snug">
-                      {cert.name}
-                    </h4>
-
-                    <p className="text-red-500 text-sm font-medium">
-                      {cert.issuer}
-                    </p>
-
-                    <p className="text-white text-sm">
-                      {cert.date}
-                    </p>
-                  </div>
-
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-
         {/* ORGANIZATION */}
         <div>
           <h3 className="text-3xl mb-12 text-center">Organization</h3>
@@ -217,7 +165,7 @@ export function Education() {
             {activities.map((activity, index) => (
               <Card
                 key={index}
-                className="p-8 hover:shadow-xl transition-shadow border-2 border-transparent hover:border-orange-200"
+                className="p-8 hover:shadow-xl transition-shadow border-2 border-transparent hover:border-red-700"
               >
                 <div className="flex items-start gap-5">
                   <div className="w-16 h-16 rounded-full overflow-hidden bg-white shadow-md flex items-center justify-center border">

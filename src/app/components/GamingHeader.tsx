@@ -8,6 +8,7 @@ const navItems = [
   { label: "Main Games", id: "main-games" },
   { label: "Other Games", id: "other-games" },
   { label: "Profiles", id: "profiles" },
+  { label: "Socials", id: "Social" },
 ];
 
 export function GamingHeader() {

@@ -9,6 +9,7 @@ import { Contact } from '../components/Contact';
 import { Footer } from '../components/Footer';
 import { CVDownload } from '../components/CVDownload';
 import { Experience } from '../components/Experience';
+import { Cert } from '../components/cert';
 
 export function CVSite() {
   return (
@@ -18,6 +19,7 @@ export function CVSite() {
         <Hero />
         <About />
         <Education />
+        <Cert />
         <Skills />
         <Experience />
         <Hobbies />

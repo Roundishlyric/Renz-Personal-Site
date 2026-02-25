@@ -24,6 +24,7 @@ export function Header() {
   const navItems = [
     { label: "About", id: "about" },
     { label: "Education", id: "education" },
+    { label: "Certifications", id: "cert" },
     { label: "Skills", id: "skills" },
     { label: "Hobbies", id: "hobbies" },
     { label: "Gallery", id: "gallery" },
@@ -36,7 +37,7 @@ export function Header() {
 
   const brandText = isScrolled ? "text-white" : "text-gray-900";
   const navText = isScrolled
-    ? "text-gray-200 hover:text-white"
+    ? "text-gray-200 hover:text-red-400"
     : "text-gray-700 hover:text-red-700";
 
   const mobileBorder = isScrolled ? "border-white/10" : "border-gray-200";
@@ -47,6 +48,8 @@ export function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
+          
+          {/* LOGO */}
           <button
             onClick={() => scrollToSection("hero")}
             className={`text-xl font-bold transition-colors ${brandText} ${
@@ -68,13 +71,14 @@ export function Header() {
               </button>
             ))}
 
+            {/* FIXED GAMING BUTTON */}
             <Link to="/gaming">
               <Button
                 variant="outline"
                 className={`flex items-center gap-2 transition-colors ${
                   isScrolled
-                    ? "border-white/30 text-white hover:bg-white/10 hover:text-red-700"
-                    : "border-gray-300 text-gray-900 hover:bg-gray-100"
+                    ? "!bg-transparent !text-white border-white/30 hover:!bg-white/10 hover:!text-white"
+                    : "bg-transparent text-gray-900 border-gray-300 hover:bg-gray-100"
                 }`}
               >
                 <Gamepad2 size={18} />
@@ -104,7 +108,7 @@ export function Header() {
                 onClick={() => scrollToSection(item.id)}
                 className={`block w-full text-left py-2 transition-colors ${
                   isScrolled
-                    ? "text-gray-200 hover:text-red-700"
+                    ? "text-gray-200 hover:text-red-400"
                     : "text-gray-700 hover:text-red-700"
                 }`}
               >
@@ -115,7 +119,9 @@ export function Header() {
             <Link
               to="/gaming"
               className={`flex items-center gap-2 py-2 transition-colors ${
-                isScrolled ? "text-gray-200 hover:text-white" : "text-gray-700 hover:text-red-700"
+                isScrolled
+                  ? "text-gray-200 hover:text-red-400"
+                  : "text-gray-700 hover:text-red-700"
               }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >

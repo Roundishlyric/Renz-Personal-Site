@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+
 import {
   Trophy,
   Gamepad2,
@@ -6,14 +7,12 @@ import {
   Twitch,
   Youtube,
   Medal,
-  Target,
-  Swords,
   ExternalLink,
   Instagram,
   Facebook,
-  Twitter,
   ChevronLeft,
   ChevronRight,
+  Clock
 } from "lucide-react";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
@@ -38,6 +37,7 @@ type SlideAnim = {
   from: number;
   to: number;
   dir: "next" | "prev";
+  phase: "init" | "animate";
 };
 
 const XIcon = ({ size = 34 }: { size?: number }) => (
@@ -48,9 +48,10 @@ const XIcon = ({ size = 34 }: { size?: number }) => (
     viewBox="0 0 24 24"
     fill="currentColor"
   >
-    <path d="M18.244 2H21.5l-7.37 8.42L23 22h-6.828l-5.345-6.993L4.5 22H1.244l7.885-9.007L1 2h6.828l4.84 6.35L18.244 2Zm-2.395 18h2.1L7.95 4h-2.1l9.999 16Z"/>
+    <path d="M18.244 2H21.5l-7.37 8.42L23 22h-6.828l-5.345-6.993L4.5 22H1.244l7.885-9.007L1 2h6.828l4.84 6.35L18.244 2Zm-2.395 18h2.1L7.95 4h-2.1l9.999 16Z" />
   </svg>
 );
+
 export function Gaming() {
   const games = useMemo<Game[]>(
     () => [
@@ -61,7 +62,7 @@ export function Gaming() {
         images: [
           "/images/sagat.webp",
           "/images/bison.webp",
-          "/images/Guile.webp",
+          "https://media.eventhubs.com/images/2022/06/09_gui04.jpg",
           "/images/ken.webp",
         ],
         focus: "object-left",
@@ -82,11 +83,11 @@ export function Gaming() {
         tab: "TEKKEN",
         title: "TEKKEN 8",
         images: [
-          "/images/kuma.webp",
-          "/images/panda.webp",
-          "/images/clive.webp",
+          "https://static.bandainamcoent.eu/high/tekken/tekken-8/02-characters/new-gallery/Screenshots_V1/Kuma/Kuma-poster.jpg",
+          "https://static.bandainamcoent.eu/high/tekken/tekken-8/02-characters/new-gallery/Screenshots_V1/Panda/Pande-poster.jpg",
+          "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/12/tekken-8-clive-rosfield-header-image.jpg",
           "/images/paul.webp",
-          "/images/fahk.webp",
+          "https://static0.thegamerimages.com/wordpress/wp-content/uploads/wm/2025/07/tekken-8-fahkumram-guide-featured-image.jpg",
         ],
         focus: "object-center",
         main: "KUMA / PANDA",
@@ -95,34 +96,48 @@ export function Gaming() {
         placements: [
           { event: "CTRL+ALT+ELITE tournament", place: "3rd Place" },
           { event: "MANILA MADNESS III", place: "49th Place" },
-          {event: "RTX PC AI DAY TEKKEN 8 COMMUNITY TOURNAMENT",place: "17th Place"},
-          {event: "TRYHARDS September 2024",place: "49th Place"},
-          {event: "Geekpop+ Ayala Circuit",place: "25th Place"},
+          {
+            event: "RTX PC AI DAY TEKKEN 8 COMMUNITY TOURNAMENT",
+            place: "17th Place",
+          },
+          { event: "TRYHARDS September 2024", place: "49th Place" },
+          { event: "Geekpop+ Ayala Circuit", place: "25th Place" },
         ],
       },
       {
         key: "ggst",
         tab: "GGST",
         title: "GUILTY GEAR STRIVE",
-        images: ["/images/elp.webp", "/images/nago.webp", "/images/leo.jpg"],
+        images: [
+          "https://cdn.dashfight.com/9d3a20e201c12900f66ac1e4a2de1962c3e8b2b7.png",
+          "https://www.fightersgeneration.com/nf8/game/guiltygear/guiltygear2020-screenshot5.jpg",
+          "/images/leo.jpg",
+        ],
         focus: "object-right",
         main: "ELPHELT VALENTINE",
         subs: ["NAGORIYUKI", "LEO WHITEFANG"],
         rank: "Platinum",
-        placements: [{ event: "Geekpop+ Ayala Circuit", place: "11th Place" },
-          { event: "Geekpop+ Fight Club February 2026", place: "5th  Place" }
+        placements: [
+          { event: "Geekpop+ Ayala Circuit", place: "11th Place" },
+          { event: "Geekpop+ Fight Club February 2026", place: "5th Place" },
         ],
       },
       {
         key: "gbvsr",
         tab: "GBVSR",
         title: "GRANBLUE FANTASY VERSUS RISING",
-        images: ["/images/bea.webp", "/images/gal.webp", "/images/anila.webp"],
+        images: [
+          "https://gamingbolt.com/wp-content/uploads/2024/05/Granblue-Fantasy-Versus-Rising_Beatrix.jpg",
+          "https://www.heypoorplayer.com/wp-content/uploads/2025/05/Granblue-Fantasy-Versus-Rising-Galleon-Attack.jpg",
+          "https://gamicsoft.sgp1.digitaloceanspaces.com/26032/QQ%E5%9B%BE%E7%89%8720230306130348.png",
+        ],
         focus: "object-center",
         main: "BEATRIX",
         subs: ["GALLEON", "ANILA"],
         rank: "S+",
-        placements: [{ event: "Geek+Pop Fight Club Ranker Event 4", place: "13th Place" }],
+        placements: [
+          { event: "Geek+Pop Fight Club Ranker Event 4", place: "13th Place" },
+        ],
       },
     ],
     []
@@ -130,59 +145,118 @@ export function Gaming() {
 
   const otherGames = [
     {
-      title: "League of Legends",
-      rank: "Diamond II",
+      title: "Fatal Fury: City of the Wolves",
+      rank: "A+",
       hours: "800+",
-      role: "Mid Lane",
-      image:
-        "https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=800&q=80",
+      role: "Andy Bogard",
+      image: "https://wallpapercave.com/wp/wp15327877.jpg",
     },
     {
-      title: "Valorant",
+      title: "King of Fighters XV",
       rank: "Immortal",
       hours: "500+",
       role: "Duelist",
-      image:
-        "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=800&q=80",
+      image: "https://www.snk-corp.co.jp/us/games/kof-xv/special/img/wallpaper.jpg",
     },
     {
-      title: "Apex Legends",
+      title: "Melty Blood: Type Lumina",
       rank: "Predator",
       hours: "400+",
       role: "Assault",
-      image:
-        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&q=80",
+      image: "https://images4.alphacoders.com/117/1179291.jpg",
     },
     {
-      title: "Rocket League",
+      title: "UNDER NIGHT IN-BIRTH II Sys:Celes",
       rank: "Champion III",
       hours: "600+",
       role: "Striker",
-      image:
-        "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=800&q=80",
+      image: "/images/und.png",
+    },
+    {
+      title: "2XKO",
+      rank: "Champion III",
+      hours: "600+",
+      role: "Striker",
+      image: "https://wiki.play2xko.com/en-us/images/2XKO_Cover.jpg?302f5",
+    },
+    {
+      title: "Uma Musume: Pretty Derby",
+      rank: "Champion III",
+      hours: "600+",
+      role: "Striker",
+      image: "https://www.cyberagent.co.jp/files/topics/25885_ext_03_en_0.jpg",
+    },
+    {
+      title: "Wuthering Waves",
+      rank: "Champion III",
+      hours: "600+",
+      role: "Striker",
+      image: "https://4kwallpapers.com/images/wallpapers/wuthering-waves-v2-3840x2160-24011.jpg",
+    },
+    {
+      title: "Grandblue Fantasy: Relink",
+      rank: "Champion III",
+      hours: "600+",
+      role: "Striker",
+      image: "https://4kwallpapers.com/images/wallpapers/granblue-fantasy-3840x2160-15025.jpg",
+    },
+    {
+      title: "Monster Hunter: Wilds",
+      rank: "Completed - All Achievements",
+      hours: "300+",
+      role: "PvE",
+      image: "https://i.redd.it/wallpaper-compilation-from-wilds-release-s-capcom-survey-v0-x1ytckrvmvle1.jpg?width=2560&format=pjpg&auto=webp&s=b34be37c51661ff48b918a0a217c353bd16909af",
+    },
+    {
+      title: "Monster Hunter: World",
+      rank: "Completed - All Achievements",
+      hours: "300+",
+      role: "PvE",
+      image: "https://images3.alphacoders.com/107/1070888.jpg",
     },
     {
       title: "Elden Ring",
       rank: "Completed - All Achievements",
       hours: "300+",
       role: "PvE",
-      image:
-        "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=800&q=80",
+      image: "https://preview.redd.it/mn7z7ia8qet71.jpg?auto=webp&s=92e01d8b1c4e0b3ffc87096be274b31fbd17a430",
+    },
+    {
+      title: "Dark Souls III",
+      rank: "Completed - All Achievements",
+      hours: "300+",
+      role: "PvE",
+      image: "https://static.bandainamcoent.eu/high/dark-souls/dark-souls-3/00-page-setup/ds3_game-thumbnail.jpg",
+    },
+    {
+      title: "Apex Legends",
+      rank: "Completed - All Achievements",
+      hours: "300+",
+      role: "PvE",
+      image: "https://www.denofgeek.com/wp-content/uploads/2021/08/Apex-Legends-Season-10-Meta.jpg?fit=1200%2C800",
+    },
+    {
+      title: "Clair Obscur: Expedition 33",
+      rank: "Completed - All Achievements",
+      hours: "300+",
+      role: "PvE",
+      image: "https://cdn.mos.cms.futurecdn.net/n9ZybPuhE42y6etXEuutWc.jpg",
+    },
+    {
+      title: "Overwatch",
+      rank: "Completed - All Achievements",
+      hours: "300+",
+      role: "PvE",
+      image: "https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt030bf3d606661d3c/633f5be164fe5a7d4481a16c/overwatch-section1-feature1.png?imwidth=1920&imdensity=2.625",
+    },
+    {
+      title: "Sekiro: Shadows Die Twice",
+      rank: "Completed - All Achievements",
+      hours: "300+",
+      role: "PvE",
+      image: "https://4kwallpapers.com/images/wallpapers/sekiro-shadows-die-5120x2880-14176.jpg",
     },
   ];
-
-  const getBadgeColor = (badge: TournamentBadge) => {
-    switch (badge) {
-      case "gold":
-        return "bg-gradient-to-r from-yellow-400 to-yellow-600 text-white";
-      case "silver":
-        return "bg-gradient-to-r from-gray-300 to-gray-500 text-white";
-      case "bronze":
-        return "bg-gradient-to-r from-orange-400 to-orange-600 text-white";
-      default:
-        return "bg-gradient-to-r from-teal-500 to-cyan-500 text-white";
-    }
-  };
 
   /* ===================== MAIN GAMES SLIDER STATE ===================== */
   const [activeKey, setActiveKey] = useState<string>(games[0]?.key ?? "sf6");
@@ -195,6 +269,7 @@ export function Gaming() {
   const [anim, setAnim] = useState<SlideAnim | null>(null);
 
   const canSlide = (active?.images?.length ?? 0) > 1;
+  const currentIndex = anim ? anim.to : slide;
 
   // Reset slider when switching games
   useEffect(() => {
@@ -202,13 +277,22 @@ export function Gaming() {
     setAnim(null);
   }, [activeKey]);
 
-  // Finish animation + set final slide (prevents "blank" frames)
+  // Kick off the CSS transition on the next frame (prevents “jump” / broken transition)
   useEffect(() => {
-    if (!anim) return;
+    if (!anim || anim.phase !== "init") return;
+    const raf = requestAnimationFrame(() => {
+      setAnim((a) => (a ? { ...a, phase: "animate" } : a));
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [anim]);
+
+  // Finish animation cleanly
+  useEffect(() => {
+    if (!anim || anim.phase !== "animate") return;
     const t = window.setTimeout(() => {
       setSlide(anim.to);
       setAnim(null);
-    }, 320); // match duration-300 + tiny buffer
+    }, 320);
     return () => window.clearTimeout(t);
   }, [anim]);
 
@@ -222,22 +306,64 @@ export function Gaming() {
       const normalizedTo = ((to % total) + total) % total;
       if (normalizedTo === slide) return;
 
-      setAnim({ from: slide, to: normalizedTo, dir });
+      setAnim({ from: slide, to: normalizedTo, dir, phase: "init" });
     },
     [active, anim, canSlide, slide]
   );
 
-  const next = useCallback(() => {
-    if (!active) return;
-    startSlide(slide + 1, "next");
-  }, [active, slide, startSlide]);
+  const next = useCallback(() => startSlide(slide + 1, "next"), [slide, startSlide]);
+  const prev = useCallback(() => startSlide(slide - 1, "prev"), [slide, startSlide]);
 
-  const prev = useCallback(() => {
-    if (!active) return;
-    startSlide(slide - 1, "prev");
-  }, [active, slide, startSlide]);
+type HoyoKey = "genshin" | "hsr" | "zzz";
 
-  const currentIndex = anim ? anim.to : slide;
+const HOYO_TEAMS: Record<
+  HoyoKey,
+  {
+    key: HoyoKey;
+    label: string;
+    icon: string;
+    teamCols: 3 | 4;
+    members: { name: string; img: string }[];
+  }
+> = {
+  genshin: {
+    key: "genshin",
+    label: "Genshin Impact",
+    icon: "/images/gen.webp",
+    teamCols: 4,
+    members: [
+      { name: "Neuvillette", img: "/images/char-placeholder.png" },
+      { name: "Furina", img: "/images/char-placeholder.png" },
+      { name: "Kazuha", img: "/images/char-placeholder.png" },
+      { name: "Baizhu", img: "/images/char-placeholder.png" },
+    ],
+  },
+  hsr: {
+    key: "hsr",
+    label: "Honkai: Star Rail",
+    icon: "/images/star.webp",
+    teamCols: 4,
+    members: [
+      { name: "Kafka", img: "/images/char-placeholder.png" },
+      { name: "Black Swan", img: "/images/char-placeholder.png" },
+      { name: "Ruan Mei", img: "/images/char-placeholder.png" },
+      { name: "Huohuo", img: "/images/char-placeholder.png" },
+    ],
+  },
+  zzz: {
+    key: "zzz",
+    label: "Zenless Zone Zero",
+    icon: "/images/zzz.webp",
+    teamCols: 3,
+    members: [
+      { name: "Ellen", img: "/images/char-placeholder.png" },
+      { name: "Lycaon", img: "/images/char-placeholder.png" },
+      { name: "Soukaku", img: "/images/char-placeholder.png" },
+    ],
+  },
+};
+
+const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
 
   return (
     <section
@@ -245,69 +371,116 @@ export function Gaming() {
       className="py-20 bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900 text-white pt-24"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero Introduction */}
-        <div id="overview" className="scroll-mt-24 text-center mb-20">
-          <div className="mb-8">
-            <div className="inline-block p-1 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full">
-              <div className="bg-slate-900 rounded-full p-1">
-                <div className="w-40 h-40 bg-gradient-to-br from-teal-900 to-cyan-900 rounded-full flex items-center justify-center overflow-hidden">
-                  <ImageWithFallback
-                    src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80"
-                    alt="Player Profile"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
+{/* Hero Introduction */}
+<div id="overview" className="scroll-mt-24 text-center mb-20">
+  {/* Top glow / accents */}
+  <div className="relative mx-auto mb-10 w-full max-w-3xl">
+    <div className="pointer-events-none absolute -top-24 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-teal-500/20 blur-3xl" />
+    <div className="pointer-events-none absolute -top-10 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl" />
+  </div>
+
+  {/* Avatar */}
+{/* Profile Banner Image */}
+<div className="mb-12 flex justify-center">
+  <div className="relative w-full max-w-2xl">
+
+    {/* glow */}
+    <div className="absolute inset-0 bg-teal-500/20 blur-2xl rounded-3xl" />
+
+    {/* frame */}
+    <div className="relative rounded-3xl p-[2px] bg-gradient-to-r from-teal-500 to-cyan-500">
+      <div className="rounded-3xl overflow-hidden bg-slate-900">
+
+        <div className="relative h-[260px] md:h-[320px] w-full">
+          <ImageWithFallback
+            src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&q=80"
+            alt="Player Profile"
+            className="w-full h-full object-cover"
+            draggable={false}
+          />
+
+          {/* dark overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+          {/* name inside banner */}
+          <div className="absolute bottom-6 left-6 text-left">
+            <div className="flex items-center gap-3">
+              <Gamepad2 size={28} className="text-teal-300" />
+              <h1 className="text-3xl md:text-4xl font-bold text-white">
+                SenGouku
+              </h1>
             </div>
+            <p className="text-teal-300 mt-1 text-sm md:text-base">
+              Fighting Game Competitor
+            </p>
           </div>
 
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Gamepad2 size={40} className="text-teal-400" />
-            <h1 className="text-5xl md:text-6xl text-white">Your Gamertag</h1>
-          </div>
-
-          <div className="w-20 h-1 bg-gradient-to-r from-teal-500 to-cyan-500 mx-auto mb-6" />
-
-          <h2 className="text-2xl md:text-3xl text-teal-400 mb-6">
-            Fighting Game Competitor and Gaming Content Creator
-          </h2>
-
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-4">
-            Competing at the highest level in fighting game tournaments
-            worldwide. Specializing in Street Fighter 6, Tekken 8, and multiple
-            fighting game titles.
-          </p>
-
-          <p className="text-md text-gray-400 max-w-2xl mx-auto mb-8">
-            With over 5 years of competitive experience, I've secured multiple
-            championship titles and consistently place in top 8 at major
-            tournaments. Currently representing Team Apex Fighters.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-4">
-            <Badge className="bg-gradient-to-r from-teal-500 to-cyan-500 text-white text-lg px-6 py-2">
-              ⚔️ Fighting Game Specialist
-            </Badge>
-            <Badge className="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-lg px-6 py-2">
-              👥 TArchangel Esports
-            </Badge>
-          </div>
         </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  {/* Underline */}
+  <div className="mx-auto mb-6 h-1 w-20 rounded bg-gradient-to-r from-teal-500 to-cyan-500" />
+
+  {/* Title */}
+  <h2 className="text-xl md:text-3xl font-semibold text-teal-300 mb-4">
+    Fighting Game Competitor & Gaming Content Creator
+  </h2>
+
+  {/* Description */}
+  <p className="text-base md:text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
+    Competing at the highest level in fighting game tournaments worldwide.
+    Specializing in Street Fighter 6, Tekken 8, and multiple fighting game titles.
+  </p>
+
+  {/* Highlights row */}
+  <div className="mt-8 flex flex-wrap justify-center gap-3">
+    <Badge className="px-5 py-2 text-sm md:text-base bg-slate-900/50 border border-white/10 text-white">
+      ⚔️ Fighting Game Specialist
+    </Badge>
+    <Badge className="px-5 py-2 text-sm md:text-base bg-slate-900/50 border border-white/10 text-white">
+      👥 TArchangel Esports
+    </Badge>
+    <Badge className="px-5 py-2 text-sm md:text-base bg-slate-900/50 border border-white/10 text-teal-200">
+      ⭐ Competitive Player
+    </Badge>
+  </div>
+
+  {/* Quick stats (optional but looks really good) */}
+  <div className="mt-10 max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div className="rounded-2xl border border-white/10 bg-slate-900/35 px-6 py-5">
+      <p className="text-sm text-gray-300">Main Focus</p>
+      <p className="mt-1 text-xl font-bold text-white">FGC Tournaments</p>
+    </div>
+    <div className="rounded-2xl border border-white/10 bg-slate-900/35 px-6 py-5">
+      <p className="text-sm text-gray-300">Signature Titles</p>
+      <p className="mt-1 text-xl font-bold text-white">SF6 • T8 • More</p>
+    </div>
+    <div className="rounded-2xl border border-white/10 bg-slate-900/35 px-6 py-5">
+      <p className="text-sm text-gray-300">Content</p>
+      <p className="mt-1 text-xl font-bold text-white">Clips • Guides</p>
+    </div>
+  </div>
+</div>
 
         {/* Team Section */}
         <div id="team" className="scroll-mt-24 mb-20">
           <div className="text-center mb-10">
             <h3 className="text-3xl mb-4">Representing Archangel Esports</h3>
-            <p className="text-gray-300 max-w-2xl mx-auto">
+            <p className="text-gray-300 max-w-8xl mx-auto">
               Competing as one of the top fighting game teams in the region
             </p>
           </div>
-          <div className="max-w-4xl mx-auto">
+
+          <div className="max-w-8xl mx-auto">
             <Card className="bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-teal-500 shadow-2xl shadow-teal-500/30 overflow-hidden">
               <div className="relative h-64 bg-slate-900">
                 <ImageWithFallback
                   src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=80"
-                  alt="Team Apex Fighters"
+                  alt="Team"
                   className="w-full h-full object-cover opacity-40"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/70 to-transparent" />
@@ -322,7 +495,8 @@ export function Gaming() {
                   </div>
                 </div>
               </div>
-              <div className="p-8 flex flex-col flex-1">
+
+              <div className="p-8">
                 <div className="grid md:grid-cols-3 gap-6 mb-6">
                   <div className="flex items-center gap-4">
                     <div className="p-4 bg-teal-600/20 rounded-lg">
@@ -333,6 +507,7 @@ export function Gaming() {
                       <div className="text-gray-300">Team Championships</div>
                     </div>
                   </div>
+
                   <div className="flex items-center gap-4">
                     <div className="p-4 bg-teal-600/20 rounded-lg">
                       <Users className="text-teal-400" size={32} />
@@ -342,6 +517,7 @@ export function Gaming() {
                       <div className="text-gray-300">Team Members</div>
                     </div>
                   </div>
+
                   <div className="flex items-center gap-4">
                     <div className="p-4 bg-teal-600/20 rounded-lg">
                       <Medal className="text-teal-400" size={32} />
@@ -352,197 +528,221 @@ export function Gaming() {
                     </div>
                   </div>
                 </div>
+
                 <p className="text-gray-300 text-center">
-                  Playing as the main fighter, contributing to team victories
-                  across multiple major tournaments and representing our team at
-                  international competitions.
+                  Playing as the main fighter, contributing to team victories across multiple major
+                  tournaments and representing our team at international competitions.
                 </p>
               </div>
             </Card>
           </div>
         </div>
 
+       {/* MAIN GAMES SECTION */}
+<div id="main-games" className="scroll-mt-24 mb-20">
+  <div className="max-w-8xl mx-auto">
+    {/* TABS (segmented pills) */}
+    <div className="mb-7">
+      <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-2 backdrop-blur">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          {games.map((game) => {
+            const activeTab = game.key === activeKey;
+            return (
+              <button
+                key={game.key}
+                onClick={() => setActiveKey(game.key)}
+                className={[
+                  "relative rounded-xl px-4 py-3 font-semibold tracking-wide transition",
+                  "border",
+                  activeTab
+                    ? "bg-gradient-to-r from-teal-400 to-cyan-400 text-slate-900 border-transparent shadow-lg shadow-teal-500/20"
+                    : "bg-slate-800/60 text-white border-white/10 hover:border-teal-400/40 hover:bg-slate-800",
+                ].join(" ")}
+              >
+                {activeTab && (
+                  <span className="absolute inset-0 rounded-xl ring-2 ring-teal-300/30 pointer-events-none" />
+                )}
+                {game.tab}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
 
-        {/* MAIN GAMES SECTION */}
-        <div id="main-games" className="scroll-mt-24 mb-20">
-          <div className="max-w-6xl mx-auto">
-            {/* TABS */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-              {games.map((game) => (
-                <button
-                  key={game.key}
-                  onClick={() => setActiveKey(game.key)}
-                  className={`rounded-xl px-4 py-3 font-bold border transition ${
-                    game.key === activeKey
-                      ? "bg-teal-500 text-slate-900 border-teal-300"
-                      : "bg-slate-800 text-white border-slate-700 hover:border-teal-400"
-                  }`}
-                >
-                  {game.tab}
-                </button>
-              ))}
-            </div>
+    {/* PANEL (gradient border + glass) */}
+    <div className="rounded-3xl p-[1px] bg-gradient-to-r from-teal-500/50 via-cyan-400/30 to-teal-500/50">
+      <div className="rounded-3xl overflow-hidden bg-slate-900/40 backdrop-blur shadow-2xl">
+        <div className="grid md:grid-cols-5 min-h-[540px]">
+          {/* IMAGE / SLIDER */}
+          <div className="md:col-span-3 relative overflow-hidden bg-slate-950">
+            <div className="relative w-full h-[420px] md:h-full overflow-hidden">
+              {/* Outgoing */}
+              <ImageWithFallback
+                src={active.images[anim ? anim.from : slide]}
+                alt={active.title}
+                className={[
+                  "absolute inset-0 w-full h-full object-cover",
+                  active.focus,
+                  "will-change-transform",
+                  "transition-transform duration-300 ease-out",
+                  anim?.phase === "animate"
+                    ? anim.dir === "next"
+                      ? "-translate-x-full"
+                      : "translate-x-full"
+                    : "translate-x-0",
+                ].join(" ")}
+              />
 
-            {/* PANEL */}
-            <div className="rounded-3xl overflow-hidden bg-slate-800 shadow-2xl">
-              <div className="grid md:grid-cols-5 min-h-[520px]">
-                {/* IMAGE / SLIDER (fills left panel) */}
-                <div className="md:col-span-3 relative bg-slate-900 overflow-hidden">
-                  <div className="relative w-full h-[420px] md:h-full overflow-hidden">
-                    {/* Outgoing image (stays visible so no blank flash) */}
-                    <ImageWithFallback
-                      src={active.images[anim ? anim.from : slide]}
-                      alt={active.title}
-                      className={[
-                        "absolute inset-0 w-full h-full object-cover",
-                        active.focus,
-                        "transition-transform duration-300 ease-out",
-                        "md:group-hover:scale-110", // zoom feel on desktop hover
-                        anim
-                          ? anim.dir === "next"
-                            ? "-translate-x-full"
-                            : "translate-x-full"
-                          : "translate-x-0",
-                      ].join(" ")}
-                    />
+              {/* Incoming */}
+              {anim && (
+                <ImageWithFallback
+                  src={active.images[anim.to]}
+                  alt={active.title}
+                  className={[
+                    "absolute inset-0 w-full h-full object-cover",
+                    active.focus,
+                    "will-change-transform",
+                    "transition-transform duration-300 ease-out",
+                    anim.phase === "animate"
+                      ? "translate-x-0"
+                      : anim.dir === "next"
+                      ? "translate-x-full"
+                      : "-translate-x-full",
+                  ].join(" ")}
+                />
+              )}
 
-                    {/* Incoming image */}
-                    {anim && (
-                      <ImageWithFallback
-                        src={active.images[anim.to]}
-                        alt={active.title}
-                        className={[
-                          "absolute inset-0 w-full h-full object-cover",
-                          active.focus,
-                          "transition-transform duration-300 ease-out",
-                          anim.dir === "next"
-                            ? "translate-x-0"
-                            : "translate-x-0",
-                          // start positions
-                          anim.dir === "next"
-                            ? "will-change-transform"
-                            : "will-change-transform",
-                        ].join(" ")}
-                        // set initial transform via style so it never shows blank
-                        style={{
-                          transform:
-                            anim.dir === "next"
-                              ? "translateX(100%)"
-                              : "translateX(-100%)",
-                          animation: `gamingSlideIn300ms ${
-                            anim.dir === "next" ? "fromRight" : "fromLeft"
-                          } 300ms ease-out forwards`,
-                        }}
-                      />
-                    )}
+              {/* overlays */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 [background:radial-gradient(circle_at_30%_20%,rgba(45,212,191,0.18),transparent_55%)] pointer-events-none" />
 
-                    {/* overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/10 pointer-events-none" />
-
-                    {/* title */}
-                    <div className="absolute bottom-6 left-6 pr-6 text-white drop-shadow">
-                      <div className="text-2xl md:text-3xl font-extrabold tracking-wide leading-tight">
-                        {active.title}
-                      </div>
-                    </div>
-
-                    {/* dots */}
-                    {active.images.length > 1 && (
-                      <div className="absolute bottom-6 right-6 flex gap-2">
-                        {active.images.map((_, i) => (
-                          <button
-                            key={i}
-                            onClick={() =>
-                              startSlide(i, i > currentIndex ? "next" : "prev")
-                            }
-                            disabled={!!anim}
-                            className={`h-2.5 w-2.5 rounded-full transition disabled:opacity-50 ${
-                              i === currentIndex ? "bg-teal-400" : "bg-white/40"
-                            }`}
-                            aria-label={`Go to image ${i + 1}`}
-                          />
-                        ))}
-                      </div>
-                    )}
-
-                    {/* arrows */}
-                    {canSlide && (
-                      <>
-                        <button
-                          onClick={prev}
-                          disabled={!!anim}
-                          className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/20 p-3 text-white backdrop-blur hover:bg-white/30 disabled:opacity-50"
-                          aria-label="Previous image"
-                        >
-                          <ChevronLeft />
-                        </button>
-                        <button
-                          onClick={next}
-                          disabled={!!anim}
-                          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/20 p-3 text-white backdrop-blur hover:bg-white/30 disabled:opacity-50"
-                          aria-label="Next image"
-                        >
-                          <ChevronRight />
-                        </button>
-                      </>
-                    )}
+              {/* Title chip */}
+              <div className="absolute bottom-6 left-6">
+                <div className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-black/35 px-4 py-3 backdrop-blur">
+                  <div className="h-2.5 w-2.5 rounded-full bg-teal-400 shadow-[0_0_12px_rgba(45,212,191,0.8)]" />
+                  <div className="text-xl md:text-2xl font-extrabold tracking-wide text-white">
+                    {active.title}
                   </div>
                 </div>
+              </div>
 
-                {/* INFO */}
-                <div className="md:col-span-2 bg-slate-700 p-6 space-y-5">
-                  <div>
-                    <p className="font-semibold">MAIN:</p>
-                    <p className="text-red-400">{active.main}</p>
+              {/* Dots -> progress pills */}
+              {active.images.length > 1 && (
+                <div className="absolute bottom-6 right-6 flex items-center gap-2">
+                  {active.images.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() =>
+                        startSlide(i, i > currentIndex ? "next" : "prev")
+                      }
+                      disabled={!!anim}
+                      className={[
+                        "h-2 rounded-full transition-all disabled:opacity-50",
+                        i === currentIndex ? "w-10 bg-teal-400" : "w-4 bg-white/30 hover:bg-white/45",
+                      ].join(" ")}
+                      aria-label={`Go to image ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              )}
 
-                    <p className="font-semibold mt-3">SUB-MAINS:</p>
-                    {active.subs.map((s) => (
-                      <p key={s} className="text-teal-200">
-                        {s}
-                      </p>
-                    ))}
-                  </div>
+              {/* arrows */}
+              {canSlide && (
+                <>
+                  <button
+                    onClick={prev}
+                    disabled={!!anim}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white backdrop-blur hover:bg-white/20 disabled:opacity-50 border border-white/10"
+                    aria-label="Previous image"
+                  >
+                    <ChevronLeft />
+                  </button>
+                  <button
+                    onClick={next}
+                    disabled={!!anim}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white backdrop-blur hover:bg-white/20 disabled:opacity-50 border border-white/10"
+                    aria-label="Next image"
+                  >
+                    <ChevronRight />
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
 
-                  <div>
-                    <p className="font-semibold">RANK:</p>
-                    <div className="bg-slate-900/40 px-4 py-2 rounded-xl inline-block mt-2 font-bold">
-                      {active.rank}
-                    </div>
-                  </div>
+          {/* INFO */}
+          <div className="md:col-span-2 bg-slate-900/50 p-7">
+            {/* Header */}
+            <div className="flex items-start justify-between gap-4 mb-6">
+              <div>
+                <p className="text-sm text-gray-300">Main Character</p>
+                <p className="text-xl font-bold text-red-400">{active.main}</p>
+              </div>
 
-                  <div>
-                    <p className="text-teal-200 font-semibold">
-                      Notable Placements:
-                    </p>
-                    {active.placements.map((p, i) => (
-                      <div
-                        key={i}
-                        className="flex justify-between text-sm mt-1 gap-4"
-                      >
-                        <span className="leading-snug">• {p.event}</span>
-                        <span className="text-teal-200 whitespace-nowrap">
-                          {p.place}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+              <div className="text-right">
+                <p className="text-sm text-gray-300">Rank</p>
+                <div className="inline-flex rounded-xl border border-white/10 bg-slate-950/40 px-4 py-2 font-bold text-white">
+                  {active.rank}
                 </div>
               </div>
             </div>
 
-            {/* tiny keyframes for the incoming image (no blank flash) */}
-            <style>{`
-              @keyframes gamingSlideIn300ms_fromRight {
-                from { transform: translateX(100%); }
-                to { transform: translateX(0%); }
-              }
-              @keyframes gamingSlideIn300ms_fromLeft {
-                from { transform: translateX(-100%); }
-                to { transform: translateX(0%); }
-              }
-            `}</style>
+            <div className="h-px w-full bg-white/10 mb-6" />
+
+            {/* Subs */}
+            <div className="mb-7">
+              <p className="text-sm font-semibold text-gray-200 mb-3">
+                Sub-mains
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {active.subs.map((s) => (
+                  <span
+                    key={s}
+                    className="rounded-xl border border-teal-400/20 bg-teal-500/10 px-3 py-1.5 text-sm text-teal-200"
+                  >
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Placements */}
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-sm font-semibold text-gray-200">
+                  Notable Placements
+                </p>
+                <span className="text-xs text-gray-400">
+                  {active.placements.length} events
+                </span>
+              </div>
+
+              <div className="space-y-3">
+                {active.placements.map((p, i) => (
+                  <div
+                    key={i}
+                    className="rounded-2xl border border-white/10 bg-slate-950/30 px-4 py-3"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <p className="text-sm text-gray-200 leading-snug">
+                        {p.event}
+                      </p>
+                      <span className="text-sm font-semibold text-teal-200 whitespace-nowrap">
+                        {p.place}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
 
         {/* Other Games */}
         <div id="other-games" className="scroll-mt-24 mb-20">
@@ -550,270 +750,467 @@ export function Gaming() {
           <p className="text-center text-gray-300 mb-10">
             Additional competitive and casual titles I play
           </p>
-          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6 items-stretch">
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
             {otherGames.map((game, index) => (
-              <Card
-                key={index}
-                className="bg-slate-800 border-2 border-slate-700 overflow-hidden hover:border-teal-500 transition-all hover:shadow-xl hover:shadow-teal-500/20"
-              >
-                <div className="relative h-40 overflow-hidden bg-slate-900">
-                  <ImageWithFallback
-                    src={game.image}
-                    alt={game.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/70 to-transparent" />
+                    <Card
+              key={index}
+              className="overflow-hidden border-2 border-slate-700 bg-slate-800 transition-all hover:border-teal-500 hover:shadow-xl hover:shadow-teal-500/20 space-y--5"
+            >
+              {/* IMAGE */}
+              <div className="relative h-64 w-full overflow-hidden bg-slate-900">
+                <ImageWithFallback
+                  src={game.image}
+                  alt={game.title}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  draggable={false}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent" />
+              </div>
+
+              {/* TEXT */}
+              <div className="p-4">
+                <h4 className="text-lg font-semibold text-white">{game.title}</h4>
+
+              <div className="mt-3 space-y-2 text-sm">
+                <div className="flex items-center gap-2 text-teal-400">
+                  <Medal size={16} />
+                  <span>{game.rank}</span>
                 </div>
-                <div className="p-4">
-                  <h4 className="text-lg mb-2 text-white">{game.title}</h4>
-                  <div className="space-y-1 text-sm mt-auto">
-                    <p className="text-teal-400">🏅 {game.rank}</p>
-                    <p className="text-gray-300">🎮 {game.role}</p>
-                    <p className="text-cyan-400">⏱️ {game.hours}</p>
-                  </div>
+
+                <div className="flex items-center gap-2 text-gray-300">
+                  <Gamepad2 size={16} />
+                  <span>{game.role}</span>
                 </div>
-              </Card>
+
+                <div className="flex items-center gap-2 text-cyan-400">
+                  <Clock size={16} />
+                  <span>{game.hours}</span>
+                </div>
+              </div>
+              </div>
+            </Card>
             ))}
           </div>
         </div>
 
         {/* Steam Profile & Social Media */}
-          {/* Steam Profile & Social Media */}
-<div id="profiles" className="scroll-mt-24 mb-20">
-  <h3 className="text-3xl mb-10 text-center">Gaming Profiles & Social Media</h3>
+        <div id="profiles" className="scroll-mt-24 mb-20">
+          <h3 className="text-3xl mb-10 text-center">Gaming Profiles & Social Media</h3>
 
-  {/* 2-column grid (Steam + Twitch) */}
-  <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-8 items-stretch">
-    {/* Steam Profile */}
-    <Card className="h-full flex flex-col bg-slate-800 border-2 border-slate-700 hover:border-teal-500 transition-all">
-      <div className="p-8 flex flex-col flex-1">
-        <div className="flex items-center gap-4 mb-6">
-          <div className="p-4 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl shadow-lg">
-            <img
-              src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/steam.svg"
-              alt="Steam Logo"
-              className="w-8 h-8 invert"
-            />
+          <div className="grid md:grid-cols-2 gap-8 max-w-8xl mx-auto mb-8 items-stretch">
+            {/* Steam */}
+            <Card className="h-full flex flex-col bg-slate-800 border-2 border-slate-700 hover:border-teal-500 transition-all">
+              <div className="p-8 flex flex-col flex-1">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="p-4 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl shadow-lg">
+                    <img
+                      src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/steam.svg"
+                      alt="Steam Logo"
+                      className="w-8 h-8 invert"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="text-2xl text-white">Sen</h4>
+                    <p className="text-teal-400">ID: 1108528630</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 mb-6 text-gray-300">
+                  <p className="flex justify-between">
+                    <span>Games Owned:</span>
+                    <span className="text-white font-semibold">200+</span>
+                  </p>
+                  <p className="flex justify-between">
+                    <span>Total Hours:</span>
+                    <span className="text-white font-semibold">6,400+</span>
+                  </p>
+                  <p className="flex justify-between">
+                    <span>Level:</span>
+                    <span className="text-white font-semibold">85</span>
+                  </p>
+                  <p className="flex justify-between">
+                    <span>Achievements:</span>
+                    <span className="text-white font-semibold">850+</span>
+                  </p>
+                </div>
+
+                <Button
+                  className="w-full mt-auto bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900"
+                  onClick={() => window.open("#", "_blank")}
+                >
+                  <ExternalLink size={18} className="mr-2" />
+                  View Steam Profile
+                </Button>
+              </div>
+            </Card>
+
+            {/* Twitch */}
+            <Card className="h-full flex flex-col bg-slate-800 border-2 border-slate-700 hover:border-teal-500 transition-all">
+              <div className="p-8 flex flex-col flex-1">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="p-4 bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl shadow-lg">
+                    <Twitch size={32} className="text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-2xl text-white">SenGouku</h4>
+                    <p className="text-teal-400">@YourTwitchHandle</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 mb-6 text-gray-300">
+                  <p className="flex justify-between">
+                    <span>Followers:</span>
+                    <span className="text-white font-semibold">2,500+</span>
+                  </p>
+                  <p className="flex justify-between">
+                    <span>Stream Schedule:</span>
+                    <span className="text-white font-semibold">Mon-Fri 7PM</span>
+                  </p>
+                  <p className="flex justify-between">
+                    <span>Content:</span>
+                    <span className="text-white font-semibold">Fighting Games</span>
+                  </p>
+                  <p className="flex justify-between">
+                    <span>Status:</span>
+                    <span className="text-teal-400 font-semibold">Affiliate</span>
+                  </p>
+                </div>
+
+                <Button
+                  className="w-full mt-auto bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900"
+                  onClick={() => window.open("#", "_blank")}
+                >
+                  <Twitch size={18} className="mr-2" />
+                  Watch Live Stream
+                </Button>
+              </div>
+            </Card>
           </div>
-          <div>
-            <h4 className="text-2xl text-white">Sen</h4>
-            <p className="text-teal-400">ID: 1108528630</p>
+
+          <div className="max-w-8xl mx-auto">
+            <Card className="overflow-hidden border border-white/10 bg-slate-800/70 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur">
+              <div className="grid lg:grid-cols-5 min-h-[540px]">
+                
+                {/* LEFT: HoYoLAB */}
+                <aside className="lg:col-span-2 border-b lg:border-b-0 lg:border-r border-white/10">
+                  <div className="p-7">
+                    
+                    {/* Header */}
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-700 shadow-lg flex items-center justify-center">
+                        <img
+                          src="/images/hoyo.png"
+                          alt="HoYoLAB"
+                          className="w-8 h-8 object-contain"
+                          draggable={false}
+                        />
+                      </div>
+                      <div>
+                        <h4 className="text-2xl font-semibold text-white leading-tight">
+                          HoYoLAB
+                        </h4>
+                        <p className="text-cyan-300 text-sm">11846094</p>
+                      </div>
+                    </div>
+
+                    {/* Accounts */}
+                    <div className="space-y-4">
+                      {["genshin", "hsr", "zzz"].map((key) => {
+                        const k = key as HoyoKey;
+                        const active = hoyoActive === k;
+
+                        const content =
+                          k === "genshin"
+                            ? {
+                                icon: "/images/gen.webp",
+                                title: "Genshin Impact",
+                                rows: [
+                                  ["UID", "801498652"],
+                                  ["Achievements", "950+"],
+                                  ["Spiral Abyss", "36★", "text-cyan-300"],
+                                ],
+                              }
+                            : k === "hsr"
+                            ? {
+                                icon: "/images/star.webp",
+                                title: "Honkai: Star Rail",
+                                rows: [
+                                  ["UID", "802923246"],
+                                  ["Memory of Chaos", "Full Clear", "text-cyan-300"],
+                                  ["Favorites", "Kafka / Jingliu"],
+                                ],
+                              }
+                            : {
+                                icon: "/images/zzz.webp",
+                                title: "Zenless Zone Zero",
+                                rows: [
+                                  ["UID", "1302497095"],
+                                  ["Hollow Zero", "Cleared", "text-cyan-300"],
+                                  ["Main Squad", "Ellen / Lycaon"],
+                                ],
+                              };
+
+                        return (
+                          <button
+                            key={k}
+                            onClick={() => setHoyoActive(k)}
+                            className={[
+                              "w-full text-left rounded-2xl border p-4 transition",
+                              "bg-slate-900/40 border-white/10 hover:border-cyan-400/30 hover:bg-slate-900/60",
+                              active
+                                ? "ring-2 ring-cyan-400/60 border-cyan-400/40"
+                                : "",
+                            ].join(" ")}
+                          >
+                            <div className="flex items-center gap-3 mb-3">
+                              <div className="h-8 w-8 rounded-xl border border-white/10 bg-slate-800/50 flex items-center justify-center">
+                                <img
+                                  src={content.icon}
+                                  alt=""
+                                  className="h-5 w-5 object-contain"
+                                />
+                              </div>
+                              <p className="text-white font-semibold">
+                                {content.title}
+                              </p>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-y-2 text-sm">
+                              {content.rows.map(([label, value, accent]) => (
+                                <React.Fragment key={label}>
+                                  <div className="text-gray-300">{label}</div>
+                                  <div
+                                    className={[
+                                      "text-right font-semibold",
+                                      accent ?? "text-white",
+                                    ].join(" ")}
+                                  >
+                                    {value}
+                                  </div>
+                                </React.Fragment>
+                              ))}
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {/* CTA */}
+                    <Button
+                      className="w-full mt-6 h-11 bg-gradient-to-r from-cyan-500 to-blue-700 hover:from-cyan-600 hover:to-blue-800"
+                      onClick={() =>
+                        window.open(
+                          "https://www.hoyolab.com/accountCenter/postList?id=11846094"
+                        )
+                      }
+                    >
+                      <img
+                        src="/images/hoyolab.png"
+                        alt=""
+                        className="w-5 h-5 mr-2"
+                      />
+                      View HoYoLAB Profile
+                    </Button>
+                  </div>
+                </aside>
+
+                {/* RIGHT: Teams Showcase */}
+                <section className="lg:col-span-3">
+                  <div className="p-7">
+
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center gap-3">
+                        <div className="h-11 w-11 rounded-xl border border-white/10 bg-slate-900/40 flex items-center justify-center">
+                          <img
+                            src={HOYO_TEAMS[hoyoActive].icon}
+                            alt=""
+                            className="h-7 w-7 object-contain"
+                          />
+                        </div>
+                        <div>
+                          <h4 className="text-2xl font-semibold text-white">
+                            Teams Showcase
+                          </h4>
+                          <p className="text-sm text-gray-300">
+                            {HOYO_TEAMS[hoyoActive].label}
+                          </p>
+                        </div>
+                      </div>
+
+                      <span className="text-xs text-gray-200 rounded-full border border-white/10 bg-slate-900/40 px-3 py-1">
+                        {HOYO_TEAMS[hoyoActive].members.length} members
+                      </span>
+                    </div>
+
+                    {/* Main Team */}
+                    <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-6">
+                      <p className="text-white font-semibold mb-5">Main Team</p>
+
+                      <div
+                        className={[
+                          "grid gap-5",
+                          HOYO_TEAMS[hoyoActive].teamCols === 4
+                            ? "grid-cols-2 sm:grid-cols-4"
+                            : "grid-cols-3",
+                        ].join(" ")}
+                      >
+                        {HOYO_TEAMS[hoyoActive].members.map((c) => (
+                          <div
+                            key={c.name}
+                            className="group rounded-2xl border border-white/10 bg-slate-800/40 p-3 hover:border-cyan-400/30 hover:bg-slate-800/60 transition"
+                          >
+                            <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-slate-950/30 border border-white/10">
+                              <img
+                                src={c.img}
+                                alt={c.name}
+                                className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-300"
+                                loading="lazy"
+                                draggable={false}
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                            </div>
+
+                            <p className="mt-3 text-sm font-semibold text-white text-center truncate">
+                              {c.name}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                  </div>
+                </section>
+              </div>
+            </Card>
+          </div>
+
+         {/* Social Media */}
+<div id="Social" className="scroll-mt-24 mt-16">
+  <div className="max-w-8xl mx-auto px-4">
+    <div className="text-center mb-10">
+      <h4 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+        Connect on Social Media
+      </h4>
+      <div className="mt-4 mx-auto h-1 w-24 rounded bg-gradient-to-r from-teal-400 to-cyan-400" />
+      <p className="mt-4 text-gray-300">
+        Follow my content, updates, and tournament runs.
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* YouTube */}
+      <button
+        onClick={() => window.open("https://www.youtube.com/@SenGouku")}
+        className="group text-left"
+      >
+        <div className="relative h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur transition-all
+                        hover:-translate-y-1 hover:border-red-400/40 hover:shadow-2xl hover:shadow-red-500/15">
+          <div className="absolute inset-0 bg-gradient-to-br from-red-600/30 via-transparent to-transparent opacity-100" />
+          <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-red-500/20 blur-2xl" />
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity
+                          [background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent)]" />
+
+          <div className="relative h-full px-6 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="h-12 w-12 rounded-xl bg-red-600/25 border border-red-400/20 flex items-center justify-center">
+                <Youtube size={26} className="text-white" />
+              </div>
+              <div>
+                <p className="text-white font-bold text-lg leading-tight">YouTube</p>
+                <p className="text-gray-300 text-sm">@SenGouku</p>
+              </div>
+            </div>
           </div>
         </div>
+      </button>
 
-        <div className="space-y-3 mb-6 text-gray-300">
-          <p className="flex justify-between">
-            <span>Games Owned:</span>
-            <span className="text-white font-semibold">200+</span>
-          </p>
-          <p className="flex justify-between">
-            <span>Total Hours:</span>
-            <span className="text-white font-semibold">6,400+</span>
-          </p>
-          <p className="flex justify-between">
-            <span>Level:</span>
-            <span className="text-white font-semibold">85</span>
-          </p>
-          <p className="flex justify-between">
-            <span>Achievements:</span>
-            <span className="text-white font-semibold">850+</span>
-          </p>
-        </div>
+      {/* Instagram */}
+      <button
+        onClick={() => window.open("https://www.instagram.com/sen_gouku/")}
+        className="group text-left"
+      >
+        <div className="relative h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur transition-all
+                        hover:-translate-y-1 hover:border-pink-400/40 hover:shadow-2xl hover:shadow-pink-500/15">
+          <div className="absolute inset-0 bg-gradient-to-br from-pink-600/30 via-purple-600/15 to-transparent" />
+          <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-pink-500/20 blur-2xl" />
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity
+                          [background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent)]" />
 
-        <Button
-          className="w-full mt-auto bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900"
-          onClick={() => window.open("#", "_blank")}
-        >
-          <ExternalLink size={18} className="mr-2" />
-          View Steam Profile
-        </Button>
-      </div>
-    </Card>
+          <div className="relative h-full px-6 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="h-12 w-12 rounded-xl bg-pink-600/25 border border-pink-400/20 flex items-center justify-center">
+                <Instagram size={24} className="text-white" />
+              </div>
+              <div>
+                <p className="text-white font-bold text-lg leading-tight">Instagram</p>
+                <p className="text-gray-300 text-sm">@sen_gouku</p>
+              </div>
+            </div>
 
-    {/* Twitch Streaming */}
-    <Card className="h-full flex flex-col bg-slate-800 border-2 border-slate-700 hover:border-teal-500 transition-all">
-      <div className="p-8 flex flex-col flex-1">
-        <div className="flex items-center gap-4 mb-6">
-          <div className="p-4 bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl shadow-lg">
-            <Twitch size={32} className="text-white" />
-          </div>
-          <div>
-            <h4 className="text-2xl text-white">Twitch Channel</h4>
-            <p className="text-teal-400">@YourTwitchHandle</p>
           </div>
         </div>
+      </button>
 
-        <div className="space-y-3 mb-6 text-gray-300">
-          <p className="flex justify-between">
-            <span>Followers:</span>
-            <span className="text-white font-semibold">2,500+</span>
-          </p>
-          <p className="flex justify-between">
-            <span>Stream Schedule:</span>
-            <span className="text-white font-semibold">Mon-Fri 7PM</span>
-          </p>
-          <p className="flex justify-between">
-            <span>Content:</span>
-            <span className="text-white font-semibold">Fighting Games</span>
-          </p>
-          <p className="flex justify-between">
-            <span>Status:</span>
-            <span className="text-teal-400 font-semibold">Affiliate</span>
-          </p>
-        </div>
+      {/* Facebook */}
+      <button
+        onClick={() => window.open("https://www.facebook.com/SenGouku20")}
+        className="group text-left"
+      >
+        <div className="relative h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur transition-all
+                        hover:-translate-y-1 hover:border-blue-400/40 hover:shadow-2xl hover:shadow-blue-500/15">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/30 via-transparent to-transparent" />
+          <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-blue-500/20 blur-2xl" />
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity
+                          [background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent)]" />
 
-        <Button
-          className="w-full mt-auto bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900"
-          onClick={() => window.open("#", "_blank")}
-        >
-          <Twitch size={18} className="mr-2" />
-          Watch Live Stream
-        </Button>
-      </div>
-    </Card>
-  </div>
+          <div className="relative h-full px-6 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="h-12 w-12 rounded-xl bg-blue-600/25 border border-blue-400/20 flex items-center justify-center">
+                <Facebook size={24} className="text-white" />
+              </div>
+              <div>
+                <p className="text-white font-bold text-lg leading-tight">Facebook</p>
+                <p className="text-gray-300 text-sm">SenGouku20</p>
+              </div>
+            </div>
 
-  {/* HoYoLAB (centered, same max width as grid) */}
-  <div className="max-w-5xl mx-auto">
-    <Card className="h-full flex flex-col bg-slate-800 border-2 border-slate-700 hover:border-cyan-400 transition-all">
-      <div className="p-8 flex flex-col flex-1">
-        <div className="flex items-center gap-4 mb-6">
-          <div className="p-4 bg-gradient-to-br from-cyan-500 to-blue-700 rounded-xl shadow-lg flex items-center justify-center">
-            <img
-              src="/images/hoyo.png"
-              alt="HoYoLAB"
-              className="w-8 h-8 object-contain"
-            />
-          </div>
-          <div>
-            <h4 className="text-2xl text-white">HoYoLAB</h4>
-            <p className="text-cyan-300">11846094</p>
           </div>
         </div>
+      </button>
 
-        <div className="space-y-4 mb-6 text-gray-300">
-          {/* Genshin */}
-          <div className="rounded-xl border border-slate-700 bg-slate-900/40 p-4">
-            <div className="flex items-center gap-3 mb-3">
-              <img src="/images/gen.webp" alt="Genshin Impact" className="w-6 h-6 object-contain" />
-              <p className="text-white font-semibold">Genshin Impact</p>
-            </div>
-            <div className="space-y-2">
-              <p className="flex justify-between">
-                <span>UID:</span>
-                <span className="text-white font-semibold">801498652</span>
-              </p>
-              <p className="flex justify-between">
-                <span>Achievements:</span>
-                <span className="text-white font-semibold">950+</span>
-              </p>
-              <p className="flex justify-between">
-                <span>Spiral Abyss:</span>
-                <span className="text-cyan-300 font-semibold">36★</span>
-              </p>
-            </div>
-          </div>
+      {/* X */}
+      <button
+        onClick={() => window.open("https://x.com/Sen_Gouku")}
+        className="group text-left"
+      >
+        <div className="relative h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur transition-all
+                        hover:-translate-y-1 hover:border-white/25 hover:shadow-2xl hover:shadow-white/10">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent" />
+          <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-white/10 blur-2xl" />
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity
+                          [background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent)]" />
 
-          {/* Star Rail */}
-          <div className="rounded-xl border border-slate-700 bg-slate-900/40 p-4">
-            <div className="flex items-center gap-3 mb-3">
-              <img src="/images/star.webp" alt="Honkai: Star Rail" className="w-6 h-6 object-contain" />
-              <p className="text-white font-semibold">Honkai: Star Rail</p>
+          <div className="relative h-full px-6 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="h-12 w-12 rounded-xl bg-black/40 border border-white/15 flex items-center justify-center">
+                <XIcon size={22} />
+              </div>
+              <div>
+                <p className="text-white font-bold text-lg leading-tight">X</p>
+                <p className="text-gray-300 text-sm">@Sen_Gouku</p>
+              </div>
             </div>
-            <div className="space-y-2">
-              <p className="flex justify-between">
-                <span>UID:</span>
-                <span className="text-white font-semibold">802923246</span>
-              </p>
-              <p className="flex justify-between">
-                <span>Memory of Chaos:</span>
-                <span className="text-cyan-300 font-semibold">Full Clear</span>
-              </p>
-              <p className="flex justify-between">
-                <span>Favorites:</span>
-                <span className="text-white font-semibold">Kafka / Jingliu</span>
-              </p>
-            </div>
-          </div>
 
-          {/* ZZZ */}
-          <div className="rounded-xl border border-slate-700 bg-slate-900/40 p-4">
-            <div className="flex items-center gap-3 mb-3">
-              <img src="/images/zzz.webp" alt="Zenless Zone Zero" className="w-6 h-6 object-contain" />
-              <p className="text-white font-semibold">Zenless Zone Zero</p>
-            </div>
-            <div className="space-y-2">
-              <p className="flex justify-between">
-                <span>UID:</span>
-                <span className="text-white font-semibold">1302497095</span>
-              </p>
-              <p className="flex justify-between">
-                <span>Hollow Zero:</span>
-                <span className="text-cyan-300 font-semibold">Cleared</span>
-              </p>
-              <p className="flex justify-between">
-                <span>Main Squad:</span>
-                <span className="text-white font-semibold">Ellen / Lycaon</span>
-              </p>
-            </div>
           </div>
         </div>
-
-        <Button
-          className="w-full mt-auto bg-gradient-to-r from-cyan-500 to-blue-700 hover:from-cyan-600 hover:to-blue-800"
-          onClick={() => window.open("https://www.hoyolab.com/accountCenter/postList?id=11846094")}
-        >
-          <img src="/images/hoyolab.png" alt="" className="w-5 h-5 mr-2" />
-          View HoYoLAB Profile
-        </Button>
-      </div>
-    </Card>
-  </div>
-
-{/* Social Media Links */}
-<div className="max-w-5xl mx-auto">
-  <h4 className="text-3xl mb-8 mt-12 text-center text-white font-semibold">
-    Connect on Social Media
-  </h4>
-
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-
-    <Button
-      className="h-23 text-lg font-semibold flex flex-col items-center justify-center gap-2 bg-red-600 hover:bg-red-700"
-      onClick={() => window.open("https://www.youtube.com/@SenGouku")}
-    >
-      <Youtube size={34} />
-      YouTube
-    </Button>
-
-    <Button
-      className="h-23 text-lg font-semibold flex flex-col items-center justify-center gap-2 bg-pink-600 hover:bg-pink-700"
-      onClick={() => window.open("https://www.instagram.com/sen_gouku/")}
-    >
-      <Instagram size={34} />
-      Instagram
-    </Button>
-
-    <Button
-      className="h-23 text-lg font-semibold flex flex-col items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700"
-      onClick={() => window.open("https://www.facebook.com/SenGouku20")}
-    >
-      <Facebook size={34} />
-      Facebook
-    </Button>
-
- <Button
-  className="h-23 text-lg font-semibold flex flex-col items-center justify-center gap-2 bg-black hover:bg-neutral-800 border border-white/20"
-  onClick={() => window.open("https://x.com/Sen_Gouku")}
->
-  <XIcon size={34} />
-  X / Twitter
-</Button>
-
+      </button>
+    </div>
   </div>
 </div>
-</div>
-
+        </div>
       </div>
     </section>
   );

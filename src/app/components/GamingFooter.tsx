@@ -15,7 +15,7 @@ export function GamingFooter() {
           </div>
 
           <p className="text-gray-400 text-center mb-2">
-            GG WP - Game On!
+          
           </p>
           <p className="text-gray-500 text-sm">
             © {currentYear} All rights reserved.

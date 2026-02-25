@@ -15,7 +15,7 @@ export function Hobbies() {
     },
     {
       title: 'Music',
-      description: 'Playing guitar and discovering new genres',
+      description: 'Playing Guitar and Drums and discovering other music genres',
       image: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&q=80',
     },
     {
@@ -24,17 +24,17 @@ export function Hobbies() {
       image: 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800&q=80',
     },
     {
-      title: 'Fitness',
+      title: 'Graphic Design',
       description: 'Regular workouts and staying healthy',
       image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80',
     },
     {
-      title: 'Traveling',
-      description: 'Exploring new places and cultures',
+      title: 'Learning Other languages',
+      description: 'Learning Japanese and Spanish',
       image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80',
     },
     {
-      title: 'Coffee Enthusiast',
+      title: 'Personal Coding',
       description: 'Trying different brewing methods and cafes',
       image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80',
     },
@@ -46,7 +46,7 @@ export function Hobbies() {
   ];
 
   return (
-    <section id="hobbies" className="py-20 bg-gradient-to-br from-red-50 via-orange-50 to-white">
+    <section id="hobbies" className="py-10 bg-gradient-to-br from-red-50 via-orange-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Hobbies & Interests</h2>
@@ -76,7 +76,7 @@ export function Hobbies() {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
+        <div className="mt-10 text-center">
           <Card className="bg-gradient-to-r from-red-700 to-red-700 text-white max-w-4xl mx-auto">
             <div className="p-8">
               <h3 className="text-2xl mb-4">Balance is Key</h3>

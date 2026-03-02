@@ -17,30 +17,29 @@ export function GamingHeader() {
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 🔥 Smooth scroll that always works
+  // Smooth scroll with navbar offset
   const scrollToId = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
 
-    el.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    const headerOffset = 64;
+    const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
 
+    window.scrollTo({ top: y, behavior: "smooth" });
     setIsMobileMenuOpen(false);
   };
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-slate-900/90 backdrop-blur-md shadow-lg shadow-teal-500/20"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50
+        bg-slate-950 border-b border-white/10
+        transition-all duration-300
+        ${isScrolled ? "shadow-lg shadow-teal-500/20" : ""}
+      `}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -49,8 +48,9 @@ export function GamingHeader() {
           <button
             onClick={() => scrollToId("overview")}
             className="flex items-center gap-2"
+            aria-label="Go to overview"
           >
-            <Gamepad2 className="text-teal-500" size={28} />
+            <Gamepad2 className="text-teal-400" size={28} />
             <span className="text-xl font-bold text-white">SenGouku</span>
           </button>
 
@@ -60,7 +60,7 @@ export function GamingHeader() {
               <button
                 key={item.id}
                 onClick={() => scrollToId(item.id)}
-                className="px-3 py-2 text-sm text-gray-300 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+                className="px-3 py-2 text-sm text-gray-300 hover:text-teal-300 transition-colors rounded-lg hover:bg-white/5"
               >
                 {item.label}
               </button>
@@ -68,7 +68,7 @@ export function GamingHeader() {
 
             <Link
               to="/"
-              className="ml-2 flex items-center gap-2 px-4 py-2 text-gray-300 hover:text-white border border-gray-700 hover:border-teal-500 rounded-lg"
+              className="ml-2 flex items-center gap-2 px-4 py-2 text-gray-300 hover:text-white border border-gray-700 hover:border-teal-500 rounded-lg transition"
             >
               <Briefcase size={18} />
               View CV Site
@@ -78,7 +78,8 @@ export function GamingHeader() {
           {/* Mobile Menu Button */}
           <button
             className="md:hidden text-white"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => setIsMobileMenuOpen((v) => !v)}
+            aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -91,7 +92,7 @@ export function GamingHeader() {
               <button
                 key={item.id}
                 onClick={() => scrollToId(item.id)}
-                className="w-full text-left px-2 py-2 text-gray-300 hover:text-white rounded-lg hover:bg-white/5"
+                className="w-full text-left px-2 py-2 text-gray-300 hover:text-teal-300 rounded-lg hover:bg-white/5"
               >
                 {item.label}
               </button>

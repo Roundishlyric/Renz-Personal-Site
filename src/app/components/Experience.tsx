@@ -4,17 +4,17 @@ import { Card } from "./ui/card";
 export function Experience() {
   const experiences = [
     {
-      role: "Software Engineering Intern",
-      company: "Your Company Name",
-      period: "2025 - Present",
+      role: "Full Stack Developer Intern",
+      company: "Gallium31 Corporation",
+      period: "2025 - 2026",
       description: [
-        "Assisted in building and maintaining web features using React and TypeScript",
-        "Implemented UI components based on design specs and improved responsiveness",
-        "Integrated REST APIs and handled validation and error states",
-        "Fixed bugs and improved performance through code cleanup and optimization",
-        "Collaborated with team using Git, pull requests, and code reviews",
+        "Assisted in the development and enhancement of web applications.",
+        "Worked on UI and front-end implementations across multiple company websites.",
+        "Improved site usability and responsiveness to provide a better user experience.",
+        "Automated testing using Playwright to verify functionality and reduce manual testing effort.",
+        "Used Git for version control, including branching, committing, pushing code, and creating pull requests for team review."
       ],
-      technologies: ["React", "TypeScript", "JavaScript", "Node.js", "Git"],
+      technologies: ["React", "TypeScript", "JavaScript", "Node.js", "Git","Playwright","Wordpress","Figma"],
     },
   ];
 

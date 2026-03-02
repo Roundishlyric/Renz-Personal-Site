@@ -26,10 +26,10 @@ type Game = {
   tab: string;
   title: string;
   images: string[];
-  focus: string; // tailwind object-* utility
+  focus: string;
   main: string;
   subs: string[];
-  rank: string;
+  rank: string; 
   placements: { event: string; place: string }[];
 };
 
@@ -92,7 +92,7 @@ export function Gaming() {
         focus: "object-center",
         main: "KUMA / PANDA",
         subs: ["CLIVE ROSFIELD", "PAUL PHOENIX", "FAHKUMRAM"],
-        rank: "Tekken God Supreme",
+        rank: "TEKKEN GOD SUPREME",
         placements: [
           { event: "CTRL+ALT+ELITE tournament", place: "3rd Place" },
           { event: "MANILA MADNESS III", place: "49th Place" },
@@ -149,14 +149,14 @@ export function Gaming() {
       rank: "A+",
       hours: "800+",
       role: "Andy Bogard",
-      image: "https://wallpapercave.com/wp/wp15327877.jpg",
+      image: "https://www.snk-corp.co.jp/hero/fatal-fury/s2kv_pc.webp",
     },
     {
       title: "King of Fighters XV",
       rank: "Immortal",
       hours: "500+",
       role: "Duelist",
-      image: "https://www.snk-corp.co.jp/us/games/kof-xv/special/img/wallpaper.jpg",
+      image: "https://i.redd.it/hf9yujsb8si71.jpg",
     },
     {
       title: "Melty Blood: Type Lumina",
@@ -184,7 +184,7 @@ export function Gaming() {
       rank: "Champion III",
       hours: "600+",
       role: "Striker",
-      image: "https://www.cyberagent.co.jp/files/topics/25885_ext_03_en_0.jpg",
+      image: "https://i.redd.it/592408sdingf1.jpeg",
     },
     {
       title: "Wuthering Waves",
@@ -324,6 +324,7 @@ const HOYO_TEAMS: Record<
     icon: string;
     teamCols: 3 | 4;
     members: { name: string; img: string }[];
+    team2Members: { name: string; img: string }[];
   }
 > = {
   genshin: {
@@ -332,10 +333,16 @@ const HOYO_TEAMS: Record<
     icon: "/images/gen.webp",
     teamCols: 4,
     members: [
-      { name: "Neuvillette", img: "/images/char-placeholder.png" },
-      { name: "Furina", img: "/images/char-placeholder.png" },
-      { name: "Kazuha", img: "/images/char-placeholder.png" },
-      { name: "Baizhu", img: "/images/char-placeholder.png" },
+      { name: "Arlecchino", img: "https://i2.wp.com/images.genshin-builds.com/genshin/characters/arlecchino/image.png?strip=all&quality=100" },
+      { name: "Yelan", img: "https://static.wikia.nocookie.net/gensin-impact/images/d/d3/Yelan_Icon.png/revision/latest/scale-to-width-down/250?cb=20240711205454" },
+      { name: "Kazuha", img: "https://static.wikia.nocookie.net/gensin-impact/images/e/e3/Kaedehara_Kazuha_Icon.png/revision/latest/scale-to-width-down/250?cb=20210623063513" },
+      { name: "Bennet", img: "https://static.wikia.nocookie.net/gensin-impact/images/7/79/Bennett_Icon.png/revision/latest/scale-to-width-down/250?cb=20231215091856" },
+    ],
+    team2Members: [
+      { name: "Yae Miko", img: "https://static.wikia.nocookie.net/gensin-impact/images/b/ba/Yae_Miko_Icon.png/revision/latest/scale-to-width-down/250?cb=20220216025931" },
+      { name: "Raiden Shogun", img: "https://static.wikia.nocookie.net/gensin-impact/images/2/24/Raiden_Shogun_Icon.png/revision/latest/scale-to-width-down/250?cb=20240717072843" },
+      { name: "Sucrose", img: "https://i2.wp.com/images.genshin-builds.com/genshin/characters/sucrose/image.png?strip=all&quality=100" },
+      { name: "Bennet", img: "https://static.wikia.nocookie.net/gensin-impact/images/7/79/Bennett_Icon.png/revision/latest/scale-to-width-down/250?cb=20231215091856" },
     ],
   },
   hsr: {
@@ -344,10 +351,16 @@ const HOYO_TEAMS: Record<
     icon: "/images/star.webp",
     teamCols: 4,
     members: [
-      { name: "Kafka", img: "/images/char-placeholder.png" },
-      { name: "Black Swan", img: "/images/char-placeholder.png" },
-      { name: "Ruan Mei", img: "/images/char-placeholder.png" },
-      { name: "Huohuo", img: "/images/char-placeholder.png" },
+      { name: "Kafka", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/1005.png" },
+      { name: "Black Swan", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3014.png" },
+      { name: "Ruan Mei", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3011.png" },
+      { name: "Lynx", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3004.png" },
+    ],
+    team2Members: [
+      { name: "The Herta", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3036.png" },
+      { name: "Jade", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3026.png" },
+      { name: "Tingyun", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/1202.png" },
+      { name: "Gallagher", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3019.png" },
     ],
   },
   zzz: {
@@ -356,14 +369,61 @@ const HOYO_TEAMS: Record<
     icon: "/images/zzz.webp",
     teamCols: 3,
     members: [
-      { name: "Ellen", img: "/images/char-placeholder.png" },
-      { name: "Lycaon", img: "/images/char-placeholder.png" },
-      { name: "Soukaku", img: "/images/char-placeholder.png" },
+      { name: "Hoshini Miyabi", img: "https://sunderarmor.com/ZZZ/Character/thumb_miyabi.png" },
+      { name: "Tsukishiro Yanagu", img: "https://sunderarmor.com/ZZZ/Character/thumb_yanagi.png" },
+      { name: "Astra Yao", img: "https://sunderarmor.com/ZZZ/Character/thumb_astra_yao.png" },
+    ],
+    team2Members: [
+      { name: "Jane Doe", img: "https://sunderarmor.com/ZZZ/Character/thumb_jane_doe.png" },
+      { name: "Seth Lowell", img: "https://sunderarmor.com/ZZZ/Character/thumb_seth.png " },
+      { name: "Ukinami Yuzuha", img: "https://sunderarmor.com/ZZZ/Character/thumb_yuzuha.png" },
     ],
   },
 };
 
 const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
+
+  const TeamPanel = ({
+    title,
+    members,
+  }: {
+    title: string;
+    members: { name: string; img: string }[];
+  }) => (
+    <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-6">
+      <p className="text-white font-semibold mb-5">{title}</p>
+
+      <div
+        className={[
+          "grid gap-5",
+          HOYO_TEAMS[hoyoActive].teamCols === 4
+            ? "grid-cols-2 sm:grid-cols-4"
+            : "grid-cols-3",
+        ].join(" ")}
+      >
+        {members.map((c) => (
+          <div
+            key={c.name}
+            className="group rounded-2xl border border-white/10 bg-slate-800/40 p-3 hover:border-cyan-400/30 hover:bg-slate-800/60 transition"
+          >
+            <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-slate-950/30 border border-white/10">
+              <img
+                src={c.img}
+                alt={c.name}
+                className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-300"
+                loading="lazy"
+                draggable={false}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            </div>
+            <p className="mt-3 text-sm font-semibold text-white text-center truncate">
+              {c.name}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 
   return (
     <section
@@ -371,108 +431,106 @@ const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
       className="py-20 bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900 text-white pt-24"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-{/* Hero Introduction */}
-<div id="overview" className="scroll-mt-24 text-center mb-20">
-  {/* Top glow / accents */}
-  <div className="relative mx-auto mb-10 w-full max-w-3xl">
-    <div className="pointer-events-none absolute -top-24 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-teal-500/20 blur-3xl" />
-    <div className="pointer-events-none absolute -top-10 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl" />
-  </div>
-
-  {/* Avatar */}
-{/* Profile Banner Image */}
-<div className="mb-12 flex justify-center">
-  <div className="relative w-full max-w-2xl">
-
-    {/* glow */}
-    <div className="absolute inset-0 bg-teal-500/20 blur-2xl rounded-3xl" />
-
-    {/* frame */}
-    <div className="relative rounded-3xl p-[2px] bg-gradient-to-r from-teal-500 to-cyan-500">
-      <div className="rounded-3xl overflow-hidden bg-slate-900">
-
-        <div className="relative h-[260px] md:h-[320px] w-full">
-          <ImageWithFallback
-            src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&q=80"
-            alt="Player Profile"
-            className="w-full h-full object-cover"
-            draggable={false}
-          />
-
-          {/* dark overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-          {/* name inside banner */}
-          <div className="absolute bottom-6 left-6 text-left">
-            <div className="flex items-center gap-3">
-              <Gamepad2 size={28} className="text-teal-300" />
-              <h1 className="text-3xl md:text-4xl font-bold text-white">
-                SenGouku
-              </h1>
-            </div>
-            <p className="text-teal-300 mt-1 text-sm md:text-base">
-              Fighting Game Competitor
-            </p>
+        {/* Hero Introduction */}
+        <section
+          id="overview"
+          className="
+            relative
+            w-screen
+            left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]
+            -mt-16
+            bg-black text-white overflow-hidden
+            min-h-[560px] md:min-h-[680px] lg:min-h-[760px]
+          "
+        >
+          {/* glow background */}
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-teal-500/20 blur-3xl" />
+            <div className="absolute top-10 left-1/2 h-[360px] w-[360px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl" />
           </div>
 
-        </div>
-      </div>
-    </div>
+          <div className="relative grid grid-cols-1 md:grid-cols-5 h-full">
+            {/* LEFT IMAGE */}
+            <div className="relative md:col-span-3 min-h-[420px] md:min-h-0">
+              <ImageWithFallback
+                src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=2000&q=80"
+                alt="SenGouku"
+                className="absolute inset-0 h-full w-full object-cover object-left"
+                draggable={false}
+              />
 
-  </div>
-</div>
+              {/* teal tint */}
+              <div className="absolute inset-0 bg-gradient-to-br from-teal-500/25 via-cyan-500/10 to-transparent mix-blend-overlay" />
 
-  {/* Underline */}
-  <div className="mx-auto mb-6 h-1 w-20 rounded bg-gradient-to-r from-teal-500 to-cyan-500" />
+              {/* readability */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-  {/* Title */}
-  <h2 className="text-xl md:text-3xl font-semibold text-teal-300 mb-4">
-    Fighting Game Competitor & Gaming Content Creator
-  </h2>
+              {/* bottom identity */}
+              <div className="absolute bottom-10 left-10 flex items-center gap-3">
+                <Gamepad2 size={28} className="text-teal-300" />
+                <div>
+                  <p className="text-3xl font-bold">SenGouku</p>
+                  <p className="text-teal-300 text-sm">Fighting Game Competitor</p>
+                </div>
+              </div>
+            </div>
 
-  {/* Description */}
-  <p className="text-base md:text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-    Competing at the highest level in fighting game tournaments worldwide.
-    Specializing in Street Fighter 6, Tekken 8, and multiple fighting game titles.
-  </p>
+            {/* RIGHT PANEL */}
+            <div className="relative md:col-span-2 bg-slate-900/80 backdrop-blur-xl border-l border-white/10">
+              <div className="absolute inset-0 bg-gradient-to-b from-teal-500/10 via-transparent to-transparent pointer-events-none" />
 
-  {/* Highlights row */}
-  <div className="mt-8 flex flex-wrap justify-center gap-3">
-    <Badge className="px-5 py-2 text-sm md:text-base bg-slate-900/50 border border-white/10 text-white">
-      ⚔️ Fighting Game Specialist
-    </Badge>
-    <Badge className="px-5 py-2 text-sm md:text-base bg-slate-900/50 border border-white/10 text-white">
-      👥 TArchangel Esports
-    </Badge>
-    <Badge className="px-5 py-2 text-sm md:text-base bg-slate-900/50 border border-white/10 text-teal-200">
-      ⭐ Competitive Player
-    </Badge>
-  </div>
+              <div className="h-full px-10 py-12 flex flex-col">
+                <h1 className="text-white font-extrabold uppercase leading-[0.85] text-6xl sm:text-7xl lg:text-8xl">
+                  SENGOUKU
+                </h1>
 
-  {/* Quick stats (optional but looks really good) */}
-  <div className="mt-10 max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4">
-    <div className="rounded-2xl border border-white/10 bg-slate-900/35 px-6 py-5">
-      <p className="text-sm text-gray-300">Main Focus</p>
-      <p className="mt-1 text-xl font-bold text-white">FGC Tournaments</p>
-    </div>
-    <div className="rounded-2xl border border-white/10 bg-slate-900/35 px-6 py-5">
-      <p className="text-sm text-gray-300">Signature Titles</p>
-      <p className="mt-1 text-xl font-bold text-white">SF6 • T8 • More</p>
-    </div>
-    <div className="rounded-2xl border border-white/10 bg-slate-900/35 px-6 py-5">
-      <p className="text-sm text-gray-300">Content</p>
-      <p className="mt-1 text-xl font-bold text-white">Clips • Guides</p>
-    </div>
-  </div>
-</div>
+                <div className="mt-6 h-1 w-24 rounded bg-gradient-to-r from-teal-400 to-cyan-400" />
+
+                <h2 className="mt-6 text-teal-300 text-lg font-semibold">
+                  Fighting Game Competitor &amp; Gaming Content Creator
+                </h2>
+
+                <p className="mt-4 text-gray-300 max-w-md">
+                  Competing at the highest level in fighting game tournaments worldwide.
+                  Specializing in Street Fighter 6, Tekken 8, and multiple fighting game titles.
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Badge className="px-4 py-2 text-sm bg-slate-800/70 border border-white/10 text-white">
+                    ⚔️ Fighting Game Specialist
+                  </Badge>
+                  <Badge className="px-4 py-2 text-sm bg-slate-800/70 border border-white/10 text-white">
+                    👥 Archangel Esports
+                  </Badge>
+                  <Badge className="px-4 py-2 text-sm bg-slate-800/70 border border-white/10 text-teal-200">
+                    ⭐ Competitive Player
+                  </Badge>
+                </div>
+
+                <div className="mt-auto pt-10 grid grid-cols-1 gap-4">
+                  <div className="rounded-2xl border border-white/10 bg-slate-800/60 backdrop-blur px-6 py-5">
+                    <p className="text-sm text-gray-300">Main Focus</p>
+                    <p className="mt-1 text-xl font-bold text-white">FGC Tournaments</p>
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-slate-800/60 backdrop-blur px-6 py-5">
+                    <p className="text-sm text-gray-300">Signature Titles</p>
+                    <p className="mt-1 text-xl font-bold text-white">SF6 • T8 • More</p>
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-slate-800/60 backdrop-blur px-6 py-5">
+                    <p className="text-sm text-gray-300">Content</p>
+                    <p className="mt-1 text-xl font-bold text-white">Clips • Guides</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Team Section */}
         <div id="team" className="scroll-mt-24 mb-20">
-          <div className="text-center mb-10">
+          <div className="text-center mb-10 mt-10">
             <h3 className="text-3xl mb-4">Representing Archangel Esports</h3>
-            <p className="text-gray-300 max-w-8xl mx-auto">
-              Competing as one of the top fighting game teams in the region
-            </p>
           </div>
 
           <div className="max-w-8xl mx-auto">
@@ -804,7 +862,7 @@ const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
             <Card className="h-full flex flex-col bg-slate-800 border-2 border-slate-700 hover:border-teal-500 transition-all">
               <div className="p-8 flex flex-col flex-1">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="p-4 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl shadow-lg">
+                  <div className="p-4 bg-black rounded-xl shadow-lg">
                     <img
                       src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/steam.svg"
                       alt="Steam Logo"
@@ -835,14 +893,21 @@ const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
                     <span className="text-white font-semibold">850+</span>
                   </p>
                 </div>
-
-                <Button
-                  className="w-full mt-auto bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900"
-                  onClick={() => window.open("#", "_blank")}
-                >
-                  <ExternalLink size={18} className="mr-2" />
-                  View Steam Profile
-                </Button>
+                    <Button
+                      className="w-full mt-6 h-11 bgblue-700 hover:from-cyan-600 hover:to-blue-800"
+                      onClick={() =>
+                        window.open(
+                          "https://steamcommunity.com/profiles/76561199068794358/"
+                        )
+                      }
+                    >
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/steam.svg"
+                        alt=""
+                        className="w-5 h-5 mr-2 invert"
+                      />
+                      View Steam Profile
+                    </Button>
               </div>
             </Card>
 
@@ -951,7 +1016,6 @@ const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
                                   ["Main Squad", "Ellen / Lycaon"],
                                 ],
                               };
-
                         return (
                           <button
                             key={k}
@@ -997,22 +1061,13 @@ const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
                       })}
                     </div>
 
-                    {/* CTA */}
-                    <Button
-                      className="w-full mt-6 h-11 bg-gradient-to-r from-cyan-500 to-blue-700 hover:from-cyan-600 hover:to-blue-800"
-                      onClick={() =>
-                        window.open(
-                          "https://www.hoyolab.com/accountCenter/postList?id=11846094"
-                        )
-                      }
-                    >
-                      <img
-                        src="/images/hoyolab.png"
-                        alt=""
-                        className="w-5 h-5 mr-2"
-                      />
-                      View HoYoLAB Profile
-                    </Button>
+                <Button
+                  className="w-full mt-10 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900"
+                  onClick={() => window.open("https://www.hoyolab.com/accountCenter/postList?id=11846094")}
+                >
+                  <ExternalLink size={18} className="mr-2" />
+                  View HoYoLAB Profile
+                </Button>
                   </div>
                 </aside>
 
@@ -1039,177 +1094,145 @@ const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
                           </p>
                         </div>
                       </div>
-
-                      <span className="text-xs text-gray-200 rounded-full border border-white/10 bg-slate-900/40 px-3 py-1">
-                        {HOYO_TEAMS[hoyoActive].members.length} members
-                      </span>
                     </div>
 
-                    {/* Main Team */}
-                    <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-6">
-                      <p className="text-white font-semibold mb-5">Main Team</p>
-
-                      <div
-                        className={[
-                          "grid gap-5",
-                          HOYO_TEAMS[hoyoActive].teamCols === 4
-                            ? "grid-cols-2 sm:grid-cols-4"
-                            : "grid-cols-3",
-                        ].join(" ")}
-                      >
-                        {HOYO_TEAMS[hoyoActive].members.map((c) => (
-                          <div
-                            key={c.name}
-                            className="group rounded-2xl border border-white/10 bg-slate-800/40 p-3 hover:border-cyan-400/30 hover:bg-slate-800/60 transition"
-                          >
-                            <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-slate-950/30 border border-white/10">
-                              <img
-                                src={c.img}
-                                alt={c.name}
-                                className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-300"
-                                loading="lazy"
-                                draggable={false}
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                            </div>
-
-                            <p className="mt-3 text-sm font-semibold text-white text-center truncate">
-                              {c.name}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
+                    {/* Teams */}
+                    <div className="grid gap-6 lg:grid-cols-1">
+                      <TeamPanel
+                        title="Main Team"
+                        members={HOYO_TEAMS[hoyoActive].members}
+                      />
+                      <TeamPanel
+                        title="Second Team"
+                        members={HOYO_TEAMS[hoyoActive].team2Members}
+                      />
                     </div>
-
                   </div>
                 </section>
               </div>
             </Card>
           </div>
 
-         {/* Social Media */}
-<div id="Social" className="scroll-mt-24 mt-16">
-  <div className="max-w-8xl mx-auto px-4">
-    <div className="text-center mb-10">
-      <h4 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-        Connect on Social Media
-      </h4>
-      <div className="mt-4 mx-auto h-1 w-24 rounded bg-gradient-to-r from-teal-400 to-cyan-400" />
-      <p className="mt-4 text-gray-300">
-        Follow my content, updates, and tournament runs.
-      </p>
-    </div>
-
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {/* YouTube */}
-      <button
-        onClick={() => window.open("https://www.youtube.com/@SenGouku")}
-        className="group text-left"
-      >
-        <div className="relative h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur transition-all
-                        hover:-translate-y-1 hover:border-red-400/40 hover:shadow-2xl hover:shadow-red-500/15">
-          <div className="absolute inset-0 bg-gradient-to-br from-red-600/30 via-transparent to-transparent opacity-100" />
-          <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-red-500/20 blur-2xl" />
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity
-                          [background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent)]" />
-
-          <div className="relative h-full px-6 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="h-12 w-12 rounded-xl bg-red-600/25 border border-red-400/20 flex items-center justify-center">
-                <Youtube size={26} className="text-white" />
+          {/* Social Media */}
+          <div id="Social" className="scroll-mt-24 mt-16">
+            <div className="max-w-8xl mx-auto px-4">
+              <div className="text-center mb-10">
+                <h4 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+                  Connect on Social Media
+                </h4>
+                <div className="mt-4 mx-auto h-1 w-24 rounded bg-gradient-to-r from-teal-400 to-cyan-400" />
               </div>
-              <div>
-                <p className="text-white font-bold text-lg leading-tight">YouTube</p>
-                <p className="text-gray-300 text-sm">@SenGouku</p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {/* YouTube */}
+                <button
+                  onClick={() => window.open("https://www.youtube.com/@SenGouku")}
+                  className="group text-left"
+                >
+                  <div className="relative h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur transition-all
+                                  hover:-translate-y-1 hover:border-red-400/40 hover:shadow-2xl hover:shadow-red-500/15">
+                    <div className="absolute inset-0 bg-gradient-to-br from-red-600/30 via-transparent to-transparent opacity-100" />
+                    <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-red-500/20 blur-2xl" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity
+                                    [background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent)]" />
+
+                    <div className="relative h-full px-6 flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="h-12 w-12 rounded-xl bg-red-600/25 border border-red-400/20 flex items-center justify-center">
+                          <Youtube size={26} className="text-white" />
+                        </div>
+                        <div>
+                          <p className="text-white font-bold text-lg leading-tight">YouTube</p>
+                          <p className="text-gray-300 text-sm">@SenGouku</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </button>
+
+                {/* Instagram */}
+                <button
+                  onClick={() => window.open("https://www.instagram.com/sen_gouku/")}
+                  className="group text-left"
+                >
+                  <div className="relative h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur transition-all
+                                  hover:-translate-y-1 hover:border-pink-400/40 hover:shadow-2xl hover:shadow-pink-500/15">
+                    <div className="absolute inset-0 bg-gradient-to-br from-pink-600/30 via-purple-600/15 to-transparent" />
+                    <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-pink-500/20 blur-2xl" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity
+                                    [background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent)]" />
+
+                    <div className="relative h-full px-6 flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="h-12 w-12 rounded-xl bg-pink-600/25 border border-pink-400/20 flex items-center justify-center">
+                          <Instagram size={24} className="text-white" />
+                        </div>
+                        <div>
+                          <p className="text-white font-bold text-lg leading-tight">Instagram</p>
+                          <p className="text-gray-300 text-sm">@sen_gouku</p>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </button>
+
+                {/* Facebook */}
+                <button
+                  onClick={() => window.open("https://www.facebook.com/SenGouku20")}
+                  className="group text-left"
+                >
+                  <div className="relative h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur transition-all
+                                  hover:-translate-y-1 hover:border-blue-400/40 hover:shadow-2xl hover:shadow-blue-500/15">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-600/30 via-transparent to-transparent" />
+                    <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-blue-500/20 blur-2xl" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity
+                                    [background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent)]" />
+
+                    <div className="relative h-full px-6 flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="h-12 w-12 rounded-xl bg-blue-600/25 border border-blue-400/20 flex items-center justify-center">
+                          <Facebook size={24} className="text-white" />
+                        </div>
+                        <div>
+                          <p className="text-white font-bold text-lg leading-tight">Facebook</p>
+                          <p className="text-gray-300 text-sm">SenGouku20</p>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </button>
+
+                {/* X */}
+                <button
+                  onClick={() => window.open("https://x.com/Sen_Gouku")}
+                  className="group text-left"
+                >
+                  <div className="relative h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur transition-all
+                                  hover:-translate-y-1 hover:border-white/25 hover:shadow-2xl hover:shadow-white/10">
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent" />
+                    <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-white/10 blur-2xl" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity
+                                    [background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent)]" />
+
+                    <div className="relative h-full px-6 flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="h-12 w-12 rounded-xl bg-black/40 border border-white/15 flex items-center justify-center">
+                          <XIcon size={22} />
+                        </div>
+                        <div>
+                          <p className="text-white font-bold text-lg leading-tight">X</p>
+                          <p className="text-gray-300 text-sm">@Sen_Gouku</p>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </button>
               </div>
             </div>
           </div>
-        </div>
-      </button>
-
-      {/* Instagram */}
-      <button
-        onClick={() => window.open("https://www.instagram.com/sen_gouku/")}
-        className="group text-left"
-      >
-        <div className="relative h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur transition-all
-                        hover:-translate-y-1 hover:border-pink-400/40 hover:shadow-2xl hover:shadow-pink-500/15">
-          <div className="absolute inset-0 bg-gradient-to-br from-pink-600/30 via-purple-600/15 to-transparent" />
-          <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-pink-500/20 blur-2xl" />
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity
-                          [background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent)]" />
-
-          <div className="relative h-full px-6 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="h-12 w-12 rounded-xl bg-pink-600/25 border border-pink-400/20 flex items-center justify-center">
-                <Instagram size={24} className="text-white" />
-              </div>
-              <div>
-                <p className="text-white font-bold text-lg leading-tight">Instagram</p>
-                <p className="text-gray-300 text-sm">@sen_gouku</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </button>
-
-      {/* Facebook */}
-      <button
-        onClick={() => window.open("https://www.facebook.com/SenGouku20")}
-        className="group text-left"
-      >
-        <div className="relative h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur transition-all
-                        hover:-translate-y-1 hover:border-blue-400/40 hover:shadow-2xl hover:shadow-blue-500/15">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/30 via-transparent to-transparent" />
-          <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-blue-500/20 blur-2xl" />
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity
-                          [background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent)]" />
-
-          <div className="relative h-full px-6 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="h-12 w-12 rounded-xl bg-blue-600/25 border border-blue-400/20 flex items-center justify-center">
-                <Facebook size={24} className="text-white" />
-              </div>
-              <div>
-                <p className="text-white font-bold text-lg leading-tight">Facebook</p>
-                <p className="text-gray-300 text-sm">SenGouku20</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </button>
-
-      {/* X */}
-      <button
-        onClick={() => window.open("https://x.com/Sen_Gouku")}
-        className="group text-left"
-      >
-        <div className="relative h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur transition-all
-                        hover:-translate-y-1 hover:border-white/25 hover:shadow-2xl hover:shadow-white/10">
-          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent" />
-          <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-white/10 blur-2xl" />
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity
-                          [background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent)]" />
-
-          <div className="relative h-full px-6 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="h-12 w-12 rounded-xl bg-black/40 border border-white/15 flex items-center justify-center">
-                <XIcon size={22} />
-              </div>
-              <div>
-                <p className="text-white font-bold text-lg leading-tight">X</p>
-                <p className="text-gray-300 text-sm">@Sen_Gouku</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </button>
-    </div>
-  </div>
-</div>
         </div>
       </div>
     </section>

@@ -1,128 +1,226 @@
-import React from "react";
+import React, { memo, useMemo, useRef } from "react";
 import { Card } from "./ui/card";
+
+/* ================= TYPES ================= */
 
 type Certification = {
   name: string;
   issuer: string;
-  date: string;
-  credlyUrl?: string; // profile/badge link
-  credlyEmbedUrl?: string; // optional: Credly embed URL for badge image
+  dateLabel: string;
+  dateTime?: string;
+  credlyUrl?: string;
+  badgeImgUrl?: string;
 };
+
+const FALLBACK = {
+  cisco: "/images/cis.png",
+  certiport: "/images/cert.png",
+} as const;
+
+/* ================= DATA ================= */
 
 const certifications: Certification[] = [
   {
     name: "CyberOps Associate",
     issuer: "Cisco Networking Academy",
-    date: "July 2025",
-    credlyUrl: "https://www.credly.com/badges/9fa89645-16a5-4e7e-8edc-23a33257f20b/public_url",
-    credlyEmbedUrl: "https://images.credly.com/size/220x220/images/53f37f83-04a1-4935-9b1e-21a99cc6e1b2/CyberOpsAssoc.png",
+    dateLabel: "July 2025",
+    dateTime: "2025-07",
+    credlyUrl:
+      "https://www.credly.com/badges/9fa89645-16a5-4e7e-8edc-23a33257f20b/public_url",
+    badgeImgUrl:
+      "https://images.credly.com/size/220x220/images/53f37f83-04a1-4935-9b1e-21a99cc6e1b2/CyberOpsAssoc.png",
   },
   {
     name: "Cisco Certified Support Technician Networking (CCST Networking) - Lifetime",
     issuer: "Certiport",
-    date: "March 2025",
-    // credlyUrl: "https://www.credly.com/badges/xxxx",
-    // credlyEmbedUrl: "https://www.credly.com/embedded_badge/.../image",
+    dateLabel: "March 2025",
+    dateTime: "2025-03",
+    credlyUrl:
+      "https://www.credly.com/badges/f67638d0-fe60-4171-88ed-26330681b85d/public_url",
+    badgeImgUrl:
+      "https://images.credly.com/size/340x340/images/57d88bab-75be-4400-a2fd-dbfa8e2b056e/image.png",
   },
   {
     name: "CCNA: Enterprise Networking, Security, and Automation",
     issuer: "Cisco Networking Academy",
-    date: "November 2024",
-    // credlyUrl: "https://www.credly.com/badges/xxxx",
-    // credlyEmbedUrl: "https://www.credly.com/embedded_badge/.../image",
+    dateLabel: "November 2024",
+    dateTime: "2024-11",
+    credlyUrl:
+      "https://www.credly.com/badges/01b6d082-aede-46b1-a14c-ac30c3b3a9e7/public_url",
+    badgeImgUrl:
+      "https://images.credly.com/size/110x110/images/0a6d331e-8abf-4272-a949-33f754569a76/CCNAENSA__1_.png",
   },
   {
     name: "CCNA: Switching, Routing, and Wireless Essentials",
     issuer: "Cisco Networking Academy",
-    date: "July 2024",
-    // credlyUrl: "https://www.credly.com/badges/xxxx",
-    // credlyEmbedUrl: "https://www.credly.com/embedded_badge/.../image",
+    dateLabel: "July 2024",
+    dateTime: "2024-07",
+    credlyUrl:
+      "https://www.credly.com/badges/3ae0ee6e-cc28-4cfc-b862-618fc2128780/public_url",
+    badgeImgUrl:
+      "https://images.credly.com/size/110x110/images/f4ccdba9-dd65-4349-baad-8f05df116443/CCNASRWE__1_.png",
   },
   {
     name: "Introduction to Networks",
     issuer: "Cisco Networking Academy",
-    date: "April 2024",
-    // credlyUrl: "https://www.credly.com/badges/xxxx",
-    // credlyEmbedUrl: "https://www.credly.com/embedded_badge/.../image",
+    dateLabel: "April 2024",
+    dateTime: "2024-04",
+    credlyUrl:
+      "https://www.credly.com/badges/1840edb8-bf4c-4ae2-b562-37512737049c/public_url",
+    badgeImgUrl:
+      "https://images.credly.com/size/110x110/images/70d71df5-f3dc-4380-9b9d-f22513a70417/CCNAITN__1_.png",
   },
   {
     name: "Introduction to Cybersecurity",
     issuer: "Cisco Networking Academy",
-    date: "March 2024",
-    // credlyUrl: "https://www.credly.com/badges/xxxx",
-    // credlyEmbedUrl: "https://www.credly.com/embedded_badge/.../image",
+    dateLabel: "March 2024",
+    dateTime: "2024-03",
+    credlyUrl:
+      "https://www.credly.com/badges/ca76c119-b63f-401b-a68a-912c7ac8cdca/public_url",
+    badgeImgUrl:
+      "https://images.credly.com/size/110x110/images/af8c6b4e-fc31-47c4-8dcb-eb7a2065dc5b/I2CS__1_.png",
   },
   {
     name: "IT Specialist - Java",
     issuer: "Certiport",
-    date: "July 2023",
-    // credlyUrl: "https://www.credly.com/badges/xxxx",
-    // credlyEmbedUrl: "https://www.credly.com/embedded_badge/.../image",
+    dateLabel: "July 2023",
+    dateTime: "2023-07",
+    credlyUrl:
+      "https://www.credly.com/badges/6a75b8e2-9147-40f5-9744-8bd64f3da44b/public_url",
+    badgeImgUrl:
+      "https://images.credly.com/size/110x110/images/2210b6fe-0eda-415a-8aba-6c1400566728/ITS-Badges_Java_1200px.png",
   },
 ];
 
+/* ================= HELPERS ================= */
+
+function getIssuerKind(issuer: string) {
+  return issuer.toLowerCase().includes("certiport") ? "certiport" : "cisco";
+}
+
 type IconProps = React.SVGProps<SVGSVGElement>;
 
-function ShieldCheckIcon(props: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M12 2.5l7 3.8v7.3c0 4.6-3.2 8.6-7 9.9-3.8-1.3-7-5.3-7-9.9V6.3l7-3.8z"
-        stroke="currentColor"
-        strokeWidth={1.6}
-        strokeLinejoin="round"
-      />
-      <path
-        d="M8.5 12.3l2.2 2.2 4.8-5.2"
-        stroke="currentColor"
-        strokeWidth={1.8}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+const ShieldCheckIcon = (props: IconProps) => (
+  <svg viewBox="0 0 24 24" fill="none" {...props}>
+    <path d="M12 2.5l7 3.8v7.3c0 4.6-3.2 8.6-7 9.9-3.8-1.3-7-5.3-7-9.9V6.3l7-3.8z" stroke="currentColor" strokeWidth={1.6}/>
+    <path d="M8.5 12.3l2.2 2.2 4.8-5.2" stroke="currentColor" strokeWidth={1.8}/>
+  </svg>
+);
 
-function ExternalLinkIcon(props: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M14 5h5v5"
-        stroke="currentColor"
-        strokeWidth={1.8}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M10 14L19 5"
-        stroke="currentColor"
-        strokeWidth={1.8}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M19 14.5V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4.5"
-        stroke="currentColor"
-        strokeWidth={1.6}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+const ExternalLinkIcon = (props: IconProps) => (
+  <svg viewBox="0 0 24 24" fill="none" {...props}>
+    <path d="M14 5h5v5" stroke="currentColor" strokeWidth={1.8}/>
+    <path d="M10 14L19 5" stroke="currentColor" strokeWidth={1.8}/>
+    <path d="M19 14.5V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4.5" stroke="currentColor" strokeWidth={1.6}/>
+  </svg>
+);
 
-/**
- * Credly badge images:
- * - Best: use Credly "Embed" image URL for each badge (credlyEmbedUrl).
- * - Fallback: issuer logo (Cisco/Certiport) if embed URL not provided.
- */
-export function Cert() {
+/* ================= CARD ================= */
+
+const CertCard = memo(function CertCard({ cert }: { cert: Certification }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const issuerKind = getIssuerKind(cert.issuer);
+  const hasCredly = Boolean(cert.credlyUrl);
+  const imgSrc = cert.badgeImgUrl ?? FALLBACK[issuerKind];
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const rect = cardRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    cardRef.current?.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+    cardRef.current?.style.setProperty("--my", `${e.clientY - rect.top}px`);
+  }
+
   return (
-    <section
-      id="cert"
-      className="relative py-24 bg-black text-white overflow-hidden"
+    <Card
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      className="
+        group relative overflow-hidden
+        p-6
+        rounded-2xl
+        bg-white text-black
+        border-2 border-transparent
+        transition-shadow
+        hover:shadow-2xl
+        hover:border-red-700
+      "
     >
-      {/* subtle red glow accents (still only red/black/white) */}
+      {/* glow */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300"
+        style={{
+          background:
+            "radial-gradient(280px circle at var(--mx) var(--my), rgba(255,0,0,0.15), transparent 60%)",
+        }}
+      />
+
+      <div className="flex items-start gap-5">
+        <div className="w-20 h-20 rounded-xl flex items-center justify-center overflow-hidden shadow-[0_0_20px_rgba(255,0,0,0.12)] bg-white border">
+          <img
+            src={imgSrc}
+            alt={cert.name}
+            className="w-16 h-16 object-contain"
+          />
+        </div>
+
+        <div className="min-w-0 flex-1">
+          <div className="flex items-start justify-between gap-3">
+            <h4 className="text-xl md:text-2xl font-semibold leading-snug">
+              {cert.name}
+            </h4>
+
+            {hasCredly && (
+              <span className="inline-flex items-center gap-2 rounded-full bg-black text-white px-3 py-1 text-xs font-semibold">
+                <ShieldCheckIcon className="h-4 w-4" />
+                Verified
+              </span>
+            )}
+          </div>
+
+          <p className="mt-1 text-red-600 font-medium">
+            {cert.issuer}
+          </p>
+
+          {/* reserve space for pinned button */}
+          <div className="mt-2 pr-40">
+            <time className="text-sm text-gray-500">
+              {cert.dateLabel}
+            </time>
+          </div>
+        </div>
+      </div>
+
+      {/* pinned button */}
+      {hasCredly && (
+        <a
+          href={cert.credlyUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="
+            absolute bottom-5 right-5
+            inline-flex items-center gap-2
+            rounded-xl
+            bg-black px-4 py-2
+            text-sm font-semibold text-white
+            transition
+            hover:shadow-lg
+          "
+        >
+          Verify
+          <ExternalLinkIcon className="h-4 w-4" />
+        </a>
+      )}
+    </Card>
+  );
+});
+
+/* ================= SECTION ================= */
+
+export function Cert() {
+  const items = useMemo(() => certifications, []);
+
+  return (
+    <section id="cert" className="relative py-24 bg-black text-white overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-32 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-red-600/10 blur-3xl" />
         <div className="absolute -bottom-44 right-10 h-80 w-80 rounded-full bg-red-600/10 blur-3xl" />
@@ -130,175 +228,20 @@ export function Cert() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6 xl:px-0">
-        {/* TITLE */}
-        <div className="text-center mb-14">
-
-
-          <h3 className="mt-5 text-4xl md:text-6xl font-bold tracking-tight">
-            Badges and Certifications
-          </h3>
-          <div className="mt-4 mx-auto h-1 w-28 rounded bg-red-600" />
-
-          <p className="mt-5 text-white/75 max-w-2xl mx-auto">
-            Credly-verified credentials show a badge image and a verification
-            link.
-          </p>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl mb-4 text-white">
+            Internship Experience
+          </h2>
+          <div className="w-24 h-1 bg-red-600 mx-auto"></div>
         </div>
 
-        {/* GRID (bigger panels: 1 col on small, 2 cols on desktop) */}
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-10">
-          {certifications.map((cert, index) => {
-            const isCertiport = cert.issuer.toLowerCase().includes("certiport");
-            const hasCredly = Boolean(cert.credlyUrl);
-            const hasBadgeImg = Boolean(cert.credlyEmbedUrl);
-
-            const fallbackLogo = isCertiport ? "/images/cert.png" : "/images/cis.png";
-
-            return (
-              <Card
-                key={index}
-                className="
-                  group relative overflow-hidden
-                  p-8 md:p-10
-                  rounded-3xl
-                  bg-white text-black
-                  border border-red-700/60
-                  shadow-[0_20px_60px_rgba(0,0,0,0.45)]
-                  transition-all duration-300
-                  hover:-translate-y-2
-                  hover:border-red-500
-                  hover:shadow-[0_30px_90px_rgba(255,0,0,0.20)]
-                  min-h-[200px]
-                "
-              >
-                {/* top accent line */}
-                <div className="absolute inset-x-0 top-0 h-1.5 bg-red-600" />
-
-                <div className="flex items-start gap-6">
-                  {/* BADGE IMAGE / LOGO */}
-                  <div
-                    className="
-                      w-20 h-20 md:w-24 md:h-24 shrink-0
-                      flex items-center justify-center
-                      rounded-2xl
-                      bg-white
-                      border border-black/15
-                      shadow-sm
-                      overflow-hidden
-                    "
-                    title={hasBadgeImg ? "Credly badge image" : cert.issuer}
-                  >
-                    <img
-                      src={hasBadgeImg ? (cert.credlyEmbedUrl as string) : fallbackLogo}
-                      alt={hasBadgeImg ? `${cert.name} badge` : cert.issuer}
-                      className="w-14 h-14 md:w-16 md:h-16 object-contain"
-                      loading="lazy"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-
-                  {/* TEXT */}
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-start justify-between gap-3">
-                      <h4 className="text-xl md:text-2xl font-bold leading-snug">
-                        {cert.name}
-                      </h4>
-
-                      {/* verification badge */}
-                      {hasCredly ? (
-                        <span
-                          className="
-                            inline-flex items-center gap-2
-                            rounded-full border border-red-600/40
-                            bg-black px-3 py-1.5
-                            text-xs md:text-sm font-semibold text-white
-                            whitespace-nowrap
-                          "
-                          title="Credly verification link available"
-                        >
-                          <ShieldCheckIcon className="h-4 w-4 md:h-5 md:w-5 text-white" />
-                          Verified
-                        </span>
-                      ) : (
-                        <span
-                          className="
-                            inline-flex items-center
-                            rounded-full border border-black/15
-                            bg-white px-3 py-1.5
-                            text-xs md:text-sm font-medium text-black/60
-                            whitespace-nowrap
-                          "
-                          title="Add a Credly link to show verification"
-                        >
-                          No link
-                        </span>
-                      )}
-                    </div>
-
-                    <p className="mt-3 text-red-600 text-base font-semibold">
-                      {cert.issuer}
-                    </p>
-
-                    <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
-                      <p className="text-black/70 text-base">{cert.date}</p>
-
-                      {/* Credly verify button */}
-                      {hasCredly ? (
-                        <a
-                          href={cert.credlyUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="
-                            inline-flex items-center gap-2
-                            rounded-2xl
-                            bg-black px-5 py-3
-                            text-base font-semibold text-white
-                            border border-red-600/40
-                            transition-all duration-200
-                            hover:border-red-500
-                            hover:shadow-[0_12px_38px_rgba(255,0,0,0.18)]
-                            focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600
-                          "
-                          aria-label={`Verify ${cert.name} on Credly`}
-                        >
-                          Verify (Credly)
-                          <ExternalLinkIcon className="h-5 w-5 text-white" />
-                        </a>
-                      ) : (
-                        <span className="text-sm text-black/50">
-                          Add <span className="font-semibold">credlyUrl</span> to enable verification
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Optional hint if they forgot the badge image */}
-                    {hasCredly && !hasBadgeImg ? (
-                      <p className="mt-4 text-sm text-black/55">
-                        Want the real badge image? Add{" "}
-                        <span className="font-semibold">credlyEmbedUrl</span> from
-                        Credly’s “Embed” options.
-                      </p>
-                    ) : null}
-                  </div>
-                </div>
-
-                {/* subtle hover ring */}
-                <div
-                  className="
-                    pointer-events-none absolute inset-0 rounded-3xl
-                    ring-0 ring-red-600/0
-                    group-hover:ring-2 group-hover:ring-red-600/30
-                    transition
-                  "
-                />
-              </Card>
-            );
-          })}
-        </div>
-
-        <div className="mt-10 text-center text-white/60 text-sm">
-          Tip: For each badge, set <span className="text-white">credlyUrl</span>{" "}
-          and optionally <span className="text-white">credlyEmbedUrl</span>.
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-10">
+          {items.map((cert) => (
+            <CertCard
+              key={cert.credlyUrl ?? cert.name}
+              cert={cert}
+            />
+          ))}
         </div>
       </div>
     </section>

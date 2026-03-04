@@ -230,7 +230,7 @@ export function Cert() {
       <div className="relative mx-auto max-w-7xl px-6 xl:px-0">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mb-4 text-white">
-            Internship Experience
+            Badges and Certifications
           </h2>
           <div className="w-24 h-1 bg-red-600 mx-auto"></div>
         </div>

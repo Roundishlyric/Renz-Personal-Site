@@ -33,7 +33,7 @@ export function About() {
           <div>
             <Card className="overflow-hidden border-2 border-transparent hover:border-red-300 transition-all shadow-xl">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
+                src="/images/fib.jpg"
                 alt="Profile"
                 className="w-full h-96 object-cover"
               />
@@ -42,8 +42,8 @@ export function About() {
 
           <div className="space-y-6">
             <p className="text-lg text-white leading-relaxed">
-              Hello! I'm a passionate Computer Science student with a keen interest in software development 
-              and problem-solving. Currently pursuing my degree while gaining practical experience as a 
+              Hello! I'm a passionate Computer Engineering Student with a keen interest in software development 
+              and Hardware Development. Currently pursuing my degree while gaining practical experience as a 
               Software Development Intern.
             </p>
 

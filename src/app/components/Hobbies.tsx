@@ -4,89 +4,153 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 export function Hobbies() {
   const hobbies = [
     {
-      title: 'Competitive Gaming',
-      description: 'Fighting game tournaments and esports competitions',
-      image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80',
-    },
-    {
-      title: 'Reading',
-      description: 'Tech blogs, sci-fi novels, and programming books',
-      image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80',
-    },
-    {
-      title: 'Music',
-      description: 'Playing Guitar and Drums and discovering other music genres',
-      image: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&q=80',
-    },
-    {
-      title: 'Photography',
-      description: 'Capturing moments and exploring visual creativity',
-      image: 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800&q=80',
-    },
-    {
-      title: 'Graphic Design',
-      description: 'Regular workouts and staying healthy',
-      image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80',
-    },
-    {
-      title: 'Learning Other languages',
-      description: 'Learning Japanese and Spanish',
-      image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80',
-    },
-    {
       title: 'Personal Coding',
-      description: 'Trying different brewing methods and cafes',
-      image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80',
+      description:
+        'Building personal projects and experimenting with new technologies and frameworks',
+      image: '/images/yes.png',
+    },
+    {
+      title: 'Hardware Exploration',
+      description:
+        'Exploring computer hardware, components, and how systems work at a deeper level',
+      image: '/images/hard.jpg',
+    },
+    {
+      title: 'Networking & Systems',
+      description:
+        'Learning about computer networks, system architecture, and modern infrastructure',
+      image: '/images/TEK.png',
     },
     {
       title: 'Digital Art',
-      description: 'UI design and creative digital projects',
-      image: 'https://images.unsplash.com/photo-1561998338-13ad7883b20f?w=800&q=80',
+      description:
+        'Creating digital illustrations and experimenting with visual styles and design tools',
+      image: '/images/ag.png',
+    },
+    {
+      title: 'Competitive & Casual Gaming',
+      description:
+        'Participating in fighting game tournaments and enjoying competitive and casual gameplay',
+      image: '/images/comppo.png',
+    },
+    {
+      title: 'Japanese Media',
+      description:
+        'Exploring stories through manga, anime, games, and other forms of Japanese media',
+      image: '/images/ani.png',
+    },
+    {
+      title: 'Graphic Design',
+      description:
+        'Designing layouts, visuals, and digital graphics for creative and technical projects',
+      image: '/images/grap.png',
+    },
+    {
+      title: 'Building Model Kits',
+      description:
+        'Assembling and customizing model kits, focusing on precision and creativity',
+      image: '/images/gun.png',
+    },
+    {
+      title: 'Music',
+      description:
+        'Playing guitar and drums while exploring different musical genres and styles',
+      image: '/images/git.png',
+    },
+    {
+      title: 'Photography',
+      description:
+        'Capturing moments and developing creativity through visual storytelling',
+      image: '/images/pho.png',
+    },
+    {
+      title: 'Language Learning',
+      description:
+        'Studying Japanese and Spanish to explore new cultures and improve communication',
+      image: '/images/jap.jpg',
+    },
+    {
+      title: 'Travel & Exploration',
+      description:
+        'Exploring new places, cultures, and experiences for inspiration and personal growth',
+      image: '/images/aki.png',
     },
   ];
 
   return (
-    <section id="hobbies" className="py-10 bg-gradient-to-br from-red-50 via-orange-50 to-white">
+    <section
+      id="hobbies"
+      className="py-10 bg-gradient-to-br from-red-50 via-orange-50 to-white"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* SECTION HEADER */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Hobbies & Interests</h2>
+          <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">
+            Hobbies & Interests
+          </h2>
+
           <div className="w-20 h-1 bg-gradient-to-r from-red-700 to-red-700 mx-auto mb-4"></div>
-          <p className="text-lg text-gray-600">What I enjoy doing in my free time</p>
+
+          <p className="text-lg text-gray-600">
+            What I enjoy doing in my free time
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* HOBBIES GRID */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {hobbies.map((hobby, index) => (
             <Card
               key={index}
-              className="group hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-transparent hover:border-red-300"
+              className="group relative overflow-hidden border border-white/20 
+              bg-white/70 backdrop-blur-xl 
+              transition-all duration-500 
+              hover:-translate-y-2 hover:shadow-2xl 
+              hover:shadow-red-400/40 rounded-xl"
             >
-              <div className="relative h-48 overflow-hidden">
+              {/* Glow hover effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-br from-red-400/20 via-orange-300/10 to-transparent"></div>
+
+              {/* Image */}
+              <div className="relative h-72 overflow-hidden">
                 <ImageWithFallback
                   src={hobby.image}
                   alt={hobby.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
+
+                {/* Dark overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <h3 className="text-xl mb-1 text-white font-semibold">{hobby.title}</h3>
-                  <p className="text-gray-200 text-sm">{hobby.description}</p>
+
+                {/* Text */}
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 className="text-xl text-white font-semibold">
+                    {hobby.title}
+                  </h3>
+                  <p className="text-gray-200 text-sm">
+                    {hobby.description}
+                  </p>
                 </div>
               </div>
             </Card>
           ))}
         </div>
 
+        {/* Bottom message card */}
         <div className="mt-10 text-center">
-          <Card className="bg-gradient-to-r from-red-700 to-red-700 text-white max-w-4xl mx-auto">
+          <Card className="bg-gradient-to-r from-red-700 to-red-700 text-white max-w-4xl mx-auto rounded-xl">
             <div className="p-8">
               <h3 className="text-2xl mb-4">Balance is Key</h3>
+
               <p className="text-lg text-red-100">
-                I believe in maintaining a healthy work-life balance. These hobbies help me stay creative, 
-                motivated, and bring fresh perspectives to my academic and professional work.
+                I believe in maintaining a healthy work-life balance. These
+                hobbies help me stay creative, motivated, and bring fresh
+                perspectives to my academic and professional work.
               </p>
             </div>
           </Card>
         </div>
+
       </div>
     </section>
   );

@@ -15,7 +15,7 @@ export function Footer() {
               <span className="text-xl font-bold">Renz Danniel R. Rapanut</span>
             </div>
             <p className="text-white">
-              Computer Science Student & Software Development Intern passionate about creating innovative solutions.
+              Computer Engineering student and Software Development Intern passionate about building efficient systems, exploring hardware–software integration, and creating innovative technology solutions.
             </p>
           </div>
 
@@ -38,7 +38,7 @@ export function Footer() {
               <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-lg hover:bg-red-700 transition-colors">
                 <Github size={20} />
               </a>
-              <a href="mailto:your.email@example.com" className="p-2 bg-gray-800 rounded-lg hover:bg-red-700 transition-colors">
+              <a href="mailto:renzdanniel63@gmail.com" className="p-2 bg-gray-800 rounded-lg hover:bg-red-700 transition-colors">
                 <Mail size={20} />
               </a>
             </div>

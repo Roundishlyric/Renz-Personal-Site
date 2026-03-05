@@ -12,39 +12,38 @@ export function Experience() {
         "Worked on UI and front-end implementations across multiple company websites.",
         "Improved site usability and responsiveness to provide a better user experience.",
         "Automated testing using Playwright to verify functionality and reduce manual testing effort.",
-        "Used Git for version control, including branching, committing, pushing code, and creating pull requests for team review."
+        "Used Git for version control, including branching, committing, pushing code, and creating pull requests for team review.",
       ],
-      technologies: ["React", "TypeScript", "JavaScript", "Node.js", "Git","Playwright","Wordpress","Figma"],
+      technologies: ["React", "TypeScript", "JavaScript", "Node.js", "Git", "Playwright", "WordPress", "Figma"],
     },
   ];
 
   return (
-    <section id="experience" className="py-20 bg-black">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* Title */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl mb-4 text-white">
-            Internship Experience
-          </h2>
-          <div className="w-24 h-1 bg-red-600 mx-auto"></div>
+    <section id="experience" className="relative overflow-hidden bg-black py-20">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(185,28,28,0.10),transparent_55%)] pointer-events-none" />
+      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-16 text-center">
+          <h2 className="mb-4 text-4xl text-white md:text-5xl">Internship Experience</h2>
+          <div className="mx-auto mb-4 h-1 w-24 bg-red-700"></div>
+          <p className="text-lg text-gray-300">
+            Hands-on experience building interfaces, improving usability, and supporting delivery workflows
+          </p>
         </div>
 
-        {/* Card */}
-        <div className="max-w-3xl mx-auto">
+        <div className="mx-auto max-w-3xl">
           {experiences.map((exp, index) => (
             <Card
               key={index}
-              className="p-8 bg-neutral-900 border border-red-600 hover:border-red-500 transition-colors"
+              className="border border-red-600 bg-neutral-900 p-8 transition-colors hover:border-red-500"
             >
-              <div className="flex items-start gap-4 mb-6">
-                <div className="p-3 bg-red-600 rounded-lg">
+              <div className="mb-6 flex items-start gap-4">
+                <div className="rounded-lg bg-red-700 p-3">
                   <Briefcase className="text-white" size={22} />
                 </div>
 
                 <div className="flex-1">
-                  <h3 className="text-2xl mb-1 text-white">{exp.role}</h3>
-                  <p className="text-lg text-red-500 mb-2">{exp.company}</p>
+                  <h3 className="mb-1 text-2xl text-white">{exp.role}</h3>
+                  <p className="mb-2 text-lg text-red-500">{exp.company}</p>
 
                   <div className="flex items-center gap-2 text-gray-400">
                     <Calendar size={16} />
@@ -53,22 +52,20 @@ export function Experience() {
                 </div>
               </div>
 
-              {/* Description */}
-              <ul className="space-y-3 mb-6 text-gray-300">
+              <ul className="mb-6 space-y-3 text-gray-300">
                 {exp.description.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="text-red-500 mt-1">▸</span>
+                    <span className="mt-1 text-red-500">-</span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
 
-              {/* Tech Stack */}
               <div className="flex flex-wrap gap-3">
                 {exp.technologies.map((tech, i) => (
                   <span
                     key={i}
-                    className="px-3 py-1.5 bg-black border border-red-600 text-red-400 rounded-full text-sm"
+                    className="rounded-full border border-red-600 bg-black px-3 py-1.5 text-sm text-red-400"
                   >
                     {tech}
                   </span>

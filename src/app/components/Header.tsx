@@ -26,6 +26,7 @@ export function Header() {
     { label: "Education", id: "education" },
     { label: "Certifications", id: "cert" },
     { label: "Skills", id: "skills" },
+    { label: "Experience", id: "experience" },
     { label: "Hobbies", id: "hobbies" },
     { label: "Gallery", id: "gallery" },
     { label: "Contact", id: "contact" },
@@ -48,8 +49,6 @@ export function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          
-          {/* LOGO */}
           <button
             onClick={() => scrollToSection("hero")}
             className={`text-xl font-bold transition-colors ${brandText} ${
@@ -59,7 +58,6 @@ export function Header() {
             &lt;Renz Rapanut /&gt;
           </button>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <button
@@ -71,14 +69,13 @@ export function Header() {
               </button>
             ))}
 
-            {/* FIXED GAMING BUTTON */}
             <Link to="/gaming">
               <Button
                 variant="outline"
                 className={`flex items-center gap-2 transition-colors ${
                   isScrolled
                     ? "!bg-transparent !text-white border-white/30 hover:!bg-white/10 hover:!text-white"
-                    : "bg-transparent text-gray-900 border-gray-300 hover:bg-gray-100"
+                    : "bg-transparent text-black border-gray-300 hover:bg-gray-100"
                 }`}
               >
                 <Gamepad2 size={18} />
@@ -87,7 +84,6 @@ export function Header() {
             </Link>
           </nav>
 
-          {/* Mobile Menu Button */}
           <button
             className={`md:hidden transition-colors ${
               isScrolled ? "text-white" : "text-gray-900"
@@ -99,7 +95,6 @@ export function Header() {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <nav className={`md:hidden py-4 border-t ${mobileBorder}`}>
             {navItems.map((item) => (

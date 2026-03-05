@@ -4,7 +4,7 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 export function Gallery() {
   const photos = [
     {
-      src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
+      src: "/images/prof.png",
       title: "Profile",
       category: "Personal",
     },
@@ -51,7 +51,7 @@ export function Gallery() {
   ];
 
   return (
-    <section id="gallery" className="py-20 bg-gray-50">
+    <section id="gallery" className="py-20 bg-gradient-to-br from-red-50 via-white to-red-50">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* HEADER */}
@@ -60,7 +60,7 @@ export function Gallery() {
             Photo Gallery
           </h2>
 
-          <div className="mt-4 w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+          <div className="mt-4 w-24 h-1 bg-red-700 mx-auto rounded-full"></div>
 
           <p className="text-gray-500 mt-6 text-lg">
             Moments and memories from my journey
@@ -85,12 +85,12 @@ export function Gallery() {
                 />
 
                 {/* CATEGORY BADGE */}
-                <div className="absolute top-3 left-3 bg-white/90 backdrop-blur px-3 py-1 text-xs rounded-full font-medium text-gray-700 shadow">
+                <div className="absolute top-3 left-3 bg-red-700 px-3 py-1 text-xs rounded-full font-medium text-white shadow">
                   {photo.category}
                 </div>
 
                 {/* OVERLAY */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute inset-0 bg-gradient-to-t from-red-700/90 via-red-700/35 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   
                   <div className="absolute bottom-4 left-4 right-4 text-white">
                     <p className="font-semibold text-lg">

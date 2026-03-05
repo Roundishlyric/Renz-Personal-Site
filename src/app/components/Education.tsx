@@ -78,13 +78,13 @@ export function Education() {
   return (
     <section
       id="education"
-      className="py-10 bg-gradient-to-br from-red-50 via-orange-50 to-white"
+      className="py-10 bg-gradient-to-br from-red-50 via-white to-red-50"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         {/* HEADER */}
         <div className="text-center">
           <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Education</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-red-600 to-orange-600 mx-auto mb-4"></div>
+          <div className="w-20 h-1 bg-red-700 mx-auto mb-4"></div>
           <p className="text-lg text-gray-600">
             My academic journey and achievements
           </p>
@@ -119,7 +119,7 @@ export function Education() {
                       <p className="text-xl text-red-700">{edu.school}</p>
                     </div>
 
-                    <Badge className="bg-gradient-to-r from-red-600 to-red-700 text-white">
+                    <Badge className="bg-red-700 text-white">
                       <Calendar size={16} className="mr-2" />
                       {edu.period}
                     </Badge>
@@ -183,7 +183,7 @@ export function Education() {
 
                   <div className="flex-1 space-y-2">
                     <h4 className="text-2xl text-gray-900">{activity.name}</h4>
-                    <p className="text-red-600 font-medium text-lg">
+                    <p className="text-red-700 font-medium text-lg">
                       {activity.role}
                     </p>
                     <p className="text-sm text-gray-500">{activity.period}</p>

@@ -12,60 +12,69 @@ export function About() {
     {
       icon: Palette,
       title: 'UI/UX Design',
-      description: 'Creating beautiful, intuitive interfaces that users love to interact with',
+      description: 'Creating clear, focused interfaces that feel polished and usable',
     },
     {
       icon: Rocket,
-      title: 'Performance',
-      description: 'Building fast, optimized applications that deliver exceptional user experiences',
+      title: 'Growth Mindset',
+      description: 'Continuously improving through projects, technical study, and hands-on problem solving',
     },
   ];
 
   return (
     <section id="about" className="py-10 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl mb-4 text-white">About Me</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-red-700 to-red-700 mx-auto"></div>
+        <div className="mb-16 text-center">
+          <h2 className="mb-4 text-4xl md:text-5xl text-white">About Me</h2>
+          <div className="mx-auto mb-4 h-1 w-20 bg-red-700"></div>
+          <p className="text-lg text-gray-300">A quick overview of my background and strengths</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid items-center gap-12 md:grid-cols-2">
           <div>
-            <Card className="overflow-hidden border-2 border-transparent hover:border-red-300 transition-all shadow-xl">
+            <Card className="overflow-hidden border-2 border-transparent bg-neutral-950 shadow-xl transition-all hover:border-red-300">
               <ImageWithFallback
                 src="/images/fib.jpg"
                 alt="Profile"
-                className="w-full h-96 object-cover"
+                className="h-96 w-full object-cover"
               />
             </Card>
           </div>
 
           <div className="space-y-6">
-            <p className="text-lg text-white leading-relaxed">
-              Hello! I'm a passionate Computer Engineering Student with a keen interest in software development 
-              and Hardware Development. Currently pursuing my degree while gaining practical experience as a 
-              Software Development Intern.
+            <p className="text-lg leading-relaxed text-white">
+              Hello! I'm a Computer Engineering graduate with strong interest in software development, cybersecurity, and hardware-software integration.
             </p>
 
-            <p className="text-lg text-white leading-relaxed">
-              I specialize in full-stack web development, with expertise in modern frameworks like React, 
-              Node.js, and databases. I'm always eager to learn new technologies and apply them to real-world projects.
+            <p className="text-lg leading-relaxed text-white">
+              I focus on full-stack web development using modern tools like React, Node.js, and databases, while continuing to build my knowledge in secure systems and practical engineering workflows.
             </p>
 
-            <p className="text-lg text-white leading-relaxed">
-              Beyond coding, I enjoy participating in hackathons, contributing to open-source projects, 
-              and staying updated with the latest trends in technology.
+            <p className="text-lg leading-relaxed text-white">
+              Beyond coding, I enjoy building projects, exploring technical systems, and staying current with evolving technologies that improve how software is designed and delivered.
             </p>
 
             <div className="grid grid-cols-2 gap-4 pt-4">
-              <div className="p-4 bg-gradient-to-br from-red-50 to-orange-50 rounded-lg border-2 border-red-200">
-                <div className="text-3xl font-bold text-red-600 mb-2">3+</div>
-                <div className="text-gray-700">Years Coding</div>
+              <div className="rounded-2xl border border-red-900 bg-neutral-900 p-4 shadow-sm">
+                <div className="mb-2 text-3xl font-bold text-red-700">3+</div>
+                <div className="text-gray-300">Years Coding</div>
               </div>
-              <div className="p-4 bg-gradient-to-br from-orange-50 to-red-50 rounded-lg border-2 border-orange-200">
-                <div className="text-3xl font-bold text-orange-600 mb-2">15+</div>
-                <div className="text-gray-700">Projects Built</div>
+              <div className="rounded-2xl border border-red-900 bg-neutral-900 p-4 shadow-sm">
+                <div className="mb-2 text-3xl font-bold text-red-700">15+</div>
+                <div className="text-gray-300">Projects Built</div>
               </div>
+            </div>
+
+            <div className="grid gap-4 pt-2 sm:grid-cols-3">
+              {highlights.map(({ icon: Icon, title, description }) => (
+                <Card key={title} className="border border-red-900 bg-neutral-900 p-4 shadow-sm">
+                  <div className="mb-3 inline-flex rounded-xl bg-red-700 p-2 text-white">
+                    <Icon size={18} />
+                  </div>
+                  <h3 className="mb-2 text-base font-semibold text-white">{title}</h3>
+                  <p className="text-sm text-gray-400">{description}</p>
+                </Card>
+              ))}
             </div>
           </div>
         </div>

@@ -15,9 +15,18 @@ export function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission (this is a mock implementation)
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! I will get back to you soon.');
+
+    const subject = encodeURIComponent(`Message from ${formData.name || 'Website Visitor'}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    );
+
+    window.open(
+      `https://mail.google.com/mail/?view=cm&fs=1&to=renzdanniel63@gmail.com&su=${subject}&body=${body}`,
+      '_blank',
+      'noopener,noreferrer'
+    );
+
     setFormData({ name: '', email: '', message: '' });
   };
 
@@ -42,8 +51,29 @@ export function Contact() {
     },
   ];
 
+  const socialLinks = [
+    {
+      icon: Linkedin,
+      label: 'LinkedIn',
+      href: 'https://www.linkedin.com/in/renz-danniel-rapanut-692902210',
+      className: 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800',
+    },
+    {
+      icon: Github,
+      label: 'GitHub',
+      href: 'https://github.com/Roundishlyric',
+      className: 'bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black',
+    },
+    {
+      icon: Facebook,
+      label: 'Facebook',
+      href: 'https://www.facebook.com/Roundishlyric/',
+      className: 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800',
+    },
+  ];
+
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-red-50 via-orange-50 to-white">
+    <section id="contact" className="py-20 bg-gradient-to-br from-red-50 via-white to-red-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Get In Touch</h2>
@@ -96,46 +126,53 @@ export function Contact() {
 
             <div>
               <h3 className="text-2xl mb-6 text-gray-900">Connect With Me</h3>
-              <div className="flex gap-4">
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
-                  onClick={() => window.open('www.linkedin.com/in/renz-danniel-rapanut-692902210')}
-                >
-                  <Linkedin size={20} />
-                </Button>
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black"
-                  onClick={() => window.open('https://github.com/Roundishlyric')}
-                >
-                  <Github size={20} />
-                </Button>
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
-                  onClick={() => window.open('https://www.facebook.com/Roundishlyric/')}
-                >
-                  <Facebook size={20} />
-                </Button>
+              <div className="grid gap-4 sm:grid-cols-3">
+                {socialLinks.map(({ icon: Icon, label, href, className }) => (
+                  <Button
+                    key={label}
+                    size="lg"
+                    className={`h-auto min-h-20 w-full justify-start gap-4 px-5 py-4 text-left text-base font-semibold text-white shadow-lg transition-transform hover:scale-[1.02] ${className}`}
+                    onClick={() => window.open(href, '_blank', 'noopener,noreferrer')}
+                  >
+                    <Icon size={30} />
+                    <span>{label}</span>
+                  </Button>
+                ))}
               </div>
             </div>
           </div>
 
           <Card className="p-8 border-2 border-red-200 shadow-xl">
             <h3 className="text-2xl mb-6 text-gray-900">Send a Message</h3>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
-                <Input placeholder="Your Name" className="border-gray-300 focus:border-red-500 focus:ring-red-500" />
+                <Input
+                  placeholder="Your Name"
+                  className="border-gray-300 focus:border-red-500 focus:ring-red-500"
+                  value={formData.name}
+                  onChange={(e) => setFormData((current) => ({ ...current, name: e.target.value }))}
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                <Input type="email" placeholder="your.email@example.com" className="border-gray-300 focus:border-red-500 focus:ring-red-500" />
+                <Input
+                  type="email"
+                  placeholder="your.email@example.com"
+                  className="border-gray-300 focus:border-red-500 focus:ring-red-500"
+                  value={formData.email}
+                  onChange={(e) => setFormData((current) => ({ ...current, email: e.target.value }))}
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                <Textarea placeholder="Your message here..." rows={5} className="border-gray-300 focus:border-red-500 focus:ring-red-500" />
+                <Textarea
+                  placeholder="Your message here..."
+                  rows={5}
+                  className="border-gray-300 focus:border-red-500 focus:ring-red-500"
+                  value={formData.message}
+                  onChange={(e) => setFormData((current) => ({ ...current, message: e.target.value }))}
+                />
               </div>
               <Button 
                 type="submit" 

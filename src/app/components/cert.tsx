@@ -1,8 +1,6 @@
 import React, { memo, useMemo, useRef } from "react";
 import { Card } from "./ui/card";
 
-/* ================= TYPES ================= */
-
 type Certification = {
   name: string;
   issuer: string;
@@ -16,8 +14,6 @@ const FALLBACK = {
   cisco: "/images/cis.png",
   certiport: "/images/cert.png",
 } as const;
-
-/* ================= DATA ================= */
 
 const certifications: Certification[] = [
   {
@@ -92,8 +88,6 @@ const certifications: Certification[] = [
   },
 ];
 
-/* ================= HELPERS ================= */
-
 function getIssuerKind(issuer: string) {
   return issuer.toLowerCase().includes("certiport") ? "certiport" : "cisco";
 }
@@ -102,20 +96,18 @@ type IconProps = React.SVGProps<SVGSVGElement>;
 
 const ShieldCheckIcon = (props: IconProps) => (
   <svg viewBox="0 0 24 24" fill="none" {...props}>
-    <path d="M12 2.5l7 3.8v7.3c0 4.6-3.2 8.6-7 9.9-3.8-1.3-7-5.3-7-9.9V6.3l7-3.8z" stroke="currentColor" strokeWidth={1.6}/>
-    <path d="M8.5 12.3l2.2 2.2 4.8-5.2" stroke="currentColor" strokeWidth={1.8}/>
+    <path d="M12 2.5l7 3.8v7.3c0 4.6-3.2 8.6-7 9.9-3.8-1.3-7-5.3-7-9.9V6.3l7-3.8z" stroke="currentColor" strokeWidth={1.6} />
+    <path d="M8.5 12.3l2.2 2.2 4.8-5.2" stroke="currentColor" strokeWidth={1.8} />
   </svg>
 );
 
 const ExternalLinkIcon = (props: IconProps) => (
   <svg viewBox="0 0 24 24" fill="none" {...props}>
-    <path d="M14 5h5v5" stroke="currentColor" strokeWidth={1.8}/>
-    <path d="M10 14L19 5" stroke="currentColor" strokeWidth={1.8}/>
-    <path d="M19 14.5V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4.5" stroke="currentColor" strokeWidth={1.6}/>
+    <path d="M14 5h5v5" stroke="currentColor" strokeWidth={1.8} />
+    <path d="M10 14L19 5" stroke="currentColor" strokeWidth={1.8} />
+    <path d="M19 14.5V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4.5" stroke="currentColor" strokeWidth={1.6} />
   </svg>
 );
-
-/* ================= CARD ================= */
 
 const CertCard = memo(function CertCard({ cert }: { cert: Certification }) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -136,18 +128,16 @@ const CertCard = memo(function CertCard({ cert }: { cert: Certification }) {
       onMouseMove={handleMouseMove}
       className="
         group relative overflow-hidden
-        p-6
         rounded-2xl
-        bg-white text-black
         border-2 border-transparent
+        bg-white p-6 text-black
         transition-shadow
-        hover:shadow-2xl
         hover:border-red-700
+        hover:shadow-2xl
       "
     >
-      {/* glow */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300"
+        className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
         style={{
           background:
             "radial-gradient(280px circle at var(--mx) var(--my), rgba(255,0,0,0.15), transparent 60%)",
@@ -155,33 +145,32 @@ const CertCard = memo(function CertCard({ cert }: { cert: Certification }) {
       />
 
       <div className="flex items-start gap-5">
-        <div className="w-20 h-20 rounded-xl flex items-center justify-center overflow-hidden shadow-[0_0_20px_rgba(255,0,0,0.12)] bg-white border">
+        <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-xl border bg-white shadow-[0_0_20px_rgba(255,0,0,0.12)]">
           <img
             src={imgSrc}
             alt={cert.name}
-            className="w-16 h-16 object-contain"
+            className="h-16 w-16 object-contain"
           />
         </div>
 
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-3">
-            <h4 className="text-xl md:text-2xl font-semibold leading-snug">
+            <h4 className="text-xl font-semibold leading-snug md:text-2xl">
               {cert.name}
             </h4>
 
             {hasCredly && (
-              <span className="inline-flex items-center gap-2 rounded-full bg-black text-white px-3 py-1 text-xs font-semibold">
+              <span className="inline-flex items-center gap-2 rounded-full bg-red-700 px-3 py-1 text-xs font-semibold text-white">
                 <ShieldCheckIcon className="h-4 w-4" />
                 Verified
               </span>
             )}
           </div>
 
-          <p className="mt-1 text-red-600 font-medium">
+          <p className="mt-1 font-medium text-red-700">
             {cert.issuer}
           </p>
 
-          {/* reserve space for pinned button */}
           <div className="mt-2 pr-40">
             <time className="text-sm text-gray-500">
               {cert.dateLabel}
@@ -190,7 +179,6 @@ const CertCard = memo(function CertCard({ cert }: { cert: Certification }) {
         </div>
       </div>
 
-      {/* pinned button */}
       {hasCredly && (
         <a
           href={cert.credlyUrl}
@@ -200,9 +188,10 @@ const CertCard = memo(function CertCard({ cert }: { cert: Certification }) {
             absolute bottom-5 right-5
             inline-flex items-center gap-2
             rounded-xl
-            bg-black px-4 py-2
+            bg-red-700 px-4 py-2
             text-sm font-semibold text-white
             transition
+            hover:bg-red-800
             hover:shadow-lg
           "
         >
@@ -214,13 +203,11 @@ const CertCard = memo(function CertCard({ cert }: { cert: Certification }) {
   );
 });
 
-/* ================= SECTION ================= */
-
 export function Cert() {
   const items = useMemo(() => certifications, []);
 
   return (
-    <section id="cert" className="relative py-24 bg-black text-white overflow-hidden">
+    <section id="cert" className="relative overflow-hidden bg-black py-24 text-white">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-32 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-red-600/10 blur-3xl" />
         <div className="absolute -bottom-44 right-10 h-80 w-80 rounded-full bg-red-600/10 blur-3xl" />
@@ -228,14 +215,15 @@ export function Cert() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6 xl:px-0">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl mb-4 text-white">
+        <div className="mb-16 text-center">
+          <h2 className="mb-4 text-4xl text-white md:text-5xl">
             Badges and Certifications
           </h2>
-          <div className="w-24 h-1 bg-red-600 mx-auto"></div>
+          <div className="mx-auto mb-4 h-1 w-24 bg-red-700"></div>
+          <p className="text-lg text-gray-300">Recognitions that support my direction in networking, software, and cybersecurity</p>
         </div>
 
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2">
           {items.map((cert) => (
             <CertCard
               key={cert.credlyUrl ?? cert.name}

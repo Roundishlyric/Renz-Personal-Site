@@ -80,7 +80,7 @@ export function Hobbies() {
   return (
     <section
       id="hobbies"
-      className="py-10 bg-gradient-to-br from-red-50 via-orange-50 to-white"
+      className="py-10 bg-gradient-to-br from-red-50 via-white to-red-50"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -90,7 +90,7 @@ export function Hobbies() {
             Hobbies & Interests
           </h2>
 
-          <div className="w-20 h-1 bg-gradient-to-r from-red-700 to-red-700 mx-auto mb-4"></div>
+          <div className="w-20 h-1 bg-red-700 mx-auto mb-4"></div>
 
           <p className="text-lg text-gray-600">
             What I enjoy doing in my free time
@@ -109,7 +109,7 @@ export function Hobbies() {
               hover:shadow-red-400/40 rounded-xl"
             >
               {/* Glow hover effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-br from-red-400/20 via-orange-300/10 to-transparent"></div>
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-br from-red-700/20 via-red-500/10 to-transparent"></div>
 
               {/* Image */}
               <div className="relative h-72 overflow-hidden">

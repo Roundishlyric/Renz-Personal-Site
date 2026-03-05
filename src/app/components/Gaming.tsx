@@ -19,8 +19,6 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
-type TournamentBadge = "gold" | "silver" | "bronze" | "participant";
-
 type Game = {
   key: string;
   tab: string;
@@ -40,6 +38,29 @@ type SlideAnim = {
   phase: "init" | "animate";
 };
 
+const SLIDE_ANIM_MS = 300;
+
+type HoyoKey = "genshin" | "hsr" | "zzz";
+
+type HoyoMember = { name: string; img: string };
+
+type HoyoTeam = {
+  key: HoyoKey;
+  label: string;
+  icon: string;
+  teamCols: 3 | 4;
+  members: HoyoMember[];
+  team2Members: HoyoMember[];
+};
+
+type OtherGame = {
+  title: string;
+  rank: string;
+  hours: string;
+  role: string;
+  image: string;
+};
+
 const XIcon = ({ size = 34 }: { size?: number }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +73,159 @@ const XIcon = ({ size = 34 }: { size?: number }) => (
   </svg>
 );
 
+const HOYO_TEAMS: Record<HoyoKey, HoyoTeam> = {
+  genshin: {
+    key: "genshin",
+    label: "Genshin Impact",
+    icon: "/images/gen.webp",
+    teamCols: 4,
+    members: [
+      { name: "Arlecchino", img: "https://i2.wp.com/images.genshin-builds.com/genshin/characters/arlecchino/image.png?strip=all&quality=100" },
+      { name: "Yelan", img: "https://static.wikia.nocookie.net/gensin-impact/images/d/d3/Yelan_Icon.png/revision/latest/scale-to-width-down/250?cb=20240711205454" },
+      { name: "Kazuha", img: "https://static.wikia.nocookie.net/gensin-impact/images/e/e3/Kaedehara_Kazuha_Icon.png/revision/latest/scale-to-width-down/250?cb=20210623063513" },
+      { name: "Bennet", img: "https://static.wikia.nocookie.net/gensin-impact/images/7/79/Bennett_Icon.png/revision/latest/scale-to-width-down/250?cb=20231215091856" },
+    ],
+    team2Members: [
+      { name: "Yae Miko", img: "https://static.wikia.nocookie.net/gensin-impact/images/b/ba/Yae_Miko_Icon.png/revision/latest/scale-to-width-down/250?cb=20220216025931" },
+      { name: "Raiden Shogun", img: "https://static.wikia.nocookie.net/gensin-impact/images/2/24/Raiden_Shogun_Icon.png/revision/latest/scale-to-width-down/250?cb=20240717072843" },
+      { name: "Sucrose", img: "https://i2.wp.com/images.genshin-builds.com/genshin/characters/sucrose/image.png?strip=all&quality=100" },
+      { name: "Bennet", img: "https://static.wikia.nocookie.net/gensin-impact/images/7/79/Bennett_Icon.png/revision/latest/scale-to-width-down/250?cb=20231215091856" },
+    ],
+  },
+  hsr: {
+    key: "hsr",
+    label: "Honkai: Star Rail",
+    icon: "/images/star.webp",
+    teamCols: 4,
+    members: [
+      { name: "Kafka", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/1005.png" },
+      { name: "Black Swan", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3014.png" },
+      { name: "Ruan Mei", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3011.png" },
+      { name: "Lynx", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3004.png" },
+    ],
+    team2Members: [
+      { name: "The Herta", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3036.png" },
+      { name: "Jade", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3026.png" },
+      { name: "Tingyun", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/1202.png" },
+      { name: "Gallagher", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3019.png" },
+    ],
+  },
+  zzz: {
+    key: "zzz",
+    label: "Zenless Zone Zero",
+    icon: "/images/zzz.webp",
+    teamCols: 3,
+    members: [
+      { name: "Hoshini Miyabi", img: "https://sunderarmor.com/ZZZ/Character/thumb_miyabi.png" },
+      { name: "Tsukishiro Yanagu", img: "https://sunderarmor.com/ZZZ/Character/thumb_yanagi.png" },
+      { name: "Astra Yao", img: "https://sunderarmor.com/ZZZ/Character/thumb_astra_yao.png" },
+    ],
+    team2Members: [
+      { name: "Jane Doe", img: "https://sunderarmor.com/ZZZ/Character/thumb_jane_doe.png" },
+      { name: "Seth Lowell", img: "https://sunderarmor.com/ZZZ/Character/thumb_seth.png " },
+      { name: "Ukinami Yuzuha", img: "https://sunderarmor.com/ZZZ/Character/thumb_yuzuha.png" },
+    ],
+  },
+};
+
+const TeamPanel = React.memo(function TeamPanel({
+  title,
+  members,
+  teamCols,
+}: {
+  title: string;
+  members: HoyoMember[];
+  teamCols: 3 | 4;
+}) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-6">
+      <p className="text-white font-semibold mb-5">{title}</p>
+
+      <div
+        className={[
+          "grid gap-5",
+          teamCols === 4 ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-3",
+        ].join(" ")}
+      >
+        {members.map((c) => (
+          <div
+            key={c.name}
+            className="group rounded-2xl border border-white/10 bg-slate-800/40 p-3 hover:border-cyan-400/30 hover:bg-slate-800/60 transition"
+          >
+            <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-slate-950/30 border border-white/10">
+              <img
+                src={c.img}
+                alt={c.name}
+                className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-300"
+                loading="lazy"
+                draggable={false}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            </div>
+            <p className="mt-3 text-sm font-semibold text-white text-center truncate">
+              {c.name}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+});
+
+const OtherGameCard = React.memo(function OtherGameCard({
+  game,
+}: {
+  game: OtherGame;
+}) {
+  return (
+    <Card className="group relative overflow-hidden border border-white/10 bg-slate-900/60 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-teal-400/40 hover:shadow-2xl hover:shadow-teal-500/20">
+      <div className="relative h-56 w-full overflow-hidden bg-slate-950">
+        <ImageWithFallback
+          src={game.image}
+          alt={game.title}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+          loading="lazy"
+          draggable={false}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-teal-400/15 via-transparent to-cyan-400/5 opacity-70" />
+
+        <div className="absolute left-3 right-3 top-3 flex items-center justify-between gap-2">
+          <span className="inline-flex items-center gap-1 rounded-full border border-teal-300/30 bg-slate-950/70 px-2.5 py-1 text-xs font-semibold text-teal-200 backdrop-blur">
+            <Medal size={13} />
+            {game.rank}
+          </span>
+          <span className="inline-flex items-center gap-1 rounded-full border border-cyan-300/30 bg-slate-950/70 px-2.5 py-1 text-xs font-semibold text-cyan-200 backdrop-blur">
+            <Clock size={13} />
+            {game.hours}
+          </span>
+        </div>
+      </div>
+
+      <div className="p-5">
+        <h4 className="line-clamp-2 min-h-[3.5rem] text-lg font-bold leading-snug text-white">
+          {game.title}
+        </h4>
+
+        <div className="mt-4 rounded-xl border border-white/10 bg-slate-950/50 p-3">
+          <div className="flex items-start gap-2 text-sm text-gray-200">
+            <Gamepad2 size={16} className="mt-0.5 shrink-0 text-teal-300" />
+            <p className="line-clamp-2">{game.role}</p>
+          </div>
+        </div>
+
+        <div className="mt-4 h-px w-full bg-white/10" />
+        <p className="mt-3 text-xs uppercase tracking-[0.18em] text-gray-400">
+          Game Snapshot
+        </p>
+      </div>
+    </Card>
+  );
+});
+
 export function Gaming() {
+  const aboutTitleClass = "mb-4 text-4xl md:text-5xl text-white";
+
   const games = useMemo<Game[]>(
     () => [
       {
@@ -143,7 +316,8 @@ export function Gaming() {
     []
   );
 
-  const otherGames = [
+  const otherGames = useMemo<OtherGame[]>(
+    () => [
     {
       title: "Fatal Fury: City of the Wolves",
       rank: "C1",
@@ -256,7 +430,9 @@ export function Gaming() {
       role: "Okami",
       image: "https://4kwallpapers.com/images/wallpapers/sekiro-shadows-die-5120x2880-14176.jpg",
     },
-  ];
+  ],
+    []
+  );
 
   /* ===================== MAIN GAMES SLIDER STATE ===================== */
   const [activeKey, setActiveKey] = useState<string>(games[0]?.key ?? "sf6");
@@ -286,15 +462,28 @@ export function Gaming() {
     return () => cancelAnimationFrame(raf);
   }, [anim]);
 
-  // Finish animation cleanly
+  // Finish animation from JS timer to avoid transitionend race/bounce issues.
   useEffect(() => {
     if (!anim || anim.phase !== "animate") return;
+    const target = anim.to;
     const t = window.setTimeout(() => {
-      setSlide(anim.to);
+      setSlide(target);
       setAnim(null);
-    }, 320);
+    }, SLIDE_ANIM_MS + 20);
     return () => window.clearTimeout(t);
   }, [anim]);
+
+  // Preload adjacent slides to reduce flicker during transition.
+  useEffect(() => {
+    if (!active || active.images.length < 2) return;
+    const total = active.images.length;
+    const nextIndex = (slide + 1) % total;
+    const prevIndex = (slide - 1 + total) % total;
+    [active.images[nextIndex], active.images[prevIndex]].forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, [active, slide]);
 
   const startSlide = useCallback(
     (to: number, dir: "next" | "prev") => {
@@ -314,116 +503,7 @@ export function Gaming() {
   const next = useCallback(() => startSlide(slide + 1, "next"), [slide, startSlide]);
   const prev = useCallback(() => startSlide(slide - 1, "prev"), [slide, startSlide]);
 
-type HoyoKey = "genshin" | "hsr" | "zzz";
-
-const HOYO_TEAMS: Record<
-  HoyoKey,
-  {
-    key: HoyoKey;
-    label: string;
-    icon: string;
-    teamCols: 3 | 4;
-    members: { name: string; img: string }[];
-    team2Members: { name: string; img: string }[];
-  }
-> = {
-  genshin: {
-    key: "genshin",
-    label: "Genshin Impact",
-    icon: "/images/gen.webp",
-    teamCols: 4,
-    members: [
-      { name: "Arlecchino", img: "https://i2.wp.com/images.genshin-builds.com/genshin/characters/arlecchino/image.png?strip=all&quality=100" },
-      { name: "Yelan", img: "https://static.wikia.nocookie.net/gensin-impact/images/d/d3/Yelan_Icon.png/revision/latest/scale-to-width-down/250?cb=20240711205454" },
-      { name: "Kazuha", img: "https://static.wikia.nocookie.net/gensin-impact/images/e/e3/Kaedehara_Kazuha_Icon.png/revision/latest/scale-to-width-down/250?cb=20210623063513" },
-      { name: "Bennet", img: "https://static.wikia.nocookie.net/gensin-impact/images/7/79/Bennett_Icon.png/revision/latest/scale-to-width-down/250?cb=20231215091856" },
-    ],
-    team2Members: [
-      { name: "Yae Miko", img: "https://static.wikia.nocookie.net/gensin-impact/images/b/ba/Yae_Miko_Icon.png/revision/latest/scale-to-width-down/250?cb=20220216025931" },
-      { name: "Raiden Shogun", img: "https://static.wikia.nocookie.net/gensin-impact/images/2/24/Raiden_Shogun_Icon.png/revision/latest/scale-to-width-down/250?cb=20240717072843" },
-      { name: "Sucrose", img: "https://i2.wp.com/images.genshin-builds.com/genshin/characters/sucrose/image.png?strip=all&quality=100" },
-      { name: "Bennet", img: "https://static.wikia.nocookie.net/gensin-impact/images/7/79/Bennett_Icon.png/revision/latest/scale-to-width-down/250?cb=20231215091856" },
-    ],
-  },
-  hsr: {
-    key: "hsr",
-    label: "Honkai: Star Rail",
-    icon: "/images/star.webp",
-    teamCols: 4,
-    members: [
-      { name: "Kafka", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/1005.png" },
-      { name: "Black Swan", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3014.png" },
-      { name: "Ruan Mei", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3011.png" },
-      { name: "Lynx", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3004.png" },
-    ],
-    team2Members: [
-      { name: "The Herta", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3036.png" },
-      { name: "Jade", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3026.png" },
-      { name: "Tingyun", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/1202.png" },
-      { name: "Gallagher", img: "https://sunderarmor.com/STARRAIL/Characters/Thumb/3019.png" },
-    ],
-  },
-  zzz: {
-    key: "zzz",
-    label: "Zenless Zone Zero",
-    icon: "/images/zzz.webp",
-    teamCols: 3,
-    members: [
-      { name: "Hoshini Miyabi", img: "https://sunderarmor.com/ZZZ/Character/thumb_miyabi.png" },
-      { name: "Tsukishiro Yanagu", img: "https://sunderarmor.com/ZZZ/Character/thumb_yanagi.png" },
-      { name: "Astra Yao", img: "https://sunderarmor.com/ZZZ/Character/thumb_astra_yao.png" },
-    ],
-    team2Members: [
-      { name: "Jane Doe", img: "https://sunderarmor.com/ZZZ/Character/thumb_jane_doe.png" },
-      { name: "Seth Lowell", img: "https://sunderarmor.com/ZZZ/Character/thumb_seth.png " },
-      { name: "Ukinami Yuzuha", img: "https://sunderarmor.com/ZZZ/Character/thumb_yuzuha.png" },
-    ],
-  },
-};
-
-const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
-
-  const TeamPanel = ({
-    title,
-    members,
-  }: {
-    title: string;
-    members: { name: string; img: string }[];
-  }) => (
-    <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-6">
-      <p className="text-white font-semibold mb-5">{title}</p>
-
-      <div
-        className={[
-          "grid gap-5",
-          HOYO_TEAMS[hoyoActive].teamCols === 4
-            ? "grid-cols-2 sm:grid-cols-4"
-            : "grid-cols-3",
-        ].join(" ")}
-      >
-        {members.map((c) => (
-          <div
-            key={c.name}
-            className="group rounded-2xl border border-white/10 bg-slate-800/40 p-3 hover:border-cyan-400/30 hover:bg-slate-800/60 transition"
-          >
-            <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-slate-950/30 border border-white/10">
-              <img
-                src={c.img}
-                alt={c.name}
-                className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-300"
-                loading="lazy"
-                draggable={false}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            </div>
-            <p className="mt-3 text-sm font-semibold text-white text-center truncate">
-              {c.name}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+  const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
 
   return (
     <section
@@ -531,9 +611,10 @@ const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
         {/* ===================== TEAM SECTION ===================== */}
   <div id="team" className="scroll-mt-24 mb-20">
       <div className="text-center mb-10 mt-10">
-        <h3 className="text-3xl mb-4 font-extrabold tracking-tight">
+        <h3 className={aboutTitleClass}>
           Representing Archangel Esports
         </h3>
+        <div className="mx-auto mb-4 h-1 w-20 rounded bg-gradient-to-r from-teal-400 to-cyan-400" />
       </div>
 
       <div className="max-w-8xl mx-auto">
@@ -780,11 +861,12 @@ const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
     <ImageWithFallback
       src={active.images[anim ? anim.from : slide]}
       alt={active.title}
+      style={{ transitionDuration: `${SLIDE_ANIM_MS}ms` }}
       className={[
         "absolute inset-0 w-full h-full object-cover",
         active.focus,
         "will-change-transform",
-        "transition-transform duration-300 ease-out",
+        "transition-transform ease-out",
         anim?.phase === "animate"
           ? anim.dir === "next"
             ? "-translate-x-full"
@@ -798,11 +880,12 @@ const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
       <ImageWithFallback
         src={active.images[anim.to]}
         alt={active.title}
+        style={{ transitionDuration: `${SLIDE_ANIM_MS}ms` }}
         className={[
           "absolute inset-0 w-full h-full object-cover",
           active.focus,
           "will-change-transform",
-          "transition-transform duration-300 ease-out",
+          "transition-transform ease-out",
           anim.phase === "animate"
             ? "translate-x-0"
             : anim.dir === "next"
@@ -880,58 +963,25 @@ const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
 
         {/* Other Games */}
         <div id="other-games" className="scroll-mt-24 mb-20">
-          <h3 className="text-3xl mb-4 text-center">Other Games</h3>
+          <h3 className={`${aboutTitleClass} text-center`}>Other Games</h3>
+          <div className="mx-auto mb-4 h-1 w-20 rounded bg-gradient-to-r from-teal-400 to-cyan-400" />
           <p className="text-center text-gray-300 mb-10">
             Additional competitive and casual titles I play
           </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
-            {otherGames.map((game, index) => (
-                    <Card
-              key={index}
-              className="overflow-hidden border-2 border-slate-700 bg-slate-800 transition-all hover:border-teal-500 hover:shadow-xl hover:shadow-teal-500/20 space-y--5"
-            >
-              {/* IMAGE */}
-              <div className="relative h-64 w-full overflow-hidden bg-slate-900">
-                <ImageWithFallback
-                  src={game.image}
-                  alt={game.title}
-                  className="h-full w-full object-cover"
-                  loading="lazy"
-                  draggable={false}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent" />
-              </div>
-
-              {/* TEXT */}
-              <div className="p-4">
-                <h4 className="text-lg font-semibold text-white">{game.title}</h4>
-
-              <div className="mt-3 space-y-2 text-sm">
-                <div className="flex items-center gap-2 text-teal-400">
-                  <Medal size={16} />
-                  <span>{game.rank}</span>
-                </div>
-
-                <div className="flex items-center gap-2 text-gray-300">
-                  <Gamepad2 size={16} />
-                  <span>{game.role}</span>
-                </div>
-
-                <div className="flex items-center gap-2 text-cyan-400">
-                  <Clock size={16} />
-                  <span>{game.hours}</span>
-                </div>
-              </div>
-              </div>
-            </Card>
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4 items-stretch">
+            {otherGames.map((game) => (
+              <OtherGameCard key={game.title} game={game} />
             ))}
           </div>
         </div>
 
         {/* Steam Profile & Social Media */}
         <div id="profiles" className="scroll-mt-24 mb-20">
-          <h3 className="text-3xl mb-10 text-center">Gaming Profiles & Social Media</h3>
+          <h3 className={`${aboutTitleClass} text-center`}>
+            Gaming Profiles & Social Media
+          </h3>
+          <div className="mx-auto mb-10 h-1 w-20 rounded bg-gradient-to-r from-teal-400 to-cyan-400" />
 
           <div className="grid md:grid-cols-2 gap-8 max-w-8xl mx-auto mb-8 items-stretch">
             {/* Steam */}
@@ -970,7 +1020,7 @@ const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
                   </p>
                 </div>
                     <Button
-                      className="w-full mt-6 h-11 bgblue-700 hover:from-cyan-600 hover:to-blue-800"
+                      className="w-full mt-6 h-11 bg-blue-700 hover:bg-blue-800"
                       onClick={() =>
                         window.open(
                           "https://www.hoyolab.com/accountCenter/postList?id=11846094"
@@ -1177,10 +1227,12 @@ const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
                       <TeamPanel
                         title="Main Team"
                         members={HOYO_TEAMS[hoyoActive].members}
+                        teamCols={HOYO_TEAMS[hoyoActive].teamCols}
                       />
                       <TeamPanel
                         title="Second Team"
                         members={HOYO_TEAMS[hoyoActive].team2Members}
+                        teamCols={HOYO_TEAMS[hoyoActive].teamCols}
                       />
                     </div>
                   </div>
@@ -1193,10 +1245,10 @@ const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
           <div id="Social" className="scroll-mt-24 mt-16">
             <div className="max-w-8xl mx-auto px-4">
               <div className="text-center mb-10">
-                <h4 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+                <h4 className={`${aboutTitleClass} text-center`}>
                   Connect on Social Media
                 </h4>
-                <div className="mt-4 mx-auto h-1 w-24 rounded bg-gradient-to-r from-teal-400 to-cyan-400" />
+                <div className="mx-auto mb-4 h-1 w-20 rounded bg-gradient-to-r from-teal-400 to-cyan-400" />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

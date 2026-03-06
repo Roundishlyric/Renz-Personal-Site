@@ -49,7 +49,7 @@ export function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-10 bg-gradient-to-br from-red-50 via-white to-red-50">
+    <section id="skills" className="scroll-mt-8 py-10 bg-gradient-to-br from-red-50 via-white to-red-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Technical Skills</h2>

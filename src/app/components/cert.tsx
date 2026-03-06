@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useRef } from "react";
+import React, { memo, useMemo } from "react";
 import { Card } from "./ui/card";
 
 type Certification = {
@@ -110,52 +110,33 @@ const ExternalLinkIcon = (props: IconProps) => (
 );
 
 const CertCard = memo(function CertCard({ cert }: { cert: Certification }) {
-  const cardRef = useRef<HTMLDivElement>(null);
   const issuerKind = getIssuerKind(cert.issuer);
   const hasCredly = Boolean(cert.credlyUrl);
   const imgSrc = cert.badgeImgUrl ?? FALLBACK[issuerKind];
 
-  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    const rect = cardRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    cardRef.current?.style.setProperty("--mx", `${e.clientX - rect.left}px`);
-    cardRef.current?.style.setProperty("--my", `${e.clientY - rect.top}px`);
-  }
-
   return (
     <Card
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
       className="
-        group relative overflow-hidden
+        group relative
         rounded-2xl
-        border-2 border-transparent
-        bg-white p-6 text-black
-        transition-shadow
-        hover:border-red-700
-        hover:shadow-2xl
+        border border-red-600
+        bg-neutral-900 p-4 text-white
+        transition-colors
+        hover:border-red-500
       "
     >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100"
-        style={{
-          background:
-            "radial-gradient(280px circle at var(--mx) var(--my), rgba(255,0,0,0.15), transparent 60%)",
-        }}
-      />
-
-      <div className="flex items-start gap-5">
-        <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-xl border bg-white shadow-[0_0_20px_rgba(255,0,0,0.12)]">
+      <div className="flex items-start gap-3">
+        <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-lg border border-white/70 bg-white p-1">
           <img
             src={imgSrc}
             alt={cert.name}
-            className="h-16 w-16 object-contain"
+            className="h-full w-full object-contain"
           />
         </div>
 
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-3">
-            <h4 className="text-xl font-semibold leading-snug md:text-2xl">
+            <h4 className="text-lg font-semibold leading-snug text-white">
               {cert.name}
             </h4>
 
@@ -167,38 +148,36 @@ const CertCard = memo(function CertCard({ cert }: { cert: Certification }) {
             )}
           </div>
 
-          <p className="mt-1 font-medium text-red-700">
+          <p className="mt-1 font-medium text-red-400">
             {cert.issuer}
           </p>
 
-          <div className="mt-2 pr-40">
-            <time className="text-sm text-gray-500">
+          <div className="mt-1">
+            <time className="text-xs text-gray-400">
               {cert.dateLabel}
             </time>
           </div>
+
+          {hasCredly && (
+            <a
+              href={cert.credlyUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="
+                mt-3 inline-flex w-fit items-center gap-2
+                rounded-lg
+                bg-red-700 px-3 py-1.5
+                text-xs font-semibold text-white
+                transition
+                hover:bg-red-800
+              "
+            >
+              Verify
+              <ExternalLinkIcon className="h-4 w-4" />
+            </a>
+          )}
         </div>
       </div>
-
-      {hasCredly && (
-        <a
-          href={cert.credlyUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="
-            absolute bottom-5 right-5
-            inline-flex items-center gap-2
-            rounded-xl
-            bg-red-700 px-4 py-2
-            text-sm font-semibold text-white
-            transition
-            hover:bg-red-800
-            hover:shadow-lg
-          "
-        >
-          Verify
-          <ExternalLinkIcon className="h-4 w-4" />
-        </a>
-      )}
     </Card>
   );
 });
@@ -223,7 +202,7 @@ export function Cert() {
           <p className="text-lg text-gray-300">Recognitions that support my direction in networking, software, and cybersecurity</p>
         </div>
 
-        <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2">
+        <div className="grid gap-5 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
           {items.map((cert) => (
             <CertCard
               key={cert.credlyUrl ?? cert.name}

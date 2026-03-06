@@ -80,7 +80,7 @@ export function Hobbies() {
   return (
     <section
       id="hobbies"
-      className="py-10 bg-gradient-to-br from-red-50 via-white to-red-50"
+      className="scroll-mt-8 py-10 bg-gradient-to-br from-red-50 via-white to-red-50"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -91,14 +91,10 @@ export function Hobbies() {
           </h2>
 
           <div className="w-20 h-1 bg-red-700 mx-auto mb-4"></div>
-
-          <p className="text-lg text-gray-600">
-            What I enjoy doing in my free time
-          </p>
         </div>
 
         {/* HOBBIES GRID */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {hobbies.map((hobby, index) => (
             <Card
               key={index}

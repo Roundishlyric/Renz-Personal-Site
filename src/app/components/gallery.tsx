@@ -51,9 +51,8 @@ export function Gallery() {
   ];
 
   return (
-    <section id="gallery" className="py-20 bg-gradient-to-br from-red-50 via-white to-red-50">
+    <section id="gallery" className="py-5 bg-gradient-to-br from-red-50 via-white to-red-50">
       <div className="max-w-7xl mx-auto px-6">
-
         {/* HEADER */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900">

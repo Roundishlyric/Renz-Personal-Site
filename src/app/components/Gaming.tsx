@@ -11,8 +11,7 @@ import {
   Instagram,
   Facebook,
   ChevronLeft,
-  ChevronRight,
-  Clock
+  ChevronRight
 } from "lucide-react";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
@@ -39,6 +38,7 @@ type SlideAnim = {
 };
 
 const SLIDE_ANIM_MS = 300;
+const HERO_SLIDE_ANIM_MS = 700;
 
 type HoyoKey = "genshin" | "hsr" | "zzz";
 
@@ -179,45 +179,40 @@ const OtherGameCard = React.memo(function OtherGameCard({
 }) {
   return (
     <Card className="group relative overflow-hidden border border-white/10 bg-slate-900/60 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-teal-400/40 hover:shadow-2xl hover:shadow-teal-500/20">
-      <div className="relative h-56 w-full overflow-hidden bg-slate-950">
+      <div className="relative h-56 w-full overflow-hidden bg-slate-950 leading-none">
         <ImageWithFallback
           src={game.image}
           alt={game.title}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+          className="block h-full w-full object-cover align-top transition-transform duration-500 group-hover:scale-[1.06]"
           loading="lazy"
           draggable={false}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-br from-teal-400/15 via-transparent to-cyan-400/5 opacity-70" />
 
-        <div className="absolute left-3 right-3 top-3 flex items-center justify-between gap-2">
-          <span className="inline-flex items-center gap-1 rounded-full border border-teal-300/30 bg-slate-950/70 px-2.5 py-1 text-xs font-semibold text-teal-200 backdrop-blur">
-            <Medal size={13} />
-            {game.rank}
-          </span>
-          <span className="inline-flex items-center gap-1 rounded-full border border-cyan-300/30 bg-slate-950/70 px-2.5 py-1 text-xs font-semibold text-cyan-200 backdrop-blur">
-            <Clock size={13} />
-            {game.hours}
-          </span>
-        </div>
       </div>
 
-      <div className="p-5">
+      <div className="px-4 pb-4 pt-1.5">
         <h4 className="line-clamp-2 min-h-[3.5rem] text-lg font-bold leading-snug text-white">
           {game.title}
         </h4>
 
-        <div className="mt-4 rounded-xl border border-white/10 bg-slate-950/50 p-3">
-          <div className="flex items-start gap-2 text-sm text-gray-200">
-            <Gamepad2 size={16} className="mt-0.5 shrink-0 text-teal-300" />
-            <p className="line-clamp-2">{game.role}</p>
-          </div>
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          <span className="line-clamp-1 rounded-full border border-white/10 bg-slate-950/50 px-3 py-1 text-xs text-gray-200">
+            {game.role}
+          </span>
         </div>
 
-        <div className="mt-4 h-px w-full bg-white/10" />
-        <p className="mt-3 text-xs uppercase tracking-[0.18em] text-gray-400">
-          Game Snapshot
-        </p>
+        <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
+          <div className="rounded-lg border border-white/10 bg-slate-950/40 px-3 py-2">
+            <p className="text-gray-400">Rank</p>
+            <p className="mt-0.5 font-semibold text-white">{game.rank}</p>
+          </div>
+          <div className="rounded-lg border border-white/10 bg-slate-950/40 px-3 py-2">
+            <p className="text-gray-400">Hours</p>
+            <p className="mt-0.5 font-semibold text-cyan-200">{game.hours}</p>
+          </div>
+        </div>
       </div>
     </Card>
   );
@@ -225,6 +220,16 @@ const OtherGameCard = React.memo(function OtherGameCard({
 
 export function Gaming() {
   const aboutTitleClass = "mb-4 text-4xl md:text-5xl text-white";
+  const heroImages = useMemo(
+    () => [
+      "/images/paka.jpg",
+      "/images/fib.jpg",
+      "/images/work.jpg",
+      "/images/hard.jpg",
+      "/images/jap.jpg",
+    ],
+    []
+  );
 
   const games = useMemo<Game[]>(
     () => [
@@ -233,7 +238,7 @@ export function Gaming() {
         tab: "SF6",
         title: "STREET FIGHTER 6",
         images: [
-          "https://www.streetfighter.com/6/assets/images/character/sagat/sagat_ss04_thumb.jpg",
+          "https://www.impulsegamer.com/articles/wp-content/uploads/2025/07/SF6-DLC-Sagat_06-26-25-1920x1080-1.jpg",
           "https://www.streetfighter.com/article/sites/2/2024/06/lighting05_06.jpg",
           "https://media.eventhubs.com/images/2022/06/09_gui04.jpg",
           "https://4kwallpapers.com/images/wallpapers/street-fighter-6-ken-2560x1440-9529.jpg",
@@ -329,7 +334,7 @@ export function Gaming() {
       title: "King of Fighters XV",
       rank: "Rank 12",
       hours: "10+",
-      role: "Shermie/Whip/Leona",
+      role: "Shermie / Whip /Leona",
       image: "https://i.redd.it/hf9yujsb8si71.jpg",
     },
     {
@@ -357,20 +362,20 @@ export function Gaming() {
       title: "Uma Musume: Pretty Derby",
       rank: "A3",
       hours: "600+",
-      role: "Rice Shower/Agnes Tachyon",
+      role: "Rice Shower / Agnes Tachyon",
       image: "https://i.redd.it/592408sdingf1.jpeg",
     },
     {
       title: "Wuthering Waves",
       rank: "Lvl. 70",
       hours: "700+",
-      role: "Zani/Phoebe/Verina",
+      role: "Zani / Phoebe / Verina",
       image: "https://4kwallpapers.com/images/wallpapers/wuthering-waves-v2-3840x2160-24011.jpg",
     },
     {
       title: "Grandblue Fantasy: Relink",
       rank: "Lvl. 15",
-      hours: "10+",
+      hours: "10 +",
       role: "Narmaya",
       image: "https://4kwallpapers.com/images/wallpapers/granblue-fantasy-3840x2160-15025.jpg",
     },
@@ -378,14 +383,14 @@ export function Gaming() {
       title: "Monster Hunter: Wilds",
       rank: "MR: 40",
       hours: "100+",
-      role: "GunLance/Switch Axe",
+      role: "GunLance / Switch Axe",
       image: "https://i.redd.it/wallpaper-compilation-from-wilds-release-s-capcom-survey-v0-x1ytckrvmvle1.jpg?width=2560&format=pjpg&auto=webp&s=b34be37c51661ff48b918a0a217c353bd16909af",
     },
     {
       title: "Monster Hunter: World",
       rank: "HR: 20",
       hours: "20+",
-      role: "GunLance/Switch Axe",
+      role: "GunLance / Switch Axe",
       image: "https://images3.alphacoders.com/107/1070888.jpg",
     },
     {
@@ -406,14 +411,14 @@ export function Gaming() {
       title: "Apex Legends",
       rank: "Silver",
       hours: "320+",
-      role: "Mad Maggie/Crypto",
+      role: "Mad Maggie / Crypto",
       image: "https://www.denofgeek.com/wp-content/uploads/2021/08/Apex-Legends-Season-10-Meta.jpg?fit=1200%2C800",
     },
     {
       title: "Clair Obscur: Expedition 33",
       rank: "Incomplete",
       hours: "20+",
-      role: "Verso/Lune/Sciel",
+      role: "Verso / Lune / Sciel",
       image: "https://cdn.mos.cms.futurecdn.net/n9ZybPuhE42y6etXEuutWc.jpg",
     },
     {
@@ -503,6 +508,86 @@ export function Gaming() {
   const next = useCallback(() => startSlide(slide + 1, "next"), [slide, startSlide]);
   const prev = useCallback(() => startSlide(slide - 1, "prev"), [slide, startSlide]);
 
+  const [heroSlide, setHeroSlide] = useState(0);
+  const [heroAnim, setHeroAnim] = useState<SlideAnim | null>(null);
+  const [heroReady, setHeroReady] = useState(false);
+  const canHeroSlide = heroImages.length > 1;
+
+  const startHeroSlide = useCallback(
+    (to: number, dir: "next" | "prev") => {
+      if (!heroReady) return;
+      if (!canHeroSlide) return;
+      if (heroAnim) return;
+
+      const total = heroImages.length;
+      const normalizedTo = ((to % total) + total) % total;
+      if (normalizedTo === heroSlide) return;
+
+      setHeroAnim({ from: heroSlide, to: normalizedTo, dir, phase: "init" });
+    },
+    [canHeroSlide, heroAnim, heroImages.length, heroReady, heroSlide]
+  );
+
+  useEffect(() => {
+    if (!heroAnim || heroAnim.phase !== "init") return;
+    const raf = requestAnimationFrame(() => {
+      setHeroAnim((a) => (a ? { ...a, phase: "animate" } : a));
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [heroAnim]);
+
+  useEffect(() => {
+    if (!heroAnim || heroAnim.phase !== "animate") return;
+    const target = heroAnim.to;
+    const t = window.setTimeout(() => {
+      setHeroSlide(target);
+      setHeroAnim(null);
+    }, HERO_SLIDE_ANIM_MS + 20);
+    return () => window.clearTimeout(t);
+  }, [heroAnim]);
+
+  useEffect(() => {
+    if (!heroReady || !canHeroSlide || heroAnim) return;
+    const t = window.setTimeout(() => {
+      startHeroSlide(heroSlide + 1, "next");
+    }, 5000);
+    return () => window.clearTimeout(t);
+  }, [canHeroSlide, heroAnim, heroReady, heroSlide, startHeroSlide]);
+
+  useEffect(() => {
+    if (!canHeroSlide) return;
+    const total = heroImages.length;
+    const nextIndex = (heroSlide + 1) % total;
+    const prevIndex = (heroSlide - 1 + total) % total;
+    [heroImages[nextIndex], heroImages[prevIndex]].forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, [canHeroSlide, heroImages, heroSlide]);
+
+  useEffect(() => {
+    let done = 0;
+    let cancelled = false;
+
+    const finishOne = () => {
+      done += 1;
+      if (!cancelled && done >= heroImages.length) {
+        setHeroReady(true);
+      }
+    };
+
+    heroImages.forEach((src) => {
+      const img = new Image();
+      img.onload = finishOne;
+      img.onerror = finishOne;
+      img.src = src;
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [heroImages]);
+
   const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
 
   return (
@@ -533,11 +618,29 @@ export function Gaming() {
             {/* LEFT IMAGE */}
             <div className="relative md:col-span-3 min-h-[420px] md:min-h-0">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=2000&q=80"
+                src={heroImages[heroAnim ? heroAnim.from : heroSlide]}
                 alt="SenGouku"
-                className="absolute inset-0 h-full w-full object-cover object-left"
+                style={{ transitionDuration: `${HERO_SLIDE_ANIM_MS}ms` }}
+                className={[
+                  "absolute inset-0 h-full w-full object-cover object-left",
+                  "will-change-opacity transition-opacity ease-in-out",
+                  heroAnim?.phase === "animate" ? "opacity-0" : "opacity-100",
+                ].join(" ")}
                 draggable={false}
               />
+              {heroAnim && (
+                <ImageWithFallback
+                  src={heroImages[heroAnim.to]}
+                  alt="SenGouku"
+                  style={{ transitionDuration: `${HERO_SLIDE_ANIM_MS}ms` }}
+                  className={[
+                    "absolute inset-0 h-full w-full object-cover object-left",
+                    "will-change-opacity transition-opacity ease-in-out",
+                    heroAnim.phase === "animate" ? "opacity-100" : "opacity-0",
+                  ].join(" ")}
+                  draggable={false}
+                />
+              )}
 
               {/* teal tint */}
               <div className="absolute inset-0 bg-gradient-to-br from-teal-500/25 via-cyan-500/10 to-transparent mix-blend-overlay" />
@@ -747,6 +850,12 @@ export function Gaming() {
 
         {/* ===================== MAIN GAMES SECTION ===================== */}
         <div id="main-games" className="scroll-mt-24 mb-20">
+          <h3 className={`${aboutTitleClass} text-center`}>Main Games</h3>
+          <div className="mx-auto mb-4 h-1 w-20 rounded bg-gradient-to-r from-teal-400 to-cyan-400" />
+          <p className="text-center text-gray-300 mb-8">
+            Primary titles I compete in and actively play
+          </p>
+
           <div className="max-w-8xl mx-auto">
 
             {/* ---------------- TABS ---------------- */}
@@ -1090,11 +1199,11 @@ export function Gaming() {
                     
                     {/* Header */}
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-700 shadow-lg flex items-center justify-center">
+                      <div className="h-14 w-14 p-0.5 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-700 shadow-lg flex items-center justify-center overflow-hidden">
                         <img
                           src="/images/hoyo.png"
                           alt="HoYoLAB"
-                          className="w-8 h-8 object-contain"
+                          className="h-full w-full scale-110 object-contain object-center"
                           draggable={false}
                         />
                       </div>
@@ -1155,11 +1264,11 @@ export function Gaming() {
                             ].join(" ")}
                           >
                             <div className="flex items-center gap-3 mb-3">
-                              <div className="h-8 w-8 rounded-xl border border-white/10 bg-slate-800/50 flex items-center justify-center">
+                              <div className="h-8 w-8 rounded-lg border border-white/10 bg-slate-800/50 flex items-center justify-center overflow-hidden">
                                 <img
                                   src={content.icon}
                                   alt=""
-                                  className="h-5 w-5 object-contain"
+                                  className="h-full p-0.75 w-full scale-125 object-contain object-center"
                                 />
                               </div>
                               <p className="text-white font-semibold">
@@ -1204,11 +1313,11 @@ export function Gaming() {
                     {/* Header */}
                     <div className="flex items-center justify-between mb-6">
                       <div className="flex items-center gap-3">
-                        <div className="h-11 w-11 rounded-xl border border-white/10 bg-slate-900/40 flex items-center justify-center">
+                        <div className="h-11 w-11 rounded-lg border border-white/10 bg-slate-900/40 flex items-center justify-center overflow-hidden">
                           <img
                             src={HOYO_TEAMS[hoyoActive].icon}
                             alt=""
-                            className="h-7 w-7 object-contain"
+                            className="h-full p-0.75 w-full scale-125 object-contain object-center"
                           />
                         </div>
                         <div>

@@ -2,12 +2,13 @@ import { Github, Linkedin, Mail } from 'lucide-react';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const navLabelClass = "text-gray-200 transition-colors hover:text-red-400";
 
   return (
     <footer className="border-t border-red-600/40 bg-black py-12 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 grid gap-8 md:grid-cols-3">
-          <div>
+        <div className="mb-8 grid gap-6 md:grid-cols-5">
+          <div className="md:col-span-2">
             <div className="mb-4 flex items-center gap-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-700 font-bold text-white">
                 YN
@@ -20,18 +21,27 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-red-700">Quick Links</h3>
-            <ul className="space-y-2">
-              <li><a href="#about" className="text-gray-300 transition-colors hover:text-red-700">About</a></li>
-              <li><a href="#education" className="text-gray-300 transition-colors hover:text-red-700">Education</a></li>
-              <li><a href="#experience" className="text-gray-300 transition-colors hover:text-red-700">Experience</a></li>
-              <li><a href="#skills" className="text-gray-300 transition-colors hover:text-red-700">Skills</a></li>
-              <li><a href="#contact" className="text-gray-300 transition-colors hover:text-red-700">Contact</a></li>
+            <h3 className="mb-2 text-lg font-semibold text-gray-200">Quick Links</h3>
+            <ul className="space-y-1">
+              <li><a href="#about" className={navLabelClass}>About</a></li>
+              <li><a href="#education" className={navLabelClass}>Education</a></li>
+              <li><a href="#cert" className={navLabelClass}>Certifications</a></li>
+              <li><a href="#skills" className={navLabelClass}>Skills</a></li>
             </ul>
           </div>
 
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-red-700">Connect</h3>
+            <h3 className="mb-2 text-lg font-semibold text-gray-200">More Links</h3>
+            <ul className="space-y-1">
+              <li><a href="#experience" className={navLabelClass}>Experience</a></li>
+              <li><a href="#hobbies" className={navLabelClass}>Hobbies</a></li>
+              <li><a href="#gallery" className={navLabelClass}>Gallery</a></li>
+              <li><a href="#contact" className={navLabelClass}>Contact</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="mb-2 text-lg font-semibold text-gray-200">Connect</h3>
             <div className="flex gap-4">
               <a
                 href="https://www.linkedin.com/in/renz-danniel-rapanut-692902210"

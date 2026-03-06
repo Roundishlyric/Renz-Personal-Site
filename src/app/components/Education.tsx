@@ -1,4 +1,4 @@
-import { GraduationCap, Calendar, Award } from "lucide-react";
+import { Calendar, GraduationCap, MapPin } from "lucide-react";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 
@@ -37,120 +37,100 @@ export function Education() {
     },
   ];
 
-  const certifications = [
-    {
-      name: "CyberOps Associate",
-      issuer: " Cisco Networking Academy",
-      date: "July 2025",
-    },
-    {
-      name: "Cisco Certified Support Technician Networking (CCST Networking) - Lifetime",
-      issuer: "Certiport",
-      date: "March 2025",
-    },
-    {
-      name: "CCNA: Enterprise Networking, Security, and Automation",
-      issuer: " Cisco Networking Academy",
-      date: "November 2024",
-    },
-    {
-      name: "CCNA: Switching, Routing, and Wireless Essentials",
-      issuer: " Cisco Networking Academy",
-      date: "July 2024",
-    },
-        {
-      name: "Introduction to Networks",
-      issuer: " Cisco Networking Academy",
-      date: "April 2024",
-    },
-    {
-      name: "Introduction to Cybersecurity",
-      issuer: " Cisco Networking Academy",
-      date: "March 2024",
-    },
-    {
-      name: "IT Specialist - Java",
-      issuer: "Certiport",
-      date: "July 2023",
-    },
-  ];
-
   return (
     <section
       id="education"
-      className="py-10 bg-gradient-to-br from-red-50 via-white to-red-50"
+      className="scroll-mt-8 py-10 bg-gradient-to-br from-red-50 via-white to-red-50"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        {/* HEADER */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center">
           <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Education</h2>
           <div className="w-20 h-1 bg-red-700 mx-auto mb-4"></div>
-          <p className="text-lg text-gray-600">
-            My academic journey and achievements
-          </p>
         </div>
 
-        {/* EDUCATION */}
-        <div className="space-y-20">
+        <div className="space-y-12">
           {education.map((edu, index) => (
             <Card
               key={index}
-              className="p-8 hover:shadow-2xl transition-shadow border-2 border-transparent hover:border-red-700"
+              className="overflow-hidden border border-red-200/70 bg-white/90 p-8 shadow-lg shadow-red-100/50 transition-all hover:-translate-y-0.5 hover:shadow-2xl"
             >
-              <div className="flex items-start gap-6">
-              <div className="w-20 h-20 rounded-xl 
-              flex items-center justify-center overflow-hidden
-              shadow-[0_0_20px_rgba(255,0,0,0.15)]">
+              <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
+                <div className="space-y-6">
+                  <div className="flex items-start gap-5">
+                    <div className="w-20 h-20 rounded-2xl border border-red-200 bg-white flex items-center justify-center overflow-hidden shadow-[0_10px_30px_rgba(239,68,68,0.18)]">
+                      <img
+                        src="/images/feu.png"
+                        alt="FEU Institute of Technology"
+                        className="w-16 h-16 object-contain"
+                      />
+                    </div>
 
-                <img
-                  src="/images/feu.png"
-                  alt="FEU Institute of Technology"
-                  className="w-16 h-16 object-contain"
-                />
-
-              </div>
-
-                <div className="flex-1 space-y-6">
-                  <div className="flex items-start justify-between">
-                    <div>
+                    <div className="flex-1">
                       <h3 className="text-2xl md:text-3xl mb-2 text-gray-900">
                         {edu.degree}
                       </h3>
                       <p className="text-xl text-red-700">{edu.school}</p>
+                      <p className="mt-2 inline-flex items-center gap-2 text-sm text-gray-500">
+                        <MapPin size={14} />
+                        {edu.location}
+                      </p>
                     </div>
-
-                    <Badge className="bg-red-700 text-white">
-                      <Calendar size={16} className="mr-2" />
-                      {edu.period}
-                    </Badge>
                   </div>
 
                   <div>
-                    <h4 className="text-lg mb-3 text-gray-700 font-semibold">
-                      Relevant Coursework:
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
+                    <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
+                      Relevant Coursework
+                    </p>
+                    <div className="flex flex-wrap gap-2.5">
                       {edu.coursework.map((course, i) => (
-                        <Badge
+                        <span
                           key={i}
-                          variant="outline"
-                          className="border-red-300 text-gray-700"
+                          className="rounded-full border border-red-200 bg-red-50 px-3 py-1.5 text-sm text-gray-700"
                         >
                           {course}
-                        </Badge>
+                        </span>
                       ))}
                     </div>
                   </div>
 
                   <div>
-                    <h4 className="text-lg mb-2 text-gray-700 font-semibold">
-                      Achievements:
-                    </h4>
-                    <ul className="list-disc list-inside space-y-1 text-gray-600">
+                    <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
+                      Achievements
+                    </p>
+                    <div className="space-y-2">
                       {edu.achievements.map((achievement, i) => (
-                        <li key={i}>{achievement}</li>
+                        <div
+                          key={i}
+                          className="rounded-xl border border-red-100 bg-red-50/70 px-4 py-2 text-gray-700"
+                        >
+                          {achievement}
+                        </div>
                       ))}
-                    </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-red-200 bg-gradient-to-b from-white to-red-50/70 p-5">
+                  <div className="space-y-4">
+                    <div className="rounded-xl border border-red-200 bg-white px-4 py-3">
+                      <p className="text-xs uppercase tracking-wide text-gray-500">Timeline</p>
+                      <p className="mt-1 inline-flex items-center gap-2 font-semibold text-gray-900">
+                        <Calendar size={15} className="text-red-700" />
+                        {edu.period}
+                      </p>
+                    </div>
+
+                    <div className="rounded-xl border border-red-200 bg-white px-4 py-3">
+                      <p className="text-xs uppercase tracking-wide text-gray-500">Status</p>
+                      <Badge className="mt-2 bg-red-700 text-white">{edu.status}</Badge>
+                    </div>
+
+                    <div className="rounded-xl border border-red-200 bg-white px-4 py-3">
+                      <p className="text-xs uppercase tracking-wide text-gray-500">Focus</p>
+                      <p className="mt-2 text-sm text-gray-700">
+                        Software engineering, systems, and practical project execution.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -158,41 +138,40 @@ export function Education() {
           ))}
         </div>
 
-        {/* ORGANIZATION */}
         <div>
-          <h3 className="text-3xl mb-12 text-center">Organization</h3>
-          <div className="max-w-2xl mx-auto">
-            {activities.map((activity, index) => (
-              <Card
-                key={index}
-                className="p-8 hover:shadow-xl transition-shadow border-2 border-transparent hover:border-red-700"
-              >
-                <div className="flex items-start gap-5">
-                  <div className="w-16 h-16 rounded-full overflow-hidden bg-white shadow-md flex items-center justify-center border">
-                    <img
-                      src={activity.logo}
-                      alt={activity.name}
-                      className="w-full h-full object-contain p-1"
-                      onError={(e) => {
-                        // shows a clear error in console if path is wrong
-                        console.error("Logo failed to load:", activity.logo);
-                        e.currentTarget.style.display = "none";
-                      }}
-                    />
-                  </div>
-
-                  <div className="flex-1 space-y-2">
-                    <h4 className="text-2xl text-gray-900">{activity.name}</h4>
-                    <p className="text-red-700 font-medium text-lg">
-                      {activity.role}
-                    </p>
-                    <p className="text-sm text-gray-500">{activity.period}</p>
-                    <p className="text-gray-700">{activity.description}</p>
-                  </div>
+          <h3 className="text-3xl mb-6 text-gray-900">Organization</h3>
+          {activities.map((activity, index) => (
+            <Card
+              key={index}
+              className="border border-red-200/70 bg-white/90 p-6 shadow-lg shadow-red-100/50 transition-all hover:-translate-y-0.5 hover:shadow-xl"
+            >
+              <div className="flex items-start gap-5">
+                <div className="h-20 w-20 rounded-2xl overflow-hidden bg-white shadow-sm flex items-center justify-center border border-red-200 p-1.5">
+                  <img
+                    src={activity.logo}
+                    alt={activity.name}
+                    className="w-full h-full object-contain rounded-xl"
+                    onError={(e) => {
+                      console.error("Logo failed to load:", activity.logo);
+                      e.currentTarget.style.display = "none";
+                    }}
+                  />
                 </div>
-              </Card>
-            ))}
-          </div>
+
+                <div className="flex-1 space-y-2">
+                  <h4 className="text-2xl text-gray-900">{activity.name}</h4>
+                  <p className="text-red-700 font-medium text-lg">
+                    {activity.role}
+                  </p>
+                  <p className="inline-flex items-center gap-2 text-sm text-gray-500">
+                    <Calendar size={14} />
+                    {activity.period}
+                  </p>
+                  <p className="text-gray-700">{activity.description}</p>
+                </div>
+              </div>
+            </Card>
+          ))}
         </div>
       </div>
     </section>

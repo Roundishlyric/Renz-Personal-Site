@@ -52,12 +52,12 @@ export function Education() {
           {education.map((edu, index) => (
             <Card
               key={index}
-              className="overflow-hidden border border-red-200/70 bg-white/90 p-8 shadow-lg shadow-red-100/50 transition-all hover:-translate-y-0.5 hover:shadow-2xl"
+              className="overflow-hidden border-2 border-transparent bg-white p-8 transition-shadow hover:shadow-xl hover:border-red-700"
             >
               <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
                 <div className="space-y-6">
                   <div className="flex items-start gap-5">
-                    <div className="w-20 h-20 rounded-2xl border border-red-200 bg-white flex items-center justify-center overflow-hidden shadow-[0_10px_30px_rgba(239,68,68,0.18)]">
+                    <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-lg p-2">
                       <img
                         src="/images/feu.png"
                         alt="FEU Institute of Technology"
@@ -110,7 +110,7 @@ export function Education() {
                   </div>
                 </div>
 
-                <div className="rounded-2xl border border-red-200 bg-gradient-to-b from-white to-red-50/70 p-5">
+                <div className="rounded-xl border border-red-100 p-5">
                   <div className="space-y-4">
                     <div className="rounded-xl border border-red-200 bg-white px-4 py-3">
                       <p className="text-xs uppercase tracking-wide text-gray-500">Timeline</p>
@@ -143,10 +143,10 @@ export function Education() {
           {activities.map((activity, index) => (
             <Card
               key={index}
-              className="border border-red-200/70 bg-white/90 p-6 shadow-lg shadow-red-100/50 transition-all hover:-translate-y-0.5 hover:shadow-xl"
+              className="border-2 border-transparent bg-white p-6 transition-shadow hover:shadow-xl hover:border-red-700"
             >
               <div className="flex items-start gap-5">
-                <div className="h-20 w-20 rounded-2xl overflow-hidden bg-white shadow-sm flex items-center justify-center border border-red-200 p-1.5">
+                <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-lg p-2">
                   <img
                     src={activity.logo}
                     alt={activity.name}

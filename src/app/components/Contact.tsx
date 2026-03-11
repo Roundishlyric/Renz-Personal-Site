@@ -73,11 +73,11 @@ export function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-red-50 via-white to-red-50">
+    <section id="contact" className="scroll-mt-8 py-10 bg-gradient-to-br from-red-50 via-white to-red-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Get In Touch</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-red-700 to-red-700 mx-auto mb-4"></div>
+          <div className="w-20 h-1 bg-red-700 mx-auto mb-4"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
@@ -85,10 +85,10 @@ export function Contact() {
             <div>
               <h3 className="text-2xl mb-6 text-gray-900">Contact Information</h3>
               <div className="space-y-4">
-                <Card className="p-4 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-red-200">
+                <Card className="border-2 border-transparent bg-white p-4 transition-shadow hover:shadow-xl hover:border-red-700">
                   <div className="flex items-center gap-4">
-                    <div className="p-3 bg-gradient-to-br from-red-700 to-red-700 rounded-lg">
-                      <Mail className="text-white" size={24} />
+                    <div className="rounded-lg bg-red-700 p-3 text-white">
+                      <Mail size={24} />
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Email</p>
@@ -97,10 +97,10 @@ export function Contact() {
                   </div>
                 </Card>
 
-                <Card className="p-4 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-red-200">
+                <Card className="border-2 border-transparent bg-white p-4 transition-shadow hover:shadow-xl hover:border-red-700">
                   <div className="flex items-center gap-4">
-                    <div className="p-3 bg-gradient-to-br from-red-700 to-red-700 rounded-lg">
-                      <Phone className="text-white" size={24} />
+                    <div className="rounded-lg bg-red-700 p-3 text-white">
+                      <Phone size={24} />
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Phone</p>
@@ -109,10 +109,10 @@ export function Contact() {
                   </div>
                 </Card>
 
-                <Card className="p-4 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-red-200">
+                <Card className="border-2 border-transparent bg-white p-4 transition-shadow hover:shadow-xl hover:border-red-700">
                   <div className="flex items-center gap-4">
-                    <div className="p-3 bg-gradient-to-br from-red-700 to-red-700 rounded-lg">
-                      <MapPin className="text-white" size={24} />
+                    <div className="rounded-lg bg-red-700 p-3 text-white">
+                      <MapPin size={24} />
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Location</p>
@@ -141,7 +141,7 @@ export function Contact() {
             </div>
           </div>
 
-          <Card className="p-8 border-2 border-red-200 shadow-xl">
+          <Card className="border-2 border-transparent bg-white p-8 transition-shadow hover:shadow-xl hover:border-red-700">
             <h3 className="text-2xl mb-6 text-gray-900">Send a Message</h3>
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
@@ -175,7 +175,7 @@ export function Contact() {
               </div>
               <Button 
                 type="submit" 
-                className="w-full bg-gradient-to-r from-red-700 to-red-700 hover:from-red-700 hover:to-red-700 text-white"
+                className="w-full bg-red-700 text-white hover:bg-red-800"
                 size="lg"
               >
                 <Send size={20} className="mr-2" />

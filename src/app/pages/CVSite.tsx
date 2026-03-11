@@ -10,6 +10,7 @@ import { Footer } from '../components/Footer';
 import { CVDownload } from '../components/CVDownload';
 import { Experience } from '../components/Experience';
 import { Cert } from '../components/cert';
+import { Projects } from '../components/Projects';
 
 export function CVSite() {
   return (
@@ -21,6 +22,7 @@ export function CVSite() {
         <Education />
         <Cert />
         <Skills />
+        <Projects />
         <Experience />
         <Hobbies />
         <Gallery />

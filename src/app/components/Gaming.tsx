@@ -30,16 +30,6 @@ type Game = {
   placements: { event: string; place: string }[];
 };
 
-type SlideAnim = {
-  from: number;
-  to: number;
-  dir: "next" | "prev";
-  phase: "init" | "animate";
-};
-
-const SLIDE_ANIM_MS = 300;
-const HERO_SLIDE_ANIM_MS = 700;
-
 type HoyoKey = "genshin" | "hsr" | "zzz";
 
 type HoyoMember = { name: string; img: string };
@@ -138,7 +128,7 @@ const TeamPanel = React.memo(function TeamPanel({
   teamCols: 3 | 4;
 }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-6">
+    <div className="rounded-2xl border border-white/10 bg-slate-900 p-6">
       <p className="text-white font-semibold mb-5">{title}</p>
 
       <div
@@ -150,13 +140,13 @@ const TeamPanel = React.memo(function TeamPanel({
         {members.map((c) => (
           <div
             key={c.name}
-            className="group rounded-2xl border border-white/10 bg-slate-800/40 p-3 hover:border-cyan-400/30 hover:bg-slate-800/60 transition"
+            className="group rounded-2xl border border-white/10 bg-slate-800 p-3 transition-colors hover:border-cyan-400/30 hover:bg-slate-800/90"
           >
-            <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-slate-950/30 border border-white/10">
+            <div className="relative w-full aspect-square rounded-xl overflow-hidden border border-white/10 bg-slate-950">
               <img
                 src={c.img}
                 alt={c.name}
-                className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-300"
+                className="w-full h-full object-cover"
                 loading="lazy"
                 draggable={false}
               />
@@ -178,39 +168,45 @@ const OtherGameCard = React.memo(function OtherGameCard({
   game: OtherGame;
 }) {
   return (
-    <Card className="group relative overflow-hidden border border-white/10 bg-slate-900/60 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-teal-400/40 hover:shadow-2xl hover:shadow-teal-500/20">
-      <div className="relative h-56 w-full overflow-hidden bg-slate-950 leading-none">
+    <Card className="group overflow-hidden rounded-[1.35rem] border border-teal-400/20 bg-[#07152b] transition-all duration-300 hover:-translate-y-1 hover:border-teal-300/45 hover:shadow-[0_14px_32px_rgba(8,145,178,0.16)]">
+      <div className="h-1.5 w-full bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500" />
+
+      <div className="relative h-40 w-full overflow-hidden bg-slate-950 leading-none">
         <ImageWithFallback
           src={game.image}
           alt={game.title}
-          className="block h-full w-full object-cover align-top transition-transform duration-500 group-hover:scale-[1.06]"
+          className="block h-full w-full object-cover align-top"
           loading="lazy"
           draggable={false}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-400/15 via-transparent to-cyan-400/5 opacity-70" />
-
+        <div className="absolute inset-0 bg-gradient-to-t from-[#07152b]/88 via-[#07152b]/22 to-transparent" />
       </div>
 
-      <div className="px-4 pb-4 pt-1.5">
-        <h4 className="line-clamp-2 min-h-[3.5rem] text-lg font-bold leading-snug text-white">
-          {game.title}
-        </h4>
+      <div className="space-y-3 px-3.5 pb-3.5 pt-0">
+        <div>
+          <h4 className="line-clamp-2 min-h-[3rem] text-[15px] font-extrabold leading-snug text-white">
+            {game.title}
+          </h4>
+        </div>
 
-        <div className="mt-4 flex flex-wrap items-center gap-2">
-          <span className="line-clamp-1 rounded-full border border-white/10 bg-slate-950/50 px-3 py-1 text-xs text-gray-200">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="rounded-full border border-teal-400/20 bg-teal-400/10 px-2.5 py-1 text-[11px] font-medium text-teal-100">
             {game.role}
           </span>
         </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
-          <div className="rounded-lg border border-white/10 bg-slate-950/40 px-3 py-2">
-            <p className="text-gray-400">Rank</p>
-            <p className="mt-0.5 font-semibold text-white">{game.rank}</p>
+        <div className="grid grid-cols-2 gap-2 text-[11px]">
+          <div className="rounded-xl border border-white/10 bg-[#020817] px-2.5 py-2.5">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+              Rank
+            </p>
+            <p className="mt-1 font-bold text-white">{game.rank}</p>
           </div>
-          <div className="rounded-lg border border-white/10 bg-slate-950/40 px-3 py-2">
-            <p className="text-gray-400">Hours</p>
-            <p className="mt-0.5 font-semibold text-cyan-200">{game.hours}</p>
+          <div className="rounded-xl border border-white/10 bg-[#020817] px-2.5 py-2.5">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+              Hours
+            </p>
+            <p className="mt-1 font-bold text-cyan-200">{game.hours}</p>
           </div>
         </div>
       </div>
@@ -222,11 +218,11 @@ export function Gaming() {
   const aboutTitleClass = "mb-4 text-4xl md:text-5xl text-white";
   const heroImages = useMemo(
     () => [
-      "/images/paka.jpg",
-      "/images/fib.jpg",
-      "/images/work.jpg",
-      "/images/hard.jpg",
-      "/images/jap.jpg",
+      "/images/pro3.JPG",
+      "/images/pro2.png",
+      "/images/pro1.png",
+      "/images/pro4.jpg",
+      "/images/pro5.jpg",
     ],
     []
   );
@@ -447,36 +443,13 @@ export function Gaming() {
   );
 
   const [slide, setSlide] = useState(0);
-  const [anim, setAnim] = useState<SlideAnim | null>(null);
-
   const canSlide = (active?.images?.length ?? 0) > 1;
-  const currentIndex = anim ? anim.to : slide;
+  const currentIndex = slide;
 
   // Reset slider when switching games
   useEffect(() => {
     setSlide(0);
-    setAnim(null);
   }, [activeKey]);
-
-  // Kick off the CSS transition on the next frame (prevents “jump” / broken transition)
-  useEffect(() => {
-    if (!anim || anim.phase !== "init") return;
-    const raf = requestAnimationFrame(() => {
-      setAnim((a) => (a ? { ...a, phase: "animate" } : a));
-    });
-    return () => cancelAnimationFrame(raf);
-  }, [anim]);
-
-  // Finish animation from JS timer to avoid transitionend race/bounce issues.
-  useEffect(() => {
-    if (!anim || anim.phase !== "animate") return;
-    const target = anim.to;
-    const t = window.setTimeout(() => {
-      setSlide(target);
-      setAnim(null);
-    }, SLIDE_ANIM_MS + 20);
-    return () => window.clearTimeout(t);
-  }, [anim]);
 
   // Preload adjacent slides to reduce flicker during transition.
   useEffect(() => {
@@ -494,65 +467,44 @@ export function Gaming() {
     (to: number, dir: "next" | "prev") => {
       if (!active) return;
       if (!canSlide) return;
-      if (anim) return;
 
       const total = active.images.length;
       const normalizedTo = ((to % total) + total) % total;
       if (normalizedTo === slide) return;
 
-      setAnim({ from: slide, to: normalizedTo, dir, phase: "init" });
+      void dir;
+      setSlide(normalizedTo);
     },
-    [active, anim, canSlide, slide]
+    [active, canSlide, slide]
   );
 
   const next = useCallback(() => startSlide(slide + 1, "next"), [slide, startSlide]);
   const prev = useCallback(() => startSlide(slide - 1, "prev"), [slide, startSlide]);
 
   const [heroSlide, setHeroSlide] = useState(0);
-  const [heroAnim, setHeroAnim] = useState<SlideAnim | null>(null);
-  const [heroReady, setHeroReady] = useState(false);
   const canHeroSlide = heroImages.length > 1;
 
   const startHeroSlide = useCallback(
     (to: number, dir: "next" | "prev") => {
-      if (!heroReady) return;
       if (!canHeroSlide) return;
-      if (heroAnim) return;
 
       const total = heroImages.length;
       const normalizedTo = ((to % total) + total) % total;
       if (normalizedTo === heroSlide) return;
 
-      setHeroAnim({ from: heroSlide, to: normalizedTo, dir, phase: "init" });
+      void dir;
+      setHeroSlide(normalizedTo);
     },
-    [canHeroSlide, heroAnim, heroImages.length, heroReady, heroSlide]
+    [canHeroSlide, heroImages.length, heroSlide]
   );
 
   useEffect(() => {
-    if (!heroAnim || heroAnim.phase !== "init") return;
-    const raf = requestAnimationFrame(() => {
-      setHeroAnim((a) => (a ? { ...a, phase: "animate" } : a));
-    });
-    return () => cancelAnimationFrame(raf);
-  }, [heroAnim]);
-
-  useEffect(() => {
-    if (!heroAnim || heroAnim.phase !== "animate") return;
-    const target = heroAnim.to;
-    const t = window.setTimeout(() => {
-      setHeroSlide(target);
-      setHeroAnim(null);
-    }, HERO_SLIDE_ANIM_MS + 20);
-    return () => window.clearTimeout(t);
-  }, [heroAnim]);
-
-  useEffect(() => {
-    if (!heroReady || !canHeroSlide || heroAnim) return;
+    if (!canHeroSlide) return;
     const t = window.setTimeout(() => {
       startHeroSlide(heroSlide + 1, "next");
     }, 5000);
     return () => window.clearTimeout(t);
-  }, [canHeroSlide, heroAnim, heroReady, heroSlide, startHeroSlide]);
+  }, [canHeroSlide, heroSlide, startHeroSlide]);
 
   useEffect(() => {
     if (!canHeroSlide) return;
@@ -564,29 +516,6 @@ export function Gaming() {
       img.src = src;
     });
   }, [canHeroSlide, heroImages, heroSlide]);
-
-  useEffect(() => {
-    let done = 0;
-    let cancelled = false;
-
-    const finishOne = () => {
-      done += 1;
-      if (!cancelled && done >= heroImages.length) {
-        setHeroReady(true);
-      }
-    };
-
-    heroImages.forEach((src) => {
-      const img = new Image();
-      img.onload = finishOne;
-      img.onerror = finishOne;
-      img.src = src;
-    });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [heroImages]);
 
   const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
 
@@ -608,42 +537,18 @@ export function Gaming() {
             min-h-[560px] md:min-h-[680px] lg:min-h-[760px]
           "
         >
-          {/* glow background */}
-          <div className="pointer-events-none absolute inset-0">
-            <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-teal-500/20 blur-3xl" />
-            <div className="absolute top-10 left-1/2 h-[360px] w-[360px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl" />
-          </div>
-
           <div className="relative grid grid-cols-1 md:grid-cols-5 h-full">
             {/* LEFT IMAGE */}
             <div className="relative md:col-span-3 min-h-[420px] md:min-h-0">
               <ImageWithFallback
-                src={heroImages[heroAnim ? heroAnim.from : heroSlide]}
+                src={heroImages[heroSlide]}
                 alt="SenGouku"
-                style={{ transitionDuration: `${HERO_SLIDE_ANIM_MS}ms` }}
-                className={[
-                  "absolute inset-0 h-full w-full object-cover object-left",
-                  "will-change-opacity transition-opacity ease-in-out",
-                  heroAnim?.phase === "animate" ? "opacity-0" : "opacity-100",
-                ].join(" ")}
+                className="absolute inset-0 h-full w-full object-cover object-left"
                 draggable={false}
               />
-              {heroAnim && (
-                <ImageWithFallback
-                  src={heroImages[heroAnim.to]}
-                  alt="SenGouku"
-                  style={{ transitionDuration: `${HERO_SLIDE_ANIM_MS}ms` }}
-                  className={[
-                    "absolute inset-0 h-full w-full object-cover object-left",
-                    "will-change-opacity transition-opacity ease-in-out",
-                    heroAnim.phase === "animate" ? "opacity-100" : "opacity-0",
-                  ].join(" ")}
-                  draggable={false}
-                />
-              )}
 
               {/* teal tint */}
-              <div className="absolute inset-0 bg-gradient-to-br from-teal-500/25 via-cyan-500/10 to-transparent mix-blend-overlay" />
+              <div className="absolute inset-0 bg-gradient-to-br from-teal-500/15 via-cyan-500/5 to-transparent" />
 
               {/* readability */}
               <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
@@ -660,7 +565,7 @@ export function Gaming() {
             </div>
 
             {/* RIGHT PANEL */}
-            <div className="relative md:col-span-2 bg-slate-900/80 backdrop-blur-xl border-l border-white/10">
+            <div className="relative md:col-span-2 bg-slate-900 border-l border-white/10">
               <div className="absolute inset-0 bg-gradient-to-b from-teal-500/10 via-transparent to-transparent pointer-events-none" />
 
               <div className="h-full px-10 py-12 flex flex-col">
@@ -680,27 +585,27 @@ export function Gaming() {
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Badge className="px-4 py-2 text-sm bg-slate-800/70 border border-white/10 text-white">
+                  <Badge className="px-4 py-2 text-sm bg-slate-800 border border-white/10 text-white">
                     ⚔️ Fighting Game Specialist
                   </Badge>
-                  <Badge className="px-4 py-2 text-sm bg-slate-800/70 border border-white/10 text-white">
+                  <Badge className="px-4 py-2 text-sm bg-slate-800 border border-white/10 text-white">
                     👥 Archangel Esports
                   </Badge>
-                  <Badge className="px-4 py-2 text-sm bg-slate-800/70 border border-white/10 text-teal-200">
+                  <Badge className="px-4 py-2 text-sm bg-slate-800 border border-white/10 text-teal-200">
                     ⭐ Competitive Player
                   </Badge>
                 </div>
 
                 <div className="mt-auto pt-10 grid grid-cols-1 gap-4">
-                  <div className="rounded-2xl border border-white/10 bg-slate-800/60 backdrop-blur px-6 py-5">
+                  <div className="rounded-2xl border border-white/10 bg-slate-800 px-6 py-5">
                     <p className="text-sm text-gray-300">Main Focus</p>
                     <p className="mt-1 text-xl font-bold text-white">FGC Tournaments</p>
                   </div>
-                  <div className="rounded-2xl border border-white/10 bg-slate-800/60 backdrop-blur px-6 py-5">
+                  <div className="rounded-2xl border border-white/10 bg-slate-800 px-6 py-5">
                     <p className="text-sm text-gray-300">Signature Titles</p>
                     <p className="mt-1 text-xl font-bold text-white">SF6 • T8 • More</p>
                   </div>
-                  <div className="rounded-2xl border border-white/10 bg-slate-800/60 backdrop-blur px-6 py-5">
+                  <div className="rounded-2xl border border-white/10 bg-slate-800 px-6 py-5">
                     <p className="text-sm text-gray-300">Content</p>
                     <p className="mt-1 text-xl font-bold text-white">Clips • Guides</p>
                   </div>
@@ -721,9 +626,8 @@ export function Gaming() {
       </div>
 
       <div className="max-w-8xl mx-auto">
-        {/* Outer teal frame */}
-        <div className="rounded-[2.25rem] p-[2px] bg-gradient-to-r from-teal-400/70 via-cyan-300/35 to-teal-400/70 shadow-[0_0_45px_rgba(45,212,191,0.18)]">
-          <Card className="rounded-[2.1rem] overflow-hidden border border-white/10 bg-slate-900/60 backdrop-blur-xl">
+        <div className="rounded-[2rem] border border-white/10 bg-slate-900 shadow-xl shadow-black/30">
+          <Card className="rounded-[2rem] overflow-hidden border-0 bg-slate-900">
             {/* HERO */}
             <div className="relative h-[440px] md:h-[540px] lg:h-[600px] bg-slate-950">
               <ImageWithFallback
@@ -747,11 +651,11 @@ export function Gaming() {
 
               {/* Logo (top-left) */}
               <div className="absolute left-6 top-6 z-10">
-                <div className="h-16 w-16 md:h-20 md:w-20 rounded-2xl border border-white/10 bg-black/35 backdrop-blur-xl shadow-[0_10px_35px_rgba(0,0,0,0.45)] flex items-center justify-center">
+                <div className="flex h-20 w-20 items-center justify-center rounded-2xl border border-white/25 bg-black/80 ring-1 ring-white/10 md:h-24 md:w-24">
                   <img
                     src="/images/rogo.png"
                     alt=""
-                    className="h-[82%] w-[82%] object-contain drop-shadow-[0_0_14px_rgba(255,215,64,0.45)]"
+                    className="h-[88%] w-[88%] object-contain drop-shadow-[0_0_18px_rgba(255,215,64,0.6)]"
                     draggable={false}
                   />
                 </div>
@@ -769,7 +673,7 @@ export function Gaming() {
                   </h3>
 
                   <div className="mt-5 flex justify-center">
-                    <span className="inline-flex items-center rounded-2xl border border-white/10 bg-teal-500/90 px-6 py-2 text-white font-bold shadow-lg shadow-teal-500/25">
+                    <span className="inline-flex items-center rounded-2xl border border-white/10 bg-teal-500 px-6 py-2 text-white font-bold">
                       Est. 2022 • Community Team
                     </span>
                   </div>
@@ -782,7 +686,7 @@ export function Gaming() {
               <div className="p-7 md:p-8">
                 <div className="grid gap-5 md:grid-cols-3">
                   {/* Stat 1 */}
-                  <div className="rounded-2xl border border-white/10 bg-slate-950/40 backdrop-blur-md px-6 py-5 hover:border-teal-400/25 transition">
+                  <div className="rounded-2xl border border-white/10 bg-slate-950 px-6 py-5 hover:border-teal-400/25 transition">
                     <div className="flex items-center gap-4">
                       <div className="h-14 w-14 rounded-2xl bg-teal-500/15 border border-teal-400/20 flex items-center justify-center">
                         <Trophy className="text-teal-300" size={30} />
@@ -799,7 +703,7 @@ export function Gaming() {
                   </div>
 
                   {/* Stat 2 */}
-                  <div className="rounded-2xl border border-white/10 bg-slate-950/40 backdrop-blur-md px-6 py-5 hover:border-teal-400/25 transition">
+                  <div className="rounded-2xl border border-white/10 bg-slate-950 px-6 py-5 hover:border-teal-400/25 transition">
                     <div className="flex items-center gap-4">
                       <div className="h-14 w-14 rounded-2xl bg-cyan-500/15 border border-cyan-400/20 flex items-center justify-center">
                         <Users className="text-cyan-300" size={30} />
@@ -816,7 +720,7 @@ export function Gaming() {
                   </div>
 
                   {/* Stat 3 */}
-                  <div className="rounded-2xl border border-white/10 bg-slate-950/40 backdrop-blur-md px-6 py-5 hover:border-teal-400/25 transition">
+                  <div className="rounded-2xl border border-white/10 bg-slate-950 px-6 py-5 hover:border-teal-400/25 transition">
                     <div className="flex items-center gap-4">
                       <div className="h-14 w-14 rounded-2xl bg-teal-500/15 border border-teal-400/20 flex items-center justify-center">
                         <Medal className="text-teal-300" size={30} />
@@ -852,15 +756,12 @@ export function Gaming() {
         <div id="main-games" className="scroll-mt-24 mb-20">
           <h3 className={`${aboutTitleClass} text-center`}>Main Games</h3>
           <div className="mx-auto mb-4 h-1 w-20 rounded bg-gradient-to-r from-teal-400 to-cyan-400" />
-          <p className="text-center text-gray-300 mb-8">
-            Primary titles I compete in and actively play
-          </p>
 
           <div className="max-w-8xl mx-auto">
 
             {/* ---------------- TABS ---------------- */}
             <div className="mb-8">
-              <div className="rounded-3xl border border-white/10 bg-slate-900/40 p-2 backdrop-blur-xl">
+              <div className="rounded-3xl border border-white/10 bg-slate-900/60 p-2">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                   {games.map((game) => {
                     const activeTab = game.key === activeKey;
@@ -888,13 +789,13 @@ export function Gaming() {
             </div>
 
             {/* ---------------- GRADIENT BORDER WRAPPER ---------------- */}
-            <div className="rounded-[2.75rem] p-[4px] bg-gradient-to-r from-teal-500/60 via-cyan-400/40 to-teal-500/60 shadow-[0_0_45px_rgba(45,212,191,0.25)]">
-              <div className="rounded-[2.55rem] overflow-hidden bg-slate-900/40 backdrop-blur-xl shadow-2xl">
+            <div className="rounded-[2rem] border border-white/10 bg-slate-900 shadow-xl shadow-black/30">
+              <div className="overflow-hidden rounded-[2rem]">
 
                 <div className="grid md:grid-cols-5 min-h-[540px]">
 
                   {/* ================= INFO PANEL ================= */}
-                  <div className="md:col-span-2 bg-slate-900/50 p-8 md:border-r border-white/10">
+                  <div className="md:col-span-2 bg-slate-900 p-8 md:border-r border-white/10">
 
                     {/* Header */}
                     <div className="flex items-start justify-between gap-4 mb-6">
@@ -945,7 +846,7 @@ export function Gaming() {
                         {active.placements.map((p, i) => (
                           <div
                             key={i}
-                            className="rounded-2xl border border-white/10 bg-slate-950/30 px-4 py-3"
+                            className="rounded-2xl border border-white/10 bg-slate-950 px-4 py-3"
                           >
                             <div className="flex items-start justify-between gap-4">
                               <p className="text-sm text-gray-200 leading-snug">
@@ -962,106 +863,72 @@ export function Gaming() {
 
                   </div>
                   
-                  {/* ================= IMAGE / SLIDER ================= */}
-<div className="md:col-span-3 relative overflow-hidden bg-slate-950">
-  <div className="relative w-full h-[420px] md:h-full overflow-hidden">
+                                    {/* ================= IMAGE / SLIDER ================= */}
+                  <div className="md:col-span-3 relative overflow-hidden bg-slate-950">
+                    <div className="relative w-full h-[420px] md:h-full overflow-hidden">
+                      <ImageWithFallback
+                        src={active.images[currentIndex]}
+                        alt={active.title}
+                        className={[
+                          "absolute inset-0 w-full h-full object-cover",
+                          active.focus,
+                          "transition-opacity duration-200",
+                        ].join(" ")}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent pointer-events-none" />
+                      <div className="absolute inset-0 [background:radial-gradient(circle_at_40%_25%,rgba(45,212,191,0.10),transparent_55%)] pointer-events-none" />
 
-    {/* Outgoing */}
-    <ImageWithFallback
-      src={active.images[anim ? anim.from : slide]}
-      alt={active.title}
-      style={{ transitionDuration: `${SLIDE_ANIM_MS}ms` }}
-      className={[
-        "absolute inset-0 w-full h-full object-cover",
-        active.focus,
-        "will-change-transform",
-        "transition-transform ease-out",
-        anim?.phase === "animate"
-          ? anim.dir === "next"
-            ? "-translate-x-full"
-            : "translate-x-full"
-          : "translate-x-0",
-      ].join(" ")}
-    />
+                      {/* Title Chip */}
+                      <div className="absolute bottom-6 left-6">
+                        <div className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-black/35 px-4 py-3 backdrop-blur">
+                          <div className="h-2.5 w-2.5 rounded-full bg-teal-400 shadow-[0_0_12px_rgba(45,212,191,0.8)]" />
+                          <div className="text-xl md:text-2xl font-extrabold tracking-wide text-white">
+                            {active.title}
+                          </div>
+                        </div>
+                      </div>
 
-    {/* Incoming */}
-    {anim && (
-      <ImageWithFallback
-        src={active.images[anim.to]}
-        alt={active.title}
-        style={{ transitionDuration: `${SLIDE_ANIM_MS}ms` }}
-        className={[
-          "absolute inset-0 w-full h-full object-cover",
-          active.focus,
-          "will-change-transform",
-          "transition-transform ease-out",
-          anim.phase === "animate"
-            ? "translate-x-0"
-            : anim.dir === "next"
-            ? "translate-x-full"
-            : "-translate-x-full",
-        ].join(" ")}
-      />
-    )}
+                      {/* Dots */}
+                      {active.images.length > 1 && (
+                        <div className="absolute bottom-6 right-6 flex items-center gap-2">
+                          {active.images.map((_, i) => (
+                            <button
+                              key={i}
+                              onClick={() => startSlide(i, i > currentIndex ? "next" : "prev")}
+                              className={[
+                                "h-2 rounded-full transition-all",
+                                i === currentIndex
+                                  ? "w-10 bg-teal-400"
+                                  : "w-4 bg-white/30 hover:bg-white/45",
+                              ].join(" ")}
+                              aria-label={`Go to image ${i + 1}`}
+                            />
+                          ))}
+                        </div>
+                      )}
 
-    {/* Overlays (lighter + cleaner) */}
-    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent pointer-events-none" />
-    <div className="absolute inset-0 [background:radial-gradient(circle_at_40%_25%,rgba(45,212,191,0.14),transparent_55%)] pointer-events-none" />
+                      {/* Arrows */}
+                      {canSlide && (
+                        <>
+                          <button
+                            onClick={prev}
+                            className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-white/10 bg-slate-900/80 p-3 text-white hover:bg-slate-800"
+                            aria-label="Previous image"
+                          >
+                            <ChevronLeft />
+                          </button>
 
-    {/* Title Chip */}
-    <div className="absolute bottom-6 left-6">
-      <div className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-black/35 px-4 py-3 backdrop-blur">
-        <div className="h-2.5 w-2.5 rounded-full bg-teal-400 shadow-[0_0_12px_rgba(45,212,191,0.8)]" />
-        <div className="text-xl md:text-2xl font-extrabold tracking-wide text-white">
-          {active.title}
-        </div>
-      </div>
-    </div>
-
-    {/* Dots */}
-    {active.images.length > 1 && (
-      <div className="absolute bottom-6 right-6 flex items-center gap-2">
-        {active.images.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => startSlide(i, i > currentIndex ? "next" : "prev")}
-            disabled={!!anim}
-            className={[
-              "h-2 rounded-full transition-all disabled:opacity-50",
-              i === currentIndex
-                ? "w-10 bg-teal-400"
-                : "w-4 bg-white/30 hover:bg-white/45",
-            ].join(" ")}
-            aria-label={`Go to image ${i + 1}`}
-          />
-        ))}
-      </div>
-    )}
-
-    {/* Arrows */}
-    {canSlide && (
-      <>
-        <button
-          onClick={prev}
-          disabled={!!anim}
-          className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white backdrop-blur hover:bg-white/20 disabled:opacity-50 border border-white/10"
-          aria-label="Previous image"
-        >
-          <ChevronLeft />
-        </button>
-
-        <button
-          onClick={next}
-          disabled={!!anim}
-          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white backdrop-blur hover:bg-white/20 disabled:opacity-50 border border-white/10"
-          aria-label="Next image"
-        >
-          <ChevronRight />
-        </button>
-      </>
-    )}
-  </div>
-</div>
+                          <button
+                            onClick={next}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/10 bg-slate-900/80 p-3 text-white hover:bg-slate-800"
+                            aria-label="Next image"
+                          >
+                            <ChevronRight />
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </div>
 
                 </div>
               </div>
@@ -1074,11 +941,8 @@ export function Gaming() {
         <div id="other-games" className="scroll-mt-24 mb-20">
           <h3 className={`${aboutTitleClass} text-center`}>Other Games</h3>
           <div className="mx-auto mb-4 h-1 w-20 rounded bg-gradient-to-r from-teal-400 to-cyan-400" />
-          <p className="text-center text-gray-300 mb-10">
-            Additional competitive and casual titles I play
-          </p>
 
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4 items-stretch">
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 items-stretch">
             {otherGames.map((game) => (
               <OtherGameCard key={game.title} game={game} />
             ))}
@@ -1190,7 +1054,7 @@ export function Gaming() {
           </div>
 
           <div className="max-w-8xl mx-auto">
-            <Card className="overflow-hidden border border-white/10 bg-slate-800/70 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur">
+            <Card className="overflow-hidden border border-white/10 bg-slate-800 shadow-xl shadow-black/30">
               <div className="grid lg:grid-cols-5 min-h-[540px]">
                 
                 {/* LEFT: HoYoLAB */}
@@ -1199,7 +1063,7 @@ export function Gaming() {
                     
                     {/* Header */}
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="h-14 w-14 p-0.5 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-700 shadow-lg flex items-center justify-center overflow-hidden">
+                      <div className="h-14 w-14 p-0.5 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-700 flex items-center justify-center overflow-hidden">
                         <img
                           src="/images/hoyo.png"
                           alt="HoYoLAB"
@@ -1257,14 +1121,14 @@ export function Gaming() {
                             onClick={() => setHoyoActive(k)}
                             className={[
                               "w-full text-left rounded-2xl border p-4 transition",
-                              "bg-slate-900/40 border-white/10 hover:border-cyan-400/30 hover:bg-slate-900/60",
+                              "bg-slate-900 border-white/10 hover:border-cyan-400/30 hover:bg-slate-900/90",
                               active
                                 ? "ring-2 ring-cyan-400/60 border-cyan-400/40"
                                 : "",
                             ].join(" ")}
                           >
                             <div className="flex items-center gap-3 mb-3">
-                              <div className="h-8 w-8 rounded-lg border border-white/10 bg-slate-800/50 flex items-center justify-center overflow-hidden">
+                              <div className="h-8 w-8 rounded-lg border border-white/10 bg-slate-800 flex items-center justify-center overflow-hidden">
                                 <img
                                   src={content.icon}
                                   alt=""
@@ -1313,7 +1177,7 @@ export function Gaming() {
                     {/* Header */}
                     <div className="flex items-center justify-between mb-6">
                       <div className="flex items-center gap-3">
-                        <div className="h-11 w-11 rounded-lg border border-white/10 bg-slate-900/40 flex items-center justify-center overflow-hidden">
+                        <div className="h-11 w-11 rounded-lg border border-white/10 bg-slate-900 flex items-center justify-center overflow-hidden">
                           <img
                             src={HOYO_TEAMS[hoyoActive].icon}
                             alt=""

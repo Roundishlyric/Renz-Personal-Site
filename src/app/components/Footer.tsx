@@ -27,6 +27,7 @@ export function Footer() {
               <li><a href="#education" className={navLabelClass}>Education</a></li>
               <li><a href="#cert" className={navLabelClass}>Certifications</a></li>
               <li><a href="#skills" className={navLabelClass}>Skills</a></li>
+              <li><a href="#projects" className={navLabelClass}>Projects</a></li>
             </ul>
           </div>
 
@@ -36,6 +37,7 @@ export function Footer() {
               <li><a href="#experience" className={navLabelClass}>Experience</a></li>
               <li><a href="#hobbies" className={navLabelClass}>Hobbies</a></li>
               <li><a href="#gallery" className={navLabelClass}>Gallery</a></li>
+              <li><a href="#cv-download" className={navLabelClass}>CV Download</a></li>
               <li><a href="#contact" className={navLabelClass}>Contact</a></li>
             </ul>
           </div>

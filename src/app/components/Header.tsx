@@ -26,9 +26,11 @@ export function Header() {
     { label: "Education", id: "education" },
     { label: "Certifications", id: "cert" },
     { label: "Skills", id: "skills" },
+    { label: "Projects", id: "projects" },
     { label: "Experience", id: "experience" },
     { label: "Hobbies", id: "hobbies" },
     { label: "Gallery", id: "gallery" },
+    { label: "CV Download", id: "cv-download" },
     { label: "Contact", id: "contact" },
   ];
 
@@ -58,28 +60,36 @@ export function Header() {
             &lt;Renz Rapanut /&gt;
           </button>
 
-          <nav className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`transition-colors ${navText}`}
-              >
-                {item.label}
-              </button>
-            ))}
+          <nav className="hidden md:flex min-w-0 items-center gap-3">
+            <div
+              className={`flex max-w-[min(58vw,860px)] items-center gap-1.5 overflow-x-auto whitespace-nowrap rounded-xl border px-2 py-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${
+                isScrolled
+                  ? "border-white/10 bg-white/5"
+                  : "border-black/10 bg-white/60 backdrop-blur-sm"
+              }`}
+            >
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`shrink-0 rounded-lg px-2.5 py-1.5 text-[13px] font-medium leading-none transition-colors hover:bg-white/10 ${navText}`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
 
             <Link to="/gaming">
               <Button
                 variant="outline"
-                className={`flex items-center gap-2 transition-colors ${
+                className={`flex items-center gap-2 px-3 transition-colors ${
                   isScrolled
                     ? "!bg-transparent !text-white border-white/30 hover:!bg-white/10 hover:!text-white"
                     : "bg-transparent text-black border-gray-300 hover:bg-gray-100"
                 }`}
               >
                 <Gamepad2 size={18} />
-                Gaming
+                <span className="hidden lg:inline">Gaming</span>
               </Button>
             </Link>
           </nav>

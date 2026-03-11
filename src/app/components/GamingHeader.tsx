@@ -55,23 +55,25 @@ export function GamingHeader() {
           </button>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-2">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToId(item.id)}
-                className="px-3 py-2 text-sm text-gray-300 hover:text-teal-300 transition-colors rounded-lg hover:bg-white/5"
-              >
-                {item.label}
-              </button>
-            ))}
+          <nav className="hidden md:flex min-w-0 items-center gap-3">
+            <div className="flex max-w-[min(58vw,760px)] items-center gap-1.5 overflow-x-auto whitespace-nowrap rounded-xl border border-white/10 bg-white/5 px-2 py-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToId(item.id)}
+                  className="shrink-0 rounded-lg px-2.5 py-1.5 text-[13px] font-medium leading-none text-gray-300 transition-colors hover:bg-white/10 hover:text-teal-300"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
 
             <Link
               to="/"
-              className="ml-2 flex items-center gap-2 px-4 py-2 text-gray-300 hover:text-white border border-gray-700 hover:border-teal-500 rounded-lg transition"
+              className="ml-1 flex items-center gap-2 rounded-lg border border-gray-700 px-3 py-2 text-gray-300 transition hover:border-teal-500 hover:text-white"
             >
               <Briefcase size={18} />
-              View CV Site
+              <span className="hidden lg:inline">View CV Site</span>
             </Link>
           </nav>
 

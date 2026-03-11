@@ -83,8 +83,6 @@ export function Hobbies() {
       className="scroll-mt-8 py-10 bg-gradient-to-br from-red-50 via-white to-red-50"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* SECTION HEADER */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">
             Hobbies & Interests
@@ -93,21 +91,12 @@ export function Hobbies() {
           <div className="w-20 h-1 bg-red-700 mx-auto mb-4"></div>
         </div>
 
-        {/* HOBBIES GRID */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {hobbies.map((hobby, index) => (
             <Card
               key={index}
-              className="group relative overflow-hidden border border-white/20 
-              bg-white/70 backdrop-blur-xl 
-              transition-all duration-500 
-              hover:-translate-y-2 hover:shadow-2xl 
-              hover:shadow-red-400/40 rounded-xl"
+              className="group relative overflow-hidden border-2 border-transparent bg-white transition-all duration-500 hover:shadow-xl hover:border-red-700"
             >
-              {/* Glow hover effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-br from-red-700/20 via-red-500/10 to-transparent"></div>
-
-              {/* Image */}
               <div className="relative h-72 overflow-hidden">
                 <ImageWithFallback
                   src={hobby.image}
@@ -115,10 +104,9 @@ export function Hobbies() {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
 
-                {/* Dark overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-red-700/0 via-red-700/10 to-red-900/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
 
-                {/* Text */}
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <h3 className="text-xl text-white font-semibold">
                     {hobby.title}
@@ -132,13 +120,12 @@ export function Hobbies() {
           ))}
         </div>
 
-        {/* Bottom message card */}
         <div className="mt-10 text-center">
-          <Card className="bg-gradient-to-r from-red-700 to-red-700 text-white max-w-4xl mx-auto rounded-xl">
+          <Card className="max-w-4xl mx-auto border-2 border-transparent bg-white transition-shadow hover:shadow-xl hover:border-red-700">
             <div className="p-8">
-              <h3 className="text-2xl mb-4">Balance is Key</h3>
+              <h3 className="text-2xl mb-4 text-gray-900">Balance is Key</h3>
 
-              <p className="text-lg text-red-100">
+              <p className="text-lg text-gray-700">
                 I believe in maintaining a healthy work-life balance. These
                 hobbies help me stay creative, motivated, and bring fresh
                 perspectives to my academic and professional work.

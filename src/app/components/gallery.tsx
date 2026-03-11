@@ -51,44 +51,33 @@ export function Gallery() {
   ];
 
   return (
-    <section id="gallery" className="py-5 bg-gradient-to-br from-red-50 via-white to-red-50">
+    <section id="gallery" className="scroll-mt-8 py-10 bg-gradient-to-br from-red-50 via-white to-red-50">
       <div className="max-w-7xl mx-auto px-6">
-        {/* HEADER */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
             Photo Gallery
           </h2>
-
           <div className="mt-4 w-24 h-1 bg-red-700 mx-auto rounded-full"></div>
-
-          <p className="text-gray-500 mt-6 text-lg">
-            Moments and memories from my journey
-          </p>
         </div>
 
-        {/* GRID */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
 
           {photos.map((photo, index) => (
             <Card
               key={index}
-              className="group overflow-hidden rounded-2xl border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              className="group overflow-hidden border-2 border-transparent bg-white transition-all duration-300 hover:shadow-xl hover:border-red-700"
             >
               <div className="relative aspect-square overflow-hidden">
-
-                {/* IMAGE */}
                 <ImageWithFallback
                   src={photo.src}
                   alt={photo.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
 
-                {/* CATEGORY BADGE */}
                 <div className="absolute top-3 left-3 bg-red-700 px-3 py-1 text-xs rounded-full font-medium text-white shadow">
                   {photo.category}
                 </div>
 
-                {/* OVERLAY */}
                 <div className="absolute inset-0 bg-gradient-to-t from-red-700/90 via-red-700/35 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   
                   <div className="absolute bottom-4 left-4 right-4 text-white">

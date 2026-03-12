@@ -16,7 +16,7 @@ export function Footer() {
               <span className="text-xl font-bold">Renz Danniel R. Rapanut</span>
             </div>
             <p className="text-gray-300">
-              Computer Engineering graduate focused on full-stack development, cybersecurity, and building practical technology solutions with clean implementation.
+              Fresh Computer Engineering graduate focused on full-stack development, cybersecurity, and building practical technology solutions with clean implementation.
             </p>
           </div>
 

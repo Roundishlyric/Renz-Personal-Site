@@ -133,16 +133,16 @@ const TeamPanel = React.memo(function TeamPanel({
 
       <div
         className={[
-          "grid gap-5",
+          "grid gap-4",
           teamCols === 4 ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-3",
         ].join(" ")}
       >
         {members.map((c) => (
           <div
             key={c.name}
-            className="group rounded-2xl border border-white/10 bg-slate-800 p-3 transition-colors hover:border-cyan-400/30 hover:bg-slate-800/90"
+            className="group rounded-xl border border-white/10 bg-slate-800 p-2.5 transition-colors hover:border-cyan-400/30 hover:bg-slate-800/90"
           >
-            <div className="relative w-full aspect-square rounded-xl overflow-hidden border border-white/10 bg-slate-950">
+            <div className="relative mx-auto aspect-square w-full max-w-[130px] rounded-lg overflow-hidden border border-white/10 bg-slate-950">
               <img
                 src={c.img}
                 alt={c.name}
@@ -152,7 +152,7 @@ const TeamPanel = React.memo(function TeamPanel({
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             </div>
-            <p className="mt-3 text-sm font-semibold text-white text-center truncate">
+            <p className="mt-2 text-[13px] font-semibold text-white text-center truncate">
               {c.name}
             </p>
           </div>
@@ -996,8 +996,7 @@ export function Gaming() {
                       className="w-full mt-6 h-11 bg-blue-700 hover:bg-blue-800"
                       onClick={() =>
                         window.open(
-                          "https://www.hoyolab.com/accountCenter/postList?id=11846094"
-                        )
+                          "https://steamcommunity.com/profiles/76561199068794358/")
                       }
                     >
                       <img

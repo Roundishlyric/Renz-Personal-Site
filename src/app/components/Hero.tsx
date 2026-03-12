@@ -51,16 +51,16 @@ export function Hero() {
           <div className="mb-8 h-1 w-24 bg-red-700 rounded lg:mx-0 mx-auto"></div>
 
           <h2 className="mb-6 max-w-3xl text-2xl text-gray-900 md:text-3xl">
-            Computer Engineering graduate building practical full-stack projects with a growing focus on cybersecurity and secure systems.
+            Fresh Computer Engineering graduate building practical full-stack projects with a growing focus on cybersecurity and secure systems.
           </h2>
 
           <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-gray-700 lg:mx-0">
-            I build frontend and backend solutions with attention to structure, clarity, and implementation detail, while developing deeper skills in cybersecurity, secure development, and system design.
+            I build frontend and backend solutions with attention to structure, clarity, and implementation detail, while continuing to grow my skills in cybersecurity, secure development, and system design as I start my professional career.
           </p>
 
           <div className="mb-10 flex flex-wrap justify-center gap-4 lg:justify-start">
             <Badge className="rounded-full bg-red-700 px-6 py-2 text-base text-white hover:bg-red-700">
-              CpE Graduate
+              Fresh CpE Graduate
             </Badge>
             <Badge className="rounded-full border border-red-700 px-6 py-2 text-base text-red-700 bg-white">
               Full-Stack Developer
@@ -122,7 +122,7 @@ export function Hero() {
 
             <div className="mb-8 flex justify-center">
               <div className="flex h-44 w-44 items-center justify-center rounded-full border-4 border-red-100 bg-zinc-900 text-6xl font-bold text-white shadow-[0_20px_45px_rgba(185,28,28,0.2)]">
-                YN
+                RR
               </div>
             </div>
 
@@ -132,8 +132,8 @@ export function Hero() {
                 <p className="text-lg font-semibold text-gray-900">Full-Stack Development, Cybersecurity, and Secure Systems</p>
               </div>
               <div className="rounded-2xl border border-red-100 p-4">
-                <p className="text-sm text-gray-500">Strengths</p>
-                <p className="text-lg font-semibold text-gray-900">React, Node.js, Tailwind, UI Implementation, Security Fundamentals</p>
+                <p className="text-sm text-gray-500">Current Strengths</p>
+                <p className="text-lg font-semibold text-gray-900">React, Node.js, Tailwind, UI Implementation, and Security Fundamentals</p>
               </div>
             </div>
 

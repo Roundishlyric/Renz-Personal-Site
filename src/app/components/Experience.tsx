@@ -8,11 +8,11 @@ export function Experience() {
       company: "Gallium31 Corporation",
       period: "2025 - 2026",
       description: [
-        "Assisted in the development and enhancement of web applications.",
-        "Worked on UI and front-end implementations across multiple company websites.",
-        "Improved site usability and responsiveness to provide a better user experience.",
-        "Automated testing using Playwright to verify functionality and reduce manual testing effort.",
-        "Used Git for version control, including branching, committing, pushing code, and creating pull requests for team review.",
+        "Contributed to the development and enhancement of web applications in a professional team environment.",
+        "Implemented UI and front-end updates across multiple company websites using modern web technologies.",
+        "Improved usability, responsiveness, and visual consistency to support better user experience.",
+        "Used Playwright for automated testing to help verify functionality and reduce repetitive manual checks.",
+        "Worked with Git-based workflows for version control, collaboration, and code review.",
       ],
       technologies: ["React", "TypeScript", "JavaScript", "Node.js", "Git", "Playwright", "WordPress", "Figma"],
     },
@@ -23,11 +23,8 @@ export function Experience() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(185,28,28,0.10),transparent_55%)] pointer-events-none" />
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16 text-center">
-          <h2 className="mb-4 text-4xl text-white md:text-5xl">Internship Experience</h2>
+          <h2 className="mb-4 text-4xl text-white md:text-5xl">Experience</h2>
           <div className="mx-auto mb-4 h-1 w-24 bg-red-700"></div>
-          <p className="text-lg text-gray-300">
-            Hands-on experience building interfaces, improving usability, and supporting delivery workflows
-          </p>
         </div>
 
         <div className="mx-auto max-w-3xl">

@@ -8,9 +8,12 @@ export function Education() {
       degree: "Bachelor of Science in Computer Engineering",
       school: "Far Eastern University Institute of Technology",
       location: "Manila",
-      period: "2021 - 2026 (Expected)",
-      status: "In Progress",
-      achievements: ["Member of Computer Engineering Organization"],
+      period: "2021 - 2026",
+      status: "Graduated",
+      achievements: [
+        "Completed the Bachelor of Science in Computer Engineering program",
+        "Member of the Computer Engineering Organization",
+      ],
       coursework: [
         "Data Structures & Algorithms",
         "Object-Oriented Programming",
@@ -32,7 +35,7 @@ export function Education() {
       role: "Former Member of Documentation section",
       period: "2023 - 2024",
       description:
-        "Participating in technical workshops, seminars, and collaborative projects focused on emerging technologies and software development practices.",
+        "Participated in technical activities, seminars, and collaborative initiatives that strengthened communication, documentation, and teamwork skills.",
       logo: "/images/comp.jpg",
     },
   ];
@@ -128,7 +131,7 @@ export function Education() {
                     <div className="rounded-xl border border-red-200 bg-white px-4 py-3">
                       <p className="text-xs uppercase tracking-wide text-gray-500">Focus</p>
                       <p className="mt-2 text-sm text-gray-700">
-                        Software engineering, systems, and practical project execution.
+                        Software development, systems, and applied engineering project work.
                       </p>
                     </div>
                   </div>

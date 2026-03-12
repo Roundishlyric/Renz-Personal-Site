@@ -3,11 +3,9 @@ import { Card } from './ui/card';
 import { Button } from './ui/button';
 
 export function CVDownload() {
-  const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = '/Renz_Rapanut_CV.pdf';
-    link.download = 'Renz_Rapanut_CV.pdf';
-    link.click();
+  const handleRequestCV = () => {
+    window.location.href =
+      'mailto:renzdanniel63@gmail.com?subject=CV%20Request&body=Hello%20Renz%2C%20I%20would%20like%20to%20request%20your%20latest%20CV.';
   };
 
   return (
@@ -23,32 +21,32 @@ export function CVDownload() {
             </div>
 
             <h2 className="mb-4 text-4xl font-bold text-black md:text-5xl">
-              Download My CV
+              Request My CV
             </h2>
 
             <p className="mx-auto mb-8 max-w-2xl text-xl text-black">
-              Get a comprehensive overview of my education, skills, and projects in a downloadable PDF format.
+              I am a fresh Computer Engineering graduate open to entry-level opportunities. Contact me to request my latest CV and learn more about my education, internship experience, and projects.
             </p>
 
             <div className="mb-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button
                 size="lg"
-                onClick={handleDownload}
+                onClick={handleRequestCV}
                 className="bg-red-700 px-8 py-6 text-lg text-white shadow-lg shadow-red-900/50 hover:bg-red-800"
               >
                 <Download size={24} className="mr-3" />
-                Download CV (PDF)
+                Request CV via Email
               </Button>
             </div>
 
             <div className="flex items-center justify-center gap-8 text-black">
               <div className="flex items-center gap-2">
                 <div className="h-3 w-3 rounded-full bg-red-700"></div>
-                <span>Updated Feb 2026</span>
+                <span>Updated March 2026</span>
               </div>
               <div className="flex items-center gap-2">
                 <FileText size={16} />
-                <span>PDF Format</span>
+                <span>Latest CV Available on Request</span>
               </div>
             </div>
           </div>

@@ -39,10 +39,6 @@ export function Hero() {
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-4 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:px-8">
         <div className="text-center lg:text-left">
-          <Badge className="mb-6 rounded-full bg-red-700 px-4 py-2 text-sm font-medium tracking-[0.18em] text-white uppercase hover:bg-red-700">
-            Computer Engineering Graduate
-          </Badge>
-
           <h1 className="mb-6 text-5xl font-extrabold leading-tight tracking-tight md:text-7xl">
             <span className="block text-gray-900">Renz Danniel R.</span>
             <span className="block text-red-700">Rapanut</span>

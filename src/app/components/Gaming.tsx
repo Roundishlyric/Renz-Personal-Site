@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+﻿import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import {
   Trophy,
@@ -18,11 +18,13 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
+type GameImage = string | { src: string; focus?: string };
+
 type Game = {
   key: string;
   tab: string;
   title: string;
-  images: string[];
+  images: GameImage[];
   focus: string;
   main: string;
   subs: string[];
@@ -62,6 +64,12 @@ const XIcon = ({ size = 34 }: { size?: number }) => (
     <path d="M18.244 2H21.5l-7.37 8.42L23 22h-6.828l-5.345-6.993L4.5 22H1.244l7.885-9.007L1 2h6.828l4.84 6.35L18.244 2Zm-2.395 18h2.1L7.95 4h-2.1l9.999 16Z" />
   </svg>
 );
+
+const getGameImageSrc = (image: GameImage) =>
+  typeof image === "string" ? image : image.src;
+
+const getGameImageFocus = (image: GameImage, fallback: string) =>
+  typeof image === "string" ? fallback : image.focus ?? fallback;
 
 const HOYO_TEAMS: Record<HoyoKey, HoyoTeam> = {
   genshin: {
@@ -168,10 +176,9 @@ const OtherGameCard = React.memo(function OtherGameCard({
   game: OtherGame;
 }) {
   return (
-    <Card className="group overflow-hidden rounded-[1.35rem] border border-teal-400/20 bg-[#07152b] transition-all duration-300 hover:-translate-y-1 hover:border-teal-300/45 hover:shadow-[0_14px_32px_rgba(8,145,178,0.16)]">
-      <div className="h-1.5 w-full bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500" />
-
-      <div className="relative h-40 w-full overflow-hidden bg-slate-950 leading-none">
+    <Card className="group gap-0 overflow-hidden rounded-[1.35rem] border border-teal-400/20 bg-[#07152b] transition-all duration-300 hover:-translate-y-1 hover:border-teal-300/45 hover:shadow-[0_14px_32px_rgba(8,145,178,0.16)]">
+    
+      <div className="relative h-36 w-full overflow-hidden bg-slate-950 leading-none">
         <ImageWithFallback
           src={game.image}
           alt={game.title}
@@ -182,27 +189,27 @@ const OtherGameCard = React.memo(function OtherGameCard({
         <div className="absolute inset-0 bg-gradient-to-t from-[#07152b]/88 via-[#07152b]/22 to-transparent" />
       </div>
 
-      <div className="space-y-3 px-3.5 pb-3.5 pt-0">
+      <div className="space-y-2.5 px-3.5 pb-3 pt-2.5">
         <div>
-          <h4 className="line-clamp-2 min-h-[3rem] text-[15px] font-extrabold leading-snug text-white">
+          <h4 className="line-clamp-2 min-h-[2.6rem] text-[15px] font-extrabold leading-snug text-white">
             {game.title}
           </h4>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-1.5">
           <span className="rounded-full border border-teal-400/20 bg-teal-400/10 px-2.5 py-1 text-[11px] font-medium text-teal-100">
             {game.role}
           </span>
         </div>
 
-        <div className="grid grid-cols-2 gap-2 text-[11px]">
-          <div className="rounded-xl border border-white/10 bg-[#020817] px-2.5 py-2.5">
+        <div className="grid grid-cols-2 gap-1.5 text-[11px]">
+          <div className="rounded-xl border border-white/10 bg-[#020817] px-2.5 py-2">
             <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
               Rank
             </p>
             <p className="mt-1 font-bold text-white">{game.rank}</p>
           </div>
-          <div className="rounded-xl border border-white/10 bg-[#020817] px-2.5 py-2.5">
+          <div className="rounded-xl border border-white/10 bg-[#020817] px-2.5 py-2">
             <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
               Hours
             </p>
@@ -284,10 +291,13 @@ export function Gaming() {
         title: "GUILTY GEAR STRIVE",
         images: [
           "https://cdn.dashfight.com/9d3a20e201c12900f66ac1e4a2de1962c3e8b2b7.png",
-          "https://www.fightersgeneration.com/nf8/game/guiltygear/guiltygear2020-screenshot5.jpg",
+          {
+            src: "https://www.fightersgeneration.com/nf8/game/guiltygear/guiltygear2020-screenshot5.jpg",
+            focus: "object-[62%_center]",
+          },
           "https://www.destructoid.com/wp-content/uploads/2021/05/619542-guiltygearstrivewhitefang.jpg",
         ],
-        focus: "object-right",
+        focus: "object-center",
         main: "ELPHELT VALENTINE",
         subs: ["NAGORIYUKI", "LEO WHITEFANG"],
         rank: "Platinum",
@@ -304,10 +314,11 @@ export function Gaming() {
           "https://gamingbolt.com/wp-content/uploads/2024/05/Granblue-Fantasy-Versus-Rising_Beatrix.jpg",
           "https://www.heypoorplayer.com/wp-content/uploads/2025/05/Granblue-Fantasy-Versus-Rising-Galleon-Attack.jpg",
           "https://gamicsoft.sgp1.digitaloceanspaces.com/26032/QQ%E5%9B%BE%E7%89%8720230306130348.png",
+          "https://gaming-cdn.com/images/news/articles/17255/cover/granblue-fantasy-versus-rising-will-get-the-dlc-featuring-ilsa-on-february-10-cover696d20fac5b92.jpg",
         ],
         focus: "object-center",
         main: "BEATRIX",
-        subs: ["GALLEON", "ANILA"],
+        subs: ["GALLEON", "ANILA","Ilsa"],
         rank: "S+",
         placements: [
           { event: "Geek+Pop Fight Club Ranker Event 4", place: "13th Place" },
@@ -443,12 +454,17 @@ export function Gaming() {
   );
 
   const [slide, setSlide] = useState(0);
+  const [prevSlide, setPrevSlide] = useState<number | null>(null);
+  const [isSlideFading, setIsSlideFading] = useState(false);
   const canSlide = (active?.images?.length ?? 0) > 1;
   const currentIndex = slide;
+  const currentImage = active.images[currentIndex];
 
   // Reset slider when switching games
   useEffect(() => {
     setSlide(0);
+    setPrevSlide(null);
+    setIsSlideFading(false);
   }, [activeKey]);
 
   // Preload adjacent slides to reduce flicker during transition.
@@ -457,9 +473,9 @@ export function Gaming() {
     const total = active.images.length;
     const nextIndex = (slide + 1) % total;
     const prevIndex = (slide - 1 + total) % total;
-    [active.images[nextIndex], active.images[prevIndex]].forEach((src) => {
+    [active.images[nextIndex], active.images[prevIndex]].forEach((image) => {
       const img = new Image();
-      img.src = src;
+      img.src = getGameImageSrc(image);
     });
   }, [active, slide]);
 
@@ -473,15 +489,40 @@ export function Gaming() {
       if (normalizedTo === slide) return;
 
       void dir;
+      setPrevSlide(slide);
+      setIsSlideFading(false);
       setSlide(normalizedTo);
     },
     [active, canSlide, slide]
   );
 
+  useEffect(() => {
+    if (prevSlide === null) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      setIsSlideFading(true);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [prevSlide]);
+
+  useEffect(() => {
+    if (!isSlideFading) return;
+
+    const t = window.setTimeout(() => {
+      setPrevSlide(null);
+      setIsSlideFading(false);
+    }, 420);
+
+    return () => window.clearTimeout(t);
+  }, [isSlideFading]);
+
   const next = useCallback(() => startSlide(slide + 1, "next"), [slide, startSlide]);
   const prev = useCallback(() => startSlide(slide - 1, "prev"), [slide, startSlide]);
 
   const [heroSlide, setHeroSlide] = useState(0);
+  const [heroPrevSlide, setHeroPrevSlide] = useState<number | null>(null);
+  const [isHeroFading, setIsHeroFading] = useState(false);
   const canHeroSlide = heroImages.length > 1;
 
   const startHeroSlide = useCallback(
@@ -493,10 +534,33 @@ export function Gaming() {
       if (normalizedTo === heroSlide) return;
 
       void dir;
+      setHeroPrevSlide(heroSlide);
+      setIsHeroFading(false);
       setHeroSlide(normalizedTo);
     },
     [canHeroSlide, heroImages.length, heroSlide]
   );
+
+  useEffect(() => {
+    if (heroPrevSlide === null) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      setIsHeroFading(true);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [heroPrevSlide]);
+
+  useEffect(() => {
+    if (!isHeroFading) return;
+
+    const t = window.setTimeout(() => {
+      setHeroPrevSlide(null);
+      setIsHeroFading(false);
+    }, 420);
+
+    return () => window.clearTimeout(t);
+  }, [isHeroFading]);
 
   useEffect(() => {
     if (!canHeroSlide) return;
@@ -545,17 +609,31 @@ export function Gaming() {
                 alt="SenGouku"
                 className="absolute inset-0 h-full w-full object-cover object-left"
                 draggable={false}
+                loading="eager"
+                fetchPriority="high"
               />
+              {heroPrevSlide !== null ? (
+                <ImageWithFallback
+                  src={heroImages[heroPrevSlide]}
+                  alt=""
+                  className={`absolute inset-0 h-full w-full object-cover object-left will-change-opacity transition-opacity duration-500 ease-out ${
+                    isHeroFading ? "opacity-0" : "opacity-100"
+                  }`}
+                  draggable={false}
+                  loading="eager"
+                  aria-hidden="true"
+                />
+              ) : null}
 
               {/* teal tint */}
-              <div className="absolute inset-0 bg-gradient-to-br from-teal-500/15 via-cyan-500/5 to-transparent" />
+              <div className="absolute inset-0 z-10 bg-gradient-to-br from-teal-500/15 via-cyan-500/5 to-transparent" />
 
               {/* readability */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+              <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
               {/* bottom identity */}
-              <div className="absolute bottom-10 left-10 flex items-center gap-3">
+              <div className="absolute bottom-10 left-10 z-20 flex items-center gap-3">
                 <Gamepad2 size={28} className="text-teal-300" />
                 <div>
                   <p className="text-3xl font-bold">SenGouku</p>
@@ -586,13 +664,13 @@ export function Gaming() {
 
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Badge className="px-4 py-2 text-sm bg-slate-800 border border-white/10 text-white">
-                    ⚔️ Fighting Game Specialist
+                    Fighting Game Specialist
                   </Badge>
                   <Badge className="px-4 py-2 text-sm bg-slate-800 border border-white/10 text-white">
-                    👥 Archangel Esports
+                    Archangel Esports
                   </Badge>
                   <Badge className="px-4 py-2 text-sm bg-slate-800 border border-white/10 text-teal-200">
-                    ⭐ Competitive Player
+                    Competitive Player
                   </Badge>
                 </div>
 
@@ -612,8 +690,7 @@ export function Gaming() {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </div>        </section>
 
       
         {/* ===================== TEAM SECTION ===================== */}
@@ -867,14 +944,28 @@ export function Gaming() {
                   <div className="md:col-span-3 relative overflow-hidden bg-slate-950">
                     <div className="relative w-full h-[420px] md:h-full overflow-hidden">
                       <ImageWithFallback
-                        src={active.images[currentIndex]}
+                        src={getGameImageSrc(currentImage)}
                         alt={active.title}
                         className={[
                           "absolute inset-0 w-full h-full object-cover",
-                          active.focus,
-                          "transition-opacity duration-200",
+                          getGameImageFocus(currentImage, active.focus),
                         ].join(" ")}
+                        loading="eager"
+                        fetchPriority="high"
                       />
+                      {prevSlide !== null ? (
+                        <ImageWithFallback
+                          src={getGameImageSrc(active.images[prevSlide])}
+                          alt=""
+                          className={[
+                            "absolute inset-0 w-full h-full object-cover will-change-opacity transition-opacity duration-500 ease-out",
+                            getGameImageFocus(active.images[prevSlide], active.focus),
+                            isSlideFading ? "opacity-0" : "opacity-100",
+                          ].join(" ")}
+                          loading="eager"
+                          aria-hidden="true"
+                        />
+                      ) : null}
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent pointer-events-none" />
                       <div className="absolute inset-0 [background:radial-gradient(circle_at_40%_25%,rgba(45,212,191,0.10),transparent_55%)] pointer-events-none" />
 
@@ -941,8 +1032,7 @@ export function Gaming() {
         <div id="other-games" className="scroll-mt-24 mb-20">
           <h3 className={`${aboutTitleClass} text-center`}>Other Games</h3>
           <div className="mx-auto mb-4 h-1 w-20 rounded bg-gradient-to-r from-teal-400 to-cyan-400" />
-
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 items-stretch">
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5 items-stretch">
             {otherGames.map((game) => (
               <OtherGameCard key={game.title} game={game} />
             ))}
@@ -1338,3 +1428,5 @@ export function Gaming() {
     </section>
   );
 }
+
+

@@ -318,7 +318,7 @@ export function Gaming() {
         ],
         focus: "object-center",
         main: "BEATRIX",
-        subs: ["GALLEON", "ANILA","Ilsa"],
+        subs: ["GALLEON", "ANILA","ILSA"],
         rank: "S+",
         placements: [
           { event: "Geek+Pop Fight Club Ranker Event 4", place: "13th Place" },
@@ -387,18 +387,11 @@ export function Gaming() {
       image: "https://4kwallpapers.com/images/wallpapers/granblue-fantasy-3840x2160-15025.jpg",
     },
     {
-      title: "Monster Hunter: Wilds",
+      title: "Monster Hunter Series",
       rank: "MR: 40",
       hours: "100+",
       role: "GunLance / Switch Axe",
       image: "https://i.redd.it/wallpaper-compilation-from-wilds-release-s-capcom-survey-v0-x1ytckrvmvle1.jpg?width=2560&format=pjpg&auto=webp&s=b34be37c51661ff48b918a0a217c353bd16909af",
-    },
-    {
-      title: "Monster Hunter: World",
-      rank: "HR: 20",
-      hours: "20+",
-      role: "GunLance / Switch Axe",
-      image: "https://images3.alphacoders.com/107/1070888.jpg",
     },
     {
       title: "Elden Ring",
@@ -442,6 +435,41 @@ export function Gaming() {
       role: "Okami",
       image: "https://4kwallpapers.com/images/wallpapers/sekiro-shadows-die-5120x2880-14176.jpg",
     },
+    {
+      title: "Danganropa Series",
+      rank: "Completed",
+      hours: "200+",
+      role: "Hope/Despair",
+      image: "https://i.redd.it/xh0v2m4d2a471.jpg",
+    },
+    {
+      title: "Devil May Cry Series",
+      rank: "Completed",
+      hours: "100+",
+      role: "Sparda",
+      image: "https://images6.alphacoders.com/926/926723.jpg",
+    },  
+    {
+      title: "Ace Combat ",
+      rank: "Completed",
+      hours: "100+",
+      role: "Osea Pilot",
+      image: "https://i.redd.it/abh0a8f1pa5z.png",
+    },  
+     {
+      title: "Valorant",
+      rank: "Gold 1",
+      hours: "600+",
+      role: "Cypher/Phoenix",
+      image: "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/54d784be3db8503ec574ff45e912ea098cc10352-854x484.png?accountingTag=VAL",
+    },  
+    {
+      title: "Armored Core VI: Fires of Rubicon",
+      rank: "Completed",
+      hours: "100+",
+      role: "Raven",
+      image: "https://images.wallpapersden.com/image/download/armored-core-vi-fires-of-rubicon-hd_bW1pZmaUmZqaraWkpJRobWllrWdma2U.jpg",
+    },  
   ],
     []
   );
@@ -1037,6 +1065,9 @@ export function Gaming() {
               <OtherGameCard key={game.title} game={game} />
             ))}
           </div>
+          <p className="mt-2 text-center text-lg font-semibold tracking-wide text-cyan-200">
+            And more ..
+          </p>
         </div>
 
         {/* Steam Profile & Social Media */}

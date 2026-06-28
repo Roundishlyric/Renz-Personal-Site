@@ -1,6 +1,7 @@
 import { ArrowDown, Github, Linkedin, Mail, Facebook } from 'lucide-react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function Hero() {
   const scrollToSection = (id: string) => {
@@ -47,16 +48,16 @@ export function Hero() {
           <div className="mb-8 h-1 w-24 bg-red-700 rounded lg:mx-0 mx-auto"></div>
 
           <h2 className="mb-6 max-w-3xl text-2xl text-gray-900 md:text-3xl">
-            Fresh Computer Engineering graduate building practical full-stack projects with a growing focus on cybersecurity and secure systems.
+            Computer Engineering student with strong problem-solving skills, technical knowledge, and internship experience. Passionate about technology and committed to continuous learning.
           </h2>
 
           <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-gray-700 lg:mx-0">
-            I build frontend and backend solutions with attention to structure, clarity, and implementation detail, while continuing to grow my skills in cybersecurity, secure development, and system design as I start my professional career.
+            I build frontend and backend solutions with attention to structure, clarity, and implementation detail, while continuing to grow my skills in cybersecurity, secure development, and system design as I complete my CpE requirements.
           </p>
 
           <div className="mb-10 flex flex-wrap justify-center gap-4 lg:justify-start">
             <Badge className="rounded-full bg-red-700 px-6 py-2 text-base text-white hover:bg-red-700">
-              Fresh CpE Graduate
+              CpE Student
             </Badge>
             <Badge className="rounded-full border border-red-700 px-6 py-2 text-base text-red-700 bg-white">
               Full-Stack Developer
@@ -108,7 +109,7 @@ export function Hero() {
           <div className="relative w-full rounded-[2rem] border border-red-100 bg-white p-8 shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
             <div className="mb-8 flex items-center justify-between">
               <span className="rounded-full bg-red-50 px-4 py-2 text-sm font-semibold text-red-700">
-                Available for opportunities
+                Open to opportunities
               </span>
               <span className="flex items-center gap-2 text-sm text-gray-500">
                 <span className="h-2.5 w-2.5 rounded-full bg-red-700" />
@@ -117,8 +118,12 @@ export function Hero() {
             </div>
 
             <div className="mb-8 flex justify-center">
-              <div className="flex h-44 w-44 items-center justify-center rounded-full border-4 border-red-100 bg-zinc-900 text-6xl font-bold text-white shadow-[0_20px_45px_rgba(185,28,28,0.2)]">
-                RR
+              <div className="flex h-44 w-44 items-center justify-center overflow-hidden rounded-full border-4 border-red-100 bg-zinc-900 shadow-[0_20px_45px_rgba(185,28,28,0.2)]">
+                <ImageWithFallback
+                  src="/images/prof.png"
+                  alt="Renz Danniel Rapanut"
+                  className="h-full w-full object-cover"
+                />
               </div>
             </div>
 

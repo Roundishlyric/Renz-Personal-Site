@@ -4,7 +4,6 @@ import { About } from '../components/About';
 import { Education } from '../components/Education';
 import { Skills } from '../components/Skills';
 import { Hobbies } from '../components/Hobbies';
-import { Gallery } from '../components/gallery';
 import { Contact } from '../components/Contact';
 import { Footer } from '../components/Footer';
 import { CVDownload } from '../components/CVDownload';
@@ -25,7 +24,6 @@ export function CVSite() {
         <Projects />
         <Experience />
         <Hobbies />
-        <Gallery />
         <CVDownload />
         <Contact />
       </main>

@@ -29,7 +29,6 @@ export function Header() {
     { label: "Projects", id: "projects" },
     { label: "Experience", id: "experience" },
     { label: "Hobbies", id: "hobbies" },
-    { label: "Gallery", id: "gallery" },
     { label: "CV Download", id: "cv-download" },
     { label: "Contact", id: "contact" },
   ];

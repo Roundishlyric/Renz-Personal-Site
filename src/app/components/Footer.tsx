@@ -16,7 +16,7 @@ export function Footer() {
               <span className="text-xl font-bold">Renz Danniel R. Rapanut</span>
             </div>
             <p className="text-gray-300">
-              Fresh Computer Engineering graduate focused on full-stack development, cybersecurity, and building practical technology solutions with clean implementation.
+              Computer Engineering student with thesis remaining, focused on full-stack development, cybersecurity, and building practical technology solutions with clean implementation.
             </p>
           </div>
 
@@ -36,7 +36,6 @@ export function Footer() {
             <ul className="space-y-1">
               <li><a href="#experience" className={navLabelClass}>Experience</a></li>
               <li><a href="#hobbies" className={navLabelClass}>Hobbies</a></li>
-              <li><a href="#gallery" className={navLabelClass}>Gallery</a></li>
               <li><a href="#cv-download" className={navLabelClass}>CV Download</a></li>
               <li><a href="#contact" className={navLabelClass}>Contact</a></li>
             </ul>

@@ -119,21 +119,6 @@ export function Hobbies() {
             </Card>
           ))}
         </div>
-
-        <div className="mt-10 text-center">
-          <Card className="max-w-4xl mx-auto border-2 border-transparent bg-white transition-shadow hover:shadow-xl hover:border-red-700">
-            <div className="p-8">
-              <h3 className="text-2xl mb-4 text-gray-900">Balance is Key</h3>
-
-              <p className="text-lg text-gray-700">
-                I believe in maintaining a healthy work-life balance. These
-                hobbies help me stay creative, motivated, and bring fresh
-                perspectives to my academic and professional work.
-              </p>
-            </div>
-          </Card>
-        </div>
-
       </div>
     </section>
   );

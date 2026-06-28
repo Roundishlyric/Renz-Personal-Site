@@ -8,10 +8,9 @@ export function Education() {
       degree: "Bachelor of Science in Computer Engineering",
       school: "Far Eastern University Institute of Technology",
       location: "Manila",
-      period: "2021 - 2026",
-      status: "Graduated",
+      period: "2021 - present",
       achievements: [
-        "Completed the Bachelor of Science in Computer Engineering program",
+        "Completed major Computer Engineering coursework with thesis remaining",
         "Member of the Computer Engineering Organization",
       ],
       coursework: [
@@ -122,16 +121,10 @@ export function Education() {
                         {edu.period}
                       </p>
                     </div>
-
-                    <div className="rounded-xl border border-red-200 bg-white px-4 py-3">
-                      <p className="text-xs uppercase tracking-wide text-gray-500">Status</p>
-                      <Badge className="mt-2 bg-red-700 text-white">{edu.status}</Badge>
-                    </div>
-
                     <div className="rounded-xl border border-red-200 bg-white px-4 py-3">
                       <p className="text-xs uppercase tracking-wide text-gray-500">Focus</p>
                       <p className="mt-2 text-sm text-gray-700">
-                        Software development, systems, and applied engineering project work.
+                        Software development, and applied engineering projects.
                       </p>
                     </div>
                   </div>

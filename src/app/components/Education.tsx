@@ -10,7 +10,6 @@ export function Education() {
       location: "Manila",
       period: "2021 - present",
       achievements: [
-        "Completed major Computer Engineering coursework with thesis remaining",
         "Member of the Computer Engineering Organization",
       ],
       coursework: [

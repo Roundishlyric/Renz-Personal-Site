@@ -16,7 +16,7 @@ export function Footer() {
               <span className="text-xl font-bold">Renz Danniel R. Rapanut</span>
             </div>
             <p className="text-gray-300">
-              Computer Engineering student with thesis remaining, focused on full-stack development, cybersecurity, and building practical technology solutions with clean implementation.
+              Computer Engineering student with strong problem-solving skills, technical knowledge, and internship experience. Passionate about technology and committed to continuous learning.
             </p>
           </div>
 

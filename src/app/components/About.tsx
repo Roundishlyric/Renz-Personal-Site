@@ -42,11 +42,11 @@ export function About() {
 
           <div className="space-y-5">
             <p className="text-lg leading-relaxed text-white">
-              I am currently a Bachelor of Science in Computer Engineering student with my thesis remaining, and I have a strong interest in software development, embedded systems, and hardware-software integration.
+              I am currently a Bachelor of Science in Computer Engineering student with a strong interest in software development, embedded systems, and hardware-software integration.
             </p>
 
             <p className="text-lg leading-relaxed text-white">
-              Through academic projects, thesis preparation, and internship experience, I have built a practical foundation in web development using tools such as React, Node.js, and databases, while also strengthening my understanding of system design, debugging, and collaborative development workflows.
+              Through academic projects and internship experience, I have built a practical foundation in web development using tools such as React, Node.js, and databases, while also strengthening my understanding of system design, debugging, and collaborative development workflows.
             </p>
 
             <p className="text-lg leading-relaxed text-white">

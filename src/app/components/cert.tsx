@@ -86,6 +86,16 @@ const certifications: Certification[] = [
     badgeImgUrl:
       "https://images.credly.com/size/110x110/images/2210b6fe-0eda-415a-8aba-6c1400566728/ITS-Badges_Java_1200px.png",
   },
+  {
+    name: "Responsive Web Design",
+    issuer: "FreeCodeCamp",
+    dateLabel: "July 2025",
+    dateTime: "2025-07",
+    credlyUrl:
+      "https://www.freecodecamp.org/certification/rrapanut/responsive-web-design-v9",
+    badgeImgUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0A1KK4zonxloOsoOqqTTpW6CERUimbEkkkVhMM_a3P0IMpvqTiUlD08Qc&s=10",
+  },
 ];
 
 function getIssuerKind(issuer: string) {
@@ -126,11 +136,11 @@ const CertCard = memo(function CertCard({ cert }: { cert: Certification }) {
       "
     >
       <div className="flex items-start gap-3">
-        <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-lg border border-white/70 bg-white p-1">
+        <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-white/70 bg-white p-1">
           <img
             src={imgSrc}
             alt={cert.name}
-            className="h-full w-full object-contain"
+            className="h-full w-full rounded-xl object-contain"
           />
         </div>
 
@@ -199,7 +209,6 @@ export function Cert() {
             Badges and Certifications
           </h2>
           <div className="mx-auto mb-4 h-1 w-24 bg-red-700"></div>
-          <p className="text-lg text-gray-300">Recognitions that support my direction in networking, software, and cybersecurity</p>
         </div>
 
         <div className="grid gap-5 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">

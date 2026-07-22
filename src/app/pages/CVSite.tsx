@@ -10,19 +10,22 @@ import { CVDownload } from '../components/CVDownload';
 import { Experience } from '../components/Experience';
 import { Cert } from '../components/cert';
 import { Projects } from '../components/Projects';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 export function CVSite() {
+  useScrollReveal();
+
   return (
     <div className="min-h-screen">
       <Header />
       <main>
         <Hero />
-        <About />
-        <Education />
+        <Projects />
         <Cert />
         <Skills />
-        <Projects />
         <Experience />
+        <About />
+        <Education />
         <Hobbies />
         <CVDownload />
         <Contact />

@@ -88,7 +88,6 @@ export function Header() {
                 }`}
               >
                 <Gamepad2 size={18} />
-                <span className="hidden lg:inline">Gaming</span>
               </Button>
             </Link>
           </nav>
@@ -130,7 +129,6 @@ export function Header() {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <Gamepad2 size={18} />
-              Gaming
             </Link>
           </nav>
         )}

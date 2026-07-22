@@ -80,22 +80,22 @@ export function Hobbies() {
   return (
     <section
       id="hobbies"
-      className="scroll-mt-8 py-10 bg-gradient-to-br from-red-50 via-white to-red-50"
+      className="scroll-mt-8 bg-gradient-to-br from-red-950 via-red-900 to-neutral-950 py-10"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">
+          <h2 className="mb-4 text-4xl text-white md:text-5xl">
             Hobbies & Interests
           </h2>
 
-          <div className="w-20 h-1 bg-red-700 mx-auto mb-4"></div>
+          <div className="mx-auto mb-4 h-1 w-20 bg-white"></div>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {hobbies.map((hobby, index) => (
             <Card
               key={index}
-              className="group relative overflow-hidden border-2 border-transparent bg-white transition-all duration-500 hover:shadow-xl hover:border-red-700"
+              className="group relative overflow-hidden border-2 border-white/10 bg-neutral-900 transition-all duration-500 hover:border-red-400 hover:shadow-xl hover:shadow-black/30"
             >
               <div className="relative h-72 overflow-hidden">
                 <ImageWithFallback

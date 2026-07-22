@@ -73,7 +73,6 @@ export function GamingHeader() {
               className="ml-1 flex items-center gap-2 rounded-lg border border-gray-700 px-3 py-2 text-gray-300 transition hover:border-teal-500 hover:text-white"
             >
               <Briefcase size={18} />
-              <span className="hidden lg:inline">View CV Site</span>
             </Link>
           </nav>
 
@@ -106,7 +105,6 @@ export function GamingHeader() {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <Briefcase size={18} />
-              View CV Site
             </Link>
           </nav>
         )}

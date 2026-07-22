@@ -75,5 +75,11 @@
     "overrides": {
       "vite": "6.3.5"
     }
+  },
+  "script":{
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "npm run dev"
   }
 }

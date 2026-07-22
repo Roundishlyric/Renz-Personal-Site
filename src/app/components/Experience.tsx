@@ -31,12 +31,12 @@ export function Experience() {
   ];
 
   return (
-    <section id="experience" className="relative overflow-hidden bg-black py-20">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(185,28,28,0.10),transparent_55%)] pointer-events-none" />
+    <section id="experience" className="relative overflow-hidden bg-gradient-to-br from-red-950 via-red-900 to-neutral-950 py-20">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_55%)]" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16 text-center">
           <h2 className="mb-4 text-4xl text-white md:text-5xl">Experience</h2>
-          <div className="mx-auto mb-4 h-1 w-24 bg-red-700"></div>
+          <div className="mx-auto mb-4 h-1 w-24 bg-white"></div>
         </div>
 
         <div>

@@ -70,6 +70,7 @@ export function GamingHeader() {
 
             <Link
               to="/"
+              viewTransition
               className="ml-1 flex items-center gap-2 rounded-lg border border-gray-700 px-3 py-2 text-gray-300 transition hover:border-teal-500 hover:text-white"
             >
               <Briefcase size={18} />
@@ -101,6 +102,7 @@ export function GamingHeader() {
 
             <Link
               to="/"
+              viewTransition
               className="flex items-center gap-2 px-2 py-2 text-gray-300 hover:text-white"
               onClick={() => setIsMobileMenuOpen(false)}
             >

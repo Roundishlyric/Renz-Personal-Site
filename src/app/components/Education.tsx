@@ -41,19 +41,20 @@ export function Education() {
   return (
     <section
       id="education"
-      className="scroll-mt-8 py-10 bg-gradient-to-br from-red-50 via-white to-red-50"
+      className="scroll-mt-8 bg-[#f4f1eb] py-20"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="text-center">
-          <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Education</h2>
-          <div className="w-20 h-1 bg-red-700 mx-auto mb-4"></div>
+        <div className="section-transition-item text-left">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-red-700">Academic foundation · 01</p>
+          <h2 className="mb-4 text-4xl font-black tracking-tight text-gray-900 md:text-6xl">Education</h2>
+          <div className="mb-4 h-1 w-20 bg-red-700"></div>
         </div>
 
-        <div className="space-y-12">
+        <div className="section-transition-item section-transition-delay-1 space-y-12">
           {education.map((edu, index) => (
             <Card
               key={index}
-              className="overflow-hidden border-2 border-transparent bg-white p-8 transition-shadow hover:shadow-xl hover:border-red-700"
+              className="overflow-hidden rounded-[2rem] border border-black/15 bg-white/65 p-8 shadow-none transition hover:-translate-y-1 hover:border-red-700"
             >
               <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
                 <div className="space-y-6">
@@ -133,12 +134,12 @@ export function Education() {
           ))}
         </div>
 
-        <div>
+        <div className="section-transition-item section-transition-delay-2">
           <h3 className="text-3xl mb-6 text-gray-900">Organization</h3>
           {activities.map((activity, index) => (
             <Card
               key={index}
-              className="border-2 border-transparent bg-white p-6 transition-shadow hover:shadow-xl hover:border-red-700"
+              className="rounded-[2rem] border border-black/15 bg-white/65 p-6 shadow-none transition hover:-translate-y-1 hover:border-red-700"
             >
               <div className="flex items-start gap-5">
                 <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-lg p-2">

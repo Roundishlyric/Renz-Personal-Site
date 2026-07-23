@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Gamepad2 } from "lucide-react";
 import { Button } from "./ui/button";
-import { Link } from "react-router";
+import { Link, NavLink, useLocation } from "react-router";
 
-export function Header() {
+export function Header({ hasSectionTabs = false }: { hasSectionTabs?: boolean }) {
+  const { pathname } = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -13,36 +14,28 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-      setIsMobileMenuOpen(false);
-    }
-  };
-
   const navItems = [
-    { label: "About", id: "about" },
-    { label: "Education", id: "education" },
-    { label: "Certifications", id: "cert" },
-    { label: "Skills", id: "skills" },
-    { label: "Projects", id: "projects" },
-    { label: "Experience", id: "experience" },
-    { label: "Hobbies", id: "hobbies" },
-    { label: "CV Download", id: "cv-download" },
-    { label: "Contact", id: "contact" },
+    { label: "Projects", to: "/projects" },
+    { label: "About", to: "/about" },
+    { label: "Experience", to: "/experience" },
+    { label: "Credentials", to: "/credentials" },
+    { label: "Contact", to: "/contact" },
   ];
 
-  const headerBg = isScrolled
-    ? "bg-black/90 backdrop-blur-md shadow-lg shadow-black/40"
+  const useSolidHeader = isScrolled || pathname !== "/";
+
+  const headerBg = useSolidHeader
+    ? `bg-black/90 backdrop-blur-md ${
+        hasSectionTabs ? "" : "shadow-lg shadow-black/40"
+      }`
     : "bg-transparent";
 
-  const brandText = isScrolled ? "text-white" : "text-gray-900";
-  const navText = isScrolled
+  const brandText = useSolidHeader ? "text-white" : "text-gray-900";
+  const navText = useSolidHeader
     ? "text-gray-200 hover:text-red-400"
     : "text-gray-700 hover:text-red-700";
 
-  const mobileBorder = isScrolled ? "border-white/10" : "border-gray-200";
+  const mobileBorder = useSolidHeader ? "border-white/10" : "border-gray-200";
 
   return (
     <header
@@ -50,39 +43,41 @@ export function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <button
-            onClick={() => scrollToSection("hero")}
+          <Link
+            to="/"
             className={`text-xl font-bold transition-colors ${brandText} ${
-              isScrolled ? "hover:text-red-400" : "hover:text-red-700"
+              useSolidHeader ? "hover:text-red-400" : "hover:text-red-700"
             }`}
           >
             &lt;Renz Rapanut /&gt;
-          </button>
+          </Link>
 
           <nav className="hidden md:flex min-w-0 items-center gap-3">
             <div
               className={`flex max-w-[min(58vw,860px)] items-center gap-1.5 overflow-x-auto whitespace-nowrap rounded-xl border px-2 py-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${
-                isScrolled
+                useSolidHeader
                   ? "border-white/10 bg-white/5"
                   : "border-black/10 bg-white/60 backdrop-blur-sm"
               }`}
             >
               {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`shrink-0 rounded-lg px-2.5 py-1.5 text-[13px] font-medium leading-none transition-colors hover:bg-white/10 ${navText}`}
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  className={({ isActive }) => `shrink-0 rounded-lg px-3 py-1.5 text-[13px] font-medium leading-none transition-colors hover:bg-white/10 ${navText} ${
+                    isActive ? "bg-red-700 text-white" : ""
+                  }`}
                 >
                   {item.label}
-                </button>
+                </NavLink>
               ))}
             </div>
 
-            <Link to="/gaming">
+            <Link to="/gaming" viewTransition>
               <Button
                 variant="outline"
                 className={`flex items-center gap-2 px-3 transition-colors ${
-                  isScrolled
+                  useSolidHeader
                     ? "!bg-transparent !text-white border-white/30 hover:!bg-white/10 hover:!text-white"
                     : "bg-transparent text-black border-gray-300 hover:bg-gray-100"
                 }`}
@@ -94,7 +89,7 @@ export function Header() {
 
           <button
             className={`md:hidden transition-colors ${
-              isScrolled ? "text-white" : "text-gray-900"
+              useSolidHeader ? "text-white" : "text-gray-900"
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
@@ -106,23 +101,25 @@ export function Header() {
         {isMobileMenuOpen && (
           <nav className={`md:hidden py-4 border-t ${mobileBorder}`}>
             {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`block w-full text-left py-2 transition-colors ${
-                  isScrolled
+              <NavLink
+                key={item.to}
+                to={item.to}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={({ isActive }) => `block w-full rounded-lg px-2 py-2 text-left transition-colors ${
+                  useSolidHeader
                     ? "text-gray-200 hover:text-red-400"
                     : "text-gray-700 hover:text-red-700"
-                }`}
+                } ${isActive ? "bg-red-700 text-white" : ""}`}
               >
                 {item.label}
-              </button>
+              </NavLink>
             ))}
 
             <Link
               to="/gaming"
+              viewTransition
               className={`flex items-center gap-2 py-2 transition-colors ${
-                isScrolled
+                useSolidHeader
                   ? "text-gray-200 hover:text-red-400"
                   : "text-gray-700 hover:text-red-700"
               }`}

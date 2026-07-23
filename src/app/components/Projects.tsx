@@ -125,12 +125,13 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="scroll-mt-8 bg-gradient-to-br from-red-950 via-red-900 to-neutral-950 py-10"
+      className="scroll-mt-8 bg-[#171717] py-20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 text-center">
-          <h2 className="mb-4 text-4xl text-white md:text-5xl">Projects</h2>
-          <div className="mx-auto mb-4 h-1 w-24 bg-white"></div>
+        <div className="mb-16 text-left">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-red-400">Selected work</p>
+          <h2 className="mb-4 text-4xl font-black tracking-tight text-white md:text-6xl">Projects</h2>
+          <div className="mb-4 h-1 w-24 bg-white"></div>
         </div>
 
         <Carousel className="relative" opts={{ loop: true }} setApi={setCarouselApi}>

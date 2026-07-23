@@ -1,44 +1,49 @@
-import { Download, FileText } from 'lucide-react';
-import { Card } from './ui/card';
-import { Button } from './ui/button';
+import { ArrowUpRight, Download, FileText } from 'lucide-react';
 
 export function CVDownload() {
   const handleRequestCV = () => {
-    window.open('/CV_RAPANUT.pdf', '_blank', 'noopener noreferrer');
+    window.open('/CV_RAPANUT.pdf', '_blank', 'noopener,noreferrer');
   };
 
   return (
     <section
       id="cv-download"
-      className="py-20 bg-black"
+      className="relative overflow-hidden bg-[#171717] py-24 text-white"
     >
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Card className="overflow-hidden border-2 border-red-600 bg-white shadow-2xl shadow-red-900/40">
-          <div className="p-12 text-center">
-            <div className="mb-6 inline-flex h-20 w-20 items-center justify-center rounded-full bg-red-700">
-              <FileText size={40} className="text-white" />
+      <div className="pointer-events-none absolute -right-28 -top-28 h-96 w-96 rounded-full border-[80px] border-red-700/10" />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-end gap-10 border-y border-white/15 py-12 lg:grid-cols-[0.7fr_1.3fr]">
+          <div>
+            <div className="mb-8 grid h-16 w-16 place-items-center rounded-2xl bg-red-700 shadow-[0_18px_40px_rgba(185,28,28,0.28)]">
+              <FileText size={28} />
             </div>
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-red-400">
+              One-page overview
+            </p>
+          </div>
 
-            <h2 className="mb-4 text-4xl font-bold text-black md:text-5xl">
-              Curriculum Vitae
+          <div>
+            <h2 className="max-w-3xl text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">
+              Want the full picture?
+              <span className="block text-white/35">Take my CV with you.</span>
             </h2>
-
-            <p className="mx-auto mb-8 max-w-2xl text-xl text-black">
-              Download my latest CV to review my education, internship experience, and technical projects as a Computer Engineering student.
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/60">
+              Review my education, internship experience, technical skills, and
+              selected project work in one concise document.
             </p>
 
-            <div className="mb-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button
-                size="lg"
-                onClick={handleRequestCV}
-                className="bg-red-700 px-8 py-6 text-lg text-white shadow-lg shadow-red-900/50 hover:bg-red-800"
-              >
-                <Download size={24} className="mr-3" />
-                Download CV
-              </Button>
-            </div>
+            <button
+              type="button"
+              onClick={handleRequestCV}
+              className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-7 py-4 font-bold text-black transition hover:-translate-y-0.5 hover:bg-red-700 hover:text-white"
+            >
+              <Download size={20} />
+              Download CV
+              <ArrowUpRight size={18} />
+            </button>
           </div>
-        </Card>
+        </div>
       </div>
     </section>
   );

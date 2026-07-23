@@ -31,19 +31,20 @@ export function Experience() {
   ];
 
   return (
-    <section id="experience" className="relative overflow-hidden bg-gradient-to-br from-red-950 via-red-900 to-neutral-950 py-20">
+    <section id="experience" className="relative overflow-hidden bg-[#171717] py-20">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_55%)]" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 text-center">
-          <h2 className="mb-4 text-4xl text-white md:text-5xl">Experience</h2>
-          <div className="mx-auto mb-4 h-1 w-24 bg-white"></div>
+        <div className="mb-16 text-left">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-red-400">Career timeline</p>
+          <h2 className="mb-4 text-4xl font-black tracking-tight text-white md:text-6xl">Experience</h2>
+          <div className="mb-4 h-1 w-24 bg-white"></div>
         </div>
 
         <div>
           {experiences.map((exp, index) => (
             <Card
               key={index}
-              className="border border-red-600 bg-neutral-900 p-8 transition-colors hover:border-red-500"
+              className="rounded-[2rem] border border-white/15 bg-[#202020] p-8 transition-colors hover:border-red-500"
             >
               <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_420px] lg:items-start">
                 <div className="flex h-full flex-col justify-center">

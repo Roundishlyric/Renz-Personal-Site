@@ -1,152 +1,167 @@
-import { ArrowDown, Github, Linkedin, Mail, Facebook } from 'lucide-react';
-import { Button } from './ui/button';
-import { Badge } from './ui/badge';
+import {
+  ArrowDownRight,
+  ArrowUpRight,
+  Download,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+} from 'lucide-react';
+import { Link } from 'react-router';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
+const socialLinks = [
+  {
+    icon: Linkedin,
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/renz-danniel-rapanut-692902210',
+  },
+  {
+    icon: Github,
+    label: 'GitHub',
+    href: 'https://github.com/Roundishlyric',
+  },
+  {
+    icon: Mail,
+    label: 'Email',
+    href: 'mailto:renzdanniel63@gmail.com',
+  },
+];
+
+const focusAreas = [
+  ['01', 'Full-stack development', 'React, Node.js, responsive interfaces'],
+  ['02', 'Cybersecurity', 'Secure systems and security fundamentals'],
+  ['03', 'Computer engineering', 'Hardware, software, and system design'],
+];
+
 export function Hero() {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const socialLinks = [
-    {
-      icon: Linkedin,
-      label: 'LinkedIn',
-      href: 'https://www.linkedin.com/in/renz-danniel-rapanut-692902210',
-    },
-    {
-      icon: Github,
-      label: 'GitHub',
-      href: 'https://github.com/Roundishlyric',
-    },
-    {
-      icon: Facebook,
-      label: 'Facebook',
-      href: 'https://www.facebook.com/Roundishlyric/',
-    },
-    {
-      icon: Mail,
-      label: 'Email',
-      href: 'mailto:renzdanniel63@gmail.com',
-    },
-  ];
-
   return (
-    <section className="relative overflow-hidden bg-white pb-24 pt-32 text-black">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(185,28,28,0.16),transparent_55%)] pointer-events-none" />
-      <div className="absolute inset-x-0 top-0 h-72 bg-[linear-gradient(180deg,rgba(185,28,28,0.08),transparent)] pointer-events-none" />
-      <div className="absolute left-1/2 top-24 h-64 w-64 -translate-x-1/2 rounded-full bg-red-100 blur-3xl pointer-events-none" />
+    <section className="relative min-h-screen overflow-hidden bg-[#f4f1eb] pb-20 pt-28 text-[#171717]">
+      <div className="pointer-events-none absolute right-0 top-0 h-[34rem] w-[34rem] rounded-full bg-red-600/10 blur-[110px]" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-orange-400/10 blur-[100px]" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-4 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:px-8">
-        <div className="text-center lg:text-left">
-          <h1 className="mb-6 text-5xl font-extrabold leading-tight tracking-tight md:text-7xl">
-            <span className="block text-gray-900">Renz Danniel R.</span>
-            <span className="block text-red-700">Rapanut</span>
-          </h1>
-
-          <div className="mb-8 h-1 w-24 bg-red-700 rounded lg:mx-0 mx-auto"></div>
-
-          <h2 className="mb-6 max-w-3xl text-2xl text-gray-900 md:text-3xl">
-            Computer Engineering student with strong problem-solving skills, technical knowledge, and internship experience. Passionate about technology and committed to continuous learning.
-          </h2>
-
-          <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-gray-700 lg:mx-0">
-            I build frontend and backend solutions with attention to structure, clarity, and implementation detail, while continuing to grow my skills in cybersecurity, secure development, and system design as I complete my CpE requirements.
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-8 flex items-center justify-between border-b border-black/15 pb-5">
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-red-700">
+            Portfolio · 2026
           </p>
-
-          <div className="mb-10 flex flex-wrap justify-center gap-4 lg:justify-start">
-            <Badge className="rounded-full bg-red-700 px-6 py-2 text-base text-white hover:bg-red-700">
-              CpE Student
-            </Badge>
-            <Badge className="rounded-full border border-red-700 px-6 py-2 text-base text-red-700 bg-white">
-              Full-Stack Developer
-            </Badge>
-            <Badge className="rounded-full border border-red-200 bg-red-50 px-6 py-2 text-base text-red-700 hover:bg-red-50">
-              Cybersecurity-Focused
-            </Badge>
-            <Badge className="rounded-full border border-red-200 bg-red-50 px-6 py-2 text-base text-red-700 hover:bg-red-50">
-              Quezon City, Philippines
-            </Badge>
-          </div>
-
-          <div className="mb-10 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
-            <Button
-              size="lg"
-              className="h-12 bg-red-700 px-8 text-white shadow-[0_18px_45px_rgba(185,28,28,0.28)] hover:bg-red-800"
-              onClick={() => scrollToSection('contact')}
-            >
-              Get In Touch
-            </Button>
-
-            <Button
-              size="lg"
-              variant="outline"
-              className="h-12 border-red-700 px-8 text-red-700 hover:bg-red-700 hover:text-white"
-              onClick={() => scrollToSection('about')}
-            >
-              Learn More
-            </Button>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-3 lg:justify-start">
-            {socialLinks.map(({ icon: Icon, label, href }) => (
-              <Button
-                key={label}
-                variant="outline"
-                className="h-12 border-red-200 bg-white px-4 text-gray-700 hover:border-red-700 hover:bg-red-700 hover:text-white"
-                onClick={() => window.open(href, '_blank', 'noopener,noreferrer')}
-              >
-                <Icon size={18} className="mr-2" />
-                {label}
-              </Button>
-            ))}
-          </div>
+          <p className="flex items-center gap-2 text-sm font-medium text-black/60">
+            <MapPin size={15} />
+            Quezon City, Philippines
+          </p>
         </div>
 
-        <div className="relative mx-auto flex w-full max-w-md justify-center">
-          <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-red-100 via-white to-red-50 blur-2xl" />
-          <div className="relative w-full rounded-[2rem] border border-red-100 bg-white p-8 shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
-            <div className="mb-8 flex items-center justify-between">
-              <span className="rounded-full bg-red-50 px-4 py-2 text-sm font-semibold text-red-700">
+        <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16">
+          <div className="flex flex-col justify-between">
+            <div>
+              <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-black/15 bg-white/55 px-4 py-2 text-sm font-semibold backdrop-blur">
+                <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_0_5px_rgba(16,185,129,0.12)]" />
                 Open to opportunities
-              </span>
-              <span className="flex items-center gap-2 text-sm text-gray-500">
-                <span className="h-2.5 w-2.5 rounded-full bg-red-700" />
-                2026
-              </span>
+              </div>
+
+              <h1 className="max-w-4xl text-[clamp(4rem,9vw,8.4rem)] font-black uppercase leading-[0.78] tracking-[-0.075em]">
+                Renz
+                <span className="block text-red-700">Rapanut</span>
+              </h1>
+
+              <div className="mt-9 grid gap-6 border-l-4 border-red-700 pl-6 sm:grid-cols-[1fr_auto] sm:items-end">
+                <div>
+                  <p className="max-w-2xl text-xl font-semibold leading-snug sm:text-2xl">
+                    Computer Engineer building thoughtful digital products and
+                    secure, practical systems.
+                  </p>
+                  <p className="mt-3 max-w-xl leading-relaxed text-black/60">
+                    I turn technical requirements into clean interfaces and
+                    dependable solutions, with a growing focus on cybersecurity.
+                  </p>
+                </div>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-black/40">
+                  Developer · Engineer
+                </p>
+              </div>
             </div>
 
-            <div className="mb-8 flex justify-center">
-              <div className="flex h-44 w-44 items-center justify-center overflow-hidden rounded-full border-4 border-red-100 bg-zinc-900 shadow-[0_20px_45px_rgba(185,28,28,0.2)]">
+            <div className="mt-10 flex flex-wrap gap-3">
+              <a
+                href="/CV_RAPANUT.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-13 items-center gap-3 rounded-full bg-red-700 px-7 font-bold text-white shadow-[0_14px_35px_rgba(185,28,28,0.25)] transition hover:-translate-y-0.5 hover:bg-red-800"
+              >
+                <Download size={19} />
+                Download CV
+              </a>
+              <Link
+                to="/projects"
+                viewTransition
+                className="inline-flex h-13 items-center gap-3 rounded-full border border-black/20 bg-white/50 px-7 font-bold transition hover:-translate-y-0.5 hover:border-black hover:bg-white"
+              >
+                View selected work
+                <ArrowUpRight size={19} />
+              </Link>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="absolute -right-3 -top-3 h-full w-full rounded-[2rem] border border-red-700/30" />
+            <div className="relative overflow-hidden rounded-[2rem] bg-[#181818] p-3 shadow-[0_30px_70px_rgba(0,0,0,0.18)]">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.35rem] bg-zinc-800">
                 <ImageWithFallback
                   src="/images/prof.png"
                   alt="Renz Danniel Rapanut"
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover object-top"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-red-300">
+                    Current focus
+                  </p>
+                  <p className="mt-2 text-2xl font-bold">
+                    Full-stack development &amp; secure systems
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between px-3 pb-1 pt-4 text-white">
+                <p className="text-sm text-white/55">Let&apos;s build something useful.</p>
+                <div className="flex gap-2">
+                  {socialLinks.map(({ icon: Icon, label, href }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target={href.startsWith('mailto:') ? undefined : '_blank'}
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/75 transition hover:border-red-400 hover:bg-red-700 hover:text-white"
+                    >
+                      <Icon size={17} />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-16 grid border-y border-black/15 md:grid-cols-3">
+          {focusAreas.map(([number, title, description], index) => (
+            <div
+              key={number}
+              className={`group py-7 md:px-7 ${
+                index > 0 ? 'border-t border-black/15 md:border-l md:border-t-0' : ''
+              }`}
+            >
+              <div className="mb-5 flex items-center justify-between">
+                <span className="text-sm font-black text-red-700">{number}</span>
+                <ArrowDownRight
+                  size={20}
+                  className="text-black/30 transition group-hover:translate-x-1 group-hover:translate-y-1 group-hover:text-red-700"
                 />
               </div>
+              <h2 className="text-lg font-bold">{title}</h2>
+              <p className="mt-1 text-sm text-black/55">{description}</p>
             </div>
-
-            <div className="space-y-4">
-              <div className="rounded-2xl border border-red-100 bg-red-50 p-4">
-                <p className="text-sm text-gray-500">Focus</p>
-                <p className="text-lg font-semibold text-gray-900">Full-Stack Development, Cybersecurity, and Secure Systems</p>
-              </div>
-              <div className="rounded-2xl border border-red-100 p-4">
-                <p className="text-sm text-gray-500">Current Strengths</p>
-                <p className="text-lg font-semibold text-gray-900">React, Node.js, Tailwind, UI Implementation, and Security Fundamentals</p>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => scrollToSection('about')}
-              className="mt-8 flex w-full items-center justify-center gap-2 rounded-2xl border border-red-200 px-4 py-3 text-sm font-semibold text-red-700 transition hover:bg-red-700 hover:text-white"
-            >
-              Explore Portfolio
-              <ArrowDown size={16} />
-            </button>
-          </div>
+          ))}
         </div>
       </div>
     </section>

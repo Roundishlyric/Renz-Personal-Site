@@ -1,17 +1,18 @@
 import { Github, Linkedin, Mail } from 'lucide-react';
+import { Link } from 'react-router';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
   const navLabelClass = "text-gray-200 transition-colors hover:text-red-400";
 
   return (
-    <footer className="border-t border-red-600/40 bg-black py-12 text-white">
+    <footer className="border-t border-white/10 bg-[#111111] py-14 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8 grid gap-6 md:grid-cols-5">
           <div className="md:col-span-2">
             <div className="mb-4 flex items-center gap-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-700 font-bold text-white">
-                YN
+                RR
               </div>
               <span className="text-xl font-bold">Renz Danniel R. Rapanut</span>
             </div>
@@ -23,21 +24,22 @@ export function Footer() {
           <div>
             <h3 className="mb-2 text-lg font-semibold text-gray-200">Quick Links</h3>
             <ul className="space-y-1">
-              <li><a href="#about" className={navLabelClass}>About</a></li>
-              <li><a href="#education" className={navLabelClass}>Education</a></li>
-              <li><a href="#cert" className={navLabelClass}>Certifications</a></li>
-              <li><a href="#skills" className={navLabelClass}>Skills</a></li>
-              <li><a href="#projects" className={navLabelClass}>Projects</a></li>
+              <li><Link to="/projects" className={navLabelClass}>Projects</Link></li>
+              <li><Link to="/about" className={navLabelClass}>About</Link></li>
+              <li><Link to="/experience" className={navLabelClass}>Experience</Link></li>
+              <li><Link to="/credentials" className={navLabelClass}>Credentials</Link></li>
+              <li><Link to="/contact" className={navLabelClass}>Contact</Link></li>
             </ul>
           </div>
 
           <div>
             <h3 className="mb-2 text-lg font-semibold text-gray-200">More Links</h3>
             <ul className="space-y-1">
-              <li><a href="#experience" className={navLabelClass}>Experience</a></li>
-              <li><a href="#hobbies" className={navLabelClass}>Hobbies</a></li>
-              <li><a href="#cv-download" className={navLabelClass}>CV Download</a></li>
-              <li><a href="#contact" className={navLabelClass}>Contact</a></li>
+              <li><Link to="/about#skills" className={navLabelClass}>Skills</Link></li>
+              <li><Link to="/about#hobbies" className={navLabelClass}>Hobbies</Link></li>
+              <li><Link to="/credentials#education" className={navLabelClass}>Education</Link></li>
+              <li><Link to="/credentials#cert" className={navLabelClass}>Certifications</Link></li>
+              <li><Link to="/#cv-download" className={navLabelClass}>CV Download</Link></li>
             </ul>
           </div>
 

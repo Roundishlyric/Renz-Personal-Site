@@ -80,15 +80,16 @@ export function Hobbies() {
   return (
     <section
       id="hobbies"
-      className="scroll-mt-8 bg-gradient-to-br from-red-950 via-red-900 to-neutral-950 py-10"
+      className="scroll-mt-8 bg-[#171717] py-20"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="mb-4 text-4xl text-white md:text-5xl">
-            Hobbies & Interests
+        <div className="mb-16 text-left">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-red-400">Beyond work · 03</p>
+          <h2 className="mb-4 text-4xl font-black tracking-tight text-white md:text-6xl">
+            Hobbies &amp; interests
           </h2>
 
-          <div className="mx-auto mb-4 h-1 w-20 bg-white"></div>
+          <div className="mb-4 h-1 w-20 bg-white"></div>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">

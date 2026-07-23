@@ -611,6 +611,77 @@ export function Gaming() {
 
   const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
 
+  useEffect(() => {
+    const revealTargets = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        "#gaming #overview, #gaming #team, #gaming #main-games, #gaming #other-games, #gaming #profiles, #gaming #Social"
+      )
+    );
+
+    if (
+      revealTargets.length === 0 ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
+    let previousScrollY = window.scrollY;
+    let scrollDirection: "up" | "down" = "down";
+
+    const updateScrollDirection = () => {
+      const currentScrollY = window.scrollY;
+      if (Math.abs(currentScrollY - previousScrollY) > 2) {
+        scrollDirection = currentScrollY > previousScrollY ? "down" : "up";
+        previousScrollY = currentScrollY;
+      }
+    };
+
+    revealTargets.forEach((target) => {
+      target.style.opacity = "0";
+      target.style.transform = "translate3d(0, 2.5rem, 0)";
+      target.style.transition =
+        "opacity 650ms ease, transform 750ms cubic-bezier(0.22, 1, 0.36, 1)";
+      target.style.willChange = "opacity, transform";
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const target = entry.target as HTMLElement;
+
+          if (entry.isIntersecting) {
+            target.style.opacity = "1";
+            target.style.transform = "translate3d(0, 0, 0)";
+          } else {
+            target.style.opacity = "0";
+            target.style.transform =
+              scrollDirection === "down"
+                ? "translate3d(0, -2.5rem, 0)"
+                : "translate3d(0, 2.5rem, 0)";
+          }
+        });
+      },
+      {
+        threshold: 0.08,
+        rootMargin: "0px 0px -8% 0px",
+      }
+    );
+
+    window.addEventListener("scroll", updateScrollDirection, { passive: true });
+    revealTargets.forEach((target) => observer.observe(target));
+
+    return () => {
+      window.removeEventListener("scroll", updateScrollDirection);
+      observer.disconnect();
+      revealTargets.forEach((target) => {
+        target.style.removeProperty("opacity");
+        target.style.removeProperty("transform");
+        target.style.removeProperty("transition");
+        target.style.removeProperty("will-change");
+      });
+    };
+  }, []);
+
   return (
     <section
       id="gaming"

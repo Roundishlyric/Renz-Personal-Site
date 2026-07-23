@@ -54,11 +54,12 @@ export function Skills() {
   const selectedCategory = skillCategories[activeCategory];
 
   return (
-    <section id="skills" className="scroll-mt-8 py-10 bg-gradient-to-br from-red-50 via-white to-red-50">
+    <section id="skills" className="scroll-mt-8 bg-white py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Technical Skills</h2>
-          <div className="w-20 h-1 bg-red-700 mx-auto"></div>
+        <div className="mb-16 text-left">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-red-700">Toolkit · 02</p>
+          <h2 className="mb-4 text-4xl font-black tracking-tight text-gray-900 md:text-6xl">Technical skills</h2>
+          <div className="h-1 w-20 bg-red-700"></div>
         </div>
 
         <div

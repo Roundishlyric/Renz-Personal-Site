@@ -5,7 +5,7 @@ import { GamingFooter } from '../components/GamingFooter';
 
 export function GamingSite() {
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="editorial-gaming min-h-screen bg-[#171717]">
       <GamingHeader />
       <main>
         <Gaming />

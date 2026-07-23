@@ -73,11 +73,12 @@ export function Contact() {
   ];
 
   return (
-    <section id="contact" className="scroll-mt-8 py-10 bg-gradient-to-br from-red-50 via-white to-red-50">
+    <section id="contact" className="scroll-mt-8 bg-[#f4f1eb] py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl mb-4 text-gray-900">Get In Touch</h2>
-          <div className="w-20 h-1 bg-red-700 mx-auto mb-4"></div>
+        <div className="mb-16 text-left">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-red-700">Start a conversation</p>
+          <h2 className="mb-4 text-4xl font-black tracking-tight text-gray-900 md:text-6xl">Get in touch</h2>
+          <div className="mb-4 h-1 w-20 bg-red-700"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">

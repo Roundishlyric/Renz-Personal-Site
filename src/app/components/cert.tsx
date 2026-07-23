@@ -196,7 +196,7 @@ export function Cert() {
   const items = useMemo(() => certifications, []);
 
   return (
-    <section id="cert" className="relative overflow-hidden bg-black py-24 text-white">
+    <section id="cert" className="relative overflow-hidden bg-[#171717] py-24 text-white">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-32 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-red-600/10 blur-3xl" />
         <div className="absolute -bottom-44 right-10 h-80 w-80 rounded-full bg-red-600/10 blur-3xl" />
@@ -204,11 +204,12 @@ export function Cert() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6 xl:px-0">
-        <div className="mb-16 text-center">
-          <h2 className="mb-4 text-4xl text-white md:text-5xl">
-            Badges and Certifications
+        <div className="mb-16 text-left">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-red-400">Verified learning · 02</p>
+          <h2 className="mb-4 text-4xl font-black tracking-tight text-white md:text-6xl">
+            Badges &amp; certifications
           </h2>
-          <div className="mx-auto mb-4 h-1 w-24 bg-red-700"></div>
+          <div className="mb-4 h-1 w-24 bg-red-700"></div>
         </div>
 
         <div className="grid gap-5 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">

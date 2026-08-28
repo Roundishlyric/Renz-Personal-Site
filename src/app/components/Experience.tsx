@@ -31,11 +31,10 @@ export function Experience() {
   ];
 
   return (
-    <section id="experience" className="relative overflow-hidden bg-[#171717] py-20">
+    <section id="experience" className="editorial-ring-section editorial-ring-top-left bg-[#171717] py-20">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_55%)]" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16 text-left">
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-red-400">Career timeline</p>
           <h2 className="mb-4 text-4xl font-black tracking-tight text-white md:text-6xl">Experience</h2>
           <div className="mb-4 h-1 w-24 bg-white"></div>
         </div>

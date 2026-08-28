@@ -22,7 +22,7 @@ export function About() {
   ];
 
   return (
-    <section id="about" className="scroll-mt-8 bg-[#f4f1eb] py-20 text-[#171717]">
+    <section id="about" className="editorial-ring-section scroll-mt-8 bg-[#f4f1eb] py-20 text-[#171717]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="section-transition-item mb-16 text-left">
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-red-700">Profile · 01</p>

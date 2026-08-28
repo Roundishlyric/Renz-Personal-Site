@@ -15,6 +15,7 @@ export function Header({ hasSectionTabs = false }: { hasSectionTabs?: boolean })
   }, []);
 
   const navItems = [
+    { label: "Home", to: "/" },
     { label: "Projects", to: "/projects" },
     { label: "About", to: "/about" },
     { label: "Experience", to: "/experience" },
@@ -38,6 +39,13 @@ export function Header({ hasSectionTabs = false }: { hasSectionTabs?: boolean })
   const mobileBorder = useSolidHeader ? "border-white/10" : "border-gray-200";
 
   return (
+    <>
+      <a
+        href="#main-content"
+        className="fixed left-4 top-2 z-[60] -translate-y-16 rounded-lg bg-white px-4 py-2 font-semibold text-black shadow-lg transition-transform focus:translate-y-0"
+      >
+        Skip to content
+      </a>
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerBg}`}
     >
@@ -73,7 +81,7 @@ export function Header({ hasSectionTabs = false }: { hasSectionTabs?: boolean })
               ))}
             </div>
 
-            <Link to="/gaming" viewTransition>
+            <Link to="/gaming" viewTransition aria-label="Open gaming portfolio">
               <Button
                 variant="outline"
                 className={`flex items-center gap-2 px-3 transition-colors ${
@@ -131,5 +139,6 @@ export function Header({ hasSectionTabs = false }: { hasSectionTabs?: boolean })
         )}
       </div>
     </header>
+    </>
   );
 }

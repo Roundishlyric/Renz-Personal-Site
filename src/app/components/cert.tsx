@@ -196,14 +196,14 @@ export function Cert() {
   const items = useMemo(() => certifications, []);
 
   return (
-    <section id="cert" className="relative overflow-hidden bg-[#171717] py-24 text-white">
+    <section id="cert" className="editorial-ring-section editorial-ring-bottom-right bg-[#171717] py-20 text-white">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-32 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-red-600/10 blur-3xl" />
         <div className="absolute -bottom-44 right-10 h-80 w-80 rounded-full bg-red-600/10 blur-3xl" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,0,0,0.10),transparent_55%)]" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 xl:px-0">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-16 text-left">
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-red-400">Verified learning · 02</p>
           <h2 className="mb-4 text-4xl font-black tracking-tight text-white md:text-6xl">

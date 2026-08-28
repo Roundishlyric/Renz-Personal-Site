@@ -9,7 +9,7 @@ export function ProjectsPage() {
   return (
     <div className="editorial-page min-h-screen bg-[#f4f1eb]">
       <Header />
-      <main className="[&>section:first-child]:pt-28">
+      <main id="main-content" className="[&>section:first-child]:pt-28">
         <Projects />
       </main>
       <Footer />

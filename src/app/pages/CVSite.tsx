@@ -10,7 +10,7 @@ export function CVSite() {
   return (
     <div className="min-h-screen">
       <Header />
-      <main>
+      <main id="main-content">
         <Hero />
         <CVDownload />
       </main>

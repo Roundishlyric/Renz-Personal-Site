@@ -41,16 +41,6 @@ export function Hero() {
       <div className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-orange-400/10 blur-[100px]" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 flex items-center justify-between border-b border-black/15 pb-5">
-          <p className="text-xs font-bold uppercase tracking-[0.24em] text-red-700">
-            Portfolio · 2026
-          </p>
-          <p className="flex items-center gap-2 text-sm font-medium text-black/60">
-            <MapPin size={15} />
-            Quezon City, Philippines
-          </p>
-        </div>
-
         <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16">
           <div className="flex flex-col justify-between">
             <div>
@@ -75,9 +65,6 @@ export function Hero() {
                     dependable solutions, with a growing focus on cybersecurity.
                   </p>
                 </div>
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-black/40">
-                  Developer · Engineer
-                </p>
               </div>
             </div>
 

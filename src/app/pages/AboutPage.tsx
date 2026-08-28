@@ -16,10 +16,10 @@ export function AboutPage() {
   useScrollReveal();
 
   return (
-    <div className="editorial-page min-h-screen">
+    <div className="editorial-page min-h-screen bg-[#f4f1eb]">
       <Header hasSectionTabs />
       <SectionTabs items={aboutSections} label="About page sections" />
-      <main>
+      <main id="main-content">
         <About />
         <Skills />
         <Hobbies />

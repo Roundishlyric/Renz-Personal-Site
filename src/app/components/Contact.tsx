@@ -41,7 +41,7 @@ export function Contact() {
       icon: Phone,
       label: 'Phone',
       value: '+63 9478178886',
-      link: 'mob:+639478178886',
+      link: 'tel:+639478178886',
     },
     {
       icon: MapPin,
@@ -56,24 +56,24 @@ export function Contact() {
       icon: Linkedin,
       label: 'LinkedIn',
       href: 'https://www.linkedin.com/in/renz-danniel-rapanut-692902210',
-      className: 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800',
+      className: 'border border-black/10 bg-[#171717] hover:bg-red-700',
     },
     {
       icon: Github,
       label: 'GitHub',
       href: 'https://github.com/Roundishlyric',
-      className: 'bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black',
+      className: 'border border-black/10 bg-[#171717] hover:bg-red-700',
     },
     {
       icon: Facebook,
       label: 'Facebook',
       href: 'https://www.facebook.com/Roundishlyric/',
-      className: 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800',
+      className: 'border border-black/10 bg-[#171717] hover:bg-red-700',
     },
   ];
 
   return (
-    <section id="contact" className="scroll-mt-8 bg-[#f4f1eb] py-20">
+    <section id="contact" className="editorial-ring-section editorial-ring-top-left scroll-mt-8 bg-[#f4f1eb] py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16 text-left">
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-red-700">Start a conversation</p>
@@ -93,7 +93,7 @@ export function Contact() {
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Email</p>
-                      <p className="text-gray-900 font-medium">renzdanniel63@gmail.com</p>
+                      <a className="font-medium text-gray-900 hover:text-red-700" href="mailto:renzdanniel63@gmail.com">renzdanniel63@gmail.com</a>
                     </div>
                   </div>
                 </Card>
@@ -105,7 +105,7 @@ export function Contact() {
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Phone</p>
-                      <p className="text-gray-900 font-medium">(+63) 9478178886</p>
+                      <a className="font-medium text-gray-900 hover:text-red-700" href="tel:+639478178886">(+63) 9478178886</a>
                     </div>
                   </div>
                 </Card>
@@ -131,7 +131,7 @@ export function Contact() {
                   <Button
                     key={label}
                     size="lg"
-                    className={`h-auto min-h-20 w-full justify-start gap-4 px-5 py-4 text-left text-base font-semibold text-white shadow-lg transition-transform hover:scale-[1.02] ${className}`}
+                    className={`h-auto min-h-16 w-full justify-start gap-3 px-4 py-4 text-left text-sm font-semibold text-white shadow-none transition-colors ${className}`}
                     onClick={() => window.open(href, '_blank', 'noopener,noreferrer')}
                   >
                     <Icon size={30} />
@@ -144,6 +144,9 @@ export function Contact() {
 
           <Card className="border-2 border-transparent bg-white p-8 transition-shadow hover:shadow-xl hover:border-red-700">
             <h3 className="text-2xl mb-6 text-gray-900">Send a Message</h3>
+            <p className="mb-6 text-sm leading-relaxed text-gray-500">
+              Submitting opens a pre-filled email in Gmail so you can review it before sending.
+            </p>
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
@@ -180,7 +183,7 @@ export function Contact() {
                 size="lg"
               >
                 <Send size={20} className="mr-2" />
-                Send Message
+                Continue to Gmail
               </Button>
             </form>
           </Card>

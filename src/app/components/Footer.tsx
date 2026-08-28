@@ -50,6 +50,7 @@ export function Footer() {
                 href="https://www.linkedin.com/in/renz-danniel-rapanut-692902210"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Visit Renz Rapanut on LinkedIn"
                 className="rounded-lg bg-gray-800 p-2 text-white transition-colors hover:bg-red-700"
               >
                 <Linkedin size={20} />
@@ -58,12 +59,14 @@ export function Footer() {
                 href="https://github.com/Roundishlyric"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Visit Renz Rapanut on GitHub"
                 className="rounded-lg bg-gray-800 p-2 text-white transition-colors hover:bg-red-700"
               >
                 <Github size={20} />
               </a>
               <a
                 href="mailto:renzdanniel63@gmail.com"
+                aria-label="Email Renz Rapanut"
                 className="rounded-lg bg-gray-800 p-2 text-white transition-colors hover:bg-red-700"
               >
                 <Mail size={20} />

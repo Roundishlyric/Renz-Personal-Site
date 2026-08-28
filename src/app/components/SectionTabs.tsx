@@ -53,31 +53,41 @@ export function SectionTabs({ items, label = "Page sections" }: { items: Section
       <div className="h-16 bg-[#171717]" aria-hidden="true" />
       <nav
         aria-label={label}
-        className="sticky top-16 z-40 border-b border-black/10 bg-[#f4f1eb]/95 px-4 py-2 backdrop-blur-md"
+        className="relative z-40 flex h-14 items-center bg-transparent"
       >
-        <div className="mx-auto flex max-w-7xl gap-2 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-          {items.map((item) => {
-            const isActive = activeId === item.id;
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex max-w-full items-center gap-7 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            {items.map((item, index) => {
+              const isActive = activeId === item.id;
 
-            return (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                aria-current={isActive ? "location" : undefined}
-                onClick={(event) => {
-                  event.preventDefault();
-                  navigateToSection(item.id);
-                }}
-                className={`shrink-0 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-                  isActive
-                    ? "bg-red-700 text-white shadow-sm shadow-red-950"
-                    : "text-black/60 hover:bg-black/5 hover:text-black"
-                }`}
-              >
-                {item.label}
-              </a>
-            );
-          })}
+              return (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  aria-current={isActive ? "location" : undefined}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    navigateToSection(item.id);
+                  }}
+                  className={`group flex shrink-0 items-baseline gap-2 py-2 text-sm font-semibold transition-colors focus-visible:rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-700 focus-visible:ring-offset-4 ${
+                    isActive
+                      ? "text-red-700"
+                      : "text-black/45 hover:text-black"
+                  }`}
+                >
+                  <span
+                    aria-hidden="true"
+                    className={`text-[10px] font-black tabular-nums tracking-wider transition-colors ${
+                      isActive ? "text-red-700" : "text-black/25 group-hover:text-red-700"
+                    }`}
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="whitespace-nowrap">{item.label}</span>
+                </a>
+              );
+            })}
+          </div>
         </div>
       </nav>
     </>

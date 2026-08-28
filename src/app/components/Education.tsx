@@ -41,7 +41,7 @@ export function Education() {
   return (
     <section
       id="education"
-      className="scroll-mt-8 bg-[#f4f1eb] py-20"
+      className="editorial-ring-section editorial-ring-bottom-left scroll-mt-8 bg-[#f4f1eb] py-20"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="section-transition-item text-left">

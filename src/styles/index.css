@@ -15,6 +15,55 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Reusable version of the oversized outlined circle from the CV section. */
+.editorial-ring-section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.editorial-ring-section::before {
+  content: '';
+  position: absolute;
+  top: -7rem;
+  right: -7rem;
+  z-index: 0;
+  width: 24rem;
+  height: 24rem;
+  border: 5rem solid rgb(185 28 28 / 0.1);
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+.editorial-ring-top-left::before {
+  right: auto;
+  left: -7rem;
+}
+
+.editorial-ring-bottom-right::before {
+  top: auto;
+  right: -7rem;
+  bottom: -7rem;
+}
+
+.editorial-ring-bottom-left::before {
+  top: auto;
+  right: auto;
+  bottom: -7rem;
+  left: -7rem;
+}
+
+.editorial-ring-top-center::before {
+  right: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.editorial-ring-section > * {
+  position: relative;
+  z-index: 1;
+}
+
 .scroll-reveal {
   opacity: 0;
   transform: translateY(2.5rem);

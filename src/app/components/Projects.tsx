@@ -115,7 +115,6 @@ export function Projects() {
         "LCD I2C Display",
         "Wi-Fi Communication",
         "Android Mobile Application",
-        "Firebase (if used)",
         "IoT Monitoring",
       ],
       docHref: "/Copy%20of%20REVISION%20of%20Automated%20Chicken%20Eggshell%20Fertilizer%20Production%20and%20Dispensing%20System%20for%20Cucumis%20sativus%20L.%20(Cucumber).pdf",
@@ -125,11 +124,10 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="scroll-mt-8 bg-[#171717] py-20"
+      className="editorial-ring-section editorial-ring-bottom-right scroll-mt-8 bg-[#171717] py-20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-16 text-left">
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-red-400">Selected work</p>
           <h2 className="mb-4 text-4xl font-black tracking-tight text-white md:text-6xl">Projects</h2>
           <div className="mb-4 h-1 w-24 bg-white"></div>
         </div>
@@ -201,7 +199,7 @@ export function Projects() {
 
                     <div className="rounded-xl border border-red-100 p-5">
                       <div className="mb-6 space-y-3">
-                        {project.highlights.map((highlight) => (
+                        {project.highlights.slice(0, 3).map((highlight) => (
                           <div key={highlight} className="flex items-start gap-3 text-gray-700">
                             <Link2 size={16} className="mt-1 shrink-0 text-red-700" />
                             <span>{highlight}</span>
@@ -215,7 +213,7 @@ export function Projects() {
                           Tech Stack
                         </div>
                         <div className="flex flex-wrap gap-2">
-                          {project.stack.map((tech) => (
+                          {project.stack.slice(0, 8).map((tech) => (
                             <span
                               key={tech}
                               className="rounded-full border border-red-200 bg-red-50 px-3 py-1 text-sm text-red-700"

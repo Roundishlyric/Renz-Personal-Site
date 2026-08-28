@@ -80,7 +80,7 @@ export function Hobbies() {
   return (
     <section
       id="hobbies"
-      className="scroll-mt-8 bg-[#171717] py-20"
+      className="editorial-ring-section editorial-ring-top-center scroll-mt-8 bg-[#171717] py-20"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16 text-left">

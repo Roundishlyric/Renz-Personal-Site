@@ -9,7 +9,7 @@ export function ContactPage() {
   return (
     <div className="editorial-page min-h-screen bg-[#f4f1eb]">
       <Header />
-      <main className="[&>section:first-child]:pt-28">
+      <main id="main-content" className="[&>section:first-child]:pt-28">
         <Contact />
       </main>
       <Footer />

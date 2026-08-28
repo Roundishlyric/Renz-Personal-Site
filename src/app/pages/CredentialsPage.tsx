@@ -14,10 +14,10 @@ export function CredentialsPage() {
   useScrollReveal();
 
   return (
-    <div className="editorial-page min-h-screen">
+    <div className="editorial-page min-h-screen bg-[#f4f1eb]">
       <Header hasSectionTabs />
       <SectionTabs items={credentialSections} label="Credentials page sections" />
-      <main>
+      <main id="main-content">
         <Education />
         <Cert />
       </main>

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Code2, MonitorSmartphone, Server, Wrench } from 'lucide-react';
 import { Card } from './ui/card';
-import { Progress } from './ui/progress';
 
 export function Skills() {
   const [activeCategory, setActiveCategory] = useState(0);
@@ -11,42 +10,42 @@ export function Skills() {
       icon: Code2,
       category: 'Programming Languages',
       skills: [
-        { name: 'JavaScript', level: 90 },
-        { name: 'TypeScript', level: 85 },
-        { name: 'Python', level: 75 },
-        { name: 'Java', level: 70 },
-        { name: 'HTML', level: 95 },
-        { name: 'CSS', level: 90 },
+        { name: 'JavaScript', level: 'Project experience' },
+        { name: 'TypeScript', level: 'Project experience' },
+        { name: 'Python', level: 'Working knowledge' },
+        { name: 'Java', level: 'Working knowledge' },
+        { name: 'HTML', level: 'Project experience' },
+        { name: 'CSS', level: 'Project experience' },
       ],
     },
     {
       icon: MonitorSmartphone,
       category: 'Frontend Development',
       skills: [
-        { name: 'React.js', level: 90 },
-        { name: 'Vite.js', level: 85 },
-        { name: 'Tailwind CSS', level: 85 },
-        { name: 'UI / UX Design', level: 80 },
+        { name: 'React.js', level: 'Internship & projects' },
+        { name: 'Vite.js', level: 'Project experience' },
+        { name: 'Tailwind CSS', level: 'Project experience' },
+        { name: 'UI / UX Design', level: 'Working knowledge' },
       ],
     },
     {
       icon: Server,
       category: 'Backend Development',
       skills: [
-        { name: 'Node.js', level: 85 },
-        { name: 'Express.js', level: 80 },
-        { name: 'MongoDB', level: 80 },
-        { name: 'REST APIs', level: 80 },
+        { name: 'Node.js', level: 'Project experience' },
+        { name: 'Express.js', level: 'Project experience' },
+        { name: 'MongoDB', level: 'Project experience' },
+        { name: 'REST APIs', level: 'Project experience' },
       ],
     },
     {
       icon: Wrench,
       category: 'Tools & Testing',
       skills: [
-        { name: 'Git / GitHub', level: 90 },
-        { name: 'Postman', level: 85 },
-        { name: 'Playwright', level: 75 },
-        { name: 'Figma / Photoshop', level: 80 },
+        { name: 'Git / GitHub', level: 'Internship & projects' },
+        { name: 'Postman', level: 'Working knowledge' },
+        { name: 'Playwright', level: 'Internship experience' },
+        { name: 'Figma / Photoshop', level: 'Working knowledge' },
       ],
     },
   ];
@@ -120,12 +119,9 @@ export function Skills() {
 
           <div className="grid gap-x-10 gap-y-6 md:grid-cols-2">
             {selectedCategory.skills.map((skill) => (
-              <div key={skill.name}>
-                <div className="mb-2 flex items-center justify-between">
-                  <span className="font-medium text-gray-700">{skill.name}</span>
-                  <span className="font-semibold text-red-700">{skill.level}%</span>
-                </div>
-                <Progress value={skill.level} className="h-2.5 bg-red-100 [&_[data-slot=progress-indicator]]:bg-red-700" />
+              <div key={skill.name} className="rounded-xl border border-red-100 bg-red-50/50 p-4">
+                <span className="font-semibold text-gray-900">{skill.name}</span>
+                <p className="mt-1 text-sm font-medium text-red-700">{skill.level}</p>
               </div>
             ))}
           </div>

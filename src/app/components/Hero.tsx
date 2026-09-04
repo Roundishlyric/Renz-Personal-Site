@@ -57,12 +57,12 @@ export function Hero() {
               <div className="mt-9 grid gap-6 border-l-4 border-red-700 pl-6 sm:grid-cols-[1fr_auto] sm:items-end">
                 <div>
                   <p className="max-w-2xl text-xl font-semibold leading-snug sm:text-2xl">
-                    Computer Engineer building thoughtful digital products and
-                    secure, practical systems.
+                    Entry-level software developer and Computer Engineering
+                    student building web applications and embedded systems.
                   </p>
                   <p className="mt-3 max-w-xl leading-relaxed text-black/60">
-                    I turn technical requirements into clean interfaces and
-                    dependable solutions, with a growing focus on cybersecurity.
+                    I use React, Node.js, and hands-on hardware integration to
+                    turn technical requirements into dependable solutions.
                   </p>
                 </div>
               </div>

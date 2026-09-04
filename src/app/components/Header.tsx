@@ -81,7 +81,7 @@ export function Header({ hasSectionTabs = false }: { hasSectionTabs?: boolean })
               ))}
             </div>
 
-            <Link to="/gaming" viewTransition aria-label="Open gaming portfolio">
+            <Link to="/gaming" viewTransition>
               <Button
                 variant="outline"
                 className={`flex items-center gap-2 px-3 transition-colors ${
@@ -91,6 +91,7 @@ export function Header({ hasSectionTabs = false }: { hasSectionTabs?: boolean })
                 }`}
               >
                 <Gamepad2 size={18} />
+                <span className="hidden lg:inline">Gaming</span>
               </Button>
             </Link>
           </nav>
@@ -101,13 +102,15 @@ export function Header({ hasSectionTabs = false }: { hasSectionTabs?: boolean })
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {isMobileMenuOpen && (
-          <nav className={`md:hidden py-4 border-t ${mobileBorder}`}>
+          <nav id="mobile-navigation" className={`md:hidden py-4 border-t ${mobileBorder}`}>
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
@@ -134,6 +137,7 @@ export function Header({ hasSectionTabs = false }: { hasSectionTabs?: boolean })
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <Gamepad2 size={18} />
+              <span>Gaming Portfolio</span>
             </Link>
           </nav>
         )}

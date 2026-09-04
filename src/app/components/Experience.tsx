@@ -1,6 +1,86 @@
-import { Briefcase, Calendar } from "lucide-react";
+import { useState } from "react";
+import { Briefcase, Calendar, ExternalLink, FileText } from "lucide-react";
 import { Card } from "./ui/card";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
+
+type CompletionDialogProps = {
+  title: string;
+  file: string;
+  logo: string;
+  company: string;
+};
+
+function CompletionDialog({ title, file, logo, company }: CompletionDialogProps) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <Dialog onOpenChange={(open) => open && setIsLoading(true)}>
+      <DialogTrigger asChild>
+        <button
+          type="button"
+          className="inline-flex items-center gap-2 rounded-full border border-red-600 bg-red-700 px-4 py-2 text-sm font-semibold text-white transition hover:border-red-500 hover:bg-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#202020]"
+        >
+          <FileText size={16} aria-hidden="true" />
+          View {title}
+        </button>
+      </DialogTrigger>
+
+      <DialogContent className="max-h-[92vh] max-w-[min(96vw,72rem)] gap-4 overflow-y-auto border-white/15 bg-[#171717] p-4 text-white sm:p-6">
+        <DialogHeader className="pr-10">
+          <DialogTitle className="text-xl text-white">{title}</DialogTitle>
+          <DialogDescription className="flex flex-wrap items-center justify-between gap-2 text-gray-400">
+            <span>Internship completion document</span>
+            <a
+              href={file}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 text-red-400 transition hover:text-red-300"
+            >
+              Open full view
+              <ExternalLink size={14} aria-hidden="true" />
+            </a>
+          </DialogDescription>
+        </DialogHeader>
+
+        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-white/10 bg-[#262626] sm:aspect-video">
+          {isLoading && (
+            <div
+              className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-[#111] text-gray-300"
+              role="status"
+              aria-live="polite"
+            >
+              <div className="relative flex h-24 w-24 items-center justify-center">
+                <div className="absolute inset-0 animate-spin rounded-full border-2 border-white/10 border-t-red-500" />
+                <ImageWithFallback
+                  src={logo}
+                  alt=""
+                  className="h-16 w-16 animate-pulse object-contain"
+                  draggable={false}
+                />
+              </div>
+              <p className="text-sm font-medium">Loading {company} document...</p>
+            </div>
+          )}
+
+          <iframe
+            src={`${file}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+            title={`${title} internship document`}
+            onLoad={() => setIsLoading(false)}
+            className="absolute inset-0 h-full w-full bg-white"
+          />
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
 
 export function Experience() {
   const experiences = [
@@ -27,6 +107,10 @@ export function Experience() {
         "Worked with Git-based workflows for version control, collaboration, and code review.",
       ],
       technologies: ["React", "TypeScript", "JavaScript", "Node.js", "Git", "Playwright", "WordPress", "Figma"],
+      completions: [
+        { title: "Completion 1", file: "/Completion%201.pdf" },
+        { title: "Completion 2", file: "/Completion%202.pdf" },
+      ],
     },
   ];
 
@@ -81,6 +165,22 @@ export function Experience() {
                         {tech}
                       </span>
                     ))}
+                  </div>
+
+                  <div className="mt-8 border-t border-white/10 pt-6">
+                    <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-gray-400">
+                      Completion documents
+                    </p>
+                    <div className="flex flex-wrap gap-3">
+                      {exp.completions.map((completion) => (
+                        <CompletionDialog
+                          key={completion.file}
+                          {...completion}
+                          logo={exp.logo}
+                          company={exp.company}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
 

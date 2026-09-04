@@ -939,7 +939,7 @@ export function Gaming() {
             <div className="mb-8">
               <div className="rounded-3xl border border-white/10 bg-slate-900/60 p-2">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                  {games.map((game) => {
+                  {[games[1], games[0], ...games.slice(2)].map((game) => {
                     const activeTab = game.key === activeKey;
                     return (
                       <button
@@ -949,7 +949,7 @@ export function Gaming() {
                           "relative rounded-2xl px-4 py-3 font-semibold tracking-wide transition-all duration-200",
                           "border",
                           activeTab
-                            ? "bg-gradient-to-r from-teal-400 to-cyan-400 text-slate-900 border-transparent shadow-lg shadow-teal-500/30"
+                            ? "bg-gradient-to-r from-teal-400 to-cyan-400 text-white border-transparent shadow-lg shadow-teal-500/30"
                             : "bg-slate-800/60 text-white border-white/10 hover:border-teal-400/40 hover:bg-slate-800",
                         ].join(" ")}
                       >
@@ -999,7 +999,7 @@ export function Gaming() {
                         {active.subs.map((s) => (
                           <span
                             key={s}
-                            className="rounded-xl border border-teal-400/20 bg-teal-500/10 px-3 py-1.5 text-sm text-teal-200"
+                            className="rounded-xl border border-red-500/50 bg-slate-950/70 px-3 py-1.5 text-sm font-medium text-white shadow-sm shadow-black/20"
                           >
                             {s}
                           </span>

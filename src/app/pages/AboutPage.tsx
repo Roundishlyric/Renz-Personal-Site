@@ -5,6 +5,7 @@ import { Hobbies } from '../components/Hobbies';
 import { SectionTabs } from '../components/SectionTabs';
 import { Skills } from '../components/Skills';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { usePageMetadata } from '../hooks/usePageMetadata';
 
 const aboutSections = [
   { id: 'about', label: 'About Me' },
@@ -14,6 +15,7 @@ const aboutSections = [
 
 export function AboutPage() {
   useScrollReveal();
+  usePageMetadata('About', 'Learn about Renz Rapanut, his technical skills, engineering background, and interests.');
 
   return (
     <div className="editorial-page min-h-screen bg-[#f4f1eb]">

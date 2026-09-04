@@ -21,35 +21,8 @@ export function Contact() {
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     );
 
-    window.open(
-      `https://mail.google.com/mail/?view=cm&fs=1&to=renzdanniel63@gmail.com&su=${subject}&body=${body}`,
-      '_blank',
-      'noopener,noreferrer'
-    );
-
-    setFormData({ name: '', email: '', message: '' });
+    window.location.href = `mailto:renzdanniel63@gmail.com?subject=${subject}&body=${body}`;
   };
-
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: 'Email',
-      value: 'renzdanniel63@gmail.com',
-      link: 'mailto:renzdanniel63@gmail.com',
-    },
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: '+63 9478178886',
-      link: 'tel:+639478178886',
-    },
-    {
-      icon: MapPin,
-      label: 'Location',
-      value: 'Quezon City, Philippines',
-      link: null,
-    },
-  ];
 
   const socialLinks = [
     {
@@ -130,12 +103,14 @@ export function Contact() {
                 {socialLinks.map(({ icon: Icon, label, href, className }) => (
                   <Button
                     key={label}
+                    asChild
                     size="lg"
                     className={`h-auto min-h-16 w-full justify-start gap-3 px-4 py-4 text-left text-sm font-semibold text-white shadow-none transition-colors ${className}`}
-                    onClick={() => window.open(href, '_blank', 'noopener,noreferrer')}
                   >
-                    <Icon size={30} />
-                    <span>{label}</span>
+                    <a href={href} target="_blank" rel="noopener noreferrer">
+                      <Icon size={30} />
+                      <span>{label}</span>
+                    </a>
                   </Button>
                 ))}
               </div>
@@ -145,12 +120,16 @@ export function Contact() {
           <Card className="border-2 border-transparent bg-white p-8 transition-shadow hover:shadow-xl hover:border-red-700">
             <h3 className="text-2xl mb-6 text-gray-900">Send a Message</h3>
             <p className="mb-6 text-sm leading-relaxed text-gray-500">
-              Submitting opens a pre-filled email in Gmail so you can review it before sending.
+              Submitting opens a pre-filled message in your default email app so you can review it before sending.
             </p>
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 mb-2">Name</label>
                 <Input
+                  id="contact-name"
+                  name="name"
+                  autoComplete="name"
+                  required
                   placeholder="Your Name"
                   className="border-gray-300 focus:border-red-500 focus:ring-red-500"
                   value={formData.name}
@@ -158,9 +137,13 @@ export function Contact() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 mb-2">Email</label>
                 <Input
+                  id="contact-email"
+                  name="email"
                   type="email"
+                  autoComplete="email"
+                  required
                   placeholder="your.email@example.com"
                   className="border-gray-300 focus:border-red-500 focus:ring-red-500"
                   value={formData.email}
@@ -168,8 +151,11 @@ export function Contact() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                <label htmlFor="contact-message" className="block text-sm font-medium text-gray-700 mb-2">Message</label>
                 <Textarea
+                  id="contact-message"
+                  name="message"
+                  required
                   placeholder="Your message here..."
                   rows={5}
                   className="border-gray-300 focus:border-red-500 focus:ring-red-500"
@@ -183,7 +169,7 @@ export function Contact() {
                 size="lg"
               >
                 <Send size={20} className="mr-2" />
-                Continue to Gmail
+                Continue to email
               </Button>
             </form>
           </Card>

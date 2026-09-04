@@ -1,39 +1,36 @@
 import { createBrowserRouter } from "react-router";
-import { CVSite } from "./pages/CVSite";
-import { GamingSite } from "./pages/GamingSite";
-import { AboutPage } from "./pages/AboutPage";
-import { ContactPage } from "./pages/ContactPage";
-import { ProjectsPage } from "./pages/ProjectsPage";
-import { CredentialsPage } from "./pages/CredentialsPage";
-import { ExperiencePage } from "./pages/ExperiencePage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component: CVSite,
+    lazy: async () => ({ Component: (await import("./pages/CVSite")).CVSite }),
   },
   {
     path: "/gaming",
-    Component: GamingSite,
+    lazy: async () => ({ Component: (await import("./pages/GamingSite")).GamingSite }),
   },
   {
     path: "/projects",
-    Component: ProjectsPage,
+    lazy: async () => ({ Component: (await import("./pages/ProjectsPage")).ProjectsPage }),
   },
   {
     path: "/about",
-    Component: AboutPage,
+    lazy: async () => ({ Component: (await import("./pages/AboutPage")).AboutPage }),
   },
   {
     path: "/contact",
-    Component: ContactPage,
+    lazy: async () => ({ Component: (await import("./pages/ContactPage")).ContactPage }),
   },
   {
     path: "/experience",
-    Component: ExperiencePage,
+    lazy: async () => ({ Component: (await import("./pages/ExperiencePage")).ExperiencePage }),
   },
   {
     path: "/credentials",
-    Component: CredentialsPage,
+    lazy: async () => ({ Component: (await import("./pages/CredentialsPage")).CredentialsPage }),
+  },
+  {
+    path: "*",
+    lazy: async () => ({ Component: (await import("./pages/NotFoundPage")).NotFoundPage }),
   },
 ]);

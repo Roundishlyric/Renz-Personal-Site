@@ -56,7 +56,6 @@ export function Skills() {
     <section id="skills" className="editorial-ring-section editorial-ring-bottom-left scroll-mt-8 bg-[#f8f5ef] py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16 text-left">
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-red-700">Toolkit · 02</p>
           <h2 className="mb-4 text-4xl font-black tracking-tight text-gray-900 md:text-6xl">Technical skills</h2>
           <div className="h-1 w-20 bg-red-700"></div>
         </div>

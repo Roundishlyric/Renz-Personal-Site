@@ -205,7 +205,6 @@ export function Cert() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-16 text-left">
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-red-400">Verified learning · 02</p>
           <h2 className="mb-4 text-4xl font-black tracking-tight text-white md:text-6xl">
             Badges &amp; certifications
           </h2>

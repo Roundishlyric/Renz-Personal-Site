@@ -53,7 +53,7 @@ export function SectionTabs({ items, label = "Page sections" }: { items: Section
       <div className="h-16 bg-[#171717]" aria-hidden="true" />
       <nav
         aria-label={label}
-        className="relative z-40 flex h-14 items-center bg-transparent"
+        className="sticky top-16 z-40 flex h-14 items-center border-b border-black/10 bg-[#f4f1eb]/95 shadow-sm backdrop-blur-md"
       >
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex max-w-full items-center gap-7 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">

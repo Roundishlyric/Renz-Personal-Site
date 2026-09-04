@@ -41,11 +41,10 @@ export function Education() {
   return (
     <section
       id="education"
-      className="editorial-ring-section editorial-ring-bottom-left scroll-mt-8 bg-[#f4f1eb] py-20"
+      className="editorial-ring-section editorial-ring-bottom-left scroll-mt-8 bg-[#f4f1eb] pb-20 pt-10"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="section-transition-item text-left">
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-red-700">Academic foundation · 01</p>
           <h2 className="mb-4 text-4xl font-black tracking-tight text-gray-900 md:text-6xl">Education</h2>
           <div className="mb-4 h-1 w-20 bg-red-700"></div>
         </div>

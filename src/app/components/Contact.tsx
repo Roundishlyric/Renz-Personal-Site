@@ -49,7 +49,6 @@ export function Contact() {
     <section id="contact" className="editorial-ring-section editorial-ring-top-left scroll-mt-8 bg-[#f4f1eb] py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16 text-left">
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.24em] text-red-700">Start a conversation</p>
           <h2 className="mb-4 text-4xl font-black tracking-tight text-gray-900 md:text-6xl">Get in touch</h2>
           <div className="mb-4 h-1 w-20 bg-red-700"></div>
         </div>

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Gamepad2 } from "lucide-react";
-import { Button } from "./ui/button";
+import { Menu, X } from "lucide-react";
 import { Link, NavLink, useLocation } from "react-router";
 
 export function Header({ hasSectionTabs = false }: { hasSectionTabs?: boolean }) {
@@ -23,7 +22,7 @@ export function Header({ hasSectionTabs = false }: { hasSectionTabs?: boolean })
     { label: "Contact", to: "/contact" },
   ];
 
-  const useSolidHeader = isScrolled || pathname !== "/";
+  const useSolidHeader = isMobileMenuOpen || isScrolled || pathname !== "/";
 
   const headerBg = useSolidHeader
     ? `bg-black/90 backdrop-blur-md ${
@@ -81,19 +80,6 @@ export function Header({ hasSectionTabs = false }: { hasSectionTabs?: boolean })
               ))}
             </div>
 
-            <Link to="/gaming" viewTransition>
-              <Button
-                variant="outline"
-                className={`flex items-center gap-2 px-3 transition-colors ${
-                  useSolidHeader
-                    ? "!bg-transparent !text-white border-white/30 hover:!bg-white/10 hover:!text-white"
-                    : "bg-transparent text-black border-gray-300 hover:bg-gray-100"
-                }`}
-              >
-                <Gamepad2 size={18} />
-                <span className="hidden lg:inline">Gaming</span>
-              </Button>
-            </Link>
           </nav>
 
           <button
@@ -126,19 +112,6 @@ export function Header({ hasSectionTabs = false }: { hasSectionTabs?: boolean })
               </NavLink>
             ))}
 
-            <Link
-              to="/gaming"
-              viewTransition
-              className={`flex items-center gap-2 py-2 transition-colors ${
-                useSolidHeader
-                  ? "text-gray-200 hover:text-red-400"
-                  : "text-gray-700 hover:text-red-700"
-              }`}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <Gamepad2 size={18} />
-              <span>Gaming Portfolio</span>
-            </Link>
           </nav>
         )}
       </div>

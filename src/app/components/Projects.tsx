@@ -90,7 +90,9 @@ export function Projects() {
       title: "NURTURE 1: Automated Chicken Eggshell Fertilizer Production and Dispensing System",
       type: "Embedded Systems / IoT Project",
       summary:
-        "Designed and developed an IoT-enabled automated agricultural system that converts recycled chicken eggshells into calcium-rich fertilizer and intelligently dispenses it across cucumber seedling trays based on real-time soil pH analysis. The system integrates embedded hardware, RFID-based tray identification, motorized automation, and a mobile monitoring application to support precision agriculture and sustainable farming.",
+        "NURTURE 1 turns recycled eggshells into fertilizer and automates dispensing for cucumber seedlings. Raspberry Pi and Arduino controllers use soil pH readings to guide dispensing, RFID to identify trays, and a mobile app to monitor the system over a local network.",
+      documentLabel: "Read full thesis",
+      documentNote: "PDF · approximately 35.7 MB · opens in a new tab",
       highlights: [
         "Developed a Raspberry Pi and Arduino-based embedded system for automated fertilizer production and intelligent fertilizer dispensing.",
         "Implemented real-time soil pH monitoring to determine whether fertilizer should be applied, reducing unnecessary fertilizer usage.",
@@ -157,6 +159,11 @@ export function Projects() {
                         </div>
                       </div>
 
+                      {project.documentNote && (
+                        <h4 className="text-sm font-semibold uppercase tracking-wide text-gray-500">
+                          Project summary
+                        </h4>
+                      )}
                       <p className="text-base leading-relaxed text-gray-600">
                         {project.summary}
                       </p>
@@ -173,7 +180,7 @@ export function Projects() {
                               rel="noopener noreferrer"
                             >
                               <FileText size={16} />
-                              Documentation
+                              {project.documentLabel ?? "Documentation"}
                             </a>
                           </Button>
                         )}
@@ -195,6 +202,9 @@ export function Projects() {
                           </Button>
                         )}
                       </div>
+                      {project.documentNote && (
+                        <p className="text-sm text-gray-500">{project.documentNote}</p>
+                      )}
                     </div>
 
                     <div className="rounded-xl border border-red-100 p-5">

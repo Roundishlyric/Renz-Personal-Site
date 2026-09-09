@@ -37,6 +37,7 @@ export function Footer() {
             <ul className="space-y-1">
               <li><Link to="/about#skills" className={navLabelClass}>Skills</Link></li>
               <li><Link to="/about#hobbies" className={navLabelClass}>Hobbies</Link></li>
+              <li><Link to="/gaming" viewTransition className={navLabelClass}>Gaming Portfolio</Link></li>
               <li><Link to="/credentials#education" className={navLabelClass}>Education</Link></li>
               <li><Link to="/credentials#cert" className={navLabelClass}>Certifications</Link></li>
               <li><Link to="/#cv-download" className={navLabelClass}>CV Download</Link></li>

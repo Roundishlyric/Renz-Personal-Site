@@ -693,8 +693,8 @@ export function Gaming() {
           id="overview"
           className="
             relative
-            w-screen
-            left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]
+            w-auto
+            -mx-4 sm:-mx-6 lg:-mx-8
             -mt-16
             bg-black text-white overflow-hidden
             min-h-[560px] md:min-h-[680px] lg:min-h-[760px]
@@ -732,7 +732,7 @@ export function Gaming() {
               <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
               {/* bottom identity */}
-              <div className="absolute bottom-10 left-10 z-20 flex items-center gap-3">
+              <div className="absolute bottom-6 left-5 sm:bottom-10 sm:left-10 z-20 flex items-center gap-3">
                 <Gamepad2 size={28} className="text-teal-300" />
                 <div>
                   <p className="text-3xl font-bold">SenGouku</p>
@@ -745,8 +745,8 @@ export function Gaming() {
             <div className="relative md:col-span-2 bg-slate-900 border-l border-white/10">
               <div className="absolute inset-0 bg-gradient-to-b from-teal-500/10 via-transparent to-transparent pointer-events-none" />
 
-              <div className="h-full px-10 py-12 flex flex-col">
-                <h1 className="text-white font-extrabold uppercase leading-[0.85] text-6xl sm:text-7xl lg:text-8xl">
+              <div className="h-full min-w-0 px-5 py-8 sm:px-6 sm:py-12 lg:px-8 flex flex-col">
+                <h1 className="text-white font-extrabold uppercase leading-[0.85] text-4xl sm:text-6xl md:text-4xl xl:text-5xl">
                   SENGOUKU
                 </h1>
 
@@ -859,7 +859,7 @@ export function Gaming() {
 
             {/* LOWER PANEL (overlaps hero to remove seam) */}
             <div className="relative -mt-10  bg-[#0b1f2a]">
-              <div className="p-7 md:p-8">
+              <div className="p-4 sm:p-7 md:p-8">
                 <div className="grid gap-5 md:grid-cols-3">
                   {/* Stat 1 */}
                   <div className="rounded-2xl border border-white/10 bg-slate-950 px-6 py-5 hover:border-teal-400/25 transition">
@@ -971,7 +971,7 @@ export function Gaming() {
                 <div className="grid md:grid-cols-5 min-h-[540px]">
 
                   {/* ================= INFO PANEL ================= */}
-                  <div className="md:col-span-2 bg-slate-900 p-8 md:border-r border-white/10">
+                  <div className="md:col-span-2 bg-slate-900 p-5 sm:p-8 md:border-r border-white/10">
 
                     {/* Header */}
                     <div className="flex items-start justify-between gap-4 mb-6">
@@ -1069,7 +1069,7 @@ export function Gaming() {
                       <div className="absolute inset-0 [background:radial-gradient(circle_at_40%_25%,rgba(45,212,191,0.10),transparent_55%)] pointer-events-none" />
 
                       {/* Title Chip */}
-                      <div className="absolute bottom-6 left-6">
+                      <div className="absolute bottom-16 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-auto">
                         <div className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-black/35 px-4 py-3 backdrop-blur">
                           <div className="h-2.5 w-2.5 rounded-full bg-teal-400 shadow-[0_0_12px_rgba(45,212,191,0.8)]" />
                           <div className="text-xl md:text-2xl font-extrabold tracking-wide text-white">
@@ -1151,7 +1151,7 @@ export function Gaming() {
           <div className="grid md:grid-cols-2 gap-8 max-w-8xl mx-auto mb-8 items-stretch">
             {/* Steam */}
             <Card className="h-full flex flex-col bg-slate-800 border-2 border-slate-700 hover:border-teal-500 transition-all">
-              <div className="p-8 flex flex-col flex-1">
+              <div className="p-5 sm:p-8 flex flex-col flex-1">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="p-4 bg-black rounded-xl shadow-lg">
                     <img
@@ -1167,19 +1167,19 @@ export function Gaming() {
                 </div>
 
                 <div className="space-y-3 mb-6 text-gray-300">
-                  <p className="flex justify-between">
+                  <p className="flex flex-wrap justify-between gap-x-4 gap-y-1">
                     <span>Games Owned:</span>
                     <span className="text-white font-semibold">90</span>
                   </p>
-                  <p className="flex justify-between">
+                  <p className="flex flex-wrap justify-between gap-x-4 gap-y-1">
                     <span>Total Hours:</span>
                     <span className="text-white font-semibold">5,000+</span>
                   </p>
-                  <p className="flex justify-between">
+                  <p className="flex flex-wrap justify-between gap-x-4 gap-y-1">
                     <span>Level:</span>
                     <span className="text-white font-semibold">10</span>
                   </p>
-                  <p className="flex justify-between">
+                  <p className="flex flex-wrap justify-between gap-x-4 gap-y-1">
                     <span>Achievements:</span>
                     <span className="text-white font-semibold">909</span>
                   </p>
@@ -1203,7 +1203,7 @@ export function Gaming() {
 
             {/* Twitch */}
             <Card className="h-full flex flex-col bg-slate-800 border-2 border-slate-700 hover:border-teal-500 transition-all">
-              <div className="p-8 flex flex-col flex-1">
+              <div className="p-5 sm:p-8 flex flex-col flex-1">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="p-4 bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl shadow-lg">
                     <Twitch size={32} className="text-white" />
@@ -1215,19 +1215,19 @@ export function Gaming() {
                 </div>
 
                 <div className="space-y-3 mb-6 text-gray-300">
-                  <p className="flex justify-between">
+                  <p className="flex flex-wrap justify-between gap-x-4 gap-y-1">
                     <span>Followers:</span>
                     <span className="text-white font-semibold">22</span>
                   </p>
-                  <p className="flex justify-between">
+                  <p className="flex flex-wrap justify-between gap-x-4 gap-y-1">
                     <span>Stream Schedule:</span>
                     <span className="text-white font-semibold">Mon-Fri 7PM</span>
                   </p>
-                  <p className="flex justify-between">
+                  <p className="flex flex-wrap justify-between gap-x-4 gap-y-1">
                     <span>Content:</span>
                     <span className="text-white font-semibold">Fighting Games / RPG</span>
                   </p>
-                  <p className="flex justify-between">
+                  <p className="flex flex-wrap justify-between gap-x-4 gap-y-1">
                     <span>Status:</span>
                     <span className="text-teal-400 font-semibold">Inactive</span>
                   </p>
@@ -1250,7 +1250,7 @@ export function Gaming() {
                 
                 {/* LEFT: HoYoLAB */}
                 <aside className="lg:col-span-2 border-b lg:border-b-0 lg:border-r border-white/10">
-                  <div className="p-7">
+                  <div className="p-4 sm:p-7">
                     
                     {/* Header */}
                     <div className="flex items-center gap-4 mb-6">
@@ -1331,7 +1331,7 @@ export function Gaming() {
                               </p>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-y-2 text-sm">
+                            <div className="grid grid-cols-1 gap-y-2 text-sm sm:grid-cols-2">
                               {content.rows.map(([label, value, accent]) => (
                                 <React.Fragment key={label}>
                                   <div className="text-gray-300">{label}</div>
@@ -1363,7 +1363,7 @@ export function Gaming() {
 
                 {/* RIGHT: Teams Showcase */}
                 <section className="lg:col-span-3">
-                  <div className="p-7">
+                  <div className="p-4 sm:p-7">
 
                     {/* Header */}
                     <div className="flex items-center justify-between mb-6">

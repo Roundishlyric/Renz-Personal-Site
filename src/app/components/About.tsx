@@ -22,9 +22,9 @@ export function About() {
   ];
 
   return (
-    <section id="about" className="editorial-ring-section scroll-mt-8 bg-[#f4f1eb] pb-20 pt-10 text-[#171717]">
+    <section id="about" className="editorial-ring-section scroll-mt-8 bg-[#f4f1eb] pb-12 pt-10 sm:pb-20 text-[#171717]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="section-transition-item mb-16 text-left">
+        <div className="section-transition-item mb-8 text-left sm:mb-16">
           <h2 className="mb-4 text-4xl font-black tracking-tight text-[#171717] md:text-6xl">About me</h2>
           <div className="mb-4 h-1 w-20 bg-red-700"></div>
         </div>
@@ -35,7 +35,7 @@ export function About() {
               <ImageWithFallback
                 src="/images/fib.jpg"
                 alt="Profile"
-                className="h-96 w-full object-cover md:h-[420px]"
+                className="h-72 w-full object-cover sm:h-96 md:h-[420px]"
               />
             </Card>
           </div>
@@ -53,7 +53,7 @@ export function About() {
               As I continue completing my CpE requirements, I am looking for opportunities where I can contribute, continue learning, and grow as an engineer by working on real-world systems and meaningful technical problems.
             </p>
 
-            <div className="grid grid-cols-2 gap-4 pt-2">
+            <div className="grid grid-cols-1 gap-4 pt-2 sm:grid-cols-2">
               <div className="rounded-2xl border border-black/15 bg-white/60 p-4 shadow-sm">
                 <div className="mb-2 text-3xl font-bold text-red-700">BS CpE</div>
                 <div className="text-black/55">Student</div>

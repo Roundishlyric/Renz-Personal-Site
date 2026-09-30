@@ -136,7 +136,7 @@ const CertCard = memo(function CertCard({ cert }: { cert: Certification }) {
       "
     >
       <div className="flex items-start gap-3">
-        <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-white/70 bg-white p-1">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-white/70 bg-white p-1">
           <img
             src={imgSrc}
             alt={cert.name}
@@ -145,7 +145,7 @@ const CertCard = memo(function CertCard({ cert }: { cert: Certification }) {
         </div>
 
         <div className="min-w-0 flex-1">
-          <div className="flex items-start justify-between gap-3">
+          <div className="flex flex-col items-start gap-2 sm:flex-row sm:justify-between sm:gap-3">
             <h4 className="text-lg font-semibold leading-snug text-white">
               {cert.name}
             </h4>
@@ -196,7 +196,7 @@ export function Cert() {
   const items = useMemo(() => certifications, []);
 
   return (
-    <section id="cert" className="editorial-ring-section editorial-ring-bottom-right bg-[#171717] py-20 text-white">
+    <section id="cert" className="editorial-ring-section editorial-ring-bottom-right bg-[#171717] py-12 sm:py-20 text-white">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-32 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-red-600/10 blur-3xl" />
         <div className="absolute -bottom-44 right-10 h-80 w-80 rounded-full bg-red-600/10 blur-3xl" />
@@ -204,7 +204,7 @@ export function Cert() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 text-left">
+        <div className="mb-8 text-left sm:mb-16">
           <h2 className="mb-4 text-4xl font-black tracking-tight text-white md:text-6xl">
             Badges &amp; certifications
           </h2>

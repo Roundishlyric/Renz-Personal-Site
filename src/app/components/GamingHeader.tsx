@@ -69,7 +69,7 @@ export function GamingHeader() {
             </div>
 
             <Link
-              to="/"
+              to="/" aria-label="Return to portfolio"
               viewTransition
               className="ml-1 flex items-center gap-2 rounded-lg border border-gray-700 px-3 py-2 text-gray-300 transition hover:border-teal-500 hover:text-white"
             >
@@ -79,9 +79,9 @@ export function GamingHeader() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white"
+            className="flex h-11 w-11 items-center justify-center rounded-lg md:hidden text-white"
             onClick={() => setIsMobileMenuOpen((v) => !v)}
-            aria-label="Toggle menu"
+            aria-label="Toggle menu" aria-expanded={isMobileMenuOpen} aria-controls="gaming-mobile-navigation"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -89,21 +89,21 @@ export function GamingHeader() {
 
         {/* Mobile Nav */}
         {isMobileMenuOpen && (
-          <nav className="md:hidden py-4 border-t border-gray-700 space-y-2">
+          <nav id="gaming-mobile-navigation" className="md:hidden max-h-[calc(100dvh-4rem)] overflow-y-auto py-4 border-t border-gray-700 space-y-2">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToId(item.id)}
-                className="w-full text-left px-2 py-2 text-gray-300 hover:text-teal-300 rounded-lg hover:bg-white/5"
+                className="min-h-11 w-full text-left px-2 py-2 text-gray-300 hover:text-teal-300 rounded-lg hover:bg-white/5"
               >
                 {item.label}
               </button>
             ))}
 
             <Link
-              to="/"
+              to="/" aria-label="Return to portfolio"
               viewTransition
-              className="flex items-center gap-2 px-2 py-2 text-gray-300 hover:text-white"
+              className="flex min-h-11 items-center gap-2 px-2 py-2 text-gray-300 hover:text-white"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <Briefcase size={18} />

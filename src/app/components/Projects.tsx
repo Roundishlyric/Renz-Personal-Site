@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { FileText, FolderGit2, Github, Link2, Wrench } from "lucide-react";
+import { FileText, FolderGit2, Github, ImageIcon, Link2, Video, Wrench } from "lucide-react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import {
@@ -10,6 +10,54 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./ui/carousel";
+
+type ProjectMedia = {
+  screenshots: { src: string; alt: string }[];
+  videoSrc?: string;
+  posterSrc?: string;
+  captionsSrc?: string;
+};
+
+// Add files under public/projects/ and use paths such as /projects/crud/dashboard.webp.
+const projectMedia: Record<string, ProjectMedia> = {
+  crud: { screenshots: [] },
+  health: { screenshots: [] },
+  nurture: { screenshots: [] },
+};
+
+function ProjectPreview({ media, title, showVideo }: { media: ProjectMedia; title: string; showVideo: boolean }) {
+  return (
+    <div className={`grid gap-4 ${showVideo ? "md:grid-cols-2" : ""}`}>
+      <div className="space-y-3">
+        {media.screenshots.length > 0 ? media.screenshots.map((screenshot) => (
+          <figure key={screenshot.src} className="overflow-hidden rounded-xl border border-black/10 bg-[#f4f1eb]">
+            <img src={screenshot.src} alt={screenshot.alt} loading="lazy" className="aspect-video w-full object-contain" />
+            <figcaption className="px-4 py-3 text-sm text-gray-600">{screenshot.alt}</figcaption>
+          </figure>
+        )) : (
+          <div className="flex aspect-video flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-red-200 bg-red-50/50 p-6 text-center">
+            <ImageIcon size={32} className="text-red-700" aria-hidden="true" />
+            <p className="font-semibold text-gray-900">Project images coming soon</p>
+          </div>
+        )}
+      </div>
+      {showVideo && <div>
+        {media.videoSrc ? (
+          <video controls playsInline preload="none" poster={media.posterSrc} aria-label={`${title} demonstration`} className="aspect-video w-full rounded-xl bg-black">
+            <source src={media.videoSrc} />
+            {media.captionsSrc && <track kind="captions" src={media.captionsSrc} srcLang="en" label="English" default />}
+            Your browser does not support embedded video. <a href={media.videoSrc}>Open demonstration</a>.
+          </video>
+        ) : (
+          <div className="flex aspect-video flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-black/15 bg-[#f4f1eb] p-6 text-center">
+            <Video size={32} className="text-red-700" aria-hidden="true" />
+            <p className="font-semibold text-gray-900">Short demonstration coming soon</p>
+          </div>
+        )}
+      </div>}
+    </div>
+  );
+}
 
 export function Projects() {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
@@ -44,27 +92,7 @@ export function Projects() {
 
   const projects = [
     {
-      title: "Health Monitoring System with Pulse Rate and Temperature Sensors",
-      type: "Embedded Systems / IoT Project",
-      summary:
-        "Designed and implemented a portable Arduino-based health monitoring system capable of measuring pulse rate and body temperature in real time. The device displays health data on an LCD screen and automatically sends SMS alerts through a GSM module when abnormal heart rate thresholds are detected, supporting early health monitoring and notification.",
-      highlights: [
-        "Developed an Arduino-based system integrating pulse rate and infrared temperature sensors for real-time vital monitoring.",
-        "Implemented an LCD interface to display BPM (heart rate) and body temperature readings instantly.",
-        "Configured a GSM module to send SMS alerts when the heart rate exceeds a predefined threshold.",
-        "Designed circuit connections and programmed microcontroller logic for continuous monitoring and automated alerts."
-      ],
-      stack: [
-        "Arduino Uno",
-        "Pulse Sensor",
-        "MLX90614 Temperature Sensor",
-        "GSM Module",
-        "LCD I2C Display",
-        "Embedded C / Arduino IDE"
-      ],
-      docHref: "/FinalPaper.pdf",
-    },
-    {
+      id: "crud",
       title: "CRUD_BY_RENZ User Management System",
       type: "Full-Stack Web Application",
       summary:
@@ -87,6 +115,29 @@ export function Projects() {
       repoHref: "https://github.com/Roundishlyric/CRUD_BY_RENZ",
     },
     {
+      id: "health",
+      title: "Health Monitoring System with Pulse Rate and Temperature Sensors",
+      type: "Embedded Systems / IoT Project",
+      summary:
+        "Designed and implemented a portable Arduino-based health monitoring system capable of measuring pulse rate and body temperature in real time. The device displays health data on an LCD screen and automatically sends SMS alerts through a GSM module when abnormal heart rate thresholds are detected, supporting early health monitoring and notification.",
+      highlights: [
+        "Developed an Arduino-based system integrating pulse rate and infrared temperature sensors for real-time vital monitoring.",
+        "Implemented an LCD interface to display BPM (heart rate) and body temperature readings instantly.",
+        "Configured a GSM module to send SMS alerts when the heart rate exceeds a predefined threshold.",
+        "Designed circuit connections and programmed microcontroller logic for continuous monitoring and automated alerts."
+      ],
+      stack: [
+        "Arduino Uno",
+        "Pulse Sensor",
+        "MLX90614 Temperature Sensor",
+        "GSM Module",
+        "LCD I2C Display",
+        "Embedded C / Arduino IDE"
+      ],
+      docHref: "/FinalPaper.pdf",
+    },
+    {
+      id: "nurture",
       title: "NURTURE 1: Automated Chicken Eggshell Fertilizer Production and Dispensing System",
       type: "Embedded Systems / IoT Project",
       summary:
@@ -100,7 +151,6 @@ export function Projects() {
         "Built an IoT monitoring application that displays soil pH, fertilizer status, tray information, and machine status in real time over a local network.",
         "Programmed stepper motors, servo motors, DC motors, load cell sensors, ultrasonic sensors, and limit switches for automated navigation, grinding, and fertilizer dispensing.",
         "Integrated an LCD interface for on-device monitoring and system feedback.",
-        "Achieved an overall system success rate exceeding the project's required 90% performance target through testing and validation.",
       ],
       stack: [
         "Raspberry Pi",
@@ -126,15 +176,33 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="editorial-ring-section editorial-ring-bottom-right scroll-mt-8 bg-[#171717] py-20"
+      className="editorial-ring-section editorial-ring-bottom-right scroll-mt-8 bg-[#171717] py-12 sm:py-20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 text-left">
+        <div className="mb-8 text-left sm:mb-16">
           <h2 className="mb-4 text-4xl font-black tracking-tight text-white md:text-6xl">Projects</h2>
           <div className="mb-4 h-1 w-24 bg-white"></div>
         </div>
 
         <Carousel className="relative" opts={{ loop: true }} setApi={setCarouselApi}>
+          <div className="mb-5 flex items-center justify-between gap-3">
+            <CarouselPrevious className="static size-11 shrink-0 translate-y-0 border-white bg-white text-red-700 hover:bg-red-50 hover:text-red-800" />
+            <div className="flex items-center justify-center" aria-label="Choose project">
+              {projects.map((project, index) => (
+                <button
+                  key={project.id}
+                  type="button"
+                  aria-label={`View project ${index + 1}: ${project.title}`}
+                  aria-current={selectedProject === index ? "true" : undefined}
+                  onClick={() => carouselApi?.scrollTo(index)}
+                  className="flex h-11 w-11 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                >
+                  <span className={`h-2 rounded-full transition-all ${selectedProject === index ? "w-8 bg-white" : "w-3 bg-red-300"}`} />
+                </button>
+              ))}
+            </div>
+            <CarouselNext className="static size-11 shrink-0 translate-y-0 border-white bg-white text-red-700 hover:bg-red-50 hover:text-red-800" />
+          </div>
           <div
             className="overflow-hidden transition-[height] duration-300 ease-out"
             style={activeSlideHeight ? { height: activeSlideHeight } : undefined}
@@ -143,16 +211,17 @@ export function Projects() {
               {projects.map((project) => (
               <CarouselItem key={project.title} className="md:basis-full">
                 <Card
-                  className="overflow-hidden border-2 border-transparent bg-white p-6 transition-shadow hover:shadow-xl hover:border-red-700"
+                  className="overflow-hidden border-2 border-transparent bg-white p-4 sm:p-6 transition-shadow hover:shadow-xl hover:border-red-700"
                 >
+                  <ProjectPreview media={projectMedia[project.id]} title={project.title} showVideo={project.id === "nurture"} />
                   <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
                     <div className="space-y-6">
-                      <div className="mb-5 flex items-start justify-between gap-4">
-                        <div>
+                      <div className="mb-5 flex flex-col-reverse items-start justify-between gap-4 sm:flex-row">
+                        <div className="min-w-0">
                           <div className="mb-2 inline-flex rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-700">
                             {project.type}
                           </div>
-                          <h3 className="text-2xl text-gray-900">{project.title}</h3>
+                          <h3 className="break-words text-xl text-gray-900 sm:text-2xl">{project.title}</h3>
                         </div>
                         <div className="rounded-lg bg-red-700 p-3 text-white">
                           <FolderGit2 size={22} />
@@ -208,8 +277,9 @@ export function Projects() {
                     </div>
 
                     <div className="rounded-xl border border-red-100 p-5">
+                      <h4 className="mb-4 text-sm font-semibold uppercase tracking-wide text-gray-500">My contributions</h4>
                       <div className="mb-6 space-y-3">
-                        {project.highlights.slice(0, 3).map((highlight) => (
+                        {project.highlights.map((highlight) => (
                           <div key={highlight} className="flex items-start gap-3 text-gray-700">
                             <Link2 size={16} className="mt-1 shrink-0 text-red-700" />
                             <span>{highlight}</span>
@@ -239,25 +309,6 @@ export function Projects() {
               </CarouselItem>
               ))}
             </CarouselContent>
-          </div>
-          <CarouselPrevious className="border-white bg-white text-red-700 hover:bg-red-50 hover:text-red-800" />
-          <CarouselNext className="border-white bg-white text-red-700 hover:bg-red-50 hover:text-red-800" />
-
-          <div className="mt-5 flex items-center justify-center gap-2" aria-label="Choose project">
-            {projects.map((project, index) => (
-              <button
-                key={project.title}
-                type="button"
-                aria-label={`View project ${index + 1}: ${project.title}`}
-                aria-current={selectedProject === index ? "true" : undefined}
-                onClick={() => carouselApi?.scrollTo(index)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  selectedProject === index
-                    ? "w-10 bg-white"
-                    : "w-4 bg-red-300 hover:bg-red-200"
-                }`}
-              />
-            ))}
           </div>
         </Carousel>
       </div>

@@ -83,7 +83,7 @@ export function Header({ hasSectionTabs = false }: { hasSectionTabs?: boolean })
           </nav>
 
           <button
-            className={`md:hidden transition-colors ${
+            className={`flex h-11 w-11 items-center justify-center rounded-lg md:hidden transition-colors ${
               useSolidHeader ? "text-white" : "text-gray-900"
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -96,13 +96,13 @@ export function Header({ hasSectionTabs = false }: { hasSectionTabs?: boolean })
         </div>
 
         {isMobileMenuOpen && (
-          <nav id="mobile-navigation" className={`md:hidden py-4 border-t ${mobileBorder}`}>
+          <nav id="mobile-navigation" className={`md:hidden max-h-[calc(100dvh-4rem)] overflow-y-auto py-4 border-t ${mobileBorder}`}>
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={({ isActive }) => `block w-full rounded-lg px-2 py-2 text-left transition-colors ${
+                className={({ isActive }) => `flex min-h-11 w-full items-center rounded-lg px-3 py-2 text-left transition-colors ${
                   useSolidHeader
                     ? "text-gray-200 hover:text-red-400"
                     : "text-gray-700 hover:text-red-700"

@@ -46,45 +46,45 @@ export function Contact() {
   ];
 
   return (
-    <section id="contact" className="editorial-ring-section editorial-ring-top-left scroll-mt-8 bg-[#f4f1eb] py-20">
+    <section id="contact" className="editorial-ring-section editorial-ring-top-left scroll-mt-8 bg-[#f4f1eb] py-12 sm:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 text-left">
+        <div className="mb-8 text-left sm:mb-16">
           <h2 className="mb-4 text-4xl font-black tracking-tight text-gray-900 md:text-6xl">Get in touch</h2>
           <div className="mb-4 h-1 w-20 bg-red-700"></div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
           <div className="space-y-8">
             <div>
               <h3 className="text-2xl mb-6 text-gray-900">Contact Information</h3>
               <div className="space-y-4">
                 <Card className="border-2 border-transparent bg-white p-4 transition-shadow hover:shadow-xl hover:border-red-700">
-                  <div className="flex items-center gap-4">
-                    <div className="rounded-lg bg-red-700 p-3 text-white">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="shrink-0 rounded-lg bg-red-700 p-2 sm:p-3 text-white">
                       <Mail size={24} />
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Email</p>
-                      <a className="font-medium text-gray-900 hover:text-red-700" href="mailto:renzdanniel63@gmail.com">renzdanniel63@gmail.com</a>
+                      <a className="break-all font-medium text-gray-900 hover:text-red-700" href="mailto:renzdanniel63@gmail.com">renzdanniel63@gmail.com</a>
                     </div>
                   </div>
                 </Card>
 
                 <Card className="border-2 border-transparent bg-white p-4 transition-shadow hover:shadow-xl hover:border-red-700">
-                  <div className="flex items-center gap-4">
-                    <div className="rounded-lg bg-red-700 p-3 text-white">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="shrink-0 rounded-lg bg-red-700 p-2 sm:p-3 text-white">
                       <Phone size={24} />
                     </div>
                     <div>
                       <p className="text-sm text-gray-500">Phone</p>
-                      <a className="font-medium text-gray-900 hover:text-red-700" href="tel:+639478178886">(+63) 9478178886</a>
+                      <a className="break-all font-medium text-gray-900 hover:text-red-700" href="tel:+639478178886">(+63) 9478178886</a>
                     </div>
                   </div>
                 </Card>
 
                 <Card className="border-2 border-transparent bg-white p-4 transition-shadow hover:shadow-xl hover:border-red-700">
-                  <div className="flex items-center gap-4">
-                    <div className="rounded-lg bg-red-700 p-3 text-white">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="shrink-0 rounded-lg bg-red-700 p-2 sm:p-3 text-white">
                       <MapPin size={24} />
                     </div>
                     <div>
@@ -116,7 +116,7 @@ export function Contact() {
             </div>
           </div>
 
-          <Card className="border-2 border-transparent bg-white p-8 transition-shadow hover:shadow-xl hover:border-red-700">
+          <Card className="border-2 border-transparent bg-white p-5 sm:p-8 transition-shadow hover:shadow-xl hover:border-red-700">
             <h3 className="text-2xl mb-6 text-gray-900">Send a Message</h3>
             <p className="mb-6 text-sm leading-relaxed text-gray-500">
               Submitting opens a pre-filled message in your default email app so you can review it before sending.

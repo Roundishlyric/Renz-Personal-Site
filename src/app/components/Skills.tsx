@@ -53,9 +53,9 @@ export function Skills() {
   const selectedCategory = skillCategories[activeCategory];
 
   return (
-    <section id="skills" className="editorial-ring-section editorial-ring-bottom-left scroll-mt-8 bg-[#f8f5ef] py-20">
+    <section id="skills" className="editorial-ring-section editorial-ring-bottom-left scroll-mt-8 bg-[#f8f5ef] py-12 sm:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 text-left">
+        <div className="mb-8 text-left sm:mb-16">
           <h2 className="mb-4 text-4xl font-black tracking-tight text-gray-900 md:text-6xl">Technical skills</h2>
           <div className="h-1 w-20 bg-red-700"></div>
         </div>
@@ -74,7 +74,7 @@ export function Skills() {
               aria-controls="skill-showcase"
               aria-selected={activeCategory === index}
               onClick={() => setActiveCategory(index)}
-              className={`group rounded-2xl border-2 p-4 text-left transition-all duration-300 sm:p-6 ${
+              className={`group rounded-2xl min-w-0 border-2 p-3 text-left transition-all duration-300 sm:p-6 ${
                 activeCategory === index
                   ? 'border-red-700 bg-red-700 text-white shadow-xl shadow-red-900/20'
                   : 'border-red-100 bg-white text-gray-900 hover:-translate-y-1 hover:border-red-400 hover:shadow-lg'
@@ -90,7 +90,7 @@ export function Skills() {
                 >
                   <category.icon className="h-7 w-7" />
                 </div>
-                <h3 className="text-base font-semibold sm:text-lg">
+                <h3 className="break-words text-sm font-semibold sm:text-lg">
                   {category.category}
                 </h3>
               </div>
@@ -102,9 +102,9 @@ export function Skills() {
           id="skill-showcase"
           role="tabpanel"
           aria-labelledby={`skill-tab-${activeCategory}`}
-          className="mt-6 overflow-hidden border-2 border-red-100 bg-white p-6 shadow-lg sm:p-8"
+          className="mt-6 overflow-hidden border-2 border-red-100 bg-white p-4 shadow-lg sm:p-8"
         >
-          <div className="mb-8 flex items-center gap-4 border-b-2 border-red-100 pb-5">
+          <div className="mb-6 flex flex-col items-start gap-3 sm:mb-8 sm:flex-row sm:items-center sm:gap-4 border-b-2 border-red-100 pb-5">
             <div className="rounded-xl bg-red-700 p-3 text-white">
               <selectedCategory.icon className="h-7 w-7" />
             </div>

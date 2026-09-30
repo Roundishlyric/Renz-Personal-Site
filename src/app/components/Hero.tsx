@@ -36,7 +36,7 @@ const focusAreas = [
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#f4f1eb] pb-20 pt-28 text-[#171717]">
+    <section className="relative min-h-screen overflow-hidden bg-[#f4f1eb] pb-12 pt-24 sm:pb-20 sm:pt-28 text-[#171717]">
       <div className="pointer-events-none absolute right-0 top-0 h-[34rem] w-[34rem] rounded-full bg-red-600/10 blur-[110px]" />
       <div className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-orange-400/10 blur-[100px]" />
 
@@ -49,7 +49,7 @@ export function Hero() {
                 Open to opportunities
               </div>
 
-              <h1 className="max-w-4xl text-[clamp(4rem,9vw,8.4rem)] font-black uppercase leading-[0.78] tracking-[-0.075em]">
+              <h1 className="max-w-4xl text-[clamp(3.25rem,13vw,5rem)] sm:text-[clamp(4rem,9vw,8.4rem)] font-black uppercase leading-[0.78] tracking-[-0.075em]">
                 Renz
                 <span className="block text-red-700">Rapanut</span>
               </h1>
@@ -68,12 +68,12 @@ export function Hero() {
               </div>
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
               <a
                 href="/CV_RAPANUT.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-13 items-center gap-3 rounded-full bg-red-700 px-7 font-bold text-white shadow-[0_14px_35px_rgba(185,28,28,0.25)] transition hover:-translate-y-0.5 hover:bg-red-800"
+                className="inline-flex h-13 items-center justify-center gap-3 rounded-full bg-red-700 px-7 font-bold text-white shadow-[0_14px_35px_rgba(185,28,28,0.25)] transition hover:-translate-y-0.5 hover:bg-red-800"
               >
                 <Download size={19} />
                 Download CV
@@ -81,7 +81,7 @@ export function Hero() {
               <Link
                 to="/projects"
                 viewTransition
-                className="inline-flex h-13 items-center gap-3 rounded-full border border-black/20 bg-white/50 px-7 font-bold transition hover:-translate-y-0.5 hover:border-black hover:bg-white"
+                className="inline-flex h-13 items-center justify-center gap-3 rounded-full border border-black/20 bg-white/50 px-7 font-bold transition hover:-translate-y-0.5 hover:border-black hover:bg-white"
               >
                 View selected work
                 <ArrowUpRight size={19} />
@@ -109,7 +109,7 @@ export function Hero() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between px-3 pb-1 pt-4 text-white">
+              <div className="flex flex-wrap items-center justify-between gap-3 px-3 pb-1 pt-4 text-white">
                 <p className="text-sm text-white/55">Let&apos;s build something useful.</p>
                 <div className="flex gap-2">
                   {socialLinks.map(({ icon: Icon, label, href }) => (
@@ -119,7 +119,7 @@ export function Hero() {
                       target={href.startsWith('mailto:') ? undefined : '_blank'}
                       rel="noopener noreferrer"
                       aria-label={label}
-                      className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/75 transition hover:border-red-400 hover:bg-red-700 hover:text-white"
+                      className="grid h-11 w-11 place-items-center rounded-full border border-white/15 text-white/75 transition hover:border-red-400 hover:bg-red-700 hover:text-white"
                     >
                       <Icon size={17} />
                     </a>

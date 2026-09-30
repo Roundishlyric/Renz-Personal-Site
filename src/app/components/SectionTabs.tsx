@@ -56,7 +56,7 @@ export function SectionTabs({ items, label = "Page sections" }: { items: Section
         className="sticky top-16 z-40 flex h-14 items-center border-b border-black/10 bg-[#f4f1eb]/95 shadow-sm backdrop-blur-md"
       >
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex max-w-full items-center gap-7 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex max-w-full items-center gap-4 sm:gap-7 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             {items.map((item, index) => {
               const isActive = activeId === item.id;
 
@@ -69,7 +69,7 @@ export function SectionTabs({ items, label = "Page sections" }: { items: Section
                     event.preventDefault();
                     navigateToSection(item.id);
                   }}
-                  className={`group flex shrink-0 items-baseline gap-2 py-2 text-sm font-semibold transition-colors focus-visible:rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-700 focus-visible:ring-offset-4 ${
+                  className={`group flex min-h-11 shrink-0 items-center gap-2 py-2 text-sm font-semibold transition-colors focus-visible:rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-700 focus-visible:ring-offset-4 ${
                     isActive
                       ? "text-red-700"
                       : "text-black/45 hover:text-black"

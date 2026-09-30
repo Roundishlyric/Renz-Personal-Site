@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Briefcase, Calendar, ExternalLink, FileText } from "lucide-react";
+import { Briefcase, Calendar, ExternalLink, FileText, ImageIcon } from "lucide-react";
 import { Card } from "./ui/card";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import {
@@ -18,6 +18,36 @@ type CompletionDialogProps = {
   company: string;
 };
 
+// Add these files to public/experience/ when your photos are ready.
+const experiencePhotos = [
+  { src: "/experience/internship-1.jpg", alt: "Internship photo 1" },
+  { src: "/experience/internship-2.jpg", alt: "Internship photo 2" },
+  { src: "/experience/internship-3.jpg", alt: "Internship photo 3" },
+];
+
+function ExperiencePhoto({ src, alt }: { src: string; alt: string }) {
+  const [unavailable, setUnavailable] = useState(false);
+
+  return (
+    <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-white/15 bg-black/30">
+      {unavailable ? (
+        <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
+          <ImageIcon size={28} className="text-red-400" aria-hidden="true" />
+          <p className="text-sm text-gray-400">Photo coming soon</p>
+        </div>
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          onError={() => setUnavailable(true)}
+          className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
+        />
+      )}
+    </div>
+  );
+}
+
 function CompletionDialog({ title, file, logo, company }: CompletionDialogProps) {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -33,7 +63,7 @@ function CompletionDialog({ title, file, logo, company }: CompletionDialogProps)
         </button>
       </DialogTrigger>
 
-      <DialogContent className="max-h-[92vh] max-w-[min(96vw,72rem)] gap-4 overflow-y-auto border-white/15 bg-[#171717] p-4 text-white sm:p-6">
+      <DialogContent className="max-h-[92dvh] max-w-[min(96vw,72rem)] gap-4 overflow-y-auto border-white/15 bg-[#171717] p-4 text-white sm:p-6">
         <DialogHeader className="pr-10">
           <DialogTitle className="text-xl text-white">{title}</DialogTitle>
           <DialogDescription className="flex flex-wrap items-center justify-between gap-2 text-gray-400">
@@ -50,7 +80,7 @@ function CompletionDialog({ title, file, logo, company }: CompletionDialogProps)
           </DialogDescription>
         </DialogHeader>
 
-        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-white/10 bg-[#262626] sm:aspect-video">
+        <div className="relative h-[60dvh] w-full sm:h-auto overflow-hidden rounded-xl border border-white/10 bg-[#262626] sm:aspect-video">
           {isLoading && (
             <div
               className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-[#111] text-gray-300"
@@ -115,10 +145,10 @@ export function Experience() {
   ];
 
   return (
-    <section id="experience" className="editorial-ring-section editorial-ring-top-left bg-[#171717] py-20">
+    <section id="experience" className="editorial-ring-section editorial-ring-top-left bg-[#171717] py-12 sm:py-20">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_55%)]" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 text-left">
+        <div className="mb-8 text-left sm:mb-16">
           <h2 className="mb-4 text-4xl font-black tracking-tight text-white md:text-6xl">Experience</h2>
           <div className="mb-4 h-1 w-24 bg-white"></div>
         </div>
@@ -127,7 +157,7 @@ export function Experience() {
           {experiences.map((exp, index) => (
             <Card
               key={index}
-              className="rounded-[2rem] border border-white/15 bg-[#202020] p-8 transition-colors hover:border-red-500"
+              className="rounded-[2rem] border border-white/15 bg-[#202020] p-5 sm:p-8 transition-colors hover:border-red-500"
             >
               <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_420px] lg:items-start">
                 <div className="flex h-full flex-col justify-center">
@@ -136,8 +166,8 @@ export function Experience() {
                       <Briefcase className="text-white" size={22} />
                     </div>
 
-                    <div className="flex-1">
-                      <h3 className="mb-1 text-2xl text-white">{exp.role}</h3>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="mb-1 text-xl sm:text-2xl text-white">{exp.role}</h3>
                       <p className="mb-2 text-lg text-red-500">{exp.company}</p>
 
                       <div className="flex items-center gap-2 text-gray-400">
@@ -217,6 +247,16 @@ export function Experience() {
                       />
                     </div>
                   </div>
+                </div>
+              </div>
+              <div className="mt-8 border-t border-white/10 pt-6">
+                <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-gray-400">
+                  Internship photos
+                </h4>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {experiencePhotos.map((photo) => (
+                    <ExperiencePhoto key={photo.src} {...photo} />
+                  ))}
                 </div>
               </div>
             </Card>

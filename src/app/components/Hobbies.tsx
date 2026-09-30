@@ -80,10 +80,10 @@ export function Hobbies() {
   return (
     <section
       id="hobbies"
-      className="editorial-ring-section editorial-ring-top-center scroll-mt-8 bg-[#171717] py-20"
+      className="editorial-ring-section editorial-ring-top-center scroll-mt-8 bg-[#171717] py-12 sm:py-20"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 text-left">
+        <div className="mb-8 text-left sm:mb-16">
           <h2 className="mb-4 text-4xl font-black tracking-tight text-white md:text-6xl">
             Hobbies &amp; interests
           </h2>

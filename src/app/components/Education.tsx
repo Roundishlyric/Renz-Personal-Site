@@ -41,7 +41,7 @@ export function Education() {
   return (
     <section
       id="education"
-      className="editorial-ring-section editorial-ring-bottom-left scroll-mt-8 bg-[#f4f1eb] pb-20 pt-10"
+      className="editorial-ring-section editorial-ring-bottom-left scroll-mt-8 bg-[#f4f1eb] pb-12 pt-10 sm:pb-20"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="section-transition-item text-left">
@@ -53,12 +53,12 @@ export function Education() {
           {education.map((edu, index) => (
             <Card
               key={index}
-              className="overflow-hidden rounded-[2rem] border border-black/15 bg-white/65 p-8 shadow-none transition hover:-translate-y-1 hover:border-red-700"
+              className="overflow-hidden rounded-[2rem] border border-black/15 bg-white/65 p-5 sm:p-8 shadow-none transition hover:-translate-y-1 hover:border-red-700"
             >
               <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
                 <div className="space-y-6">
-                  <div className="flex items-start gap-5">
-                    <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-lg p-2">
+                  <div className="flex flex-col items-start gap-4 sm:flex-row sm:gap-5">
+                    <div className="flex h-16 w-16 shrink-0 items-center sm:h-20 sm:w-20 justify-center overflow-hidden rounded-lg p-2">
                       <img
                         src="/images/feu.png"
                         alt="FEU Institute of Technology"
@@ -66,11 +66,11 @@ export function Education() {
                       />
                     </div>
 
-                    <div className="flex-1">
-                      <h3 className="text-2xl md:text-3xl mb-2 text-gray-900">
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-xl sm:text-2xl md:text-3xl mb-2 text-gray-900">
                         {edu.degree}
                       </h3>
-                      <p className="text-xl text-red-700">{edu.school}</p>
+                      <p className="text-lg text-red-700 sm:text-xl">{edu.school}</p>
                       <p className="mt-2 inline-flex items-center gap-2 text-sm text-gray-500">
                         <MapPin size={14} />
                         {edu.location}
@@ -138,10 +138,10 @@ export function Education() {
           {activities.map((activity, index) => (
             <Card
               key={index}
-              className="rounded-[2rem] border border-black/15 bg-white/65 p-6 shadow-none transition hover:-translate-y-1 hover:border-red-700"
+              className="rounded-[2rem] border border-black/15 bg-white/65 p-5 sm:p-6 shadow-none transition hover:-translate-y-1 hover:border-red-700"
             >
-              <div className="flex items-start gap-5">
-                <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-lg p-2">
+              <div className="flex flex-col items-start gap-4 sm:flex-row sm:gap-5">
+                <div className="flex h-16 w-16 shrink-0 items-center sm:h-20 sm:w-20 justify-center overflow-hidden rounded-lg p-2">
                   <img
                     src={activity.logo}
                     alt={activity.name}
@@ -153,7 +153,7 @@ export function Education() {
                   />
                 </div>
 
-                <div className="flex-1 space-y-2">
+                <div className="min-w-0 flex-1 space-y-2">
                   <h4 className="text-2xl text-gray-900">{activity.name}</h4>
                   <p className="text-red-700 font-medium text-lg">
                     {activity.role}

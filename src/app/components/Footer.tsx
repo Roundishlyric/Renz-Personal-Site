@@ -75,8 +75,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between gap-4 border-t border-gray-700 pt-8 text-gray-400">
-          <p className="min-w-0">&copy; {currentYear} Renz Rapanut. All rights reserved.</p>
+        <div className="grid grid-cols-[2.75rem_minmax(0,1fr)_2.75rem] items-center gap-2 border-t border-gray-700 pt-8 text-gray-400 sm:gap-4">
+          <p className="col-start-2 min-w-0 text-center">&copy; {currentYear} Renz Rapanut. All rights reserved.</p>
           <Link
             to="/gaming"
             viewTransition

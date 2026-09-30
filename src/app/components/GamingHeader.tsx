@@ -29,7 +29,8 @@ export function GamingHeader() {
     const headerOffset = 64;
     const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
 
-    window.scrollTo({ top: y, behavior: "smooth" });
+    window.history.replaceState(window.history.state, "", `#${id}`);
+    window.scrollTo({ top: y, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
     setIsMobileMenuOpen(false);
   };
 
@@ -74,6 +75,7 @@ export function GamingHeader() {
               className="ml-1 flex items-center gap-2 rounded-lg border border-gray-700 px-3 py-2 text-gray-300 transition hover:border-teal-500 hover:text-white"
             >
               <Briefcase size={18} />
+              <span className="text-sm">Portfolio</span>
             </Link>
           </nav>
 
@@ -107,6 +109,7 @@ export function GamingHeader() {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <Briefcase size={18} />
+              <span>Return to portfolio</span>
             </Link>
           </nav>
         )}

@@ -3,13 +3,13 @@ import { Link } from "react-router";
 
 export function GamingFooter() {
   const currentYear = new Date().getFullYear();
-  const navLabelClass = "text-gray-300 transition-colors hover:text-teal-300";
+  const navLabelClass = "inline-flex min-h-11 items-center text-gray-300 transition-colors hover:text-teal-300";
 
   return (
     <footer className="border-t border-teal-900/40 bg-slate-950 py-12 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 grid gap-6 md:grid-cols-5">
-          <div className="md:col-span-2">
+        <div className="mb-8 grid grid-cols-2 gap-6 md:grid-cols-5">
+          <div className="col-span-2">
             <div className="mb-4 flex items-center gap-2">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-500/20 border border-teal-300/30 font-bold text-teal-200">
                 SG
@@ -42,26 +42,26 @@ export function GamingFooter() {
 
           <div>
             <h3 className="mb-2 text-lg font-semibold text-teal-200">Connect</h3>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-3">
               <a
-                href="https://www.linkedin.com/in/renz-danniel-rapanut-692902210"
+                aria-label="LinkedIn" href="https://www.linkedin.com/in/renz-danniel-rapanut-692902210"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg bg-slate-800 p-2 text-white transition-colors hover:bg-teal-700"
+                className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-800 p-2 text-white transition-colors hover:bg-teal-700"
               >
                 <Linkedin size={20} />
               </a>
               <a
-                href="https://github.com/Roundishlyric"
+                aria-label="GitHub" href="https://github.com/Roundishlyric"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-lg bg-slate-800 p-2 text-white transition-colors hover:bg-teal-700"
+                className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-800 p-2 text-white transition-colors hover:bg-teal-700"
               >
                 <Github size={20} />
               </a>
               <a
-                href="mailto:renzdanniel63@gmail.com"
-                className="rounded-lg bg-slate-800 p-2 text-white transition-colors hover:bg-teal-700"
+                aria-label="Email" href="mailto:renzdanniel63@gmail.com"
+                className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-800 p-2 text-white transition-colors hover:bg-teal-700"
               >
                 <Mail size={20} />
               </a>

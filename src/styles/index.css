@@ -138,33 +138,12 @@ html {
   }
 }
 
-/* Keep the gaming portfolio's darker personality inside the main red brand. */
-.editorial-gaming #gaming {
-  background: #171717 !important;
+/* Gaming uses its own navy, blue, and teal palette. */
+.editorial-gaming {
+  color-scheme: dark;
 }
 
-.editorial-gaming [class*="text-teal-"],
-.editorial-gaming [class*="text-cyan-"] {
-  color: #fca5a5 !important;
-}
-
-.editorial-gaming [class*="bg-teal-"],
-.editorial-gaming [class*="bg-cyan-"] {
-  background-color: #b91c1c !important;
-}
-
-.editorial-gaming [class*="border-teal-"],
-.editorial-gaming [class*="border-cyan-"] {
-  border-color: rgba(239, 68, 68, 0.45) !important;
-}
-
-.editorial-gaming [class*="from-teal-"],
-.editorial-gaming [class*="from-cyan-"] {
-  --tw-gradient-from: #dc2626 var(--tw-gradient-from-position) !important;
-  --tw-gradient-to: rgb(220 38 38 / 0) var(--tw-gradient-to-position) !important;
-}
-
-.editorial-gaming [class*="to-teal-"],
-.editorial-gaming [class*="to-cyan-"] {
-  --tw-gradient-to: #7f1d1d var(--tw-gradient-to-position) !important;
+.editorial-gaming :is(a, button):focus-visible {
+  outline: 2px solid #5eead4;
+  outline-offset: 4px;
 }

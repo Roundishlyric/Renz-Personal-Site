@@ -1,4 +1,4 @@
-﻿import React, { useCallback, useEffect, useMemo, useState } from "react";
+﻿import React, { useMemo, useState } from "react";
 
 import {
   Trophy,
@@ -120,7 +120,7 @@ const HOYO_TEAMS: Record<HoyoKey, HoyoTeam> = {
     ],
     team2Members: [
       { name: "Jane Doe", img: "https://sunderarmor.com/ZZZ/Character/thumb_jane_doe.png" },
-      { name: "Seth Lowell", img: "https://sunderarmor.com/ZZZ/Character/thumb_seth.png " },
+      { name: "Seth Lowell", img: "https://sunderarmor.com/ZZZ/Character/thumb_seth.png" },
       { name: "Ukinami Yuzuha", img: "https://sunderarmor.com/ZZZ/Character/thumb_yuzuha.png" },
     ],
   },
@@ -136,13 +136,13 @@ const TeamPanel = React.memo(function TeamPanel({
   teamCols: 3 | 4;
 }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-slate-900 p-6">
+    <div className="rounded-2xl border border-white/10 bg-slate-900 p-4 sm:p-6">
       <p className="text-white font-semibold mb-5">{title}</p>
 
       <div
         className={[
           "grid gap-4",
-          teamCols === 4 ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-3",
+          teamCols === 4 ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-2 sm:grid-cols-3",
         ].join(" ")}
       >
         {members.map((c) => (
@@ -151,16 +151,15 @@ const TeamPanel = React.memo(function TeamPanel({
             className="group rounded-xl border border-white/10 bg-slate-800 p-2.5 transition-colors hover:border-cyan-400/30 hover:bg-slate-800/90"
           >
             <div className="relative mx-auto aspect-square w-full max-w-[130px] rounded-lg overflow-hidden border border-white/10 bg-slate-950">
-              <img
+              <img loading="lazy" decoding="async"
                 src={c.img}
                 alt={c.name}
                 className="w-full h-full object-cover"
-                loading="lazy"
                 draggable={false}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             </div>
-            <p className="mt-2 text-[13px] font-semibold text-white text-center truncate">
+            <p className="mt-2 text-[13px] font-semibold text-white text-center break-words">
               {c.name}
             </p>
           </div>
@@ -222,7 +221,7 @@ const OtherGameCard = React.memo(function OtherGameCard({
 });
 
 export function Gaming() {
-  const aboutTitleClass = "mb-4 text-4xl md:text-5xl text-white";
+  const aboutTitleClass = "mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-white";
   const heroImages = useMemo(
     () => [
       "/images/pro3.JPG",
@@ -268,7 +267,7 @@ export function Gaming() {
           "https://static.bandainamcoent.eu/high/tekken/tekken-8/02-characters/new-gallery/Screenshots_V1/Panda/Pande-poster.jpg",
           "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/12/tekken-8-clive-rosfield-header-image.jpg",
           "https://images8.alphacoders.com/132/1326135.png",
-          "https://static0.thegamerimages.com/wordpress/wp-content/uploads/wm/2025/07/tekken-8-fahkumram-guide-featured-image.jpg",
+          "https://static0.thegamerimages.com/wordpress/wp-content/uploads/wm/2025/07/tekken-8-fahkumram-guide-featuteal-image.jpg",
         ],
         focus: "object-center",
         main: "KUMA / PANDA",
@@ -468,7 +467,7 @@ export function Gaming() {
       rank: "Completed",
       hours: "100+",
       role: "Raven",
-      image: "https://images.wallpapersden.com/image/download/armored-core-vi-fires-of-rubicon-hd_bW1pZmaUmZqaraWkpJRobWllrWdma2U.jpg",
+      image: "https://images.wallpapersden.com/image/download/armoteal-core-vi-fires-of-rubicon-hd_bW1pZmaUmZqaraWkpJRobWllrWdma2U.jpg",
     },  
   ],
     []
@@ -482,210 +481,28 @@ export function Gaming() {
   );
 
   const [slide, setSlide] = useState(0);
-  const [prevSlide, setPrevSlide] = useState<number | null>(null);
-  const [isSlideFading, setIsSlideFading] = useState(false);
   const canSlide = (active?.images?.length ?? 0) > 1;
   const currentIndex = slide;
   const currentImage = active.images[currentIndex];
 
-  // Reset slider when switching games
-  useEffect(() => {
+  // Reset the image in the same render as the selected game.
+  const selectGame = (key: string) => {
     setSlide(0);
-    setPrevSlide(null);
-    setIsSlideFading(false);
-  }, [activeKey]);
-
-  // Preload adjacent slides to reduce flicker during transition.
-  useEffect(() => {
-    if (!active || active.images.length < 2) return;
-    const total = active.images.length;
-    const nextIndex = (slide + 1) % total;
-    const prevIndex = (slide - 1 + total) % total;
-    [active.images[nextIndex], active.images[prevIndex]].forEach((image) => {
-      const img = new Image();
-      img.src = getGameImageSrc(image);
-    });
-  }, [active, slide]);
-
-  const startSlide = useCallback(
-    (to: number, dir: "next" | "prev") => {
-      if (!active) return;
-      if (!canSlide) return;
-
-      const total = active.images.length;
-      const normalizedTo = ((to % total) + total) % total;
-      if (normalizedTo === slide) return;
-
-      void dir;
-      setPrevSlide(slide);
-      setIsSlideFading(false);
-      setSlide(normalizedTo);
-    },
-    [active, canSlide, slide]
-  );
-
-  useEffect(() => {
-    if (prevSlide === null) return;
-
-    const frame = window.requestAnimationFrame(() => {
-      setIsSlideFading(true);
-    });
-
-    return () => window.cancelAnimationFrame(frame);
-  }, [prevSlide]);
-
-  useEffect(() => {
-    if (!isSlideFading) return;
-
-    const t = window.setTimeout(() => {
-      setPrevSlide(null);
-      setIsSlideFading(false);
-    }, 420);
-
-    return () => window.clearTimeout(t);
-  }, [isSlideFading]);
-
-  const next = useCallback(() => startSlide(slide + 1, "next"), [slide, startSlide]);
-  const prev = useCallback(() => startSlide(slide - 1, "prev"), [slide, startSlide]);
-
+    setActiveKey(key);
+  };
+  const startSlide = (index: number) => {
+    setSlide((index + active.images.length) % active.images.length);
+  };
+  const next = () => startSlide(slide + 1);
+  const prev = () => startSlide(slide - 1);
   const [heroSlide, setHeroSlide] = useState(0);
-  const [heroPrevSlide, setHeroPrevSlide] = useState<number | null>(null);
-  const [isHeroFading, setIsHeroFading] = useState(false);
-  const canHeroSlide = heroImages.length > 1;
-
-  const startHeroSlide = useCallback(
-    (to: number, dir: "next" | "prev") => {
-      if (!canHeroSlide) return;
-
-      const total = heroImages.length;
-      const normalizedTo = ((to % total) + total) % total;
-      if (normalizedTo === heroSlide) return;
-
-      void dir;
-      setHeroPrevSlide(heroSlide);
-      setIsHeroFading(false);
-      setHeroSlide(normalizedTo);
-    },
-    [canHeroSlide, heroImages.length, heroSlide]
-  );
-
-  useEffect(() => {
-    if (heroPrevSlide === null) return;
-
-    const frame = window.requestAnimationFrame(() => {
-      setIsHeroFading(true);
-    });
-
-    return () => window.cancelAnimationFrame(frame);
-  }, [heroPrevSlide]);
-
-  useEffect(() => {
-    if (!isHeroFading) return;
-
-    const t = window.setTimeout(() => {
-      setHeroPrevSlide(null);
-      setIsHeroFading(false);
-    }, 420);
-
-    return () => window.clearTimeout(t);
-  }, [isHeroFading]);
-
-  useEffect(() => {
-    if (!canHeroSlide) return;
-    const t = window.setTimeout(() => {
-      startHeroSlide(heroSlide + 1, "next");
-    }, 5000);
-    return () => window.clearTimeout(t);
-  }, [canHeroSlide, heroSlide, startHeroSlide]);
-
-  useEffect(() => {
-    if (!canHeroSlide) return;
-    const total = heroImages.length;
-    const nextIndex = (heroSlide + 1) % total;
-    const prevIndex = (heroSlide - 1 + total) % total;
-    [heroImages[nextIndex], heroImages[prevIndex]].forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, [canHeroSlide, heroImages, heroSlide]);
-
   const [hoyoActive, setHoyoActive] = useState<HoyoKey>("genshin");
-
-  useEffect(() => {
-    const revealTargets = Array.from(
-      document.querySelectorAll<HTMLElement>(
-        "#gaming #overview, #gaming #team, #gaming #main-games, #gaming #other-games, #gaming #profiles, #gaming #Social"
-      )
-    );
-
-    if (
-      revealTargets.length === 0 ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      return;
-    }
-
-    let previousScrollY = window.scrollY;
-    let scrollDirection: "up" | "down" = "down";
-
-    const updateScrollDirection = () => {
-      const currentScrollY = window.scrollY;
-      if (Math.abs(currentScrollY - previousScrollY) > 2) {
-        scrollDirection = currentScrollY > previousScrollY ? "down" : "up";
-        previousScrollY = currentScrollY;
-      }
-    };
-
-    revealTargets.forEach((target) => {
-      target.style.opacity = "0";
-      target.style.transform = "translate3d(0, 2.5rem, 0)";
-      target.style.transition =
-        "opacity 650ms ease, transform 750ms cubic-bezier(0.22, 1, 0.36, 1)";
-      target.style.willChange = "opacity, transform";
-    });
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const target = entry.target as HTMLElement;
-
-          if (entry.isIntersecting) {
-            target.style.opacity = "1";
-            target.style.transform = "translate3d(0, 0, 0)";
-          } else {
-            target.style.opacity = "0";
-            target.style.transform =
-              scrollDirection === "down"
-                ? "translate3d(0, -2.5rem, 0)"
-                : "translate3d(0, 2.5rem, 0)";
-          }
-        });
-      },
-      {
-        threshold: 0.08,
-        rootMargin: "0px 0px -8% 0px",
-      }
-    );
-
-    window.addEventListener("scroll", updateScrollDirection, { passive: true });
-    revealTargets.forEach((target) => observer.observe(target));
-
-    return () => {
-      window.removeEventListener("scroll", updateScrollDirection);
-      observer.disconnect();
-      revealTargets.forEach((target) => {
-        target.style.removeProperty("opacity");
-        target.style.removeProperty("transform");
-        target.style.removeProperty("transition");
-        target.style.removeProperty("will-change");
-      });
-    };
-  }, []);
+  const [showAllGames, setShowAllGames] = useState(false);
 
   return (
     <section
       id="gaming"
-      className="py-20 bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900 text-white pt-24"
+      className="py-20 bg-gradient-to-br from-slate-950 via-[#082332] to-slate-950 text-white pt-24"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Introduction */}
@@ -704,6 +521,7 @@ export function Gaming() {
             {/* LEFT IMAGE */}
             <div className="relative md:col-span-3 min-h-[420px] md:min-h-0">
               <ImageWithFallback
+                key={heroImages[heroSlide]}
                 src={heroImages[heroSlide]}
                 alt="SenGouku"
                 className="absolute inset-0 h-full w-full object-cover object-left"
@@ -711,18 +529,6 @@ export function Gaming() {
                 loading="eager"
                 fetchPriority="high"
               />
-              {heroPrevSlide !== null ? (
-                <ImageWithFallback
-                  src={heroImages[heroPrevSlide]}
-                  alt=""
-                  className={`absolute inset-0 h-full w-full object-cover object-left will-change-opacity transition-opacity duration-500 ease-out ${
-                    isHeroFading ? "opacity-0" : "opacity-100"
-                  }`}
-                  draggable={false}
-                  loading="eager"
-                  aria-hidden="true"
-                />
-              ) : null}
 
               {/* teal tint */}
               <div className="absolute inset-0 z-10 bg-gradient-to-br from-teal-500/15 via-cyan-500/5 to-transparent" />
@@ -731,6 +537,11 @@ export function Gaming() {
               <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
               <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
+              <div className="absolute right-4 top-12 z-20 flex items-center gap-2 rounded-full bg-black/70 p-1 text-white sm:top-4">
+                <button type="button" aria-label="Previous gaming photo" onClick={() => setHeroSlide(index => (index - 1 + heroImages.length) % heroImages.length)} className="grid h-11 w-11 place-items-center rounded-full hover:bg-white/15"><ChevronLeft size={20} /></button>
+                <span className="text-sm tabular-nums" aria-live="polite">{heroSlide + 1} / {heroImages.length}</span>
+                <button type="button" aria-label="Next gaming photo" onClick={() => setHeroSlide(index => (index + 1) % heroImages.length)} className="grid h-11 w-11 place-items-center rounded-full hover:bg-white/15"><ChevronRight size={20} /></button>
+              </div>
               {/* bottom identity */}
               <div className="absolute bottom-6 left-5 sm:bottom-10 sm:left-10 z-20 flex items-center gap-3">
                 <Gamepad2 size={28} className="text-teal-300" />
@@ -828,7 +639,7 @@ export function Gaming() {
               {/* Logo (top-left) */}
               <div className="absolute left-6 top-6 z-10">
                 <div className="flex h-20 w-20 items-center justify-center rounded-2xl border border-white/25 bg-black/80 ring-1 ring-white/10 md:h-24 md:w-24">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src="/images/rogo.png"
                     alt=""
                     className="h-[88%] w-[88%] object-contain drop-shadow-[0_0_18px_rgba(255,215,64,0.6)]"
@@ -849,7 +660,7 @@ export function Gaming() {
                   </h3>
 
                   <div className="mt-5 flex justify-center">
-                    <span className="inline-flex items-center rounded-2xl border border-white/10 bg-teal-500 px-6 py-2 text-white font-bold">
+                    <span className="inline-flex items-center rounded-2xl border border-white/10 bg-teal-400 px-6 py-2 text-slate-950 font-bold">
                       Est. 2022 • Community Team
                     </span>
                   </div>
@@ -944,12 +755,14 @@ export function Gaming() {
                     return (
                       <button
                         key={game.key}
-                        onClick={() => setActiveKey(game.key)}
+                        onClick={() => selectGame(game.key)}
+                        aria-pressed={activeTab}
+                        aria-controls="selected-game"
                         className={[
                           "relative rounded-2xl px-4 py-3 font-semibold tracking-wide transition-all duration-200",
                           "border",
                           activeTab
-                            ? "bg-gradient-to-r from-teal-400 to-cyan-400 text-white border-transparent shadow-lg shadow-teal-500/30"
+                            ? "bg-gradient-to-r from-teal-400 to-cyan-400 text-slate-950 border-transparent shadow-lg shadow-teal-500/30"
                             : "bg-slate-800/60 text-white border-white/10 hover:border-teal-400/40 hover:bg-slate-800",
                         ].join(" ")}
                       >
@@ -965,19 +778,19 @@ export function Gaming() {
             </div>
 
             {/* ---------------- GRADIENT BORDER WRAPPER ---------------- */}
-            <div className="rounded-[2rem] border border-white/10 bg-slate-900 shadow-xl shadow-black/30">
+            <div id="selected-game" className="rounded-[2rem] border border-white/10 bg-slate-900 shadow-xl shadow-black/30">
               <div className="overflow-hidden rounded-[2rem]">
 
-                <div className="grid md:grid-cols-5 min-h-[540px]">
+                <div className="grid lg:grid-cols-5 min-h-[540px]">
 
                   {/* ================= INFO PANEL ================= */}
-                  <div className="md:col-span-2 bg-slate-900 p-5 sm:p-8 md:border-r border-white/10">
+                  <div className="lg:col-span-2 bg-slate-900 p-5 sm:p-8 lg:border-r border-white/10">
 
                     {/* Header */}
-                    <div className="flex items-start justify-between gap-4 mb-6">
+                    <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
                       <div>
                         <p className="text-sm text-gray-300">Main Character</p>
-                        <p className="text-xl font-bold text-red-400">{active.main}</p>
+                        <p className="text-xl font-bold text-teal-400">{active.main}</p>
                       </div>
 
                       <div className="text-right">
@@ -999,7 +812,7 @@ export function Gaming() {
                         {active.subs.map((s) => (
                           <span
                             key={s}
-                            className="rounded-xl border border-red-500/50 bg-slate-950/70 px-3 py-1.5 text-sm font-medium text-white shadow-sm shadow-black/20"
+                            className="rounded-xl border border-teal-500/50 bg-slate-950/70 px-3 py-1.5 text-sm font-medium text-white shadow-sm shadow-black/20"
                           >
                             {s}
                           </span>
@@ -1040,36 +853,24 @@ export function Gaming() {
                   </div>
                   
                                     {/* ================= IMAGE / SLIDER ================= */}
-                  <div className="md:col-span-3 relative overflow-hidden bg-slate-950">
-                    <div className="relative w-full h-[420px] md:h-full overflow-hidden">
+                  <div className="lg:col-span-3 relative overflow-hidden bg-slate-950">
+                    <div className="relative w-full h-[360px] sm:h-[420px] lg:h-full overflow-hidden">
                       <ImageWithFallback
+                        key={getGameImageSrc(currentImage)}
                         src={getGameImageSrc(currentImage)}
                         alt={active.title}
                         className={[
                           "absolute inset-0 w-full h-full object-cover",
                           getGameImageFocus(currentImage, active.focus),
                         ].join(" ")}
-                        loading="eager"
-                        fetchPriority="high"
+                        loading="lazy"
+                        decoding="async"
                       />
-                      {prevSlide !== null ? (
-                        <ImageWithFallback
-                          src={getGameImageSrc(active.images[prevSlide])}
-                          alt=""
-                          className={[
-                            "absolute inset-0 w-full h-full object-cover will-change-opacity transition-opacity duration-500 ease-out",
-                            getGameImageFocus(active.images[prevSlide], active.focus),
-                            isSlideFading ? "opacity-0" : "opacity-100",
-                          ].join(" ")}
-                          loading="eager"
-                          aria-hidden="true"
-                        />
-                      ) : null}
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent pointer-events-none" />
                       <div className="absolute inset-0 [background:radial-gradient(circle_at_40%_25%,rgba(45,212,191,0.10),transparent_55%)] pointer-events-none" />
 
                       {/* Title Chip */}
-                      <div className="absolute bottom-16 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-auto">
+                      <div className="absolute bottom-20 left-4 right-4">
                         <div className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-black/35 px-4 py-3 backdrop-blur">
                           <div className="h-2.5 w-2.5 rounded-full bg-teal-400 shadow-[0_0_12px_rgba(45,212,191,0.8)]" />
                           <div className="text-xl md:text-2xl font-extrabold tracking-wide text-white">
@@ -1080,18 +881,19 @@ export function Gaming() {
 
                       {/* Dots */}
                       {active.images.length > 1 && (
-                        <div className="absolute bottom-6 right-6 flex items-center gap-2">
+                        <div className="absolute bottom-3 inset-x-3 flex items-center justify-center gap-1">
                           {active.images.map((_, i) => (
                             <button
                               key={i}
-                              onClick={() => startSlide(i, i > currentIndex ? "next" : "prev")}
+                              onClick={() => startSlide(i)}
                               className={[
-                                "h-2 rounded-full transition-all",
+                                "h-11 w-11 rounded-full border-8 border-transparent bg-clip-content transition-colors",
                                 i === currentIndex
-                                  ? "w-10 bg-teal-400"
-                                  : "w-4 bg-white/30 hover:bg-white/45",
+                                  ? "bg-teal-500"
+                                  : "bg-white/40 hover:bg-white/70",
                               ].join(" ")}
                               aria-label={`Go to image ${i + 1}`}
+                              aria-current={i === currentIndex ? "true" : undefined}
                             />
                           ))}
                         </div>
@@ -1131,14 +933,16 @@ export function Gaming() {
         <div id="other-games" className="scroll-mt-24 mb-20">
           <h3 className={`${aboutTitleClass} text-center`}>Other Games</h3>
           <div className="mx-auto mb-4 h-1 w-20 rounded bg-gradient-to-r from-teal-400 to-cyan-400" />
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5 items-stretch">
-            {otherGames.map((game) => (
+          <div id="other-games-list" className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
+            {(showAllGames ? otherGames : otherGames.slice(0, 6)).map((game) => (
               <OtherGameCard key={game.title} game={game} />
             ))}
           </div>
-          <p className="mt-2 text-center text-lg font-semibold tracking-wide text-cyan-200">
-            And more ..
-          </p>
+          <div className="mt-6 text-center">
+            <Button variant="outline" aria-expanded={showAllGames} aria-controls="other-games-list" onClick={() => setShowAllGames(value => !value)} className="min-h-11 border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white">
+              {showAllGames ? "Show fewer games" : `Show all ${otherGames.length} games`}
+            </Button>
+          </div>
         </div>
 
         {/* Steam Profile & Social Media */}
@@ -1154,7 +958,7 @@ export function Gaming() {
               <div className="p-5 sm:p-8 flex flex-col flex-1">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="p-4 bg-black rounded-xl shadow-lg">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/steam.svg"
                       alt="Steam Logo"
                       className="w-8 h-8 invert"
@@ -1191,7 +995,7 @@ export function Gaming() {
                           "https://steamcommunity.com/profiles/76561199068794358/")
                       }
                     >
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/steam.svg"
                         alt=""
                         className="w-5 h-5 mr-2 invert"
@@ -1205,7 +1009,7 @@ export function Gaming() {
             <Card className="h-full flex flex-col bg-slate-800 border-2 border-slate-700 hover:border-teal-500 transition-all">
               <div className="p-5 sm:p-8 flex flex-col flex-1">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="p-4 bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl shadow-lg">
+                  <div className="p-4 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl shadow-lg">
                     <Twitch size={32} className="text-white" />
                   </div>
                   <div>
@@ -1234,7 +1038,7 @@ export function Gaming() {
                 </div>
 
                 <Button
-                  className="w-full mt-auto bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900"
+                  className="w-full mt-auto bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900"
                   onClick={() => window.open("#", "_blank")}
                 >
                   <Twitch size={18} className="mr-2" />
@@ -1255,7 +1059,7 @@ export function Gaming() {
                     {/* Header */}
                     <div className="flex items-center gap-4 mb-6">
                       <div className="h-14 w-14 p-0.5 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-700 flex items-center justify-center overflow-hidden">
-                        <img
+                        <img loading="lazy" decoding="async"
                           src="/images/hoyo.png"
                           alt="HoYoLAB"
                           className="h-full w-full scale-110 object-contain object-center"
@@ -1310,6 +1114,7 @@ export function Gaming() {
                           <button
                             key={k}
                             onClick={() => setHoyoActive(k)}
+                            aria-pressed={active}
                             className={[
                               "w-full text-left rounded-2xl border p-4 transition",
                               "bg-slate-900 border-white/10 hover:border-cyan-400/30 hover:bg-slate-900/90",
@@ -1320,7 +1125,7 @@ export function Gaming() {
                           >
                             <div className="flex items-center gap-3 mb-3">
                               <div className="h-8 w-8 rounded-lg border border-white/10 bg-slate-800 flex items-center justify-center overflow-hidden">
-                                <img
+                                <img loading="lazy" decoding="async"
                                   src={content.icon}
                                   alt=""
                                   className="h-full p-0.75 w-full scale-125 object-contain object-center"
@@ -1337,7 +1142,7 @@ export function Gaming() {
                                   <div className="text-gray-300">{label}</div>
                                   <div
                                     className={[
-                                      "text-right font-semibold",
+                                      "text-left font-semibold sm:text-right",
                                       accent ?? "text-white",
                                     ].join(" ")}
                                   >
@@ -1369,7 +1174,7 @@ export function Gaming() {
                     <div className="flex items-center justify-between mb-6">
                       <div className="flex items-center gap-3">
                         <div className="h-11 w-11 rounded-lg border border-white/10 bg-slate-900 flex items-center justify-center overflow-hidden">
-                          <img
+                          <img loading="lazy" decoding="async"
                             src={HOYO_TEAMS[hoyoActive].icon}
                             alt=""
                             className="h-full p-0.75 w-full scale-125 object-contain object-center"
@@ -1422,15 +1227,15 @@ export function Gaming() {
                   className="group text-left"
                 >
                   <div className="relative h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur transition-all
-                                  hover:-translate-y-1 hover:border-red-400/40 hover:shadow-2xl hover:shadow-red-500/15">
-                    <div className="absolute inset-0 bg-gradient-to-br from-red-600/30 via-transparent to-transparent opacity-100" />
-                    <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-red-500/20 blur-2xl" />
+                                  hover:-translate-y-1 hover:border-teal-400/40 hover:shadow-2xl hover:shadow-teal-500/15">
+                    <div className="absolute inset-0 bg-gradient-to-br from-teal-600/30 via-transparent to-transparent opacity-100" />
+                    <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-teal-500/20 blur-2xl" />
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity
                                     [background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent)]" />
 
                     <div className="relative h-full px-6 flex items-center justify-between">
                       <div className="flex items-center gap-4">
-                        <div className="h-12 w-12 rounded-xl bg-red-600/25 border border-red-400/20 flex items-center justify-center">
+                        <div className="h-12 w-12 rounded-xl bg-teal-600/25 border border-teal-400/20 flex items-center justify-center">
                           <Youtube size={26} className="text-white" />
                         </div>
                         <div>
@@ -1448,15 +1253,15 @@ export function Gaming() {
                   className="group text-left"
                 >
                   <div className="relative h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur transition-all
-                                  hover:-translate-y-1 hover:border-pink-400/40 hover:shadow-2xl hover:shadow-pink-500/15">
-                    <div className="absolute inset-0 bg-gradient-to-br from-pink-600/30 via-purple-600/15 to-transparent" />
-                    <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-pink-500/20 blur-2xl" />
+                                  hover:-translate-y-1 hover:border-cyan-400/40 hover:shadow-2xl hover:shadow-cyan-500/15">
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/30 via-blue-600/15 to-transparent" />
+                    <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-cyan-500/20 blur-2xl" />
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity
                                     [background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent)]" />
 
                     <div className="relative h-full px-6 flex items-center justify-between">
                       <div className="flex items-center gap-4">
-                        <div className="h-12 w-12 rounded-xl bg-pink-600/25 border border-pink-400/20 flex items-center justify-center">
+                        <div className="h-12 w-12 rounded-xl bg-cyan-600/25 border border-cyan-400/20 flex items-center justify-center">
                           <Instagram size={24} className="text-white" />
                         </div>
                         <div>

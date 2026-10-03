@@ -20,6 +20,9 @@ type ProjectMedia = {
 
 // Add files under public/projects/ and use paths such as /projects/crud/dashboard.webp.
 const projectMedia: Record<string, ProjectMedia> = {
+  hadoukraft: {
+    screenshots: [{ src: "/projects/hadoukraft-preview.jpg", alt: "Street Fighter 6 artwork featured on Hadoukraft" }],
+  },
   crud: { screenshots: [] },
   health: { screenshots: [] },
   nurture: { screenshots: [] },
@@ -92,6 +95,55 @@ export function Projects() {
 
   const projects = [
     {
+      id: "nurture",
+      title: "NURTURE 1: Automated Chicken Eggshell Fertilizer Production and Dispensing System",
+      type: "Embedded Systems / IoT Project",
+      summary:
+        "NURTURE 1 turns recycled eggshells into fertilizer and automates dispensing for cucumber seedlings. Raspberry Pi and Arduino controllers use soil pH readings to guide dispensing, RFID to identify trays, and a mobile app to monitor the system over a local network.",
+      documentLabel: "Read full thesis",
+      documentNote: "PDF · approximately 35.7 MB · opens in a new tab",
+      highlights: [
+        "Developed a Raspberry Pi and Arduino-based embedded system for automated fertilizer production and intelligent fertilizer dispensing.",
+        "Implemented real-time soil pH monitoring to determine whether fertilizer should be applied, reducing unnecessary fertilizer usage.",
+        "Designed an RFID-based multi-tray identification system capable of tracking different seedling trays and storing fertilization records.",
+        "Built an IoT monitoring application that displays soil pH, fertilizer status, tray information, and machine status in real time over a local network.",
+        "Programmed stepper motors, servo motors, DC motors, load cell sensors, ultrasonic sensors, and limit switches for automated navigation, grinding, and fertilizer dispensing.",
+        "Integrated an LCD interface for on-device monitoring and system feedback.",
+      ],
+      stack: [
+        "Raspberry Pi",
+        "Arduino Uno",
+        "Embedded C / Arduino IDE",
+        "Python",
+        "RFID Module",
+        "Soil pH Sensor",
+        "Load Cell",
+        "Ultrasonic Sensor",
+        "Stepper Motors",
+        "Servo Motors",
+        "DC Motor",
+        "LCD I2C Display",
+        "Wi-Fi Communication",
+        "Android Mobile Application",
+        "IoT Monitoring",
+      ],
+      docHref: "/Copy%20of%20REVISION%20of%20Automated%20Chicken%20Eggshell%20Fertilizer%20Production%20and%20Dispensing%20System%20for%20Cucumis%20sativus%20L.%20(Cucumber).pdf",
+    },
+    {
+      id: "hadoukraft",
+      title: "Hadoukraft — Street Fighter 6 Combo Creator",
+      type: "Gaming Web Application",
+      summary:
+        "A web application for creating, saving, and sharing Street Fighter 6 combos with the Hadoukraft community.",
+      highlights: [
+        "Create Street Fighter 6 combos in a dedicated web application.",
+        "Save combos to revisit later.",
+        "Share combos with the Hadoukraft community.",
+      ],
+      stack: ["Vercel"],
+      liveHref: "https://sf-6-combo-create.vercel.app",
+    },
+    {
       id: "crud",
       title: "CRUD_BY_RENZ User Management System",
       type: "Full-Stack Web Application",
@@ -136,41 +188,7 @@ export function Projects() {
       ],
       docHref: "/FinalPaper.pdf",
     },
-    {
-      id: "nurture",
-      title: "NURTURE 1: Automated Chicken Eggshell Fertilizer Production and Dispensing System",
-      type: "Embedded Systems / IoT Project",
-      summary:
-        "NURTURE 1 turns recycled eggshells into fertilizer and automates dispensing for cucumber seedlings. Raspberry Pi and Arduino controllers use soil pH readings to guide dispensing, RFID to identify trays, and a mobile app to monitor the system over a local network.",
-      documentLabel: "Read full thesis",
-      documentNote: "PDF · approximately 35.7 MB · opens in a new tab",
-      highlights: [
-        "Developed a Raspberry Pi and Arduino-based embedded system for automated fertilizer production and intelligent fertilizer dispensing.",
-        "Implemented real-time soil pH monitoring to determine whether fertilizer should be applied, reducing unnecessary fertilizer usage.",
-        "Designed an RFID-based multi-tray identification system capable of tracking different seedling trays and storing fertilization records.",
-        "Built an IoT monitoring application that displays soil pH, fertilizer status, tray information, and machine status in real time over a local network.",
-        "Programmed stepper motors, servo motors, DC motors, load cell sensors, ultrasonic sensors, and limit switches for automated navigation, grinding, and fertilizer dispensing.",
-        "Integrated an LCD interface for on-device monitoring and system feedback.",
-      ],
-      stack: [
-        "Raspberry Pi",
-        "Arduino Uno",
-        "Embedded C / Arduino IDE",
-        "Python",
-        "RFID Module",
-        "Soil pH Sensor",
-        "Load Cell",
-        "Ultrasonic Sensor",
-        "Stepper Motors",
-        "Servo Motors",
-        "DC Motor",
-        "LCD I2C Display",
-        "Wi-Fi Communication",
-        "Android Mobile Application",
-        "IoT Monitoring",
-      ],
-      docHref: "/Copy%20of%20REVISION%20of%20Automated%20Chicken%20Eggshell%20Fertilizer%20Production%20and%20Dispensing%20System%20for%20Cucumis%20sativus%20L.%20(Cucumber).pdf",
-    },
+
   ];
 
   return (
@@ -238,6 +256,14 @@ export function Projects() {
                       </p>
 
                       <div className="mt-6 flex flex-wrap gap-3">
+                        {project.liveHref && (
+                          <Button asChild className="bg-red-700 text-white hover:bg-red-800">
+                            <a href={project.liveHref} target="_blank" rel="noopener noreferrer">
+                              <Link2 size={16} />
+                              Visit website
+                            </a>
+                          </Button>
+                        )}
                         {project.docHref && (
                           <Button
                             asChild

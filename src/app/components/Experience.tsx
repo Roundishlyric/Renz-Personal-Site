@@ -18,31 +18,50 @@ type CompletionDialogProps = {
   company: string;
 };
 
-// Add these files to public/experience/ when your photos are ready.
 const experiencePhotos = [
-  { src: "/experience/internship-1.jpg", alt: "Internship photo 1" },
-  { src: "/experience/internship-2.jpg", alt: "Internship photo 2" },
-  { src: "/experience/internship-3.jpg", alt: "Internship photo 3" },
+  { src: "/experience/exp1.jpg", alt: "Reviewing website designs alongside teammates during the internship" },
+  { src: "/experience/exp2.jpg", alt: "Working on code at a shared internship workspace" },
+  { src: "/experience/exp4.jpg", alt: "Internship photo collage showing a coding setup and the Spaceport workspace", portrait: true },
 ];
 
-function ExperiencePhoto({ src, alt }: { src: string; alt: string }) {
+function ExperiencePhoto({ src, alt, portrait = false }: { src: string; alt: string; portrait?: boolean }) {
   const [unavailable, setUnavailable] = useState(false);
 
   return (
-    <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-white/15 bg-black/30">
+    <div className="h-48 w-full overflow-hidden rounded-2xl border border-white/15 bg-black/30">
       {unavailable ? (
         <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
           <ImageIcon size={28} className="text-red-400" aria-hidden="true" />
           <p className="text-sm text-gray-400">Photo coming soon</p>
         </div>
       ) : (
-        <img
-          src={src}
-          alt={alt}
-          loading="lazy"
-          onError={() => setUnavailable(true)}
-          className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
-        />
+        <Dialog>
+          <DialogTrigger asChild>
+            <button
+              type="button"
+              aria-label={`View full photo: ${alt}`}
+              className="group relative block h-full w-full cursor-zoom-in overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-red-500"
+            >
+              <img
+                src={src}
+                alt={alt}
+                loading="lazy"
+                onError={() => setUnavailable(true)}
+                className={`block h-full w-full object-cover transition-transform duration-300 group-hover:scale-105 ${portrait ? "object-top" : "object-center"}`}
+              />
+              <span className="absolute bottom-3 right-3 rounded-full bg-black/75 px-3 py-1 text-xs font-medium text-white">
+                View photo
+              </span>
+            </button>
+          </DialogTrigger>
+          <DialogContent className="max-h-[92dvh] w-[calc(100%-2rem)] sm:max-w-4xl overflow-y-auto border-white/15 bg-[#171717] p-4 text-white">
+            <DialogHeader className="pr-8">
+              <DialogTitle>Internship photo</DialogTitle>
+              <DialogDescription className="text-gray-400">{alt}</DialogDescription>
+            </DialogHeader>
+            <img src={src} alt={alt} className="mx-auto max-h-[72dvh] max-w-full rounded-lg object-contain" />
+          </DialogContent>
+        </Dialog>
       )}
     </div>
   );
@@ -253,9 +272,12 @@ export function Experience() {
                 <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-gray-400">
                   Internship photos
                 </h4>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid w-full gap-3 sm:grid-cols-3">
                   {experiencePhotos.map((photo) => (
-                    <ExperiencePhoto key={photo.src} {...photo} />
+                    <ExperiencePhoto
+                      key={photo.src}
+                      {...photo}
+                    />
                   ))}
                 </div>
               </div>

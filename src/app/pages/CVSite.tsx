@@ -1,6 +1,5 @@
 import { Header } from '../components/Header';
 import { Hero } from '../components/Hero';
-import { CVDownload } from '../components/CVDownload';
 import { Footer } from '../components/Footer';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { usePageMetadata } from '../hooks/usePageMetadata';
@@ -14,7 +13,6 @@ export function CVSite() {
       <Header />
       <main id="main-content">
         <Hero />
-        <CVDownload />
       </main>
       <Footer />
     </div>

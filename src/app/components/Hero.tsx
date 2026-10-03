@@ -5,7 +5,6 @@ import {
   Github,
   Linkedin,
   Mail,
-  MapPin,
 } from 'lucide-react';
 import { Link } from 'react-router';
 import { ImageWithFallback } from './figma/ImageWithFallback';
@@ -36,25 +35,20 @@ const focusAreas = [
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#f4f1eb] pb-12 pt-24 sm:pb-20 sm:pt-28 text-[#171717]">
+    <section className="relative overflow-hidden bg-[#f4f1eb] pb-6 pt-24 sm:pb-8 text-[#171717]">
       <div className="pointer-events-none absolute right-0 top-0 h-[34rem] w-[34rem] rounded-full bg-red-600/10 blur-[110px]" />
       <div className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-orange-400/10 blur-[100px]" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16">
-          <div className="flex flex-col justify-between">
+        <div className="grid items-start gap-7 lg:grid-cols-[1.25fr_0.75fr] lg:gap-10">
+          <div className="flex flex-col">
             <div>
-              <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-black/15 bg-white/55 px-4 py-2 text-sm font-semibold backdrop-blur">
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_0_5px_rgba(16,185,129,0.12)]" />
-                Open to opportunities
-              </div>
-
               <h1 className="max-w-4xl text-[clamp(3.25rem,13vw,5rem)] sm:text-[clamp(4rem,9vw,8.4rem)] font-black uppercase leading-[0.78] tracking-[-0.075em]">
                 Renz
                 <span className="block text-red-700">Rapanut</span>
               </h1>
 
-              <div className="mt-9 grid gap-6 border-l-4 border-red-700 pl-6 sm:grid-cols-[1fr_auto] sm:items-end">
+              <div className="mt-6 border-l-4 border-red-700 pl-4">
                 <div>
                   <p className="max-w-2xl text-xl font-semibold leading-snug sm:text-2xl">
                     Entry-level software developer and Computer Engineering
@@ -68,12 +62,13 @@ export function Hero() {
               </div>
             </div>
 
-            <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a
+                id="cv-download"
                 href="/CV_RAPANUT.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-13 items-center justify-center gap-3 rounded-full bg-red-700 px-7 font-bold text-white shadow-[0_14px_35px_rgba(185,28,28,0.25)] transition hover:-translate-y-0.5 hover:bg-red-800"
+                className="inline-flex h-13 scroll-mt-24 items-center justify-center gap-3 rounded-full bg-red-700 px-7 font-bold text-white shadow-[0_14px_35px_rgba(185,28,28,0.25)] transition hover:-translate-y-0.5 hover:bg-red-800"
               >
                 <Download size={19} />
                 Download CV
@@ -89,7 +84,7 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative mx-auto w-full max-w-sm lg:ml-auto lg:mr-0">
             <div className="absolute -right-3 -top-3 h-full w-full rounded-[2rem] border border-red-700/30" />
             <div className="relative overflow-hidden rounded-[2rem] bg-[#181818] p-3 shadow-[0_30px_70px_rgba(0,0,0,0.18)]">
               <div className="relative aspect-[4/5] overflow-hidden rounded-[1.35rem] bg-zinc-800">
@@ -130,15 +125,15 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="mt-16 grid border-y border-black/15 md:grid-cols-3">
+        <div className="mt-7 grid border-y border-black/15 md:grid-cols-3">
           {focusAreas.map(([number, title, description], index) => (
             <div
               key={number}
-              className={`group py-7 md:px-7 ${
+              className={`group py-4 md:px-5 ${
                 index > 0 ? 'border-t border-black/15 md:border-l md:border-t-0' : ''
               }`}
             >
-              <div className="mb-5 flex items-center justify-between">
+              <div className="mb-2 flex items-center justify-between">
                 <span className="text-sm font-black text-red-700">{number}</span>
                 <ArrowDownRight
                   size={20}

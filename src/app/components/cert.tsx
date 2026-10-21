@@ -89,10 +89,20 @@ const certifications: Certification[] = [
   {
     name: "Responsive Web Design",
     issuer: "FreeCodeCamp",
-    dateLabel: "July 2025",
-    dateTime: "2025-07",
+    dateLabel: "July 2026",
+    dateTime: "2026-07",
     credlyUrl:
       "https://www.freecodecamp.org/certification/rrapanut/responsive-web-design-v9",
+    badgeImgUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0A1KK4zonxloOsoOqqTTpW6CERUimbEkkkVhMM_a3P0IMpvqTiUlD08Qc&s=10",
+  },
+    {
+    name: "JavaScript Algorithms and Data Structures",
+    issuer: "FreeCodeCamp",
+    dateLabel: "October 2026",
+    dateTime: "2026-10",
+    credlyUrl:
+      "https://www.freecodecamp.org/certification/rrapanut/javascript-v9",
     badgeImgUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0A1KK4zonxloOsoOqqTTpW6CERUimbEkkkVhMM_a3P0IMpvqTiUlD08Qc&s=10",
   },

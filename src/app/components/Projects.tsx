@@ -21,7 +21,10 @@ type ProjectMedia = {
 // Add files under public/projects/ and use paths such as /projects/crud/dashboard.webp.
 const projectMedia: Record<string, ProjectMedia> = {
   hadoukraft: {
-    screenshots: [{ src: "/projects/hadoukraft-preview.jpg", alt: "Street Fighter 6 artwork featured on Hadoukraft" }],
+    screenshots: [
+      { src: "/images/screen1.png", alt: "Hadoukraft Explore page with community combos and fighter filters" },
+      { src: "/images/screen2.png", alt: "Hadoukraft Create Combo form with combo details and input notation" },
+    ],
   },
   crud: { screenshots: [] },
   health: { screenshots: [] },
@@ -31,11 +34,10 @@ const projectMedia: Record<string, ProjectMedia> = {
 function ProjectPreview({ media, title, showVideo }: { media: ProjectMedia; title: string; showVideo: boolean }) {
   return (
     <div className={`grid gap-4 ${showVideo ? "md:grid-cols-2" : ""}`}>
-      <div className="space-y-3">
+      <div className={media.screenshots.length > 1 ? "grid w-full items-start gap-3 sm:grid-cols-2" : "space-y-3"}>
         {media.screenshots.length > 0 ? media.screenshots.map((screenshot) => (
           <figure key={screenshot.src} className="overflow-hidden rounded-xl border border-black/10 bg-[#f4f1eb]">
             <img src={screenshot.src} alt={screenshot.alt} loading="lazy" className="aspect-video w-full object-contain" />
-            <figcaption className="px-4 py-3 text-sm text-gray-600">{screenshot.alt}</figcaption>
           </figure>
         )) : (
           <div className="flex aspect-video flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-red-200 bg-red-50/50 p-6 text-center">
@@ -134,13 +136,14 @@ export function Projects() {
       title: "Hadoukraft — Street Fighter 6 Combo Creator",
       type: "Gaming Web Application",
       summary:
-        "A web application for creating, saving, and sharing Street Fighter 6 combos with the Hadoukraft community.",
+        "A web application where Street Fighter 6 players can create, save, and share combos with detailed move notation, damage stats, and video demonstrations. Players can discover community combos, discuss strategies, and manage their own combo collection.",
       highlights: [
-        "Create Street Fighter 6 combos in a dedicated web application.",
-        "Save combos to revisit later.",
-        "Share combos with the Hadoukraft community.",
+        "Built a combo editor with move notation, character selection, damage stats, and video uploads.",
+        "Developed personal combo management and community browsing with search, filters, and sorting.",
+        "Implemented user authentication, player profiles, likes, and combo comments.",
+        "Integrated PostgreSQL for data storage and Vercel Blob for media uploads.",
       ],
-      stack: ["Vercel"],
+      stack: ["React", "JavaScript", "CSS", "Vite", "Node.js", "PostgreSQL", "Vercel", "Vercel Blob"],
       liveHref: "https://sf-6-combo-create.vercel.app",
     },
     {

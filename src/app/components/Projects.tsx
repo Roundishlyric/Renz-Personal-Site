@@ -39,7 +39,7 @@ const projectMedia: Record<string, ProjectMedia> = {
     screenshots: [
       { src: "/projects/nurture/Proto.jpg", alt: "NURTURE 1 fertilizer production and dispensing system prototype" },
     ],
-    videoSrc: "/projects/nurture/Thesis_Video.mp4",
+    videoSrc: "/projects/nurture/Thesis_Video_comp.mp4",
     posterSrc: "/projects/nurture/Proto.jpg",
   },
 };

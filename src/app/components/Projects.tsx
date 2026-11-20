@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { FileText, FolderGit2, Github, ImageIcon, Link2, Video, Wrench } from "lucide-react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import {
   Carousel,
   type CarouselApi,
@@ -26,19 +27,45 @@ const projectMedia: Record<string, ProjectMedia> = {
       { src: "/images/screen2.png", alt: "Hadoukraft Create Combo form with combo details and input notation" },
     ],
   },
-  crud: { screenshots: [] },
+  crud: {
+    screenshots: [
+      { src: "/projects/crud/user1.png", alt: "CRUD_BY_RENZ sign-in page" },
+      { src: "/projects/crud/user2.png", alt: "CRUD_BY_RENZ user management dashboard" },
+      { src: "/projects/crud/user3.png", alt: "CRUD_BY_RENZ system logs" },
+    ],
+  },
   health: { screenshots: [] },
-  nurture: { screenshots: [] },
+  nurture: {
+    screenshots: [
+      { src: "/projects/nurture/Proto.jpg", alt: "NURTURE 1 fertilizer production and dispensing system prototype" },
+    ],
+    videoSrc: "/projects/nurture/Thesis_Video.mp4",
+    posterSrc: "/projects/nurture/Proto.jpg",
+  },
 };
 
 function ProjectPreview({ media, title, showVideo }: { media: ProjectMedia; title: string; showVideo: boolean }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [volume, setVolume] = useState(1);
+  const [muted, setMuted] = useState(false);
+
   return (
-    <div className={`grid gap-4 ${showVideo ? "md:grid-cols-2" : ""}`}>
-      <div className={media.screenshots.length > 1 ? "grid w-full items-start gap-3 sm:grid-cols-2" : "space-y-3"}>
+    <div className={`grid items-start gap-4 ${showVideo ? "md:grid-cols-2" : ""}`}>
+      <div className={media.screenshots.length > 1 ? `grid w-full items-start gap-3 sm:grid-cols-2 ${media.screenshots.length === 3 ? "lg:grid-cols-3" : ""}` : "space-y-3"}>
         {media.screenshots.length > 0 ? media.screenshots.map((screenshot) => (
-          <figure key={screenshot.src} className="overflow-hidden rounded-xl border border-black/10 bg-[#f4f1eb]">
-            <img src={screenshot.src} alt={screenshot.alt} loading="lazy" className="aspect-video w-full object-contain" />
-          </figure>
+          <Dialog key={screenshot.src}>
+            <DialogTrigger asChild>
+              <button type="button" aria-label={`Enlarge ${screenshot.alt}`} className="group relative block aspect-video w-full overflow-hidden rounded-xl border border-black/10 bg-[#0a1120] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-700 focus-visible:ring-offset-2">
+                {showVideo && <img src={screenshot.src} alt="" aria-hidden="true" loading="lazy" className="absolute inset-0 h-full w-full scale-110 object-cover blur-xl brightness-50" />}
+                <img src={screenshot.src} alt={screenshot.alt} loading="lazy" className="absolute inset-0 h-full w-full object-contain" />
+                <span className="absolute bottom-2 right-2 rounded bg-black/75 px-2 py-1 text-xs font-medium text-white">Click to enlarge</span>
+              </button>
+            </DialogTrigger>
+            <DialogContent aria-describedby={undefined} className="max-w-[calc(100%-2rem)] border-0 bg-black p-4 text-white sm:max-w-[95vw]">
+              <DialogTitle className="sr-only">{screenshot.alt}</DialogTitle>
+              <img src={screenshot.src} alt={screenshot.alt} className="mx-auto max-h-[85vh] w-full object-contain" />
+            </DialogContent>
+          </Dialog>
         )) : (
           <div className="flex aspect-video flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-red-200 bg-red-50/50 p-6 text-center">
             <ImageIcon size={32} className="text-red-700" aria-hidden="true" />
@@ -48,11 +75,18 @@ function ProjectPreview({ media, title, showVideo }: { media: ProjectMedia; titl
       </div>
       {showVideo && <div>
         {media.videoSrc ? (
-          <video controls playsInline preload="none" poster={media.posterSrc} aria-label={`${title} demonstration`} className="aspect-video w-full rounded-xl bg-black">
+          <><video ref={videoRef} controls playsInline preload="none" poster={media.posterSrc} aria-label={`${title} demonstration`} onVolumeChange={(event) => { setMuted(event.currentTarget.muted); setVolume(event.currentTarget.volume); }} onMouseDown={(event) => event.stopPropagation()} onTouchStart={(event) => event.stopPropagation()} onPointerDown={(event) => event.stopPropagation()} className="block aspect-video w-full rounded-xl bg-black object-contain">
             <source src={media.videoSrc} />
             {media.captionsSrc && <track kind="captions" src={media.captionsSrc} srcLang="en" label="English" default />}
             Your browser does not support embedded video. <a href={media.videoSrc}>Open demonstration</a>.
           </video>
+          <div className="mt-2 flex items-center gap-3 text-sm text-gray-700" onMouseDown={(event) => event.stopPropagation()} onTouchStart={(event) => event.stopPropagation()}>
+            <button type="button" className="rounded border border-gray-300 px-3 py-1 focus-visible:outline-2 focus-visible:outline-red-700" onClick={() => { if (videoRef.current) videoRef.current.muted = !videoRef.current.muted; }}>
+              {muted ? "Unmute" : "Mute"}
+            </button>
+            <label htmlFor="project-video-volume">Volume</label>
+            <input id="project-video-volume" type="range" min="0" max="1" step="0.05" value={muted ? 0 : volume} onChange={(event) => { if (videoRef.current) { videoRef.current.volume = Number(event.target.value); videoRef.current.muted = false; } }} className="w-28 accent-red-700" />
+          </div></>
         ) : (
           <div className="flex aspect-video flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-black/15 bg-[#f4f1eb] p-6 text-center">
             <Video size={32} className="text-red-700" aria-hidden="true" />
@@ -234,7 +268,7 @@ export function Projects() {
                 <Card
                   className="overflow-hidden border-2 border-transparent bg-white p-4 sm:p-6 transition-shadow hover:shadow-xl hover:border-red-700"
                 >
-                  <ProjectPreview media={projectMedia[project.id]} title={project.title} showVideo={project.id === "nurture"} />
+                  {project.id !== "health" && <ProjectPreview media={projectMedia[project.id]} title={project.title} showVideo={project.id === "nurture"} />}
                   <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
                     <div className="space-y-6">
                       <div className="mb-5 flex flex-col-reverse items-start justify-between gap-4 sm:flex-row">

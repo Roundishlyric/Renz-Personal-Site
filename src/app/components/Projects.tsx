@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FileText, FolderGit2, Github, ImageIcon, Link2, Video, Wrench } from "lucide-react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
@@ -45,10 +45,6 @@ const projectMedia: Record<string, ProjectMedia> = {
 };
 
 function ProjectPreview({ media, title, showVideo }: { media: ProjectMedia; title: string; showVideo: boolean }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [volume, setVolume] = useState(1);
-  const [muted, setMuted] = useState(false);
-
   return (
     <div className={`grid items-start gap-4 ${showVideo ? "md:grid-cols-2" : ""}`}>
       <div className={media.screenshots.length > 1 ? `grid w-full items-start gap-3 sm:grid-cols-2 ${media.screenshots.length === 3 ? "lg:grid-cols-3" : ""}` : "space-y-3"}>
@@ -75,18 +71,11 @@ function ProjectPreview({ media, title, showVideo }: { media: ProjectMedia; titl
       </div>
       {showVideo && <div>
         {media.videoSrc ? (
-          <><video ref={videoRef} controls playsInline preload="none" poster={media.posterSrc} aria-label={`${title} demonstration`} onVolumeChange={(event) => { setMuted(event.currentTarget.muted); setVolume(event.currentTarget.volume); }} onMouseDown={(event) => event.stopPropagation()} onTouchStart={(event) => event.stopPropagation()} onPointerDown={(event) => event.stopPropagation()} className="block aspect-video w-full rounded-xl bg-black object-contain">
+          <video controls playsInline preload="none" poster={media.posterSrc} aria-label={`${title} demonstration`} onMouseDown={(event) => event.stopPropagation()} onTouchStart={(event) => event.stopPropagation()} onPointerDown={(event) => event.stopPropagation()} className="block aspect-video w-full rounded-xl bg-black object-contain">
             <source src={media.videoSrc} />
             {media.captionsSrc && <track kind="captions" src={media.captionsSrc} srcLang="en" label="English" default />}
             Your browser does not support embedded video. <a href={media.videoSrc}>Open demonstration</a>.
           </video>
-          <div className="mt-2 flex items-center gap-3 text-sm text-gray-700" onMouseDown={(event) => event.stopPropagation()} onTouchStart={(event) => event.stopPropagation()}>
-            <button type="button" className="rounded border border-gray-300 px-3 py-1 focus-visible:outline-2 focus-visible:outline-red-700" onClick={() => { if (videoRef.current) videoRef.current.muted = !videoRef.current.muted; }}>
-              {muted ? "Unmute" : "Mute"}
-            </button>
-            <label htmlFor="project-video-volume">Volume</label>
-            <input id="project-video-volume" type="range" min="0" max="1" step="0.05" value={muted ? 0 : volume} onChange={(event) => { if (videoRef.current) { videoRef.current.volume = Number(event.target.value); videoRef.current.muted = false; } }} className="w-28 accent-red-700" />
-          </div></>
         ) : (
           <div className="flex aspect-video flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-black/15 bg-[#f4f1eb] p-6 text-center">
             <Video size={32} className="text-red-700" aria-hidden="true" />
